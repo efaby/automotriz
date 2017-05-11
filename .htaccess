@@ -1,0 +1,16 @@
+ErrorDocument 404 /reparaciones/Seguridad/error404/
+ErrorDocument 403 /reparaciones/Seguridad/error403/
+ErrorDocument 500 /reparaciones/Seguridad/error500/
+
+Options +FollowSymlinks
+DirectoryIndex index.php
+RewriteEngine On
+RewriteBase /reparaciones 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^(.*)/(.*)/(.*)$ vistas/$1/index.php?action=$2&id=$3 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
