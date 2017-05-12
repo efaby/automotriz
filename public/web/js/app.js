@@ -1,1054 +1,1384 @@
-/*!
- * Author: Abdullah A Almsaeed
- * Date: 4 Jan 2014
- * Description:
- *      This file should be included in all pages
- !**/
+var config = window.config = {};
 
-/*
- * Global variables. If you change any of these vars, don't forget
- * to change the values in the less files!
- */
-var left_side_width = 220; //Sidebar width in pixels
+// Config reference element
+var $ref = $("#ref");
 
-$(function() {
-    "use strict";
+// Configure responsive bootstrap toolkit
+config.ResponsiveBootstrapToolkitVisibilityDivs = {
+    'xs': $('<div class="device-xs 				  hidden-sm-up"></div>'),
+    'sm': $('<div class="device-sm hidden-xs-down hidden-md-up"></div>'),
+    'md': $('<div class="device-md hidden-sm-down hidden-lg-up"></div>'),
+    'lg': $('<div class="device-lg hidden-md-down hidden-xl-up"></div>'),
+    'xl': $('<div class="device-xl hidden-lg-down			  "></div>'),
+};
 
-    //Enable sidebar toggle
-    $("[data-toggle='offcanvas']").click(function(e) {
-        e.preventDefault();
+ResponsiveBootstrapToolkit.use('Custom', config.ResponsiveBootstrapToolkitVisibilityDivs);
 
-        //If window is small enough, enable sidebar push menu
-        if ($(window).width() <= 992) {
-            $('.row-offcanvas').toggleClass('active');
-            $('.left-side').removeClass("collapse-left");
-            $(".right-side").removeClass("strech");
-            $('.row-offcanvas').toggleClass("relative");
-        } else {
-            //Else, enable content streching
-            $('.left-side').toggleClass("collapse-left");
-            $(".right-side").toggleClass("strech");
-        }
-    });
+//validation configuration
+config.validations = {
+	debug: true,
+	errorClass:'has-error',
+	validClass:'success',
+	errorElement:"span",
 
-    //Add hover support for touch devices
-    $('.btn').bind('touchstart', function() {
-        $(this).addClass('hover');
-    }).bind('touchend', function() {
-        $(this).removeClass('hover');
-    });
+	// add error class
+	highlight: function(element, errorClass, validClass) {
+		$(element).parents("div.form-group")
+		.addClass(errorClass)
+		.removeClass(validClass); 
+	}, 
 
-    //Activate tooltips
-    $("[data-toggle='tooltip']").tooltip();
+	// add error class
+	unhighlight: function(element, errorClass, validClass) {
+		$(element).parents(".has-error")
+		.removeClass(errorClass)
+		.addClass(validClass); 
+	},
 
-    /*
-     * Add collapse and remove events to boxes
-     */
-    $("[data-widget='collapse']").click(function() {
-        //Find the box parent
-        var box = $(this).parents(".box").first();
-        //Find the body and the footer
-        var bf = box.find(".box-body, .box-footer");
-        if (!box.hasClass("collapsed-box")) {
-            box.addClass("collapsed-box");
-            //Convert minus into plus
-            $(this).children(".fa-minus").removeClass("fa-minus").addClass("fa-plus");
-            bf.slideUp();
-        } else {
-            box.removeClass("collapsed-box");
-            //Convert plus into minus
-            $(this).children(".fa-plus").removeClass("fa-plus").addClass("fa-minus");
-            bf.slideDown();
-        }
-    });
-
-    /*
-     * ADD SLIMSCROLL TO THE TOP NAV DROPDOWNS
-     * ---------------------------------------
-     */
-    $(".navbar .menu").slimscroll({
-        height: "200px",
-        alwaysVisible: false,
-        size: "3px"
-    }).css("width", "100%");
-
-    /*
-     * INITIALIZE BUTTON TOGGLE
-     * ------------------------
-     */
-    $('.btn-group[data-toggle="btn-toggle"]').each(function() {
-        var group = $(this);
-        $(this).find(".btn").click(function(e) {
-            group.find(".btn.active").removeClass("active");
-            $(this).addClass("active");
-            e.preventDefault();
-        });
-
-    });
-
-    $("[data-widget='remove']").click(function() {
-        //Find the box parent
-        var box = $(this).parents(".box").first();
-        box.slideUp();
-    });
-
-    /* Sidebar tree view */
-    $(".sidebar .treeview").tree();
-
-    /*
-     * Make sure that the sidebar is streched full height
-     * ---------------------------------------------
-     * We are gonna assign a min-height value every time the
-     * wrapper gets resized and upon page load. We will use
-     * Ben Alman's method for detecting the resize event.
-     *
-     **/
-    function _fix() {
-        //Get window height and the wrapper height
-        var height = $(window).height() - $("body > .header").height() - ($("body > .footer").outerHeight() || 0);
-        $(".wrapper").css("min-height", height + "px");
-        var content = $(".wrapper").height();
-        //If the wrapper height is greater than the window
-        if (content > height)
-            //then set sidebar height to the wrapper
-            $(".left-side, html, body").css("min-height", content + "px");
-        else {
-            //Otherwise, set the sidebar to the height of the window
-            $(".left-side, html, body").css("min-height", height + "px");
-        }
+	// submit handler
+    submitHandler: function(form) {
+        form.submit();
     }
-    //Fire upon load
-    _fix();
-    //Fire when wrapper is resized
-    $(".wrapper").resize(function() {
-        _fix();
-        fix_sidebar();
-    });
-
-    //Fix the fixed layout sidebar scroll bug
-    fix_sidebar();
-
-    /*
-     * We are gonna initialize all checkbox and radio inputs to
-     * iCheck plugin in.
-     * You can find the documentation at http://fronteed.com/iCheck/
-     */
-    // $("input[type='checkbox']:not(.simple), input[type='radio']:not(.simple)").iCheck({
-    //     checkboxClass: 'icheckbox_minimal',
-    //     radioClass: 'iradio_minimal'
-    // });
-
-});
-function fix_sidebar() {
-    //Make sure the body tag has the .fixed class
-    if (!$("body").hasClass("fixed")) {
-        return;
-    }
-
-    //Add slimscroll
-    $(".sidebar").slimscroll({
-        height: ($(window).height() - $(".header").height()) + "px",
-        color: "rgba(0,0,0,0.2)"
-    });
 }
 
-/*END DEMO*/
-$(window).load(function() {
-    /*! pace 0.4.17 */
-    (function() {
-        var a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V = [].slice, W = {}.hasOwnProperty, X = function(a, b) {
-            function c() {
-                this.constructor = a
-            }
-            for (var d in b)
-                W.call(b, d) && (a[d] = b[d]);
-            return c.prototype = b.prototype, a.prototype = new c, a.__super__ = b.prototype, a
-        }, Y = [].indexOf || function(a) {
-            for (var b = 0, c = this.length; c > b; b++)
-                if (b in this && this[b] === a)
-                    return b;
-            return-1
-        };
-        for (t = {catchupTime:500, initialRate:.03, minTime:500, ghostTime:500, maxProgressPerFrame:10, easeFactor:1.25, startOnPageLoad:!0, restartOnPushState:!0, restartOnRequestAfter:500, target:"body", elements:{checkInterval:100, selectors:["body"]}, eventLag:{minSamples:10, sampleCount:3, lagThreshold:3}, ajax:{trackMethods:["GET"], trackWebSockets:!1}}, B = function() {
-            var a;
-            return null != (a = "undefined" != typeof performance && null !== performance ? "function" == typeof performance.now ? performance.now() : void 0 : void 0) ? a : +new Date
-        }, D = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame, s = window.cancelAnimationFrame || window.mozCancelAnimationFrame, null == D && (D = function(a) {
-            return setTimeout(a, 50)
-        }, s = function(a) {
-            return clearTimeout(a)
-        }), F = function(a) {
-            var b, c;
-            return b = B(), (c = function() {
-                var d;
-                return d = B() - b, d >= 33 ? (b = B(), a(d, function() {
-                    return D(c)
-                })) : setTimeout(c, 33 - d)
-            })()
-        }, E = function() {
-            var a, b, c;
-            return c = arguments[0], b = arguments[1], a = 3 <= arguments.length ? V.call(arguments, 2) : [], "function" == typeof c[b] ? c[b].apply(c, a) : c[b]
-        }, u = function() {
-            var a, b, c, d, e, f, g;
-            for (b = arguments[0], d = 2 <= arguments.length?V.call(arguments, 1):[], f = 0, g = d.length; g > f; f++)
-                if (c = d[f])
-                    for (a in c)
-                        W.call(c, a) && (e = c[a], null != b[a] && "object" == typeof b[a] && null != e && "object" == typeof e ? u(b[a], e) : b[a] = e);
-            return b
-        }, p = function(a) {
-            var b, c, d, e, f;
-            for (c = b = 0, e = 0, f = a.length; f > e; e++)
-                d = a[e], c += Math.abs(d), b++;
-            return c / b
-        }, w = function(a, b) {
-            var c, d, e;
-            if (null == a && (a = "options"), null == b && (b = !0), e = document.querySelector("[data-pace-" + a + "]")) {
-                if (c = e.getAttribute("data-pace-" + a), !b)
-                    return c;
-                try {
-                    return JSON.parse(c)
-                } catch (f) {
-                    return d = f, "undefined" != typeof console && null !== console ? console.error("Error parsing inline pace options", d) : void 0
-                }
-            }
-        }, g = function() {
-            function a() {
-            }
-            return a.prototype.on = function(a, b, c, d) {
-                var e;
-                return null == d && (d = !1), null == this.bindings && (this.bindings = {}), null == (e = this.bindings)[a] && (e[a] = []), this.bindings[a].push({handler: b, ctx: c, once: d})
-            }, a.prototype.once = function(a, b, c) {
-                return this.on(a, b, c, !0)
-            }, a.prototype.off = function(a, b) {
-                var c, d, e;
-                if (null != (null != (d = this.bindings) ? d[a] : void 0)) {
-                    if (null == b)
-                        return delete this.bindings[a];
-                    for (c = 0, e = []; c < this.bindings[a].length; )
-                        this.bindings[a][c].handler === b ? e.push(this.bindings[a].splice(c, 1)) : e.push(c++);
-                    return e
-                }
-            }, a.prototype.trigger = function() {
-                var a, b, c, d, e, f, g, h, i;
-                if (c = arguments[0], a = 2 <= arguments.length ? V.call(arguments, 1) : [], null != (g = this.bindings) ? g[c] : void 0) {
-                    for (e = 0, i = []; e < this.bindings[c].length; )
-                        h = this.bindings[c][e], d = h.handler, b = h.ctx, f = h.once, d.apply(null != b ? b : this, a), f ? i.push(this.bindings[c].splice(e, 1)) : i.push(e++);
-                    return i
-                }
-            }, a
-        }(), null == window.Pace && (window.Pace = {}), u(Pace, g.prototype), C = Pace.options = u({}, t, window.paceOptions, w()), S = ["ajax", "document", "eventLag", "elements"], O = 0, Q = S.length; Q > O; O++)
-            I = S[O], C[I] === !0 && (C[I] = t[I]);
-        i = function(a) {
-            function b() {
-                return T = b.__super__.constructor.apply(this, arguments)
-            }
-            return X(b, a), b
-        }(Error), b = function() {
-            function a() {
-                this.progress = 0
-            }
-            return a.prototype.getElement = function() {
-                var a;
-                if (null == this.el) {
-                    if (a = document.querySelector(C.target), !a)
-                        throw new i;
-                    this.el = document.createElement("div"), this.el.className = "pace pace-active", document.body.className = document.body.className.replace("pace-done", ""), document.body.className += " pace-running", this.el.innerHTML = '<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>', null != a.firstChild ? a.insertBefore(this.el, a.firstChild) : a.appendChild(this.el)
-                }
-                return this.el
-            }, a.prototype.finish = function() {
-                var a;
-                return a = this.getElement(), a.className = a.className.replace("pace-active", ""), a.className += " pace-inactive", document.body.className = document.body.className.replace("pace-running", ""), document.body.className += " pace-done"
-            }, a.prototype.update = function(a) {
-                return this.progress = a, this.render()
-            }, a.prototype.destroy = function() {
-                try {
-                    this.getElement().parentNode.removeChild(this.getElement())
-                } catch (a) {
-                    i = a
-                }
-                return this.el = void 0
-            }, a.prototype.render = function() {
-                var a, b;
-                return null == document.querySelector(C.target) ? !1 : (a = this.getElement(), a.children[0].style.width = "" + this.progress + "%", (!this.lastRenderedProgress || this.lastRenderedProgress | 0 !== this.progress | 0) && (a.children[0].setAttribute("data-progress-text", "" + (0 | this.progress) + "%"), this.progress >= 100 ? b = "99" : (b = this.progress < 10 ? "0" : "", b += 0 | this.progress), a.children[0].setAttribute("data-progress", "" + b)), this.lastRenderedProgress = this.progress)
-            }, a.prototype.done = function() {
-                return this.progress >= 100
-            }, a
-        }(), h = function() {
-            function a() {
-                this.bindings = {}
-            }
-            return a.prototype.trigger = function(a, b) {
-                var c, d, e, f, g;
-                if (null != this.bindings[a]) {
-                    for (f = this.bindings[a], g = [], d = 0, e = f.length; e > d; d++)
-                        c = f[d], g.push(c.call(this, b));
-                    return g
-                }
-            }, a.prototype.on = function(a, b) {
-                var c;
-                return null == (c = this.bindings)[a] && (c[a] = []), this.bindings[a].push(b)
-            }, a
-        }(), N = window.XMLHttpRequest, M = window.XDomainRequest, L = window.WebSocket, v = function(a, b) {
-            var c, d, e, f;
-            f = [];
-            for (d in b.prototype)
-                try {
-                    e = b.prototype[d], null == a[d] && "function" != typeof e ? f.push(a[d] = e) : f.push(void 0)
-                } catch (g) {
-                    c = g
-                }
-            return f
-        }, z = [], Pace.ignore = function() {
-            var a, b, c;
-            return b = arguments[0], a = 2 <= arguments.length ? V.call(arguments, 1) : [], z.unshift("ignore"), c = b.apply(null, a), z.shift(), c
-        }, Pace.track = function() {
-            var a, b, c;
-            return b = arguments[0], a = 2 <= arguments.length ? V.call(arguments, 1) : [], z.unshift("track"), c = b.apply(null, a), z.shift(), c
-        }, H = function(a) {
-            var b;
-            if (null == a && (a = "GET"), "track" === z[0])
-                return"force";
-            if (!z.length && C.ajax) {
-                if ("socket" === a && C.ajax.trackWebSockets)
-                    return!0;
-                if (b = a.toUpperCase(), Y.call(C.ajax.trackMethods, b) >= 0)
-                    return!0
-            }
-            return!1
-        }, j = function(a) {
-            function b() {
-                var a, c = this;
-                b.__super__.constructor.apply(this, arguments), a = function(a) {
-                    var b;
-                    return b = a.open, a.open = function(d, e) {
-                        return H(d) && c.trigger("request", {type: d, url: e, request: a}), b.apply(a, arguments)
-                    }
-                }, window.XMLHttpRequest = function(b) {
-                    var c;
-                    return c = new N(b), a(c), c
-                }, v(window.XMLHttpRequest, N), null != M && (window.XDomainRequest = function() {
-                    var b;
-                    return b = new M, a(b), b
-                }, v(window.XDomainRequest, M)), null != L && C.ajax.trackWebSockets && (window.WebSocket = function(a, b) {
-                    var d;
-                    return d = new L(a, b), H("socket") && c.trigger("request", {type: "socket", url: a, protocols: b, request: d}), d
-                }, v(window.WebSocket, L))
-            }
-            return X(b, a), b
-        }(h), P = null, x = function() {
-            return null == P && (P = new j), P
-        }, x().on("request", function(b) {
-            var c, d, e, f;
-            return f = b.type, e = b.request, Pace.running || C.restartOnRequestAfter === !1 && "force" !== H(f) ? void 0 : (d = arguments, c = C.restartOnRequestAfter || 0, "boolean" == typeof c && (c = 0), setTimeout(function() {
-                var b, c, g, h, i, j;
-                if (b = "socket" === f ? e.readyState < 2 : 0 < (h = e.readyState) && 4 > h) {
-                    for (Pace.restart(), i = Pace.sources, j = [], c = 0, g = i.length; g > c; c++) {
-                        if (I = i[c], I instanceof a) {
-                            I.watch.apply(I, d);
-                            break
-                        }
-                        j.push(void 0)
-                    }
-                    return j
-                }
-            }, c))
-        }), a = function() {
-            function a() {
-                var a = this;
-                this.elements = [], x().on("request", function() {
-                    return a.watch.apply(a, arguments)
-                })
-            }
-            return a.prototype.watch = function(a) {
-                var b, c, d;
-                return d = a.type, b = a.request, c = "socket" === d ? new m(b) : new n(b), this.elements.push(c)
-            }, a
-        }(), n = function() {
-            function a(a) {
-                var b, c, d, e, f, g, h = this;
-                if (this.progress = 0, null != window.ProgressEvent)
-                    for (c = null, a.addEventListener("progress", function(a) {
-                        return h.progress = a.lengthComputable ? 100 * a.loaded / a.total : h.progress + (100 - h.progress) / 2
-                    }), g = ["load", "abort", "timeout", "error"], d = 0, e = g.length; e > d; d++)
-                        b = g[d], a.addEventListener(b, function() {
-                            return h.progress = 100
-                        });
-                else
-                    f = a.onreadystatechange, a.onreadystatechange = function() {
-                        var b;
-                        return 0 === (b = a.readyState) || 4 === b ? h.progress = 100 : 3 === a.readyState && (h.progress = 50), "function" == typeof f ? f.apply(null, arguments) : void 0
-                    }
-            }
-            return a
-        }(), m = function() {
-            function a(a) {
-                var b, c, d, e, f = this;
-                for (this.progress = 0, e = ["error", "open"], c = 0, d = e.length; d > c; c++)
-                    b = e[c], a.addEventListener(b, function() {
-                        return f.progress = 100
-                    })
-            }
-            return a
-        }(), d = function() {
-            function a(a) {
-                var b, c, d, f;
-                for (null == a && (a = {}), this.elements = [], null == a.selectors && (a.selectors = []), f = a.selectors, c = 0, d = f.length; d > c; c++)
-                    b = f[c], this.elements.push(new e(b))
-            }
-            return a
-        }(), e = function() {
-            function a(a) {
-                this.selector = a, this.progress = 0, this.check()
-            }
-            return a.prototype.check = function() {
-                var a = this;
-                return document.querySelector(this.selector) ? this.done() : setTimeout(function() {
-                    return a.check()
-                }, C.elements.checkInterval)
-            }, a.prototype.done = function() {
-                return this.progress = 100
-            }, a
-        }(), c = function() {
-            function a() {
-                var a, b, c = this;
-                this.progress = null != (b = this.states[document.readyState]) ? b : 100, a = document.onreadystatechange, document.onreadystatechange = function() {
-                    return null != c.states[document.readyState] && (c.progress = c.states[document.readyState]), "function" == typeof a ? a.apply(null, arguments) : void 0
-                }
-            }
-            return a.prototype.states = {loading: 0, interactive: 50, complete: 100}, a
-        }(), f = function() {
-            function a() {
-                var a, b, c, d, e, f = this;
-                this.progress = 0, a = 0, e = [], d = 0, c = B(), b = setInterval(function() {
-                    var g;
-                    return g = B() - c - 50, c = B(), e.push(g), e.length > C.eventLag.sampleCount && e.shift(), a = p(e), ++d >= C.eventLag.minSamples && a < C.eventLag.lagThreshold ? (f.progress = 100, clearInterval(b)) : f.progress = 100 * (3 / (a + 3))
-                }, 50)
-            }
-            return a
-        }(), l = function() {
-            function a(a) {
-                this.source = a, this.last = this.sinceLastUpdate = 0, this.rate = C.initialRate, this.catchup = 0, this.progress = this.lastProgress = 0, null != this.source && (this.progress = E(this.source, "progress"))
-            }
-            return a.prototype.tick = function(a, b) {
-                var c;
-                return null == b && (b = E(this.source, "progress")), b >= 100 && (this.done = !0), b === this.last ? this.sinceLastUpdate += a : (this.sinceLastUpdate && (this.rate = (b - this.last) / this.sinceLastUpdate), this.catchup = (b - this.progress) / C.catchupTime, this.sinceLastUpdate = 0, this.last = b), b > this.progress && (this.progress += this.catchup * a), c = 1 - Math.pow(this.progress / 100, C.easeFactor), this.progress += c * this.rate * a, this.progress = Math.min(this.lastProgress + C.maxProgressPerFrame, this.progress), this.progress = Math.max(0, this.progress), this.progress = Math.min(100, this.progress), this.lastProgress = this.progress, this.progress
-            }, a
-        }(), J = null, G = null, q = null, K = null, o = null, r = null, Pace.running = !1, y = function() {
-            return C.restartOnPushState ? Pace.restart() : void 0
-        }, null != window.history.pushState && (R = window.history.pushState, window.history.pushState = function() {
-            return y(), R.apply(window.history, arguments)
-        }), null != window.history.replaceState && (U = window.history.replaceState, window.history.replaceState = function() {
-            return y(), U.apply(window.history, arguments)
-        }), k = {ajax: a, elements: d, document: c, eventLag: f}, (A = function() {
-            var a, c, d, e, f, g, h, i;
-            for (Pace.sources = J = [], g = ["ajax", "elements", "document", "eventLag"], c = 0, e = g.length; e > c; c++)
-                a = g[c], C[a] !== !1 && J.push(new k[a](C[a]));
-            for (i = null != (h = C.extraSources)?h:[], d = 0, f = i.length; f > d; d++)
-                I = i[d], J.push(new I(C));
-            return Pace.bar = q = new b, G = [], K = new l
-        })(), Pace.stop = function() {
-            return Pace.trigger("stop"), Pace.running = !1, q.destroy(), r = !0, null != o && ("function" == typeof s && s(o), o = null), A()
-        }, Pace.restart = function() {
-            return Pace.trigger("restart"), Pace.stop(), Pace.start()
-        }, Pace.go = function() {
-            return Pace.running = !0, q.render(), r = !1, o = F(function(a, b) {
-                var c, d, e, f, g, h, i, j, k, m, n, o, p, s, t, u, v;
-                for (j = 100 - q.progress, d = o = 0, e = !0, h = p = 0, t = J.length; t > p; h = ++p)
-                    for (I = J[h], m = null != G[h]?G[h]:G[h] = [], g = null != (v = I.elements)?v:[I], i = s = 0, u = g.length; u > s; i = ++s)
-                        f = g[i], k = null != m[i] ? m[i] : m[i] = new l(f), e &= k.done, k.done || (d++, o += k.tick(a));
-                return c = o / d, q.update(K.tick(a, c)), n = B(), q.done() || e || r ? (q.update(100), Pace.trigger("done"), setTimeout(function() {
-                    return q.finish(), Pace.running = !1, Pace.trigger("hide")
-                }, Math.max(C.ghostTime, Math.min(C.minTime, B() - n)))) : b()
-            })
-        }, Pace.start = function(a) {
-            u(C, a), Pace.running = !0;
-            try {
-                q.render()
-            } catch (b) {
-                i = b
-            }
-            return document.querySelector(".pace") ? (Pace.trigger("start"), Pace.go()) : setTimeout(Pace.start, 50)
-        }, "function" == typeof define && define.amd ? define('theme-app', [], function() {
-            return Pace
-        }) : "object" == typeof exports ? module.exports = Pace : C.startOnPageLoad && Pace.start()
-    }).call(this);
+//delay time configuration
+config.delayTime = 50;
+
+// chart configurations
+config.chart = {};
+
+config.chart.colorPrimary = tinycolor($ref.find(".chart .color-primary").css("color"));
+config.chart.colorSecondary = tinycolor($ref.find(".chart .color-secondary").css("color"));
+$(function() {
+	animate({
+		name: 'flipInY',
+		selector: '.error-card > .error-title-block'
+	});
+
+
+	setTimeout(function(){
+		var $el = $('.error-card > .error-container');
+
+		animate({
+			name: 'fadeInUp',
+			selector: $el 
+		});
+
+		$el.addClass('visible');
+	}, 1000);
+})
+//ResetForm validation
+$(function() {
+	if (!$('#reset-form').length) {
+        return false;
+    }
+
+    var resetValidationSettings = {
+	    rules: {
+	        email1: {
+	            required: true,
+	            email: true
+	        }
+	    },
+	    messages: {
+	        email1: {
+	            required: "Please enter email address",
+	            email: "Please enter a valid email address"
+	        }
+	    },
+	    invalidHandler: function() {
+			animate({
+				name: 'shake',
+				selector: '.auth-container > .card'
+			});
+		}
+	}
+
+	$.extend(resetValidationSettings, config.validations);
+
+    $('#reset-form').validate(resetValidationSettings);
+})
+//LoginForm validation
+$(function() {
+	if (!$('#login-form').length) {
+        return false;
+    }
+
+    var loginValidationSettings = {
+	    rules: {
+	        username: {
+	            required: true,
+	            email: true
+	        },
+	        password: "required",
+	        agree: "required"
+	    },
+	    messages: {
+	        username: {
+	            required: "Please enter username",
+	            email: "Please enter a valid email address"
+	        },
+	        password:  "Please enter password",
+	        agree: "Please accept our policy"
+	    },
+	    invalidHandler: function() {
+			animate({
+				name: 'shake',
+				selector: '.auth-container > .card'
+			});
+		}
+	}
+
+	$.extend(loginValidationSettings, config.validations);
+
+    $('#login-form').validate(loginValidationSettings);
+})
+//SignupForm validation
+$(function() {
+	if (!$('#signup-form').length) {
+        return false;
+    }
+
+    var signupValidationSettings = {
+	    rules: {
+	    	firstname: {
+	    		required: true,
+	    	},
+	    	lastname: {
+	    		required: true,
+	    	},
+	        email: {
+	            required: true,
+	            email: true
+	        },
+	        password: {
+				required: true,
+				minlength: 8
+	        },
+	        retype_password: {
+				required: true,
+				minlength: 8,
+				equalTo: "#password"
+			},
+			agree: {
+				required: true,
+			}
+	    },
+	    groups: {
+	    	name: "firstname lastname",
+			pass: "password retype_password",
+		},
+		errorPlacement: function(error, element) {
+			if (
+				element.attr("name") == "firstname" || 
+				element.attr("name") == "lastname" 
+			) {
+				error.insertAfter($("#lastname").closest('.row'));
+				element.parents("div.form-group")
+				.addClass('has-error');
+			} 
+			else if (
+				element.attr("name") == "password" || 
+				element.attr("name") == "retype_password" 
+			) {
+				error.insertAfter($("#retype_password").closest('.row'));
+				element.parents("div.form-group")
+				.addClass('has-error');
+			}
+			else if (element.attr("name") == "agree") {
+				error.insertAfter("#agree-text");
+			}
+			else {
+				error.insertAfter(element);
+			}
+		},
+	    messages: {
+	    	firstname: "Please enter firstname and lastname",
+	    	lastname: "Please enter firstname and lastname",
+	        email: {
+	            required: "Please enter email",
+	            email: "Please enter a valid email address"
+	        },
+	        password: {
+	        	required: "Please enter password fields.",
+	        	minlength: "Passwords should be at least 8 characters."
+	        },
+	        retype_password: {
+	        	required: "Please enter password fields.",
+	        	minlength: "Passwords should be at least 8 characters."
+	        },
+	        agree: "Please accept our policy"
+	    },
+	    invalidHandler: function() {
+			animate({
+				name: 'shake',
+				selector: '.auth-container > .card'
+			});
+		}
+	}
+
+	$.extend(signupValidationSettings, config.validations);
+
+    $('#signup-form').validate(signupValidationSettings);
+});
+/***********************************************
+*        Animation Settings
+***********************************************/
+function animate(options) {
+	var animationName = "animated " + options.name;
+	var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
+	$(options.selector)
+	.addClass(animationName)
+	.one(animationEnd, 
+		function(){
+			$(this).removeClass(animationName);
+		}
+	);
+}
+
+$(function() {
+	var $itemActions = $(".item-actions-dropdown");
+
+	$(document).on('click',function(e) {
+		if (!$(e.target).closest('.item-actions-dropdown').length) {
+			$itemActions.removeClass('active');
+		}
+	});
+	
+	$('.item-actions-toggle-btn').on('click',function(e){
+		e.preventDefault();
+
+		var $thisActionList = $(this).closest('.item-actions-dropdown');
+
+		$itemActions.not($thisActionList).removeClass('active');
+
+		$thisActionList.toggleClass('active');	
+	});
 });
 
-/*
- * BOX REFRESH BUTTON
- * ------------------
- * This is a custom plugin to use with the compenet BOX. It allows you to add
- * a refresh button to the box. It converts the box's state to a loading state.
- *
- * USAGE:
- *  $("#box-widget").boxRefresh( options );
- * */
-(function($) {
-    "use strict";
+/***********************************************
+*        NProgress Settings
+***********************************************/
+var npSettings = { 
+	easing: 'ease', 
+	speed: 500 
+}
 
-    $.fn.boxRefresh = function(options) {
+NProgress.configure(npSettings);
+$(function() {
+	setSameHeights();
 
-        // Render options
-        var settings = $.extend({
-            //Refressh button selector
-            trigger: ".refresh-btn",
-            //File source to be loaded (e.g: ajax/src.php)
-            source: "",
-            //Callbacks
-            onLoadStart: function(box) {
-            }, //Right after the button has been clicked
-            onLoadDone: function(box) {
-            } //When the source has been loaded
+	var resizeTimer;
 
-        }, options);
-
-        //The overlay
-        var overlay = $('<div class="overlay"></div><div class="loading-img"></div>');
-
-        return this.each(function() {
-            //if a source is specified
-            if (settings.source === "") {
-                if (console) {
-                    console.log("Please specify a source first - boxRefresh()");
-                }
-                return;
-            }
-            //the box
-            var box = $(this);
-            //the button
-            var rBtn = box.find(settings.trigger).first();
-
-            //On trigger click
-            rBtn.click(function(e) {
-                e.preventDefault();
-                //Add loading overlay
-                start(box);
-
-                //Perform ajax call
-                box.find(".box-body").load(settings.source, function() {
-                    done(box);
-                });
+	$(window).resize(function() {
+		clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setSameHeights, 150);
+	});
+});
 
 
-            });
+function setSameHeights($container) {
 
-        });
+	$container = $container || $('.sameheight-container');
 
-        function start(box) {
-            //Add overlay and loading img
-            box.append(overlay);
+	var viewport = ResponsiveBootstrapToolkit.current();
 
-            settings.onLoadStart.call(box);
+	$container.each(function() {
+
+		var $items = $(this).find(".sameheight-item");
+
+		// Get max height of items in container
+		var maxHeight = 0;
+
+		$items.each(function() {
+			$(this).css({height: 'auto'});
+			maxHeight = Math.max(maxHeight, $(this).innerHeight());
+		});
+
+
+		// Set heights of items
+		$items.each(function() {
+			// Ignored viewports for item
+			var excludedStr = $(this).data('exclude') || '';
+			var excluded = excludedStr.split(',');
+
+			// Set height of element if it's not excluded on 
+			if (excluded.indexOf(viewport) === -1) {
+				$(this).innerHeight(maxHeight);
+			}
+		});
+	});
+}
+
+$(function() {
+
+    if (!$('#dashboard-visits-chart').length) {
+        return false;
+    }
+
+    // drawing visits chart
+    drawVisitsChart();
+
+    var el = null;
+    var item = 'visits';
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+       
+       el = e.target;
+       item = $(el).attr('href').replace('#', '');
+       switchHistoryCharts(item);
+       
+    });
+
+    $(document).on("themechange", function(){
+        switchHistoryCharts(item);
+    });
+
+    function switchHistoryCharts(item){
+        var chartSelector = "#dashboard-" + item + "-chart";
+
+        if ($(chartSelector).has('svg').length) {
+            $(chartSelector).empty();
         }
 
-        function done(box) {
-            //Remove overlay and loading img
-            box.find(overlay).remove();
-
-            settings.onLoadDone.call(box);
+        switch(item){
+            case 'visits':
+                drawVisitsChart();
+                break;
+             case 'downloads':
+                drawDownloadsChart();
+                break;
         }
+    }
 
-    };
+    function drawVisitsChart(){
+        var dataVisits = [
+            { x: '2015-09-01', y: 70},
+            { x: '2015-09-02', y: 75 },
+            { x: '2015-09-03', y: 50},
+            { x: '2015-09-04', y: 75 },
+            { x: '2015-09-05', y: 50 },
+            { x: '2015-09-06', y: 75 },
+            { x: '2015-09-07', y: 86 } 
+        ];
 
-})(jQuery);
 
-/*
- * SIDEBAR MENU
- * ------------
- * This is a custom plugin for the sidebar menu. It provides a tree view.
- *
- * Usage:
- * $(".sidebar).tree();
- *
- * Note: This plugin does not accept any options. Instead, it only requires a class
- *       added to the element that contains a sub-menu.
- *
- * When used with the sidebar, for example, it would look something like this:
- * <ul class='sidebar-menu'>
- *      <li class="treeview active">
- *          <a href="#>Menu</a>
- *          <ul class='treeview-menu'>
- *              <li class='active'><a href=#>Level 1</a></li>
- *          </ul>
- *      </li>
- * </ul>
- *
- * Add .active class to <li> elements if you want the menu to be open automatically
- * on page load. See above for an example.
- */
-(function($) {
-    "use strict";
-
-    $.fn.tree = function() {
-
-        return this.each(function() {
-            var btn = $(this).children("a").first();
-            var menu = $(this).children(".treeview-menu").first();
-            var isActive = $(this).hasClass('active');
-
-            //initialize already active menus
-            if (isActive) {
-                menu.show();
-                btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
-            }
-            //Slide open or close the menu on link click
-            btn.click(function(e) {
-                e.preventDefault();
-                if (isActive) {
-                    //Slide up to close menu
-                    menu.slideUp();
-                    isActive = false;
-                    btn.children(".fa-angle-down").first().removeClass("fa-angle-down").addClass("fa-angle-left");
-                    btn.parent("li").removeClass("active");
-                } else {
-                    //Slide down to open menu
-                    menu.slideDown();
-                    isActive = true;
-                    btn.children(".fa-angle-left").first().removeClass("fa-angle-left").addClass("fa-angle-down");
-                    btn.parent("li").addClass("active");
+        Morris.Line({
+            element: 'dashboard-visits-chart',
+            data: dataVisits,
+            xkey: 'x',
+            ykeys: ['y'],
+            ymin: 'auto 40',
+            labels: ['Visits'],
+            xLabels: "day",
+            hideHover: 'auto',
+            yLabelFormat: function (y) {
+                // Only integers
+                if (y === parseInt(y, 10)) {
+                    return y;
                 }
-            });
-
-            /* Add margins to submenu elements to give it a tree look */
-            menu.find("li > a").each(function() {
-                var pad = parseInt($(this).css("margin-left")) + 10;
-
-                $(this).css({"margin-left": pad + "px"});
-            });
-
-        });
-
-    };
-
-
-}(jQuery));
-
-/*
- * TODO LIST CUSTOM PLUGIN
- * -----------------------
- * This plugin depends on iCheck plugin for checkbox and radio inputs
- */
-(function($) {
-    "use strict";
-
-    $.fn.todolist = function(options) {
-        // Render options
-        var settings = $.extend({
-            //When the user checks the input
-            onCheck: function(ele) {
+                else {
+                    return '';
+                }
             },
-            //When the user unchecks the input
-            onUncheck: function(ele) {
-            }
-        }, options);
-
-        return this.each(function() {
-            $('input', this).on('ifChecked', function(event) {
-                var ele = $(this).parents("li").first();
-                ele.toggleClass("done");
-                settings.onCheck.call(ele);
-            });
-
-            $('input', this).on('ifUnchecked', function(event) {
-                var ele = $(this).parents("li").first();
-                ele.toggleClass("done");
-                settings.onUncheck.call(ele);
-            });
+            resize: true,
+            lineColors: [
+                config.chart.colorSecondary.toString(),
+            ],
+            pointFillColors: [
+                 config.chart.colorPrimary.toString(),
+            ]
         });
-    };
+    }
 
-}(jQuery));
+    function drawDownloadsChart(){
 
-/* CENTER ELEMENTS */
-(function($) {
-    "use strict";
-    jQuery.fn.center = function(parent) {
-        if (parent) {
-            parent = this.parent();
-        } else {
-            parent = window;
-        }
-        this.css({
-            "position": "absolute",
-            "top": ((($(parent).height() - this.outerHeight()) / 2) + $(parent).scrollTop() + "px"),
-            "left": ((($(parent).width() - this.outerWidth()) / 2) + $(parent).scrollLeft() + "px")
+        var dataDownloads = [
+            { 
+                year: '2006',
+                downloads: 1300
+            },
+            { 
+                year: '2007', 
+                downloads: 1526
+            },
+            { 
+                year: '2008', 
+                downloads: 2000
+            },
+            { 
+                year: '2009', 
+                downloads: 1800
+            },
+            { 
+                year: '2010', 
+                downloads: 1650
+            },    
+            { 
+                year: '2011', 
+                downloads: 620
+            },
+            { 
+                year: '2012', 
+                downloads: 1000
+            },
+            { 
+                year: '2013', 
+                downloads: 1896
+            },
+            { 
+                year: '2014', 
+                downloads: 850
+            },
+            { 
+                year: '2015', 
+                downloads: 1500
+            }  
+        ];
+
+
+        Morris.Bar({
+            element: 'dashboard-downloads-chart',
+            data: dataDownloads,
+            xkey: 'year',
+            ykeys: ['downloads'],
+            labels: ['Downloads'],
+            hideHover: 'auto',
+            resize: true,
+            barColors: [
+                config.chart.colorPrimary.toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
+            ],
         });
-        return this;
     }
-}(jQuery));
+});
 
-/*
- * jQuery resize event - v1.1 - 3/14/2010
- * http://benalman.com/projects/jquery-resize-plugin/
- *
- * Copyright (c) 2010 "Cowboy" Ben Alman
- * Dual licensed under the MIT and GPL licenses.
- * http://benalman.com/about/license/
- */
-(function($, h, c) {
-    var a = $([]), e = $.resize = $.extend($.resize, {}), i, k = "setTimeout", j = "resize", d = j + "-special-event", b = "delay", f = "throttleWindow";
-    e[b] = 250;
-    e[f] = true;
-    $.event.special[j] = {setup: function() {
-            if (!e[f] && this[k]) {
-                return false;
-            }
-            var l = $(this);
-            a = a.add(l);
-            $.data(this, d, {w: l.width(), h: l.height()});
-            if (a.length === 1) {
-                g();
-            }
-        }, teardown: function() {
-            if (!e[f] && this[k]) {
-                return false
-            }
-            var l = $(this);
-            a = a.not(l);
-            l.removeData(d);
-            if (!a.length) {
-                clearTimeout(i);
-            }
-        }, add: function(l) {
-            if (!e[f] && this[k]) {
-                return false
-            }
-            var n;
-            function m(s, o, p) {
-                var q = $(this), r = $.data(this, d);
-                r.w = o !== c ? o : q.width();
-                r.h = p !== c ? p : q.height();
-                n.apply(this, arguments)
-            }
-            if ($.isFunction(l)) {
-                n = l;
-                return m
-            } else {
-                n = l.handler;
-                l.handler = m
-            }
-        }};
-    function g() {
-        i = h[k](function() {
-            a.each(function() {
-                var n = $(this), m = n.width(), l = n.height(), o = $.data(this, d);
-                if (m !== o.w || l !== o.h) {
-                    n.trigger(j, [o.w = m, o.h = l])
-                }
-            });
-            g()
-        }, e[b])
-    }}
-)(jQuery, this);
 
-/*!
- * SlimScroll https://github.com/rochal/jQuery-slimScroll
- * =======================================================
- *
- * Copyright (c) 2011 Piotr Rochala (http://rocha.la) Dual licensed under the MIT
- */
-(function(f) {
-    jQuery.fn.extend({slimScroll: function(h) {
-            var a = f.extend({width: "auto", height: "250px", size: "7px", color: "#000", position: "right", distance: "1px", start: "top", opacity: 0.4, alwaysVisible: !1, disableFadeOut: !1, railVisible: !1, railColor: "#333", railOpacity: 0.2, railDraggable: !0, railClass: "slimScrollRail", barClass: "slimScrollBar", wrapperClass: "slimScrollDiv", allowPageScroll: !1, wheelStep: 20, touchScrollStep: 200, borderRadius: "5px", railBorderRadius: "5px"}, h);
-            this.each(function() {
-                function r(d) {
-                    if (s) {
-                        d = d ||
-                                window.event;
-                        var c = 0;
-                        d.wheelDelta && (c = -d.wheelDelta / 120);
-                        d.detail && (c = d.detail / 3);
-                        f(d.target || d.srcTarget || d.srcElement).closest("." + a.wrapperClass).is(b.parent()) && m(c, !0);
-                        d.preventDefault && !k && d.preventDefault();
-                        k || (d.returnValue = !1)
-                    }
-                }
-                function m(d, f, h) {
-                    k = !1;
-                    var e = d, g = b.outerHeight() - c.outerHeight();
-                    f && (e = parseInt(c.css("top")) + d * parseInt(a.wheelStep) / 100 * c.outerHeight(), e = Math.min(Math.max(e, 0), g), e = 0 < d ? Math.ceil(e) : Math.floor(e), c.css({top: e + "px"}));
-                    l = parseInt(c.css("top")) / (b.outerHeight() - c.outerHeight());
-                    e = l * (b[0].scrollHeight - b.outerHeight());
-                    h && (e = d, d = e / b[0].scrollHeight * b.outerHeight(), d = Math.min(Math.max(d, 0), g), c.css({top: d + "px"}));
-                    b.scrollTop(e);
-                    b.trigger("slimscrolling", ~~e);
-                    v();
-                    p()
-                }
-                function C() {
-                    window.addEventListener ? (this.addEventListener("DOMMouseScroll", r, !1), this.addEventListener("mousewheel", r, !1), this.addEventListener("MozMousePixelScroll", r, !1)) : document.attachEvent("onmousewheel", r)
-                }
-                function w() {
-                    u = Math.max(b.outerHeight() / b[0].scrollHeight * b.outerHeight(), D);
-                    c.css({height: u + "px"});
-                    var a = u == b.outerHeight() ? "none" : "block";
-                    c.css({display: a})
-                }
-                function v() {
-                    w();
-                    clearTimeout(A);
-                    l == ~~l ? (k = a.allowPageScroll, B != l && b.trigger("slimscroll", 0 == ~~l ? "top" : "bottom")) : k = !1;
-                    B = l;
-                    u >= b.outerHeight() ? k = !0 : (c.stop(!0, !0).fadeIn("fast"), a.railVisible && g.stop(!0, !0).fadeIn("fast"))
-                }
-                function p() {
-                    a.alwaysVisible || (A = setTimeout(function() {
-                        a.disableFadeOut && s || (x || y) || (c.fadeOut("slow"), g.fadeOut("slow"))
-                    }, 1E3))
-                }
-                var s, x, y, A, z, u, l, B, D = 30, k = !1, b = f(this);
-                if (b.parent().hasClass(a.wrapperClass)) {
-                    var n = b.scrollTop(),
-                            c = b.parent().find("." + a.barClass), g = b.parent().find("." + a.railClass);
-                    w();
-                    if (f.isPlainObject(h)) {
-                        if ("height"in h && "auto" == h.height) {
-                            b.parent().css("height", "auto");
-                            b.css("height", "auto");
-                            var q = b.parent().parent().height();
-                            b.parent().css("height", q);
-                            b.css("height", q)
-                        }
-                        if ("scrollTo"in h)
-                            n = parseInt(a.scrollTo);
-                        else if ("scrollBy"in h)
-                            n += parseInt(a.scrollBy);
-                        else if ("destroy"in h) {
-                            c.remove();
-                            g.remove();
-                            b.unwrap();
-                            return
-                        }
-                        m(n, !1, !0)
-                    }
-                } else {
-                    a.height = "auto" == a.height ? b.parent().height() : a.height;
-                    n = f("<div></div>").addClass(a.wrapperClass).css({position: "relative",
-                        overflow: "hidden", width: a.width, height: a.height});
-                    b.css({overflow: "hidden", width: a.width, height: a.height});
-                    var g = f("<div></div>").addClass(a.railClass).css({width: a.size, height: "100%", position: "absolute", top: 0, display: a.alwaysVisible && a.railVisible ? "block" : "none", "border-radius": a.railBorderRadius, background: a.railColor, opacity: a.railOpacity, zIndex: 90}), c = f("<div></div>").addClass(a.barClass).css({background: a.color, width: a.size, position: "absolute", top: 0, opacity: a.opacity, display: a.alwaysVisible ?
-                                "block" : "none", "border-radius": a.borderRadius, BorderRadius: a.borderRadius, MozBorderRadius: a.borderRadius, WebkitBorderRadius: a.borderRadius, zIndex: 99}), q = "right" == a.position ? {right: a.distance} : {left: a.distance};
-                    g.css(q);
-                    c.css(q);
-                    b.wrap(n);
-                    b.parent().append(c);
-                    b.parent().append(g);
-                    a.railDraggable && c.bind("mousedown", function(a) {
-                        var b = f(document);
-                        y = !0;
-                        t = parseFloat(c.css("top"));
-                        pageY = a.pageY;
-                        b.bind("mousemove.slimscroll", function(a) {
-                            currTop = t + a.pageY - pageY;
-                            c.css("top", currTop);
-                            m(0, c.position().top, !1)
-                        });
-                        b.bind("mouseup.slimscroll", function(a) {
-                            y = !1;
-                            p();
-                            b.unbind(".slimscroll")
-                        });
-                        return!1
-                    }).bind("selectstart.slimscroll", function(a) {
-                        a.stopPropagation();
-                        a.preventDefault();
-                        return!1
-                    });
-                    g.hover(function() {
-                        v()
-                    }, function() {
-                        p()
-                    });
-                    c.hover(function() {
-                        x = !0
-                    }, function() {
-                        x = !1
-                    });
-                    b.hover(function() {
-                        s = !0;
-                        v();
-                        p()
-                    }, function() {
-                        s = !1;
-                        p()
-                    });
-                    b.bind("touchstart", function(a, b) {
-                        a.originalEvent.touches.length && (z = a.originalEvent.touches[0].pageY)
-                    });
-                    b.bind("touchmove", function(b) {
-                        k || b.originalEvent.preventDefault();
-                        b.originalEvent.touches.length &&
-                                (m((z - b.originalEvent.touches[0].pageY) / a.touchScrollStep, !0), z = b.originalEvent.touches[0].pageY)
-                    });
-                    w();
-                    "bottom" === a.start ? (c.css({top: b.outerHeight() - c.outerHeight()}), m(0, !0)) : "top" !== a.start && (m(f(a.start).position().top, null, !0), a.alwaysVisible || c.hide());
-                    C()
-                }
-            });
-            return this
-        }});
-    jQuery.fn.extend({slimscroll: jQuery.fn.slimScroll})
-})(jQuery);
 
-/*! iCheck v1.0.1 by Damir Sultanov, http://git.io/arlzeA, MIT Licensed */
-(function(h) {
-    function F(a, b, d) {
-        var c = a[0], e = /er/.test(d) ? m : /bl/.test(d) ? s : l, f = d == H ? {checked: c[l], disabled: c[s], indeterminate: "true" == a.attr(m) || "false" == a.attr(w)} : c[e];
-        if (/^(ch|di|in)/.test(d) && !f)
-            D(a, e);
-        else if (/^(un|en|de)/.test(d) && f)
-            t(a, e);
-        else if (d == H)
-            for (e in f)
-                f[e] ? D(a, e, !0) : t(a, e, !0);
-        else if (!b || "toggle" == d) {
-            if (!b)
-                a[p]("ifClicked");
-            f ? c[n] !== u && t(a, e) : D(a, e)
-        }
+
+$(function() {
+	
+
+	function drawDashboardItemsListSparklines(){
+		$(".dashboard-page .items .sparkline").each(function() {
+			var type = $(this).data('type');
+
+			// There is predefined data
+			if ($(this).data('data')) {
+				var data = $(this).data('data').split(',').map(function(item) {
+					if (item.indexOf(":") > 0) {
+						return item.split(":");
+					}
+					else {
+						return item;
+					}
+				});
+			}
+			// Generate random data
+			else {
+				var data = [];
+				for (var i = 0; i < 17; i++) {
+					data.push(Math.round(100 * Math.random()));
+				}
+			}
+
+
+			$(this).sparkline(data, {
+				barColor: config.chart.colorPrimary.toString(),
+				height: $(this).height(),
+				type: type
+			});
+		});
+	}
+
+	drawDashboardItemsListSparklines();
+
+	$(document).on("themechange", function(){
+        drawDashboardItemsListSparklines();
+    });
+});
+$(function() {
+
+    var $dashboardSalesBreakdownChart = $('#dashboard-sales-breakdown-chart');
+
+    if (!$dashboardSalesBreakdownChart.length) {
+        return false;
+    } 
+
+    function drawSalesChart(){
+
+    $dashboardSalesBreakdownChart.empty();
+
+        Morris.Donut({
+            element: 'dashboard-sales-breakdown-chart',
+            data: [{ label: "Download Sales", value: 12 },
+                { label: "In-Store Sales", value: 30 },
+                { label: "Mail-Order Sales", value: 20 } ],
+            resize: true,
+            colors: [
+                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(8).toString(),
+                config.chart.colorPrimary.toString()
+            ],
+        });
+
+        var $sameheightContainer = $dashboardSalesBreakdownChart.closest(".sameheight-container");
+
+        setSameHeights($sameheightContainer);
     }
-    function D(a, b, d) {
-        var c = a[0], e = a.parent(), f = b == l, A = b == m, B = b == s, K = A ? w : f ? E : "enabled", p = k(a, K + x(c[n])), N = k(a, b + x(c[n]));
-        if (!0 !== c[b]) {
-            if (!d &&
-                    b == l && c[n] == u && c.name) {
-                var C = a.closest("form"), r = 'input[name="' + c.name + '"]', r = C.length ? C.find(r) : h(r);
-                r.each(function() {
-                    this !== c && h(this).data(q) && t(h(this), b)
-                })
-            }
-            A ? (c[b] = !0, c[l] && t(a, l, "force")) : (d || (c[b] = !0), f && c[m] && t(a, m, !1));
-            L(a, f, b, d)
-        }
-        c[s] && k(a, y, !0) && e.find("." + I).css(y, "default");
-        e[v](N || k(a, b) || "");
-        B ? e.attr("aria-disabled", "true") : e.attr("aria-checked", A ? "mixed" : "true");
-        e[z](p || k(a, K) || "")
+
+    drawSalesChart();
+
+    $(document).on("themechange", function(){
+       drawSalesChart();
+    });
+    
+})
+$(function() {
+
+    var $dashboardSalesMap = $('#dashboard-sales-map');
+
+    if (!$dashboardSalesMap.length) {
+        return false;
     }
-    function t(a, b, d) {
-        var c = a[0], e = a.parent(), f = b == l, h = b == m, q = b == s, p = h ? w : f ? E : "enabled", t = k(a, p + x(c[n])),
-                u = k(a, b + x(c[n]));
-        if (!1 !== c[b]) {
-            if (h || !d || "force" == d)
-                c[b] = !1;
-            L(a, f, p, d)
-        }
-        !c[s] && k(a, y, !0) && e.find("." + I).css(y, "pointer");
-        e[z](u || k(a, b) || "");
-        q ? e.attr("aria-disabled", "false") : e.attr("aria-checked", "false");
-        e[v](t || k(a, p) || "")
-    }
-    function M(a, b) {
-        if (a.data(q)) {
-            a.parent().html(a.attr("style", a.data(q).s || ""));
-            if (b)
-                a[p](b);
-            a.off(".i").unwrap();
-            h(G + '[for="' + a[0].id + '"]').add(a.closest(G)).off(".i")
-        }
-    }
-    function k(a, b, d) {
-        if (a.data(q))
-            return a.data(q).o[b + (d ? "" : "Class")]
-    }
-    function x(a) {
-        return a.charAt(0).toUpperCase() +
-                a.slice(1)
-    }
-    function L(a, b, d, c) {
-        if (!c) {
-            if (b)
-                a[p]("ifToggled");
-            a[p]("ifChanged")[p]("if" + x(d))
-        }
-    }
-    var q = "iCheck", I = q + "-helper", u = "radio", l = "checked", E = "un" + l, s = "disabled", w = "determinate", m = "in" + w, H = "update", n = "type", v = "addClass", z = "removeClass", p = "trigger", G = "label", y = "cursor", J = /ipad|iphone|ipod|android|blackberry|windows phone|opera mini|silk/i.test(navigator.userAgent);
-    h.fn[q] = function(a, b) {
-        var d = 'input[type="checkbox"], input[type="' + u + '"]', c = h(), e = function(a) {
-            a.each(function() {
-                var a = h(this);
-                c = a.is(d) ?
-                        c.add(a) : c.add(a.find(d))
-            })
+
+    function drawSalesMap() {
+
+        $dashboardSalesMap.empty();
+
+        var color = config.chart.colorPrimary.toHexString();
+        var darkColor = tinycolor(config.chart.colorPrimary.toString()).darken(40).toHexString();
+        var selectedColor = tinycolor(config.chart.colorPrimary.toString()).darken(10).toHexString();
+
+        var sales_data = {
+            us: 2000,
+            ru: 2000, 
+            gb: 10000,
+            fr: 10000,
+            de: 10000,
+            cn: 10000,
+            in: 10000,
+            sa: 10000,
+            ca: 10000,
+            br: 5000,
+            au: 5000
         };
-        if (/^(check|uncheck|toggle|indeterminate|determinate|disable|enable|update|destroy)$/i.test(a))
-            return a = a.toLowerCase(), e(this), c.each(function() {
-                var c = h(this);
-                "destroy" == a ? M(c, "ifDestroyed") : F(c, !0, a);
-                h.isFunction(b) && b()
-            });
-        if ("object" != typeof a && a)
-            return this;
-        var f = h.extend({checkedClass: l, disabledClass: s, indeterminateClass: m, labelHover: !0, aria: !1}, a), k = f.handle, B = f.hoverClass || "hover", x = f.focusClass || "focus", w = f.activeClass || "active", y = !!f.labelHover, C = f.labelHoverClass ||
-                "hover", r = ("" + f.increaseArea).replace("%", "") | 0;
-        if ("checkbox" == k || k == u)
-            d = 'input[type="' + k + '"]';
-        -50 > r && (r = -50);
-        e(this);
-        return c.each(function() {
-            var a = h(this);
-            M(a);
-            var c = this, b = c.id, e = -r + "%", d = 100 + 2 * r + "%", d = {position: "absolute", top: e, left: e, display: "block", width: d, height: d, margin: 0, padding: 0, background: "#fff", border: 0, opacity: 0}, e = J ? {position: "absolute", visibility: "hidden"} : r ? d : {position: "absolute", opacity: 0}, k = "checkbox" == c[n] ? f.checkboxClass || "icheckbox" : f.radioClass || "i" + u, m = h(G + '[for="' + b + '"]').add(a.closest(G)),
-                    A = !!f.aria, E = q + "-" + Math.random().toString(36).replace("0.", ""), g = '<div class="' + k + '" ' + (A ? 'role="' + c[n] + '" ' : "");
-            m.length && A && m.each(function() {
-                g += 'aria-labelledby="';
-                this.id ? g += this.id : (this.id = E, g += E);
-                g += '"'
-            });
-            g = a.wrap(g + "/>")[p]("ifCreated").parent().append(f.insert);
-            d = h('<ins class="' + I + '"/>').css(d).appendTo(g);
-            a.data(q, {o: f, s: a.attr("style")}).css(e);
-            f.inheritClass && g[v](c.className || "");
-            f.inheritID && b && g.attr("id", q + "-" + b);
-            "static" == g.css("position") && g.css("position", "relative");
-            F(a, !0, H);
-            if (m.length)
-                m.on("click.i mouseover.i mouseout.i touchbegin.i touchend.i", function(b) {
-                    var d = b[n], e = h(this);
-                    if (!c[s]) {
-                        if ("click" == d) {
-                            if (h(b.target).is("a"))
-                                return;
-                            F(a, !1, !0)
-                        } else
-                            y && (/ut|nd/.test(d) ? (g[z](B), e[z](C)) : (g[v](B), e[v](C)));
-                        if (J)
-                            b.stopPropagation();
-                        else
-                            return!1
-                    }
-                });
-            a.on("click.i focus.i blur.i keyup.i keydown.i keypress.i", function(b) {
-                var d = b[n];
-                b = b.keyCode;
-                if ("click" == d)
-                    return!1;
-                if ("keydown" == d && 32 == b)
-                    return c[n] == u && c[l] || (c[l] ? t(a, l) : D(a, l)), !1;
-                if ("keyup" == d && c[n] == u)
-                    !c[l] && D(a, l);
-                else if (/us|ur/.test(d))
-                    g["blur" ==
-                            d ? z : v](x)
-            });
-            d.on("click mousedown mouseup mouseover mouseout touchbegin.i touchend.i", function(b) {
-                var d = b[n], e = /wn|up/.test(d) ? w : B;
-                if (!c[s]) {
-                    if ("click" == d)
-                        F(a, !1, !0);
-                    else {
-                        if (/wn|er|in/.test(d))
-                            g[v](e);
-                        else
-                            g[z](e + " " + w);
-                        if (m.length && y && e == B)
-                            m[/ut|nd/.test(d) ? z : v](C)
-                    }
-                    if (J)
-                        b.stopPropagation();
-                    else
-                        return!1
-                }
-            })
-        })
+
+        $dashboardSalesMap.vectorMap({
+            map: 'world_en',
+            backgroundColor: 'transparent',
+            color: '#E5E3E5',
+            hoverOpacity: 0.7,
+            selectedColor: selectedColor,
+            enableZoom: true,
+            showTooltip: true,
+            values: sales_data,
+            scaleColors: [ color, darkColor],
+            normalizeFunction: 'linear'
+        });
     }
-})(window.jQuery || window.Zepto);
+
+    drawSalesMap();
+
+    $(document).on("themechange", function(){
+       drawSalesMap();
+    });
+});
+$(function() {
+
+	$('.actions-list > li').on('click', '.check', function(e){
+		e.preventDefault();
+
+		$(this).parents('.tasks-item')
+		.find('.checkbox')
+		.prop("checked",  true);
+
+		removeActionList();
+	});
+
+});
+//Flot Bar Chart
+$(function() {
+
+    if (!$('#flot-bar-chart').length) {
+        return false;
+    }
+
+    function drawFlotCharts() {
+
+        var barOptions = {
+            series: {
+                bars: {
+                    show: true,
+                    barWidth: 0.6,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0.8
+                        }, {
+                            opacity: 0.8
+                        }]
+                    }
+                }
+            },
+            xaxis: {
+                tickDecimals: 0
+            },
+            colors: [config.chart.colorPrimary],
+            grid: {
+                color: "#999999",
+                hoverable: true,
+                clickable: true,
+                tickColor: "#D4D4D4",
+                borderWidth:0
+            },
+            legend: {
+                show: false
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "x: %x, y: %y"
+            }
+        };
+        var barData = {
+            label: "bar",
+            data: [
+                [1, 34],
+                [2, 25],
+                [3, 19],
+                [4, 34],
+                [5, 32],
+                [6, 44]
+            ]
+        };
+        $.plot($("#flot-bar-chart"), [barData], barOptions);
+
+
+        // Flot line chart
+        var lineOptions = {
+            series: {
+                lines: {
+                    show: true,
+                    lineWidth: 2,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0.0
+                        }, {
+                            opacity: 0.0
+                        }]
+                    }
+                }
+            },
+            xaxis: {
+                tickDecimals: 0
+            },
+            colors: [config.chart.colorPrimary],
+            grid: {
+                color: "#999999",
+                hoverable: true,
+                clickable: true,
+                tickColor: "#D4D4D4",
+                borderWidth:0
+            },
+            legend: {
+                show: false
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "x: %x, y: %y"
+            }
+        };
+        var barData = {
+            label: "bar",
+            data: [
+                [1, 34],
+                [2, 25],
+                [3, 19],
+                [4, 34],
+                [5, 32],
+                [6, 44]
+            ]
+        };
+        $.plot($("#flot-line-chart"), [barData], lineOptions);
+
+        //Flot Pie Chart
+        var data = [{
+            label: "Sales 1",
+            data: 21,
+            color: tinycolor(config.chart.colorPrimary.toString()).lighten(20),
+        }, {
+            label: "Sales 2",
+            data: 15,
+            color: tinycolor(config.chart.colorPrimary.toString()).lighten(10),
+        }, {
+            label: "Sales 3",
+            data: 7,
+            color: tinycolor(config.chart.colorPrimary.toString()),
+        }, {
+            label: "Sales 4",
+            data: 52,
+            color: tinycolor(config.chart.colorPrimary.toString()).darken(10),
+        }];
+
+        var plotObj = $.plot($("#flot-pie-chart"), data, {
+            series: {
+                pie: {
+                    show: true
+                }
+            },
+            grid: {
+                hoverable: true
+            },
+            tooltip: true,
+            tooltipOpts: {
+                content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                shifts: {
+                    x: 20,
+                    y: 0
+                },
+                defaultTheme: false
+            }
+        });
+
+
+        //live chart example
+        var container = $("#flot-line-chart-moving");
+        container.empty();
+        // Determine how many data points to keep based on the placeholder's initial size;
+        // this gives us a nice high-res plot while avoiding more than one point per pixel.
+
+        var maximum = container.outerWidth() / 10 || 100;
+
+        //
+
+        var data = [];
+
+        function getRandomData() {
+
+            if (data.length) {
+                data = data.slice(1);
+            }
+
+            while (data.length < maximum) {
+                var previous = data.length ? data[data.length - 1] : 50;
+                var y = previous + Math.random() * 10 - 5;
+                data.push(y < 0 ? 0 : y > 100 ? 100 : y);
+            }
+
+            // zip the generated y values with the x values
+
+            var res = [];
+            for (var i = 0; i < data.length; ++i) {
+                res.push([i, data[i]])
+            }
+
+            return res;
+        }
+
+        series = [{
+            data: getRandomData(),
+            lines: {
+                fill: true
+            }
+        }];
+
+
+        var plot = $.plot(container, series, {
+            grid: {
+
+                color: "#999999",
+                tickColor: "#D4D4D4",
+                borderWidth:0,
+                minBorderMargin: 20,
+                labelMargin: 10,
+                backgroundColor: {
+                    colors: ["#ffffff", "#ffffff"]
+                },
+                margin: {
+                    top: 8,
+                    bottom: 20,
+                    left: 20
+                },
+                markings: function(axes) {
+                    var markings = [];
+                    var xaxis = axes.xaxis;
+                    for (var x = Math.floor(xaxis.min); x < xaxis.max; x += xaxis.tickSize * 2) {
+                        markings.push({
+                            xaxis: {
+                                from: x,
+                                to: x + xaxis.tickSize
+                            },
+                            color: "#fff"
+                        });
+                    }
+                    return markings;
+                }
+            },
+            colors: [config.chart.colorPrimary.toString()],
+            xaxis: {
+                tickFormatter: function() {
+                    return "";
+                }
+            },
+            yaxis: {
+                min: 0,
+                max: 110
+            },
+            legend: {
+                show: true
+            }
+        });
+
+        // Update the random dataset at 25FPS for a smoothly-animating chart
+
+        setInterval(function updateRandom() {
+            series[0].data = getRandomData();
+            plot.setData(series);
+            plot.draw();
+        }, 40);
+
+
+        //Flot Multiple Axes Line Chart
+        var oilpricesFull = [ [1167692400000, 61.05], [1167778800000, 58.32], [1167865200000, 57.35], [1167951600000, 56.31], [1168210800000, 55.55], [1168297200000, 55.64], [1168383600000, 54.02], [1168470000000, 51.88], [1168556400000, 52.99], [1168815600000, 52.99], [1168902000000, 51.21], [1168988400000, 52.24], [1169074800000, 50.48], [1169161200000, 51.99], [1169420400000, 51.13], [1169506800000, 55.04], [1169593200000, 55.37], [1169679600000, 54.23], [1169766000000, 55.42], [1170025200000, 54.01], [1170111600000, 56.97], [1170198000000, 58.14], [1170284400000, 58.14], [1170370800000, 59.02], [1170630000000, 58.74], [1170716400000, 58.88], [1170802800000, 57.71], [1170889200000, 59.71], [1170975600000, 59.89], [1171234800000, 57.81], [1171321200000, 59.06], [1171407600000, 58.00], [1171494000000, 57.99], [1171580400000, 59.39], [1171839600000, 59.39], [1171926000000, 58.07], [1172012400000, 60.07], [1172098800000, 61.14], [1172444400000, 61.39], [1172530800000, 61.46], [1172617200000, 61.79], [1172703600000, 62.00], [1172790000000, 60.07], [1173135600000, 60.69], [1173222000000, 61.82], [1173308400000, 60.05], [1173654000000, 58.91], [1173740400000, 57.93], [1173826800000, 58.16], [1173913200000, 57.55], [1173999600000, 57.11], [1174258800000, 56.59], [1174345200000, 59.61], [1174518000000, 61.69], [1174604400000, 62.28], [1174860000000, 62.91], [1174946400000, 62.93], [1175032800000, 64.03], [1175119200000, 66.03], [1175205600000, 65.87], [1175464800000, 64.64], [1175637600000, 64.38], [1175724000000, 64.28], [1175810400000, 64.28], [1176069600000, 61.51], [1176156000000, 61.89], [1176242400000, 62.01], [1176328800000, 63.85], [1176415200000, 63.63], [1176674400000, 63.61], [1176760800000, 63.10], [1176847200000, 63.13], [1176933600000, 61.83], [1177020000000, 63.38], [1177279200000, 64.58], [1177452000000, 65.84], [1177538400000, 65.06], [1177624800000, 66.46], [1177884000000, 64.40], [1178056800000, 63.68], [1178143200000, 63.19], [1178229600000, 61.93], [1178488800000, 61.47], [1178575200000, 61.55], [1178748000000, 61.81], [1178834400000, 62.37], [1179093600000, 62.46], [1179180000000, 63.17], [1179266400000, 62.55], [1179352800000, 64.94], [1179698400000, 66.27], [1179784800000, 65.50], [1179871200000, 65.77], [1179957600000, 64.18], [1180044000000, 65.20], [1180389600000, 63.15], [1180476000000, 63.49], [1180562400000, 65.08], [1180908000000, 66.30], [1180994400000, 65.96], [1181167200000, 66.93], [1181253600000, 65.98], [1181599200000, 65.35], [1181685600000, 66.26], [1181858400000, 68.00], [1182117600000, 69.09], [1182204000000, 69.10], [1182290400000, 68.19], [1182376800000, 68.19], [1182463200000, 69.14], [1182722400000, 68.19], [1182808800000, 67.77], [1182895200000, 68.97], [1182981600000, 69.57], [1183068000000, 70.68], [1183327200000, 71.09], [1183413600000, 70.92], [1183586400000, 71.81], [1183672800000, 72.81], [1183932000000, 72.19], [1184018400000, 72.56], [1184191200000, 72.50], [1184277600000, 74.15], [1184623200000, 75.05], [1184796000000, 75.92], [1184882400000, 75.57], [1185141600000, 74.89], [1185228000000, 73.56], [1185314400000, 75.57], [1185400800000, 74.95], [1185487200000, 76.83], [1185832800000, 78.21], [1185919200000, 76.53], [1186005600000, 76.86], [1186092000000, 76.00], [1186437600000, 71.59], [1186696800000, 71.47], [1186956000000, 71.62], [1187042400000, 71.00], [1187301600000, 71.98], [1187560800000, 71.12], [1187647200000, 69.47], [1187733600000, 69.26], [1187820000000, 69.83], [1187906400000, 71.09], [1188165600000, 71.73], [1188338400000, 73.36], [1188511200000, 74.04], [1188856800000, 76.30], [1189116000000, 77.49], [1189461600000, 78.23], [1189548000000, 79.91], [1189634400000, 80.09], [1189720800000, 79.10], [1189980000000, 80.57], [1190066400000, 81.93], [1190239200000, 83.32], [1190325600000, 81.62], [1190584800000, 80.95], [1190671200000, 79.53], [1190757600000, 80.30], [1190844000000, 82.88], [1190930400000, 81.66], [1191189600000, 80.24], [1191276000000, 80.05], [1191362400000, 79.94], [1191448800000, 81.44], [1191535200000, 81.22], [1191794400000, 79.02], [1191880800000, 80.26], [1191967200000, 80.30], [1192053600000, 83.08], [1192140000000, 83.69], [1192399200000, 86.13], [1192485600000, 87.61], [1192572000000, 87.40], [1192658400000, 89.47], [1192744800000, 88.60], [1193004000000, 87.56], [1193090400000, 87.56], [1193176800000, 87.10], [1193263200000, 91.86], [1193612400000, 93.53], [1193698800000, 94.53], [1193871600000, 95.93], [1194217200000, 93.98], [1194303600000, 96.37], [1194476400000, 95.46], [1194562800000, 96.32], [1195081200000, 93.43], [1195167600000, 95.10], [1195426800000, 94.64], [1195513200000, 95.10], [1196031600000, 97.70], [1196118000000, 94.42], [1196204400000, 90.62], [1196290800000, 91.01], [1196377200000, 88.71], [1196636400000, 88.32], [1196809200000, 90.23], [1196982000000, 88.28], [1197241200000, 87.86], [1197327600000, 90.02], [1197414000000, 92.25], [1197586800000, 90.63], [1197846000000, 90.63], [1197932400000, 90.49], [1198018800000, 91.24], [1198105200000, 91.06], [1198191600000, 90.49], [1198710000000, 96.62], [1198796400000, 96.00], [1199142000000, 99.62], [1199314800000, 99.18], [1199401200000, 95.09], [1199660400000, 96.33], [1199833200000, 95.67], [1200351600000, 91.90], [1200438000000, 90.84], [1200524400000, 90.13], [1200610800000, 90.57], [1200956400000, 89.21], [1201042800000, 86.99], [1201129200000, 89.85], [1201474800000, 90.99], [1201561200000, 91.64], [1201647600000, 92.33], [1201734000000, 91.75], [1202079600000, 90.02], [1202166000000, 88.41], [1202252400000, 87.14], [1202338800000, 88.11], [1202425200000, 91.77], [1202770800000, 92.78], [1202857200000, 93.27], [1202943600000, 95.46], [1203030000000, 95.46], [1203289200000, 101.74], [1203462000000, 98.81], [1203894000000, 100.88], [1204066800000, 99.64], [1204153200000, 102.59], [1204239600000, 101.84], [1204498800000, 99.52], [1204585200000, 99.52], [1204671600000, 104.52], [1204758000000, 105.47], [1204844400000, 105.15], [1205103600000, 108.75], [1205276400000, 109.92], [1205362800000, 110.33], [1205449200000, 110.21], [1205708400000, 105.68], [1205967600000, 101.84], [1206313200000, 100.86], [1206399600000, 101.22], [1206486000000, 105.90], [1206572400000, 107.58], [1206658800000, 105.62], [1206914400000, 101.58], [1207000800000, 100.98], [1207173600000, 103.83], [1207260000000, 106.23], [1207605600000, 108.50], [1207778400000, 110.11], [1207864800000, 110.14], [1208210400000, 113.79], [1208296800000, 114.93], [1208383200000, 114.86], [1208728800000, 117.48], [1208815200000, 118.30], [1208988000000, 116.06], [1209074400000, 118.52], [1209333600000, 118.75], [1209420000000, 113.46], [1209592800000, 112.52], [1210024800000, 121.84], [1210111200000, 123.53], [1210197600000, 123.69], [1210543200000, 124.23], [1210629600000, 125.80], [1210716000000, 126.29], [1211148000000, 127.05], [1211320800000, 129.07], [1211493600000, 132.19], [1211839200000, 128.85], [1212357600000, 127.76], [1212703200000, 138.54], [1212962400000, 136.80], [1213135200000, 136.38], [1213308000000, 134.86], [1213653600000, 134.01], [1213740000000, 136.68], [1213912800000, 135.65], [1214172000000, 134.62], [1214258400000, 134.62], [1214344800000, 134.62], [1214431200000, 139.64], [1214517600000, 140.21], [1214776800000, 140.00], [1214863200000, 140.97], [1214949600000, 143.57], [1215036000000, 145.29], [1215381600000, 141.37], [1215468000000, 136.04], [1215727200000, 146.40], [1215986400000, 145.18], [1216072800000, 138.74], [1216159200000, 134.60], [1216245600000, 129.29], [1216332000000, 130.65], [1216677600000, 127.95], [1216850400000, 127.95], [1217282400000, 122.19], [1217455200000, 124.08], [1217541600000, 125.10], [1217800800000, 121.41], [1217887200000, 119.17], [1217973600000, 118.58], [1218060000000, 120.02], [1218405600000, 114.45], [1218492000000, 113.01], [1218578400000, 116.00], [1218751200000, 113.77], [1219010400000, 112.87], [1219096800000, 114.53], [1219269600000, 114.98], [1219356000000, 114.98], [1219701600000, 116.27], [1219788000000, 118.15], [1219874400000, 115.59], [1219960800000, 115.46], [1220306400000, 109.71], [1220392800000, 109.35], [1220565600000, 106.23], [1220824800000, 106.34] ];
+        var exchangeratesFull = [ [1167606000000, 0.7580], [1167692400000, 0.7580], [1167778800000, 0.75470], [1167865200000, 0.75490], [1167951600000, 0.76130], [1168038000000, 0.76550], [1168124400000, 0.76930], [1168210800000, 0.76940], [1168297200000, 0.76880], [1168383600000, 0.76780], [1168470000000, 0.77080], [1168556400000, 0.77270], [1168642800000, 0.77490], [1168729200000, 0.77410], [1168815600000, 0.77410], [1168902000000, 0.77320], [1168988400000, 0.77270], [1169074800000, 0.77370], [1169161200000, 0.77240], [1169247600000, 0.77120], [1169334000000, 0.7720], [1169420400000, 0.77210], [1169506800000, 0.77170], [1169593200000, 0.77040], [1169679600000, 0.7690], [1169766000000, 0.77110], [1169852400000, 0.7740], [1169938800000, 0.77450], [1170025200000, 0.77450], [1170111600000, 0.7740], [1170198000000, 0.77160], [1170284400000, 0.77130], [1170370800000, 0.76780], [1170457200000, 0.76880], [1170543600000, 0.77180], [1170630000000, 0.77180], [1170716400000, 0.77280], [1170802800000, 0.77290], [1170889200000, 0.76980], [1170975600000, 0.76850], [1171062000000, 0.76810], [1171148400000, 0.7690], [1171234800000, 0.7690], [1171321200000, 0.76980], [1171407600000, 0.76990], [1171494000000, 0.76510], [1171580400000, 0.76130], [1171666800000, 0.76160], [1171753200000, 0.76140], [1171839600000, 0.76140], [1171926000000, 0.76070], [1172012400000, 0.76020], [1172098800000, 0.76110], [1172185200000, 0.76220], [1172271600000, 0.76150], [1172358000000, 0.75980], [1172444400000, 0.75980], [1172530800000, 0.75920], [1172617200000, 0.75730], [1172703600000, 0.75660], [1172790000000, 0.75670], [1172876400000, 0.75910], [1172962800000, 0.75820], [1173049200000, 0.75850], [1173135600000, 0.76130], [1173222000000, 0.76310], [1173308400000, 0.76150], [1173394800000, 0.760], [1173481200000, 0.76130], [1173567600000, 0.76270], [1173654000000, 0.76270], [1173740400000, 0.76080], [1173826800000, 0.75830], [1173913200000, 0.75750], [1173999600000, 0.75620], [1174086000000, 0.7520], [1174172400000, 0.75120], [1174258800000, 0.75120], [1174345200000, 0.75170], [1174431600000, 0.7520], [1174518000000, 0.75110], [1174604400000, 0.7480], [1174690800000, 0.75090], [1174777200000, 0.75310], [1174860000000, 0.75310], [1174946400000, 0.75270], [1175032800000, 0.74980], [1175119200000, 0.74930], [1175205600000, 0.75040], [1175292000000, 0.750], [1175378400000, 0.74910], [1175464800000, 0.74910], [1175551200000, 0.74850], [1175637600000, 0.74840], [1175724000000, 0.74920], [1175810400000, 0.74710], [1175896800000, 0.74590], [1175983200000, 0.74770], [1176069600000, 0.74770], [1176156000000, 0.74830], [1176242400000, 0.74580], [1176328800000, 0.74480], [1176415200000, 0.7430], [1176501600000, 0.73990], [1176588000000, 0.73950], [1176674400000, 0.73950], [1176760800000, 0.73780], [1176847200000, 0.73820], [1176933600000, 0.73620], [1177020000000, 0.73550], [1177106400000, 0.73480], [1177192800000, 0.73610], [1177279200000, 0.73610], [1177365600000, 0.73650], [1177452000000, 0.73620], [1177538400000, 0.73310], [1177624800000, 0.73390], [1177711200000, 0.73440], [1177797600000, 0.73270], [1177884000000, 0.73270], [1177970400000, 0.73360], [1178056800000, 0.73330], [1178143200000, 0.73590], [1178229600000, 0.73590], [1178316000000, 0.73720], [1178402400000, 0.7360], [1178488800000, 0.7360], [1178575200000, 0.7350], [1178661600000, 0.73650], [1178748000000, 0.73840], [1178834400000, 0.73950], [1178920800000, 0.74130], [1179007200000, 0.73970], [1179093600000, 0.73960], [1179180000000, 0.73850], [1179266400000, 0.73780], [1179352800000, 0.73660], [1179439200000, 0.740], [1179525600000, 0.74110], [1179612000000, 0.74060], [1179698400000, 0.74050], [1179784800000, 0.74140], [1179871200000, 0.74310], [1179957600000, 0.74310], [1180044000000, 0.74380], [1180130400000, 0.74430], [1180216800000, 0.74430], [1180303200000, 0.74430], [1180389600000, 0.74340], [1180476000000, 0.74290], [1180562400000, 0.74420], [1180648800000, 0.7440], [1180735200000, 0.74390], [1180821600000, 0.74370], [1180908000000, 0.74370], [1180994400000, 0.74290], [1181080800000, 0.74030], [1181167200000, 0.73990], [1181253600000, 0.74180], [1181340000000, 0.74680], [1181426400000, 0.7480], [1181512800000, 0.7480], [1181599200000, 0.7490], [1181685600000, 0.74940], [1181772000000, 0.75220], [1181858400000, 0.75150], [1181944800000, 0.75020], [1182031200000, 0.74720], [1182117600000, 0.74720], [1182204000000, 0.74620], [1182290400000, 0.74550], [1182376800000, 0.74490], [1182463200000, 0.74670], [1182549600000, 0.74580], [1182636000000, 0.74270], [1182722400000, 0.74270], [1182808800000, 0.7430], [1182895200000, 0.74290], [1182981600000, 0.7440], [1183068000000, 0.7430], [1183154400000, 0.74220], [1183240800000, 0.73880], [1183327200000, 0.73880], [1183413600000, 0.73690], [1183500000000, 0.73450], [1183586400000, 0.73450], [1183672800000, 0.73450], [1183759200000, 0.73520], [1183845600000, 0.73410], [1183932000000, 0.73410], [1184018400000, 0.7340], [1184104800000, 0.73240], [1184191200000, 0.72720], [1184277600000, 0.72640], [1184364000000, 0.72550], [1184450400000, 0.72580], [1184536800000, 0.72580], [1184623200000, 0.72560], [1184709600000, 0.72570], [1184796000000, 0.72470], [1184882400000, 0.72430], [1184968800000, 0.72440], [1185055200000, 0.72350], [1185141600000, 0.72350], [1185228000000, 0.72350], [1185314400000, 0.72350], [1185400800000, 0.72620], [1185487200000, 0.72880], [1185573600000, 0.73010], [1185660000000, 0.73370], [1185746400000, 0.73370], [1185832800000, 0.73240], [1185919200000, 0.72970], [1186005600000, 0.73170], [1186092000000, 0.73150], [1186178400000, 0.72880], [1186264800000, 0.72630], [1186351200000, 0.72630], [1186437600000, 0.72420], [1186524000000, 0.72530], [1186610400000, 0.72640], [1186696800000, 0.7270], [1186783200000, 0.73120], [1186869600000, 0.73050], [1186956000000, 0.73050], [1187042400000, 0.73180], [1187128800000, 0.73580], [1187215200000, 0.74090], [1187301600000, 0.74540], [1187388000000, 0.74370], [1187474400000, 0.74240], [1187560800000, 0.74240], [1187647200000, 0.74150], [1187733600000, 0.74190], [1187820000000, 0.74140], [1187906400000, 0.73770], [1187992800000, 0.73550], [1188079200000, 0.73150], [1188165600000, 0.73150], [1188252000000, 0.7320], [1188338400000, 0.73320], [1188424800000, 0.73460], [1188511200000, 0.73280], [1188597600000, 0.73230], [1188684000000, 0.7340], [1188770400000, 0.7340], [1188856800000, 0.73360], [1188943200000, 0.73510], [1189029600000, 0.73460], [1189116000000, 0.73210], [1189202400000, 0.72940], [1189288800000, 0.72660], [1189375200000, 0.72660], [1189461600000, 0.72540], [1189548000000, 0.72420], [1189634400000, 0.72130], [1189720800000, 0.71970], [1189807200000, 0.72090], [1189893600000, 0.7210], [1189980000000, 0.7210], [1190066400000, 0.7210], [1190152800000, 0.72090], [1190239200000, 0.71590], [1190325600000, 0.71330], [1190412000000, 0.71050], [1190498400000, 0.70990], [1190584800000, 0.70990], [1190671200000, 0.70930], [1190757600000, 0.70930], [1190844000000, 0.70760], [1190930400000, 0.7070], [1191016800000, 0.70490], [1191103200000, 0.70120], [1191189600000, 0.70110], [1191276000000, 0.70190], [1191362400000, 0.70460], [1191448800000, 0.70630], [1191535200000, 0.70890], [1191621600000, 0.70770], [1191708000000, 0.70770], [1191794400000, 0.70770], [1191880800000, 0.70910], [1191967200000, 0.71180], [1192053600000, 0.70790], [1192140000000, 0.70530], [1192226400000, 0.7050], [1192312800000, 0.70550], [1192399200000, 0.70550], [1192485600000, 0.70450], [1192572000000, 0.70510], [1192658400000, 0.70510], [1192744800000, 0.70170], [1192831200000, 0.70], [1192917600000, 0.69950], [1193004000000, 0.69940], [1193090400000, 0.70140], [1193176800000, 0.70360], [1193263200000, 0.70210], [1193349600000, 0.70020], [1193436000000, 0.69670], [1193522400000, 0.6950], [1193612400000, 0.6950], [1193698800000, 0.69390], [1193785200000, 0.6940], [1193871600000, 0.69220], [1193958000000, 0.69190], [1194044400000, 0.69140], [1194130800000, 0.68940], [1194217200000, 0.68910], [1194303600000, 0.69040], [1194390000000, 0.6890], [1194476400000, 0.68340], [1194562800000, 0.68230], [1194649200000, 0.68070], [1194735600000, 0.68150], [1194822000000, 0.68150], [1194908400000, 0.68470], [1194994800000, 0.68590], [1195081200000, 0.68220], [1195167600000, 0.68270], [1195254000000, 0.68370], [1195340400000, 0.68230], [1195426800000, 0.68220], [1195513200000, 0.68220], [1195599600000, 0.67920], [1195686000000, 0.67460], [1195772400000, 0.67350], [1195858800000, 0.67310], [1195945200000, 0.67420], [1196031600000, 0.67440], [1196118000000, 0.67390], [1196204400000, 0.67310], [1196290800000, 0.67610], [1196377200000, 0.67610], [1196463600000, 0.67850], [1196550000000, 0.68180], [1196636400000, 0.68360], [1196722800000, 0.68230], [1196809200000, 0.68050], [1196895600000, 0.67930], [1196982000000, 0.68490], [1197068400000, 0.68330], [1197154800000, 0.68250], [1197241200000, 0.68250], [1197327600000, 0.68160], [1197414000000, 0.67990], [1197500400000, 0.68130], [1197586800000, 0.68090], [1197673200000, 0.68680], [1197759600000, 0.69330], [1197846000000, 0.69330], [1197932400000, 0.69450], [1198018800000, 0.69440], [1198105200000, 0.69460], [1198191600000, 0.69640], [1198278000000, 0.69650], [1198364400000, 0.69560], [1198450800000, 0.69560], [1198537200000, 0.6950], [1198623600000, 0.69480], [1198710000000, 0.69280], [1198796400000, 0.68870], [1198882800000, 0.68240], [1198969200000, 0.67940], [1199055600000, 0.67940], [1199142000000, 0.68030], [1199228400000, 0.68550], [1199314800000, 0.68240], [1199401200000, 0.67910], [1199487600000, 0.67830], [1199574000000, 0.67850], [1199660400000, 0.67850], [1199746800000, 0.67970], [1199833200000, 0.680], [1199919600000, 0.68030], [1200006000000, 0.68050], [1200092400000, 0.6760], [1200178800000, 0.6770], [1200265200000, 0.6770], [1200351600000, 0.67360], [1200438000000, 0.67260], [1200524400000, 0.67640], [1200610800000, 0.68210], [1200697200000, 0.68310], [1200783600000, 0.68420], [1200870000000, 0.68420], [1200956400000, 0.68870], [1201042800000, 0.69030], [1201129200000, 0.68480], [1201215600000, 0.68240], [1201302000000, 0.67880], [1201388400000, 0.68140], [1201474800000, 0.68140], [1201561200000, 0.67970], [1201647600000, 0.67690], [1201734000000, 0.67650], [1201820400000, 0.67330], [1201906800000, 0.67290], [1201993200000, 0.67580], [1202079600000, 0.67580], [1202166000000, 0.6750], [1202252400000, 0.6780], [1202338800000, 0.68330], [1202425200000, 0.68560], [1202511600000, 0.69030], [1202598000000, 0.68960], [1202684400000, 0.68960], [1202770800000, 0.68820], [1202857200000, 0.68790], [1202943600000, 0.68620], [1203030000000, 0.68520], [1203116400000, 0.68230], [1203202800000, 0.68130], [1203289200000, 0.68130], [1203375600000, 0.68220], [1203462000000, 0.68020], [1203548400000, 0.68020], [1203634800000, 0.67840], [1203721200000, 0.67480], [1203807600000, 0.67470], [1203894000000, 0.67470], [1203980400000, 0.67480], [1204066800000, 0.67330], [1204153200000, 0.6650], [1204239600000, 0.66110], [1204326000000, 0.65830], [1204412400000, 0.6590], [1204498800000, 0.6590], [1204585200000, 0.65810], [1204671600000, 0.65780], [1204758000000, 0.65740], [1204844400000, 0.65320], [1204930800000, 0.65020], [1205017200000, 0.65140], [1205103600000, 0.65140], [1205190000000, 0.65070], [1205276400000, 0.6510], [1205362800000, 0.64890], [1205449200000, 0.64240], [1205535600000, 0.64060], [1205622000000, 0.63820], [1205708400000, 0.63820], [1205794800000, 0.63410], [1205881200000, 0.63440], [1205967600000, 0.63780], [1206054000000, 0.64390], [1206140400000, 0.64780], [1206226800000, 0.64810], [1206313200000, 0.64810], [1206399600000, 0.64940], [1206486000000, 0.64380], [1206572400000, 0.63770], [1206658800000, 0.63290], [1206745200000, 0.63360], [1206831600000, 0.63330], [1206914400000, 0.63330], [1207000800000, 0.6330], [1207087200000, 0.63710], [1207173600000, 0.64030], [1207260000000, 0.63960], [1207346400000, 0.63640], [1207432800000, 0.63560], [1207519200000, 0.63560], [1207605600000, 0.63680], [1207692000000, 0.63570], [1207778400000, 0.63540], [1207864800000, 0.6320], [1207951200000, 0.63320], [1208037600000, 0.63280], [1208124000000, 0.63310], [1208210400000, 0.63420], [1208296800000, 0.63210], [1208383200000, 0.63020], [1208469600000, 0.62780], [1208556000000, 0.63080], [1208642400000, 0.63240], [1208728800000, 0.63240], [1208815200000, 0.63070], [1208901600000, 0.62770], [1208988000000, 0.62690], [1209074400000, 0.63350], [1209160800000, 0.63920], [1209247200000, 0.640], [1209333600000, 0.64010], [1209420000000, 0.63960], [1209506400000, 0.64070], [1209592800000, 0.64230], [1209679200000, 0.64290], [1209765600000, 0.64720], [1209852000000, 0.64850], [1209938400000, 0.64860], [1210024800000, 0.64670], [1210111200000, 0.64440], [1210197600000, 0.64670], [1210284000000, 0.65090], [1210370400000, 0.64780], [1210456800000, 0.64610], [1210543200000, 0.64610], [1210629600000, 0.64680], [1210716000000, 0.64490], [1210802400000, 0.6470], [1210888800000, 0.64610], [1210975200000, 0.64520], [1211061600000, 0.64220], [1211148000000, 0.64220], [1211234400000, 0.64250], [1211320800000, 0.64140], [1211407200000, 0.63660], [1211493600000, 0.63460], [1211580000000, 0.6350], [1211666400000, 0.63460], [1211752800000, 0.63460], [1211839200000, 0.63430], [1211925600000, 0.63460], [1212012000000, 0.63790], [1212098400000, 0.64160], [1212184800000, 0.64420], [1212271200000, 0.64310], [1212357600000, 0.64310], [1212444000000, 0.64350], [1212530400000, 0.6440], [1212616800000, 0.64730], [1212703200000, 0.64690], [1212789600000, 0.63860], [1212876000000, 0.63560], [1212962400000, 0.6340], [1213048800000, 0.63460], [1213135200000, 0.6430], [1213221600000, 0.64520], [1213308000000, 0.64670], [1213394400000, 0.65060], [1213480800000, 0.65040], [1213567200000, 0.65030], [1213653600000, 0.64810], [1213740000000, 0.64510], [1213826400000, 0.6450], [1213912800000, 0.64410], [1213999200000, 0.64140], [1214085600000, 0.64090], [1214172000000, 0.64090], [1214258400000, 0.64280], [1214344800000, 0.64310], [1214431200000, 0.64180], [1214517600000, 0.63710], [1214604000000, 0.63490], [1214690400000, 0.63330], [1214776800000, 0.63340], [1214863200000, 0.63380], [1214949600000, 0.63420], [1215036000000, 0.6320], [1215122400000, 0.63180], [1215208800000, 0.6370], [1215295200000, 0.63680], [1215381600000, 0.63680], [1215468000000, 0.63830], [1215554400000, 0.63710], [1215640800000, 0.63710], [1215727200000, 0.63550], [1215813600000, 0.6320], [1215900000000, 0.62770], [1215986400000, 0.62760], [1216072800000, 0.62910], [1216159200000, 0.62740], [1216245600000, 0.62930], [1216332000000, 0.63110], [1216418400000, 0.6310], [1216504800000, 0.63120], [1216591200000, 0.63120], [1216677600000, 0.63040], [1216764000000, 0.62940], [1216850400000, 0.63480], [1216936800000, 0.63780], [1217023200000, 0.63680], [1217109600000, 0.63680], [1217196000000, 0.63680], [1217282400000, 0.6360], [1217368800000, 0.6370], [1217455200000, 0.64180], [1217541600000, 0.64110], [1217628000000, 0.64350], [1217714400000, 0.64270], [1217800800000, 0.64270], [1217887200000, 0.64190], [1217973600000, 0.64460], [1218060000000, 0.64680], [1218146400000, 0.64870], [1218232800000, 0.65940], [1218319200000, 0.66660], [1218405600000, 0.66660], [1218492000000, 0.66780], [1218578400000, 0.67120], [1218664800000, 0.67050], [1218751200000, 0.67180], [1218837600000, 0.67840], [1218924000000, 0.68110], [1219010400000, 0.68110], [1219096800000, 0.67940], [1219183200000, 0.68040], [1219269600000, 0.67810], [1219356000000, 0.67560], [1219442400000, 0.67350], [1219528800000, 0.67630], [1219615200000, 0.67620], [1219701600000, 0.67770], [1219788000000, 0.68150], [1219874400000, 0.68020], [1219960800000, 0.6780], [1220047200000, 0.67960], [1220133600000, 0.68170], [1220220000000, 0.68170], [1220306400000, 0.68320], [1220392800000, 0.68770], [1220479200000, 0.69120], [1220565600000, 0.69140], [1220652000000, 0.70090], [1220738400000, 0.70120], [1220824800000, 0.7010], [1220911200000, 0.70050]
+        ];
+
+        oilprices = [];
+        exchangerates = [];
+
+
+        oilpricesFull.map(function(item, index) {
+            if (index % 8 === 0) {
+                oilprices.push(item);
+            }
+        });
+
+        exchangeratesFull.map(function(item, index) {
+            if (index % 8 === 0) {
+                exchangerates.push(item);
+            }
+        });
+
+
+
+        function euroFormatter(v, axis) {
+            return v.toFixed(axis.tickDecimals) + "€";
+        }
+
+        function doPlot(position) {
+            $.plot($("#flot-line-chart-multi"), [{
+                data: oilprices,
+                label: "Oil price ($)"
+            }, {
+                data: exchangerates,
+                label: "USD/EUR exchange rate",
+                yaxis: 2
+            }], {
+                xaxes: [{
+                    mode: 'time'
+                }],
+                yaxes: [{
+                    min: 0
+                }, {
+                    // align if we are to the right
+                    alignTicksWithAxis: position == "right" ? 1 : null,
+                    position: position,
+                    tickFormatter: euroFormatter
+                }],
+                legend: {
+                    position: 'sw'
+                },
+                colors: [config.chart.colorPrimary.toString()],
+                grid: {
+                    color: "#999999",
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#D4D4D4",
+                    borderWidth:0,
+                    hoverable: true //IMPORTANT! this is needed for tooltip to work,
+
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "%s for %x was %y",
+                    xDateFormat: "%y-%m-%d",
+
+                    onHover: function(flotItem, $tooltipEl) {
+                        // console.log(flotItem, $tooltipEl);
+                    }
+                }
+
+            });
+        }
+
+        doPlot("right");
+
+        $("button").click(function() {
+            doPlot($(this).text());
+        });
+
+    }
+
+    drawFlotCharts();
+
+    $(document).on("themechange", function(){
+        drawFlotCharts();
+    });
+
+});
+$(function() {
+    
+    if (!$('#morris-one-line-chart').length) {
+        return false;
+    }
+
+    function drawMorrisCharts() {
+
+        $('#morris-one-line-chart').empty();
+        
+        Morris.Line({
+            element: 'morris-one-line-chart',
+                data: [
+                    { year: '2008', value: 5 },
+                    { year: '2009', value: 10 },
+                    { year: '2010', value: 8 },
+                    { year: '2011', value: 22 },
+                    { year: '2012', value: 8 },
+                    { year: '2014', value: 10 },
+                    { year: '2015', value: 5 }
+                ],
+            xkey: 'year',
+            ykeys: ['value'],
+            resize: true,
+            lineWidth:4,
+            labels: ['Value'],
+            lineColors: [config.chart.colorPrimary.toString()],
+            pointSize:5,
+        });
+
+        $('#morris-area-chart').empty();
+
+        Morris.Area({
+            element: 'morris-area-chart',
+            data: [{ period: '2010 Q1', iphone: 2666, ipad: null, itouch: 2647 },
+                { period: '2010 Q2', iphone: 2778, ipad: 2294, itouch: 2441 },
+                { period: '2010 Q3', iphone: 4912, ipad: 1969, itouch: 2501 },
+                { period: '2010 Q4', iphone: 3767, ipad: 3597, itouch: 5689 },
+                { period: '2011 Q1', iphone: 6810, ipad: 1914, itouch: 2293 },
+                { period: '2011 Q2', iphone: 5670, ipad: 4293, itouch: 1881 },
+                { period: '2011 Q3', iphone: 4820, ipad: 3795, itouch: 1588 },
+                { period: '2011 Q4', iphone: 15073, ipad: 5967, itouch: 5175 },
+                { period: '2012 Q1', iphone: 10687, ipad: 4460, itouch: 2028 },
+                { period: '2012 Q2', iphone: 8432, ipad: 5713, itouch: 1791 } ],
+            xkey: 'period',
+            ykeys: ['iphone', 'ipad', 'itouch'],
+            labels: ['iPhone', 'iPad', 'iPod Touch'],
+            pointSize: 2,
+            hideHover: 'auto',
+            resize: true,
+            lineColors: [
+                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString(),
+                config.chart.colorPrimary.toString()
+            ],
+            lineWidth:2,
+            pointSize:1,
+        });
+
+        $('#morris-donut-chart').empty();
+
+        Morris.Donut({
+            element: 'morris-donut-chart',
+            data: [{ label: "Download Sales", value: 12 },
+                { label: "In-Store Sales", value: 30 },
+                { label: "Mail-Order Sales", value: 20 } ],
+            resize: true,
+            colors: [
+                tinycolor(config.chart.colorPrimary.toString()).lighten(10).toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString(),
+                config.chart.colorPrimary.toString()
+            ],
+        });
+
+        $('#morris-bar-chart').empty();
+
+        Morris.Bar({
+            element: 'morris-bar-chart',
+            data: [{ y: '2006', a: 60, b: 50 },
+                { y: '2007', a: 75, b: 65 },
+                { y: '2008', a: 50, b: 40 },
+                { y: '2009', a: 75, b: 65 },
+                { y: '2010', a: 50, b: 40 },
+                { y: '2011', a: 75, b: 65 },
+                { y: '2012', a: 100, b: 90 } ],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B'],
+            hideHover: 'auto',
+            resize: true,
+            barColors: [
+                config.chart.colorPrimary.toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
+            ],
+        });
+
+        $('#morris-line-chart').empty();
+
+        Morris.Line({
+            element: 'morris-line-chart',
+            data: [{ y: '2006', a: 100, b: 90 },
+                { y: '2007', a: 75, b: 65 },
+                { y: '2008', a: 50, b: 40 },
+                { y: '2009', a: 75, b: 65 },
+                { y: '2010', a: 50, b: 40 },
+                { y: '2011', a: 75, b: 65 },
+                { y: '2012', a: 100, b: 90 } ],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B'],
+            hideHover: 'auto',
+            resize: true,
+            lineColors: [
+                config.chart.colorPrimary.toString(),
+                tinycolor(config.chart.colorPrimary.toString()).darken(10).toString()
+            ],
+        });
+    }
+
+    drawMorrisCharts();
+
+    $(document).on("themechange", function(){
+        drawMorrisCharts();
+    });
+});
+//LoginForm validation
+$(function() {
+	if (!$('.form-control').length) {
+        return false;
+    }
+
+    $('.form-control').focus(function() {
+		$(this).siblings('.input-group-addon').addClass('focus');
+	});
+
+	$('.form-control').blur(function() {
+		$(this).siblings('.input-group-addon').removeClass('focus');
+	});
+});
+$(function(){
+
+	// set sortable options
+	$('.images-container').sortable({
+		animation: 150,
+		handle: ".control-btn.move",
+		draggable: ".image-container",
+		onMove: function (evt) {
+			var $relatedElem = $(evt.related);
+
+	        if ($relatedElem.hasClass('add-image')) {
+	        	return false;
+	        }
+	    }
+	});
+
+
+	$controlsButtons = $('.controls');
+
+	$controlsButtonsStar = $controlsButtons.find('.star');
+	$controlsButtonsRemove = $controlsButtons.find('.remove');
+
+	$controlsButtonsStar.on('click',function(e){
+		e.preventDefault();
+
+		$controlsButtonsStar.removeClass('active');
+		$controlsButtonsStar.parents('.image-container').removeClass('main');
+
+		$(this).addClass('active');
+
+		$(this).parents('.image-container').addClass('main');
+	})
+
+})
+$(function() {
+
+    if (!$('#select-all-items').length) {
+        return false;
+    }
+
+
+    $('#select-all-items').on('change', function() {
+        var $this = $(this).children(':checkbox').get(0);    
+
+        $(this).parents('li')
+            .siblings()
+            .find(':checkbox')
+            .prop('checked', $this.checked)
+            .val($this.checked)
+            .change();
+    });
+
+
+    function drawItemsListSparklines(){
+        $(".items-list-page .sparkline").each(function() {
+            var type = $(this).data('type');
+
+            // Generate random data
+            var data = [];
+            for (var i = 0; i < 17; i++) {
+                data.push(Math.round(100 * Math.random()));
+            }
+
+            $(this).sparkline(data, {
+                barColor: config.chart.colorPrimary.toString(),
+                height: $(this).height(),
+                type: type
+            });
+        });
+    }
+
+    drawItemsListSparklines();
+
+    $(document).on("themechange", function(){
+        drawItemsListSparklines();
+    });
+
+});
+$(function() {
+
+	$(".wyswyg").each(function() {
+
+		var $toolbar = $(this).find(".toolbar");
+		var $editor = $(this).find(".editor");
+
+
+		var editor = new Quill($editor.get(0), {
+			theme: 'snow'
+		});
+
+		editor.addModule('toolbar', {
+			container: $toolbar.get(0)     // Selector for toolbar container
+		});
+
+
+
+	});
+	
+});
+$(function () {
+
+	$('#sidebar-menu, #customize-menu').metisMenu({
+		activeClass: 'open'
+	});
+
+
+	$('#sidebar-collapse-btn').on('click', function(event){
+		event.preventDefault();
+		
+		$("#app").toggleClass("sidebar-open");
+	});
+
+	$("#sidebar-overlay").on('click', function() {
+		$("#app").removeClass("sidebar-open");
+	});
+	
+});
+$(function() {
+	$('.nav-profile > li > a').on('click', function() {
+		var $el = $(this).next();
+
+		animate({
+			name: 'flipInX',
+			selector: $el
+		});
+	});
+})
+var modalMedia = {
+	$el: $("#modal-media"),
+	result: {},
+	options: {},
+	open: function(options) {
+		options = options || {};
+		this.options = options;
+
+
+		this.$el.modal('show');
+	},
+	close: function() {
+		if ($.isFunction(this.options.beforeClose)) {
+			this.options.beforeClose(this.result);
+		}
+
+		this.$el.modal('hide');
+
+		if ($.isFunction(this.options.afterClose)) {
+			this.options.beforeClose(this.result);
+		}
+	}
+};
+$(function () {
+
+	// Local storage settings
+	var themeSettings = getThemeSettings();
+
+	// Elements
+
+	var $app = $('#app');
+	var $styleLink = $('#theme-style');
+	var $customizeMenu = $('#customize-menu');
+
+	// Color switcher
+	var $customizeMenuColorBtns = $customizeMenu.find('.color-item');
+
+	// Position switchers
+	var $customizeMenuRadioBtns = $customizeMenu.find('.radio');
+
+
+	// /////////////////////////////////////////////////
+
+	// Initial state
+
+	// On setting event, set corresponding options
+
+	// Update customize view based on options
+
+	// Update theme based on options
+
+	/************************************************
+	*				Initial State
+	*************************************************/
+
+	setThemeSettings();
+
+	/************************************************
+	*					Events
+	*************************************************/
+
+	// set theme type
+	$customizeMenuColorBtns.on('click', function() {
+		themeSettings.themeName = $(this).data('theme');
+
+		setThemeSettings();
+	});
+
+
+	$customizeMenuRadioBtns.on('click', function() {
+
+		var optionName = $(this).prop('name');
+		var value = $(this).val();
+
+		themeSettings[optionName] = value;
+
+		setThemeSettings();
+	});
+
+	function setThemeSettings() {
+		setThemeState()
+		.delay(config.delayTime)
+		.queue(function (next) {
+
+			setThemeColor();
+			setThemeControlsState();
+			saveThemeSettings();
+
+			$(document).trigger("themechange");	
+			
+			next();
+		});	
+	}
+
+	/************************************************
+	*			Update theme based on options
+	*************************************************/
+
+	function setThemeState() {
+		// set theme type
+		
+
+		// App classes
+		$app.removeClass('header-fixed footer-fixed sidebar-fixed');
+
+		// set header
+		$app.addClass(themeSettings.headerPosition);
+
+		// set footer
+		$app.addClass(themeSettings.footerPosition);
+
+		// set footer
+		$app.addClass(themeSettings.sidebarPosition);
+
+		return $app;
+	}
+
+	/************************************************
+	*			Update theme controls based on options
+	*************************************************/
+
+	function setThemeControlsState() {
+		// set color switcher
+		$customizeMenuColorBtns.each(function() {
+			if($(this).data('theme') === themeSettings.themeName) {
+				$(this).addClass('active');
+			}
+			else {
+				$(this).removeClass('active');
+			}
+		});
+
+		// set radio buttons
+		$customizeMenuRadioBtns.each(function() {
+			var name = $(this).prop('name');
+			var value = $(this).val();
+
+			if (themeSettings[name] === value) {
+				$(this).prop("checked", true );
+			}
+			else {
+				$(this).prop("checked", false );
+			}
+		});
+	}
+
+	/************************************************
+	*			Update theme color
+	*************************************************/
+	function setThemeColor(){
+		config.chart.colorPrimary = tinycolor($ref.find(".chart .color-primary").css("color"));	
+		config.chart.colorSecondary = tinycolor($ref.find(".chart .color-secondary").css("color"));	
+	}
+
+	/************************************************
+	*				Storage Functions
+	*************************************************/
+
+	function getThemeSettings() {
+		var settings = (localStorage.getItem('themeSettings')) ? JSON.parse(localStorage.getItem('themeSettings')) : {};
+
+		settings.headerPosition = settings.headerPosition || '';
+		settings.sidebarPosition = settings.sidebarPosition || '';
+		settings.footerPosition = settings.footerPosition || '';
+
+		return settings;
+	}
+
+	function saveThemeSettings() {
+		localStorage.setItem('themeSettings', JSON.stringify(themeSettings));
+	}
+
+});
+$(function() {
+
+	$("body").addClass("loaded");
+
+});
+
+
+/***********************************************
+*        NProgress Settings
+***********************************************/
+
+// start load bar
+NProgress.start();
+
+// end loading bar 
+NProgress.done();

@@ -54,6 +54,7 @@ if(!isset($app)){
 }	
 $urls = unserialize(PUBLIC_URLS);
 
+/*
 
 if (!isset($_SESSION['SESSION_USER'])){
 	if(!in_array($app.$redirect, $urls)){
@@ -61,6 +62,7 @@ if (!isset($_SESSION['SESSION_USER'])){
 		exit();
 	}
 }
+*/
 
 require_once(PATH_CONTROLADORES."/".$app."Controlador.php");
 $controllerName = $app."Controlador";

@@ -1,7 +1,7 @@
 <?php 	
 	define('HOSTNAME_DATABASE', 'localhost');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'sistemas');
+	define('PASSWORD', '123456');
 	define('DATABASE', 'reparacion'); 	 
 	define('URL_BASE', '/automotriz/');
 	define('PATH_MODELOS', PATH_ROOT."/models");
@@ -11,7 +11,7 @@
 	define('PATH_CSS', PATH_BASE."/public/web/css");
 	define('PATH_JS', PATH_BASE."/public/web/js");
 	define('PATH_IMAGES', PATH_BASE."/public/web/images");
-	define('PATH_TEMPLATE', PATH_ROOT."/public/plantilla");	
+	define('PATH_TEMPLATE', PATH_ROOT."/public/template");	
 	
 	define('PATH_IMAGES_USER',  "../../assets/images/users/");
 	define('PATH_FILES_USER',  "../../files/");	
