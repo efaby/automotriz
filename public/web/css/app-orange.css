@@ -756,7 +756,7 @@ body {
   .card .title-block,
   .card .card-title-block {
     padding-bottom: 0;
-    margin-bottom: 20px;
+   /* margin-bottom: 20px;*/
     border: none; }
     .card .title-block::after,
     .card .card-title-block::after {

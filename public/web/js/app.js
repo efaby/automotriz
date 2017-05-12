@@ -1186,7 +1186,7 @@ $(function () {
 $(function() {
 	$('.nav-profile > li > a').on('click', function() {
 		var $el = $(this).next();
-
+console.log($el);
 		animate({
 			name: 'flipInX',
 			selector: $el

@@ -110,11 +110,7 @@ body.fixed .wrapper {
   margin-top: 50px;
 }
 /* Content */
-.content {
-  padding: 20px 15px;
-  background: #fff;
-  overflow: auto;
-}
+
 /* Utility */
 /* H1 - H6 font */
 h1,

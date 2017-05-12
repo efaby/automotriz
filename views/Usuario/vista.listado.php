@@ -2,11 +2,11 @@
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 
 <!-- Main row -->
-<div class="row">
-	<div class="col-lg-12">
-    	<h1 class="page-header">Usuarios</h1>
-   	</div>
+
+<div class="title-block">
+    <h1 class="title"> Usuarios</h1>
 </div>
+
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
 		<div class="alert alert-success fade in alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert"
@@ -14,39 +14,41 @@
 								  <?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
 								</div>
 		<?php endif;?>
-<div class="row">
-	<p>
-		<button class="btn btn-primary" id="modalOpen">
-			<i class="glyphicon glyphicon-plus"></i> Añadir
-		</button>
-	</p>
-	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-    <thead>
-	    <tr>
-	    	<th>Identificación</th>
-		    <th>Nombres</th>
-		    <th>Apellidos</th>
-		    <th>Usuario</th>
-		    <th>Email</th>
-		    <th>Tipo Usuario</th>
-		     <th>Avatar</th>
-		    <th style="text-align: center;">Acciones</th>
-	    </tr>
-    </thead>
-    <tbody>
-    	<?php foreach ($datos as $item) {
-    		echo "<tr><td>".$item['identificacion']."</td>";
-    		echo "<td>".$item['nombres']."</td>";
-    		echo "<td>".$item['apellidos']."</td>";
-    		echo "<td>".$item['usuario']."</td>";
-    		echo "<td>".$item['email']."</td>";
-    		echo "<td>".$item['tipo_usuario']." </td>";
-    		echo "<td align='center'> <img class='img-circle' alt='User'  height='30px' src='".PATH_IMAGES."/avatar_".$item['genero'].".png'></td>";
-    		echo "<td align='center'><a href='javascript: loadModal(".$item['id'].")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
-					  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
-    	}?>
-    </tbody>
-    </table>
+<div class="card">
+	<div class="card-block">
+		<div class="card-title-block">
+			<button class="btn btn-primary" id="modalOpen">
+				<i class="glyphicon glyphicon-plus"></i> Añadir
+			</button>
+	    </div>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+		    <thead>
+			    <tr>
+			    	<th>Identificación</th>
+				    <th>Nombres</th>
+				    <th>Apellidos</th>
+				    <th>Usuario</th>
+				    <th>Email</th>
+				    <th>Tipo Usuario</th>
+				    <th style="text-align: center;">Acciones</th>
+			    </tr>
+		    </thead>
+		    <tbody>
+		    	<?php foreach ($datos as $item) {
+		    		echo "<tr><td>".$item['identificacion']."</td>";
+		    		echo "<td>".$item['nombres']."</td>";
+		    		echo "<td>".$item['apellidos']."</td>";
+		    		echo "<td>".$item['usuario']."</td>";
+		    		echo "<td>".$item['email']."</td>";
+		    		echo "<td>".$item['tipo_usuario']." </td>";
+		    		echo "<td align='center'><a href='javascript: loadModal(".$item['id'].")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
+							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    	}?>
+		    </tbody>
+		    </table>
+		</div>
+	</div>
 </div>
 <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">

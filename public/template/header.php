@@ -9,7 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
+        <link href="<?php echo PATH_CSS; ?>/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="<?php echo PATH_CSS . '/vendor.css';?>">
+        <link rel="stylesheet" href="<?php echo PATH_CSS . '/style.css';?>">
         <!-- Theme initialization -->
         <script>
 
