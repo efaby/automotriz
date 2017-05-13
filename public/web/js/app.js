@@ -1186,7 +1186,7 @@ $(function () {
 $(function() {
 	$('.nav-profile > li > a').on('click', function() {
 		var $el = $(this).next();
-console.log($el);
+
 		animate({
 			name: 'flipInX',
 			selector: $el
@@ -1293,7 +1293,13 @@ $(function () {
 
 	function setThemeState() {
 		// set theme type
-		
+		/*
+		if (themeSettings.themeName) {
+			$styleLink.attr('href', 'css/app-' + themeSettings.themeName + '.css');
+		}
+		else {
+			$styleLink.attr('href', 'css/app.css');
+		} */
 
 		// App classes
 		$app.removeClass('header-fixed footer-fixed sidebar-fixed');

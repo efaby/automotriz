@@ -17,7 +17,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<button class="btn btn-primary" id="modalOpen">
+			<button class="btn btn-primary rounded" id="modalOpen">
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</button>
 	    </div>

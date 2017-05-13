@@ -90,7 +90,7 @@
 	</div>
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
-		<button type="submit" class="btn btn-success">Guardar</button>
+		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 
 </form>

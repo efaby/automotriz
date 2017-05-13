@@ -1264,7 +1264,7 @@ content: '';
 .navbar-nav > .user-menu > .dropdown-menu > li.user-footer .btn-default {
   color: #666666;
 }
-/* Add fade animation to dropdown menus */
+/* Add fade animation to dropdown menus 
 .open > .dropdown-menu {
   animation-name: fadeAnimation;
   animation-duration: .7s;
@@ -1281,7 +1281,7 @@ content: '';
   -moz-animation-iteration-count: 1;
   -moz-animation-timing-function: ease;
   -moz-animation-fill-mode: forwards;
-}
+} */
 @keyframes fadeAnimation {
   from {
     opacity: 0;

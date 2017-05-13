@@ -17,9 +17,7 @@
             </div>
         </div>
                
-        <script src="<?php echo PATH_JS; ?>/jquery.min.js" type="text/javascript"></script>
-        <script src="<?php echo PATH_JS; ?>/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
-        <script src="<?php echo PATH_JS; ?>/bootstrap.min.js" type="text/javascript"></script>        
+          
         
         
 		<script src="<?php echo PATH_JS; ?>/vendor.js" type="text/javascript"></script>
