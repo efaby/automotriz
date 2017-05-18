@@ -31,8 +31,7 @@ class UsuarioControlador {
 		$usuario ['password'] = $_POST ['password'];
 		$usuario ['email'] = $_POST ['email'];
 		$usuario ['celular'] = $_POST ['celular'];	
-		$usuario ['usuario'] = $_POST ['usuario'];
-		$usuario ['genero'] = $_POST ['genero'];
+		$usuario ['usuario'] = $_POST ['identificacion'];
 		$model = new UsuarioModelo();
 		try {
 			$datos = $model->guardarUsuario( $usuario );

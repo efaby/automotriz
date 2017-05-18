@@ -2,7 +2,7 @@
 	define('HOSTNAME_DATABASE', 'localhost');
 	define('USERNAME', 'root');
 	define('PASSWORD', 'sistemas');
-	define('DATABASE', 'reparacion'); 	 
+	define('DATABASE', 'automotriz'); 	 
 	define('URL_BASE', '/automotriz/');
 	define('PATH_MODELOS', PATH_ROOT."/models");
 	define('PATH_CONTROLADORES', PATH_ROOT."/controllers");

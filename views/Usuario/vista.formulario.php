@@ -1,5 +1,7 @@
 <form id="frmUsuario" method="post" action="../guardar/">
 
+<div class="row">
+
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Tipo Usuario</label>
 		<select class='form-control' name="tipo_usuario_id">
@@ -16,6 +18,8 @@
 			value="<?php echo $usuario['identificacion']; ?>">
 
 	</div>
+</div>
+<div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Nombres</label> <input type='text'
 			name='nombres' class='form-control'
@@ -28,6 +32,8 @@
 			value="<?php echo $usuario['apellidos']; ?>">
 
 	</div>
+</div>
+<div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Dirección</label> <input type='text'
 			name='direccion' class='form-control'
@@ -41,6 +47,8 @@
 			value="<?php echo $usuario['email']; ?>">
 
 	</div>
+</div>
+<div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Teléfono</label>
 		<input type='text'
@@ -56,24 +64,8 @@
 			value="<?php echo $usuario['celular']; ?>">
 
 	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Genero</label>
-		<select class='form-control' name="genero">
-			<option value="" >Seleccione</option>
-			<option value="f"  <?php if($usuario['genero']=='f'):echo "selected"; endif;?>>Femenino</option>
-			<option value="m" <?php if($usuario['genero']=='m'):echo "selected"; endif;?>>Masculino</option>
-		</select>
-
-	</div>
-
-	<div class="form-group col-sm-6">
-		<label class="control-label">Nombre de Usuario</label> <input type='text'
-			name='usuario' class='form-control'
-			value="<?php echo $usuario['usuario']; ?>">
-
-	</div>
-	
-	</div>
+</div>
+<div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Contraseña</label>
 		<input type="password"
@@ -88,6 +80,8 @@
 			value="<?php echo $usuario['password1']; ?>">
 
 	</div>
+</div>
+
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
 		<button type="submit" class="btn btn-success rounded">Guardar</button>
@@ -145,9 +139,7 @@ $(document).ready(function() {
 			telefono: {
 				message: 'El Número de Teléfono no es válido',
 				validators: {
-							notEmpty: {
-								message: 'El Número de Teléfono no puede ser vacío.'
-							},					
+												
 							regexp: {
 								regexp: /^(?:\+)?\d{9}$/,
 								message: 'Ingrese un Número de Teléfono válido.'
@@ -165,9 +157,7 @@ $(document).ready(function() {
 			celular: {
 				message: 'El Celular de Teléfono no es válido',
 				validators: {
-							notEmpty: {
-								message: 'El Número de Celular no puede ser vacío.'
-							},					
+												
 							regexp: {
 								regexp: /^(?:\+)?\d{10}$/,
 								message: 'Ingrese un Número de Celular válido.'
@@ -225,21 +215,12 @@ $(document).ready(function() {
 			email: {
 				message: 'El eEmail no es válido',
 				validators: {
-					notEmpty: {
-						message: 'El Email no puede ser vacío'
-					},
+					
 					emailAddress: {
 						message: 'Ingrese un Email válido.'
 					}
 				}
-			},	
-			genero: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Género'
-					}
-				}
-			},
+			}
 		}
 	});
 

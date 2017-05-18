@@ -4271,3 +4271,7 @@ padding: 6px 10px;
 .glyphicon {
 	display: none !important;
 }
+
+.alert-dismissable .close {
+  right: -5px;
+}
