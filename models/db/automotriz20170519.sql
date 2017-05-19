@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `automotriz` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `automotriz`;
 -- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
 --
 -- Host: localhost    Database: automotriz
@@ -16,6 +14,29 @@ USE `automotriz`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `estado_vehiculo`
+--
+
+DROP TABLE IF EXISTS `estado_vehiculo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estado_vehiculo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estado_vehiculo`
+--
+
+LOCK TABLES `estado_vehiculo` WRITE;
+/*!40000 ALTER TABLE `estado_vehiculo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estado_vehiculo` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tipo_usuario`
@@ -40,6 +61,31 @@ LOCK TABLES `tipo_usuario` WRITE;
 /*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
 INSERT INTO `tipo_usuario` VALUES (1,'Administrador','Usuario Adminstrador'),(2,'Técnico','Usuario Técnico'),(3,'Conductor','Usuario Conductor Vehiculo'),(4,'Operador','Usuario Operador de Maquinaria');
 /*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_vehiculo`
+--
+
+DROP TABLE IF EXISTS `tipo_vehiculo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipo_vehiculo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(128) NOT NULL,
+  `padre` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_vehiculo`
+--
+
+LOCK TABLES `tipo_vehiculo` WRITE;
+/*!40000 ALTER TABLE `tipo_vehiculo` DISABLE KEYS */;
+INSERT INTO `tipo_vehiculo` VALUES (1,'Vehiculo',0),(2,'Maquinaria',0),(3,'Vehiculo Liviano',1),(4,'Vehiculo Pesado',1),(5,'Maquinaria',2);
+/*!40000 ALTER TABLE `tipo_vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -77,6 +123,45 @@ LOCK TABLES `usuario` WRITE;
 INSERT INTO `usuario` VALUES (1,1,'Fabian','Villa','0603718579','Calle 2','2222222222','1111111111','efaby10@gmail.com','efaby','e10adc3949ba59abbe56e057f20f883e',0),(2,3,'Carlos','Perez','0603718577','calle 4','','','mail1@mail.com','0603718577','e10adc3949ba59abbe56e057f20f883e',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `vehiculo`
+--
+
+DROP TABLE IF EXISTS `vehiculo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehiculo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `tipo_vehiculo_id` int(11) NOT NULL,
+  `estado_vehiculo_id` int(11) NOT NULL,
+  `placa` varchar(10) NOT NULL,
+  `numero` varchar(64) NOT NULL,
+  `marca` varchar(128) NOT NULL,
+  `modelo` varchar(128) NOT NULL,
+  `anio` int(11) NOT NULL,
+  `numero_motor` varchar(64) NOT NULL,
+  `numero_chasis` varchar(64) NOT NULL,
+  `medida_uso` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_vehiculo_estado_vehiculo1_idx` (`estado_vehiculo_id`),
+  KEY `fk_vehiculo_usuario1_idx` (`usuario_id`),
+  KEY `fk_vehiculo_tipo_vehiculo1_idx` (`tipo_vehiculo_id`),
+  CONSTRAINT `fk_vehiculo_estado_vehiculo1` FOREIGN KEY (`estado_vehiculo_id`) REFERENCES `estado_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vehiculo_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vehiculo_tipo_vehiculo1` FOREIGN KEY (`tipo_vehiculo_id`) REFERENCES `tipo_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vehiculo`
+--
+
+LOCK TABLES `vehiculo` WRITE;
+/*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -87,4 +172,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-18 12:53:53
+-- Dump completed on 2017-05-19  9:15:28
