@@ -1,10 +1,10 @@
-<form id="frmUsuario" method="post" action="../guardar/">
+<form id="frmVehiculo" method="post" action="../guardar/">
 
 <div class="row">
 
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Categoría</label>
-		<select class='form-control' name="categoria_id">
+		<select class='form-control' name="categoria_id" id="categoria_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($categorias as $dato) { ?>
 			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['categoria_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -14,7 +14,7 @@
 	</div>
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Clase</label>
-		<select class='form-control' name="clase_id">
+		<select class='form-control' name="clase_id" id="clase_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($clases as $dato) { ?>
 			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['clase_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -27,7 +27,7 @@
 <div class="row">
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Tipo</label>
-		<select class='form-control' name="tipo_vehiculo_id">
+		<select class='form-control' name="tipo_vehiculo_id" id="tipo_vehiculo_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($tipos as $dato) { ?>
 			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['tipo_vehiculo_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
@@ -37,7 +37,7 @@
 	</div>
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Conductor</label>
-		<select class='form-control' name="usuario_id">
+		<select class='form-control' name="usuario_id" id="usuario_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($usuarios as $dato) { ?>
 			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombres']." ".$dato['apellidos'];?></option>
@@ -124,7 +124,7 @@
 
 
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $vehiculo['id']; ?>">
 		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 
@@ -133,135 +133,171 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#frmUsuario').bootstrapValidator({
+
+	$("#categoria_id").change(function () {
+        $("#categoria_id option:selected").each(function () {
+	        opcion=$(this).val();
+	        $.post("../loadTipoVehiculo/", { opcion: opcion }, function(data){
+	        	$("#clase_id").html(data);
+	        	$("#tipo_vehiculo_id").html('<option value="" >Seleccione</option>');
+	        });  
+
+	        $.post("../loadConductorVehiculo/", { opcion: opcion }, function(data){
+	        	$("#usuario_id").html(data);
+	        });          
+     });
+	});
+
+	$("#clase_id").change(function () {
+        $("#clase_id option:selected").each(function () {
+	        opcion=$(this).val();
+	        $.post("../loadTipoVehiculo/", { opcion: opcion }, function(data){
+	        	$("#tipo_vehiculo_id").html(data);
+	        });            
+     });
+	});
+
+
+    $('#frmVehiculo').bootstrapValidator({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
 			invalid: 'glyphicon glyphicon-remove',
 			validating: 'glyphicon glyphicon-refresh'
 		},
-		fields: {			
-			identificacion: {
-				message: 'El Número de Identificación no es válido',
-				validators: {
-							notEmpty: {
-								message: 'El Número de Identificación no puede ser vacío.'
-							},					
-							regexp: {
-								regexp: /^(?:\+)?\d{10,13}$/,
-								message: 'Ingrese un Número de Identificación válido.'
-							}
-						}
-					},
-			nombres: {
-				message: 'Los Nombres no es válido',
+		fields: {	
+			usuario_id: {
 				validators: {
 					notEmpty: {
-						message: 'El Nombre no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
-						message: 'Ingrese un Nombre válido.'
+						message: 'Seleccione un Conductor'
 					}
 				}
 			},
-			apellidos: {
-				message: 'El Apellido no es válido',
+			categoria_id: {
 				validators: {
 					notEmpty: {
-						message: 'El Apellido no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ \.]+$/,
-						message: 'Ingrese un Apellido válido.'
+						message: 'Seleccione una Categoría'
 					}
 				}
 			},
-			telefono: {
-				message: 'El Número de Teléfono no es válido',
-				validators: {
-												
-							regexp: {
-								regexp: /^(?:\+)?\d{9}$/,
-								message: 'Ingrese un Número de Teléfono válido.'
-							}
-						}
-				
-			},
-			tipo_usuario_id: {
+			clase_id: {
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Tipo de Usuario'
+						message: 'Seleccione una Clase'
 					}
 				}
 			},
-			celular: {
-				message: 'El Celular de Teléfono no es válido',
-				validators: {
-												
-							regexp: {
-								regexp: /^(?:\+)?\d{10}$/,
-								message: 'Ingrese un Número de Celular válido.'
-							}
-						}
-				
-			},	
-			direccion: {
-				message: 'La Dirección no es válida',
+			tipo_vehiculo_id: {
 				validators: {
 					notEmpty: {
-						message: 'La Dirección no puede ser vacío.'
+						message: 'Seleccione un Tipo'
+					}
+				}
+			},
+			estado_vehiculo_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Estado'
+					}
+				}
+			},			
+			placa: {
+				message: 'La Placa no es válida',
+				validators: {
+					notEmpty: {
+						message: 'La Placa no puede ser vacía.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ ,-\.]+$/,
-						message: 'Ingrese una Dirección válido.'
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-]+$/,
+						message: 'Ingrese una Placa válida.'
 					}
 				}
 			},	
-			usuario: {
-				message: 'El Usuario no es válido',
+			numero_motor: {
+				message: 'El Número de Motor no es válido',
 				validators: {
 					notEmpty: {
-						message: 'El Usuario no puede ser vacío.'
+						message: 'El Número de Motor no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-]+$/,
+						message: 'Ingrese un Número de Motor válido.'
+					}
+				}
+			},
+			numero_chasis: {
+				message: 'El Número de Chasis no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Número de Chasis no puede ser vacío.'
 					},					
 					regexp: {
 						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ -\.]+$/,
-						message: 'Ingrese un Usuario válido.'
+						message: 'Ingrese un Número de Chasis válido.'
+					}
+				}
+			},
+			modelo: {
+				message: 'El Modelo no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Modelo no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ -\.]+$/,
+						message: 'Ingrese un Modelo válido.'
+					}
+				}
+			},
+			marca: {
+				message: 'La Marca no es válida',
+				validators: {
+					notEmpty: {
+						message: 'La Marca no puede ser vacía.'
+					},					
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ -\.]+$/,
+						message: 'Ingrese una Marca válida.'
+					}
+				}
+			},
+			numero: {
+				message: 'El Número no es válido',
+				validators: {
+					notEmpty: {
+						message: 'El Número no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^\d*$/,
+						message: 'Ingrese un Número válido.'
 					}
 				}
 			},	
-			password: {
-				message: 'La Contraseña no es válida',
+			anio: {
+				message: 'El Año no es válido',
 				validators: {
 					notEmpty: {
-						message: 'La Contraseña no puede ser vacía.'
+						message: 'El Año no puede ser vacío.'
 					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-_ \.]+$/,
-						message: 'Ingrese una Contraseña válida.'
+						regexp: /^\d*$/,
+						message: 'Ingrese un Año válido.'
 					}
 				}
-			},
-			password1: {
+			},	
+			medida_uso: {
+				message: 'El  Kilometraje / Horas no es válido',
 				validators: {
 					notEmpty: {
-						message: 'La contraseña no puede ser vacia.'
-					},
-					identical: {
-						field: 'password',
-						message: 'La contraseña debe ser la misma'
+						message: 'El Kilometraje / Horas no puede ser vacío.'
+					},					
+					regexp: {
+						regexp: /^\d*$/,
+						message: 'Ingrese un Kilometraje / Horas válido.'
 					}
 				}
 			},
-			email: {
-				message: 'El eEmail no es válido',
-				validators: {
-					
-					emailAddress: {
-						message: 'Ingrese un Email válido.'
-					}
-				}
-			}
+			
 		}
 	});
 
