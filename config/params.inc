@@ -1,7 +1,7 @@
 <?php 	
 	define('HOSTNAME_DATABASE', 'localhost');
 	define('USERNAME', 'root');
-	define('PASSWORD', 'sistemas');
+	define('PASSWORD', '');
 	define('DATABASE', 'automotriz'); 	 
 	define('URL_BASE', '/automotriz/');
 	define('PATH_MODELOS', PATH_ROOT."/models");
