@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `automotriz` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `automotriz`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
 -- Host: localhost    Database: automotriz
 -- ------------------------------------------------------
--- Server version	5.5.54-0ubuntu0.14.04.1
+-- Server version	5.7.17-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -75,7 +77,7 @@ CREATE TABLE `tipo_vehiculo` (
   `nombre` varchar(128) NOT NULL,
   `padre` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +86,7 @@ CREATE TABLE `tipo_vehiculo` (
 
 LOCK TABLES `tipo_vehiculo` WRITE;
 /*!40000 ALTER TABLE `tipo_vehiculo` DISABLE KEYS */;
-INSERT INTO `tipo_vehiculo` VALUES (1,'Vehiculo',0),(2,'Maquinaria',0),(3,'Vehiculo Liviano',1),(4,'Vehiculo Pesado',1),(5,'Maquinaria',2);
+INSERT INTO `tipo_vehiculo` VALUES (1,'Vehiculo',0),(2,'Maquinaria',0),(3,'Vehiculo Liviano',1),(4,'Vehiculo Pesado',1),(5,'Maquinaria Pesada',2),(6,'Vehiculo Gasolina',3),(7,'Vehiculo Diesel',3),(8,'Rodillo',5),(9,'Restroescabadora',5),(10,'Cargadora Frontal',5),(11,'Motoniveladora',5),(12,'Bulldocer',5),(13,'Vehiculo Diesel',4);
 /*!40000 ALTER TABLE `tipo_vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,13 +146,14 @@ CREATE TABLE `vehiculo` (
   `numero_motor` varchar(64) NOT NULL,
   `numero_chasis` varchar(64) NOT NULL,
   `medida_uso` double NOT NULL,
+  `eliminado` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `fk_vehiculo_estado_vehiculo1_idx` (`estado_vehiculo_id`),
   KEY `fk_vehiculo_usuario1_idx` (`usuario_id`),
   KEY `fk_vehiculo_tipo_vehiculo1_idx` (`tipo_vehiculo_id`),
   CONSTRAINT `fk_vehiculo_estado_vehiculo1` FOREIGN KEY (`estado_vehiculo_id`) REFERENCES `estado_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vehiculo_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_vehiculo_tipo_vehiculo1` FOREIGN KEY (`tipo_vehiculo_id`) REFERENCES `tipo_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_vehiculo_tipo_vehiculo1` FOREIGN KEY (`tipo_vehiculo_id`) REFERENCES `tipo_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_vehiculo_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -172,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-19  9:15:28
+-- Dump completed on 2017-05-22 22:24:51
