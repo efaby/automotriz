@@ -3,84 +3,125 @@
 <div class="row">
 
 	<div class="form-group  col-sm-6">
-		<label class="control-label">Tipo Usuario</label>
-		<select class='form-control' name="tipo_usuario_id">
+		<label class="control-label">Categoría</label>
+		<select class='form-control' name="categoria_id">
 			<option value="" >Seleccione</option>
-		<?php foreach ($tipos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['tipo_usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php foreach ($categorias as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['categoria_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
 		<?php }?>
 		</select>
 
 	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Número de Identificación</label> <input type='text'
-			name='identificacion' class='form-control'
-			value="<?php echo $usuario['identificacion']; ?>">
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Clase</label>
+		<select class='form-control' name="clase_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($clases as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['clase_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+	</div>
+	
+</div>
+<div class="row">
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Tipo</label>
+		<select class='form-control' name="tipo_vehiculo_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($tipos as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['tipo_vehiculo_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+	</div>
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Conductor</label>
+		<select class='form-control' name="usuario_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($usuarios as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombres']." ".$dato['apellidos'];?></option>
+		<?php }?>
+		</select>
 
 	</div>
 </div>
 <div class="row">
 	<div class="form-group col-sm-6">
-		<label class="control-label">Nombres</label> <input type='text'
-			name='nombres' class='form-control'
-			value="<?php echo $usuario['nombres']; ?>">
+		<label class="control-label">Número</label> <input type='text'
+			name='numero' class='form-control'
+			value="<?php echo $vehiculo['numero']; ?>">
 
 	</div>
 	<div class="form-group col-sm-6">
-		<label class="control-label">Apellidos</label> <input type='text'
-			name='apellidos' class='form-control'
-			value="<?php echo $usuario['apellidos']; ?>">
+		<label class="control-label">Placa</label> <input type='text'
+			name='placa' class='form-control'
+			value="<?php echo $vehiculo['placa']; ?>">
 
 	</div>
 </div>
 <div class="row">
 	<div class="form-group col-sm-6">
-		<label class="control-label">Dirección</label> <input type='text'
-			name='direccion' class='form-control'
-			value="<?php echo $usuario['direccion']; ?>">
-
-	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Email</label>
+		<label class="control-label">Marca</label>
 		<input type='text'
-			name='email' class='form-control'
-			value="<?php echo $usuario['email']; ?>">
-
-	</div>
-</div>
-<div class="row">
-	<div class="form-group col-sm-6">
-		<label class="control-label">Teléfono</label>
-		<input type='text'
-			name='telefono' class='form-control'
-			value="<?php echo $usuario['telefono']; ?>">
+			name='marca' class='form-control'
+			value="<?php echo $vehiculo['marca']; ?>">
 
 	</div>
 	
 	<div class="form-group  col-sm-6">
-		<label class="control-label">Celular</label>
+		<label class="control-label">Modelo</label>
 		<input type='text'
-			name='celular' class='form-control'
-			value="<?php echo $usuario['celular']; ?>">
+			name='modelo' class='form-control'
+			value="<?php echo $vehiculo['modelo']; ?>">
 
 	</div>
 </div>
 <div class="row">
 	<div class="form-group col-sm-6">
-		<label class="control-label">Contraseña</label>
-		<input type="password"
-			name='password' class='form-control'
-			value="<?php echo $usuario['password']; ?>">
+		<label class="control-label">Número Motor</label>
+		<input type='text'
+			name='numero_motor' class='form-control'
+			value="<?php echo $vehiculo['numero_motor']; ?>">
 
 	</div>
-	<div class="form-group col-sm-6">
-		<label class="control-label">Repetir Contraseña</label>
-		<input type="password"
-			name='password1' class='form-control'
-			value="<?php echo $usuario['password1']; ?>">
+	
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Número Chasis</label>
+		<input type='text'
+			name='numero_chasis' class='form-control'
+			value="<?php echo $vehiculo['numero_chasis']; ?>">
 
 	</div>
 </div>
+<div class="row">
+	<div class="form-group col-sm-4">
+		<label class="control-label">Año Fabricación</label>
+		<input type='text'
+			name='anio' class='form-control'
+			value="<?php echo $vehiculo['anio']; ?>">
+
+	</div>
+	
+	<div class="form-group  col-sm-4">
+		<label class="control-label">Kilometraje / Horas</label>
+		<input type='text'
+			name='medida_uso' class='form-control'
+			value="<?php echo $vehiculo['medida_uso']; ?>">
+
+	</div>
+	<div class="form-group  col-sm-4">
+		<label class="control-label">Estado</label>
+		<select class='form-control' name="estado_vehiculo_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($estados as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['estado_vehiculo_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+	</div>
+</div>
+
 
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">

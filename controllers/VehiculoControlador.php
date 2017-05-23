@@ -1,28 +1,30 @@
 <?php
-require_once (PATH_MODELOS . "/UsuarioModelo.php");
+require_once (PATH_MODELOS . "/VehiculoModelo.php");
 /**
  * Controlador de Vehiculos
  */
 class VehiculoControlador {
 	
 	public function listar() {
-		$model = new UsuarioModelo();
-		$datos = $model->obtenerListadoUsuarios();
+		$model = new VehiculoModelo();
+		$datos = $model->obtenerListadoVehiculos();
 		$message = "";
-		require_once PATH_VISTAS."/Usuario/vista.listado.php";
+		require_once PATH_VISTAS."/Vehiculo/vista.listado.php";
 	}
 	
-	
-	
-	
-	
-	
 	public function editar(){
-		$model = new UsuarioModelo();
-		$usuario = $model->obtenerUsuario();
-		$tipos = $model->obtenerTipoUsuario();
+		$model = new VehiculoModelo();
+		$vehiculo = $model->obtenerVehiculo();
+		$categorias = $model->obtenerTipoVehiculo(0);
+		$estados = $model->obtenerEstadoVehiculo();
+		$clases = $tipos = $usuarios = array();
+		if($vehiculo['id']>0){
+			$clases = $model->obtenerTipoVehiculo($vehiculo['categoria_id']);
+			$tipos = $model->obtenerTipoVehiculo($vehiculo['clase_id']);
+			$usuarios = $model->obtenerConductores($vehiculo['usuario_id']);
+		}
 		$message = "";
-		require_once PATH_VISTAS."/Usuario/vista.formulario.php";
+		require_once PATH_VISTAS."/Vehiculo/vista.formulario.php";
 	}
 	
 	public function guardar() {
