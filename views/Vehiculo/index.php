@@ -1,4 +1,4 @@
 <?php 
-$app = "Usuario";
+$app = "Vehiculo";
 require_once("../../index.php");
 ?>

@@ -3,7 +3,7 @@
                     
                     <div class="footer-block author">
                         <ul>
-                            <li> copyraicth </li>
+                            <li> Copyright ©2017 Mantenimiento Automotriz. All Rights Reserved </li>
                         </ul>
                     </div>
                 </footer>

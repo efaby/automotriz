@@ -843,7 +843,7 @@ content: '';
 --------------------------
 */
 .sidebar {
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 .sidebar .sidebar-form input:focus {
   -webkit-box-shadow: none;
@@ -4274,4 +4274,8 @@ padding: 6px 10px;
 
 .alert-dismissable .close {
   right: -5px;
+}
+
+.header {
+  height: 50px !important;
 }
