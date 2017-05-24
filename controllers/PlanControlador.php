@@ -27,7 +27,7 @@ class PlanControlador {
 		$plan ['equipo'] = $_POST ['equipo'];
 		$plan ['procedimiento'] = $this->dataready($_POST ['procedimiento']);
 		$plan ['observaciones'] = $this->dataready($_POST ['observaciones']);
-		$plan ['usuario_id'] = $_SESSION['SESSION_USER']->id;
+		$plan ['tecnico_id'] = $_POST ['tecnico_id'];
 		
 		
 		$model = new PlanModelo();

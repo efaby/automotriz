@@ -92,7 +92,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#frmUsuario').bootstrapValidator({
+    $('#frmUsuario').formValidation({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',

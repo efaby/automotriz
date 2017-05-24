@@ -22,7 +22,7 @@ class PlanModelo {
 			$resultArray = $model->obtenerCampos($result);
 			$resultArray = $resultArray[0];			
 		} else {
-			$resultArray = array('id'=>0,'tarea'=>'','tiempo_ejecucion'=>'','estado_maquina'=>'', 'herramientas' =>'', 'equipo' =>'',  'materiales' =>'', 'procedimiento' =>'',  'observaciones' =>'', 'usuario_id' => 0);			
+			$resultArray = array('id'=>0,'tarea'=>'','tiempo_ejecucion'=>'','estado_maquina'=>'', 'herramientas' =>'', 'equipo' =>'',  'materiales' =>'', 'procedimiento' =>'',  'observaciones' =>'', 'tecnico_id' => 0);			
 		}
 		return $resultArray;
 	}

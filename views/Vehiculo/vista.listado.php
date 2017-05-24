@@ -56,7 +56,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Vehiculo</h3>
+				<h3>Vehículo</h3>
 			</div>
 
 			<div class="modal-body"></div>
@@ -66,11 +66,12 @@
 	</div>
 </div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
+<script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
+<script src="<?php echo PATH_JS; ?>/bootstrap.js"></script> 
 <link href="<?php echo PATH_CSS; ?>/dataTables.bootstrap.css" rel="stylesheet">
 <script src="<?php echo PATH_JS; ?>/jquery.dataTables.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/table.js"></script>
-<script src="<?php echo PATH_JS; ?>/bootstrapValidator.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/listados.js"></script>
 <link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
 

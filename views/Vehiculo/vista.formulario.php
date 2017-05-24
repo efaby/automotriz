@@ -158,7 +158,7 @@ $(document).ready(function() {
 	});
 
 
-    $('#frmVehiculo').bootstrapValidator({
+    $('#frmVehiculo').formValidation({
     	message: 'This value is not valid',
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',

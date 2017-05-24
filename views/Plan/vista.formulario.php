@@ -30,23 +30,16 @@
 	</div>
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Técnico</label>
-		<select class='form-control' name="usuario_id" id="usuario_id">
+		<select class='form-control' name="tecnico_id" id="tecnico_id">
 			<option value="" >Seleccione</option>
 		<?php
 		foreach ($tecnicos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>" <?php if($item['usuario_id']==$dato['id']):echo "selected"; endif;?> ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
+			<option value="<?php echo $dato['id'];?>" <?php if($item['tecnico_id']==$dato['id']):echo "selected"; endif;?> ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
 		<?php }?>
 		</select>
 	</div>
 </div>
-<div class="row">
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Estado Máquina</label>
-		<div>
-		<label> <input type="radio" name="estado_maquina" value="0" <?php echo ((int)$item['estado_maquina'] === 0)?'checked':''; ?>>Apagada</label>
-		 <label> <input type="radio" name="estado_maquina"value="1" <?php echo ((int)$item['estado_maquina'] === 1)?'checked':''; ?>> Encendida</label>
-	</div>
-</div>
+
 
 <div class="row">			
 	<div class="form-group  col-sm-12">	
@@ -64,18 +57,29 @@
         </textarea>
 	</div>
 </div>
+<div class="row">
+	<div class="form-group  col-sm-6">
+		<label class="control-label">Estado Máquina</label><br>
+		<label> <input type="radio" name="estado_maquina" value="0" <?php echo ((int)$item['estado_maquina'] === 0)?'checked':''; ?>>Apagada</label>
+		 <label> <input type="radio" name="estado_maquina"value="1" <?php echo ((int)$item['estado_maquina'] === 1)?'checked':''; ?>> Encendida</label>
+	</div>
+</div>
 <div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
 	<input type='hidden' name='idLab' class='form-control' value="<?php echo $item['idLab']; ?>">
 	<button type="submit" class="btn btn-success">Guardar</button>	
 </div>
 </form>
+
+
 <script src="<?php echo PATH_JS; ?>/ckeditor/ckeditor.js"></script>
 <script src="<?php echo PATH_JS; ?>/ckeditor/adapters/jquery.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#frmItem').bootstrapValidator({
+	$('#frmItem').formValidation({
     	message: 'This value is not valid',
+    	excluded: [':disabled'],
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
 			invalid: 'glyphicon glyphicon-remove',
@@ -91,6 +95,13 @@ $(document).ready(function() {
 					regexp: {
 						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
 						message: 'Ingrese una La Tarea válida.'
+					}
+				}
+			},
+			tecnico_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Técnico'
 					}
 				}
 			},
@@ -182,6 +193,8 @@ $(document).ready(function() {
     });
         ;
 });
+
+
 </script>
 <style>
 .col-sm-6, .col-sm-12 {
