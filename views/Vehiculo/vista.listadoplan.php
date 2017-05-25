@@ -38,7 +38,7 @@
 		    		echo "<td>".$item['medida_uso']."</td>";
 		    		echo "<td>".$item['estado']." </td>";
 		    		echo "<td align='center'>
-						<a href='../../ActivoPlan/listar/".$item['id']."' class='btn btn-success btn-sm' title='Asignación de Planes' ><i class='fa fa-gears'></i></a>	
+						<a href='../../VehiculoPlan/listar/".$item['id']."' class='btn btn-success btn-sm' title='Asignación de Planes' ><i class='fa fa-gears'></i></a>	
 						</td>";
 		    	}?>
 		    </tbody>

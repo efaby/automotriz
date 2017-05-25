@@ -1,4 +1,4 @@
 <?php
-$app = "ActivoPlan";
+$app = "VehiculoPlan";
 require_once("../../index.php");
 ?>

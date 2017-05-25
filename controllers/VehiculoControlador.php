@@ -84,5 +84,12 @@ class VehiculoControlador {
 		}
 		header ( "Location: ../listar/" );
 	}
+
+	public function listarplan() {
+		$model = new VehiculoModelo();
+		$datos = $model->obtenerListadoVehiculos();
+		$message = "";
+		require_once PATH_VISTAS."/Vehiculo/vista.listadoplan.php";
+	}
 	
 }

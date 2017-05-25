@@ -70,13 +70,13 @@
                                     
                                 </li>
                                 
-                                <li class="<?php echo (strpos($url, '/Plan/listar/'))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Vehiculo/listarplan/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
                                         <li> <a href="../../Plan/listar/">
         								Planes
         						          </a> </li>
-                                            <li> <a href="responsive-tables.html">
+                                            <li> <a href="../../Vehiculo/listarplan/">
         								Asignar
         							</a> </li>
                                     </ul>

@@ -2,11 +2,11 @@
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 
 <!-- Main row -->
-<div class="row">
-	<div class="col-lg-12">
-    	<h1 class="page-header">Planes Mantenimiento Asignados</h1>
-   	</div>
+
+<div class="title-block">
+    <h1 class="title"> Planes Mantenimiento Asignados</h1>
 </div>
+
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
 		<div class="alert alert-success fade in alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert"
@@ -16,11 +16,14 @@
 		<?php endif;?>
 <div class="row">
 	<div style="width: 100%; text-align: center;">
-		<h2><?php echo $activo[0]['nombre'];?></h2>
+		<h2><?php echo $vehiculo[0]['nombre'] ." - ".$vehiculo[0]['marca']." - ".$vehiculo[0]['modelo']." No. ".$vehiculo[0]['numero'];?></h2>
 	</div>
 
+<div class="card">
+	<div class="card-block">
+
 	<div class="card-title-block">
-		<button class="btn btn-primary rounded" id="modalOpen" onclick="javascript: loadModal('<?php echo  $activo[0]['id'].'-0';?>')">
+		<button class="btn btn-primary rounded" id="modalOpen1" onclick="javascript: loadModal('<?php echo  $vehiculo[0]['id'].'-0';?>')">
 			<i class="glyphicon glyphicon-plus"></i> Añadir
 		</button>
 	</div>	
@@ -57,6 +60,8 @@
     </tbody>
     </table>
     <a href='../../Activo/listar/' class='btn btn-info' title='Regresar' >Regresar</a>
+    </div>
+    </div>
 </div>
 <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,7 +69,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Plan Activo</h3>
+				<h3>Plan Vehículo</h3>
 			</div>
 
 			<div class="modal-body"></div>

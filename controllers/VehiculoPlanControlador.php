@@ -1,27 +1,25 @@
 <?php
-require_once (PATH_MODELOS . "/ActivoPlanModelo.php");
+require_once (PATH_MODELOS . "/VehiculoPlanModelo.php");
 
 
-class ActivoPlanControlador {
+class VehiculoPlanControlador {
 	
 	public function listar() {
-		$model = new ActivoPlanModelo();
-		$datos = $model->obtenerListadoActivoPlan();
-		$activo = $model->obtenerActivoNombre();
+		$model = new VehiculoPlanModelo();
+		$datos = $model->obtenerListadoVehiculoPlan();
+		$vehiculo = $model->obtenerVehiculoNombre();
 		$message = "";
-		require_once PATH_VISTAS."/ActivoPlan/vista.listado.php";
+		require_once PATH_VISTAS."/VehiculoPlan/vista.listado.php";
 	}
 	
 	public function editar(){
-		$model = new ActivoPlanModelo();
+		$model = new VehiculoPlanModelo();
 		$arrayId = explode('-', $_GET['id']);
-		$item = $model->obtenerActivoPlan($arrayId[1]);
-		$frecuencias = $model->getFrecuencias();
-		$planes = $model->getPlanes($arrayId[0],$item->plan_mantenimiento_id);
-		$partes = $model->getPartes($arrayId[0]);
-		$activo_id = $arrayId[0];
+		$item = $model->obtenerVehiculoPlan($arrayId[1]);
+		$planes = $model->obtenerPlanes($arrayId[0],$item['plan_mantenimiento_id']);
+		$vehiculo_id = $arrayId[0];
 		$message = "";		
-		require_once PATH_VIEWS."/ActivoPlan/vista.formulario.php";
+		require_once PATH_VISTAS."/VehiculoPlan/vista.formulario.php";
 	}
 	
 /*	public function guardar() {

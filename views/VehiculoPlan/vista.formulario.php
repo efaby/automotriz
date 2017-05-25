@@ -9,45 +9,33 @@
 		</select>
 
 	</div>
-	<div class="form-group  col-sm-12">
-		<label class="control-label">Partes</label>
-		<select class='form-control' name="parte_maquina_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($partes as $dato) { ?>
-			<option value="<?php echo $dato->id;?>"  <?php if($item->parte_maquina_id==$dato->id):echo "selected"; endif;?>><?php echo $dato->nombre;?></option>
-		<?php }?>
-		</select>
 
-	</div>
 	<div class="form-group  col-sm-12">
-		<label class="control-label">Frecuencia</label>
-		<div class="form-group  col-sm-12">
-			<div class="form-group  col-sm-4">
+		<label class="control-label">Aplicar Mantenimiento cada:</label>
+		<div class="form-group  col-sm-12" style="margin-bottom: 0px">
+			<div class="form-group  col-sm-4" style="margin-bottom: 0px">
 			<input type='text'
 			name='frecuencia_numero' class='form-control'
-			value="<?php echo $item->frecuencia_numero; ?>">
+			value="<?php echo $item['unidad_numero']; ?>">
 			</div>
-			<div class="form-group  col-sm-8">
-		<select class='form-control' name="frecuencia_id" id="frecuencia_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($frecuencias as $dato) { ?>
-			<option value="<?php echo $dato->id;?>"  <?php if($item->frecuencia_id==$dato->id):echo "selected"; endif;?>><?php echo $dato->nombre;?></option>
-		<?php }?>
-		</select>
+		<div class="form-group  col-sm-8">
+		Kilometros - Horas
 		</div>
 	</div>
 	</div>
 	
 	<div class="form-group  col-sm-12">
-		<label class="control-label">Alertar</label>
+		<label class="control-label">Alertar cada:</label>
 		<div class="form-group  col-sm-12">
 			<div class="form-group  col-sm-4">
 			<input type='text'
 			name='alerta_numero' class='form-control'
-			value="<?php echo $item->alerta_numero; ?>">
+			value="<?php echo $item['alerta_numero']; ?>">
 			</div>
 			<div class="form-group  col-sm-8">
-			<label class="control-label" id="antes"><?php echo ($item->frecuencia_id==1)?'Hora(s) Antes':'Día(s) antes'; ?></label>
+			<label class="control-label" id="antes">
+				Kilometros - Horas
+			</label>
 		</div>
 	</div>
 	</div>
