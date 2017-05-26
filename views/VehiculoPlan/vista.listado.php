@@ -27,42 +27,47 @@
 			<i class="glyphicon glyphicon-plus"></i> Añadir
 		</button>
 	</div>	
-	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-    <thead>
-	    <tr>
-	    	<th>ID</th>
-		    <th>Plan</th>		    
-		    <th>Mantenimiento</th>
-		    <th>Alerta Mantenimiento</th>
-		    <th>Horas Operando</th>
-		     <th>Desde</th>
-		    <th style="text-align: center; width: 20%">Acciones</th>
-	    </tr>
-    </thead>
-    <tbody>
-    	<?php
-    		if(count($datos) >0){
-	    		foreach ($datos as $item) {
-	    		echo "<tr><td>".$item['id']."</td>";
-	    		echo "<td>".$item['tarea']."</td>";   
-	    		echo "<td> Cada ".$item['unidad_numero']." ".$item['unidad']."</td>";	    		
-	    		echo "<td> ".$item['alerta_numero']." ".$item['unidad']." antes.</td>";
-	    		echo "<td>".$item['numero_operacion']."</td>";
-	    		echo "<td>".$item['fecha_inicio']."</td>";
-	    		$id = $vehiculo[0]['id']."-".$item['id'];
-	    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
-					  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
-    		}
-    	}?>
-    </tbody>
-    </table>
-    <a href='../../Vehiculo/listarplan/' class='btn btn-info' title='Regresar' >Regresar</a>
+	<div class="table-responsive">
+		<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+	    <thead>
+		    <tr>
+		    	<th>ID</th>
+			    <th>Plan</th>		    
+			    <th>Mantenimiento</th>
+			    <th>Alerta Mantenimiento</th>
+			    <th>Horas Operando</th>
+			     <th>Desde</th>
+			    <th style="text-align: center; width: 20%">Acciones</th>
+		    </tr>
+	    </thead>
+	    <tbody>
+	    	<?php
+	    		if(count($datos) >0){
+		    		foreach ($datos as $item) {
+		    		echo "<tr><td>".$item['id']."</td>";
+		    		echo "<td>".$item['tarea']."</td>";   
+		    		echo "<td> Cada ".$item['unidad_numero']." ".$item['unidad']."</td>";	    		
+		    		echo "<td> ".$item['alerta_numero']." ".$item['unidad']." antes.</td>";
+		    		echo "<td>".$item['numero_operacion']."</td>";
+		    		echo "<td>".$item['fecha_inicio']."</td>";
+		    		$id = $vehiculo[0]['id']."-".$item['id'];
+		    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
+						  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+	    		}
+	    	}?>
+	    </tbody>
+	    </table>
+	    <div class="col-sm-12">
+	    <a href='../../Vehiculo/listarplan/' class='btn btn-info' title='Regresar' >Regresar</a>
+	    </div>
+	    <div>
+    
     </div>
     </div>
 </div>
 <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width: 400px;">
+	<div class="modal-dialog" >
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>

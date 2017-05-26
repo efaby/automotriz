@@ -4284,5 +4284,7 @@ padding: 6px 10px;
 	padding: 10px;
 }
 
-
+.table-responsive {
+  padding-top: 10px;
+}
 
