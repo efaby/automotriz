@@ -55,7 +55,7 @@ class VehiculoModelo {
 		$model = new BaseModelo();
 		$sql = "select u.id, u.nombres, u.apellidos
 				from usuario as u
-				where u.tipo_usuario_id = ".$conductor;
+				where u.eliminado=0 and u.tipo_usuario_id = ".$conductor;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}

@@ -28,6 +28,7 @@
 			    	<th>Número</th>
 				    <th>Tipo</th>
 				    <th>Marca</th>
+				    <th>Modelo</th>
 				    <th>Placa</th>
 				    <th>Conductor</th>
 				    <th>Estado</th>
@@ -38,7 +39,8 @@
 		    	<?php foreach ($datos as $item) {
 		    		echo "<tr><td>".$item['numero']."</td>";
 		    		echo "<td>".$item['tipo']."</td>";
-		    		echo "<td>".$item['marca']." - ".$item['modelo']."</td>";
+		    		echo "<td>".$item['marca']."</td>";
+		    		echo "<td>".$item['modelo']."</td>";
 		    		echo "<td>".$item['placa']."</td>";
 		    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";
 		    		echo "<td>".$item['estado']." </td>";
