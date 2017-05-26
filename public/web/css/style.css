@@ -4279,3 +4279,10 @@ padding: 6px 10px;
 .header {
   height: 50px !important;
 }
+
+.sidebar-header .brand {
+	padding: 10px;
+}
+
+
+

@@ -6,7 +6,7 @@ class PlanModelo {
 	public function obtenerListadoPlan(){
 		$model = new BaseModelo();	
 		$sql = "select p.*, u.nombres, u.apellidos from plan_mantenimiento as p	
-				inner join usuario as u on u.id = p.usuario_id
+				inner join usuario as u on u.id = p.tecnico_id
 				where p.eliminado = 0";		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);		

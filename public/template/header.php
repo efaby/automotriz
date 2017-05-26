@@ -54,7 +54,10 @@
                     <div class="sidebar-container">
                         <div class="sidebar-header">
                             <div class="brand">
-                                <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> Modular Admin </div>
+                                
+                                <img src="<?php echo PATH_IMAGES . '/logo.png';?>" alt="Logo">
+								 
+							</div>
                         </div>
                         <?php $url = $_SERVER["REQUEST_URI"];?>
                         <nav class="menu">
@@ -70,7 +73,7 @@
                                     
                                 </li>
                                 
-                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Vehiculo/listarplan/')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/VehiculoPlan/listar/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
                                         <li> <a href="../../Plan/listar/">
@@ -81,6 +84,7 @@
         							</a> </li>
                                     </ul>
                                 </li>
+                                <!--  
                                 <li>
                                     <a href="forms.html"> <i class="fa fa-pencil-square-o"></i> Forms </a>
                                 </li>
@@ -132,7 +136,7 @@
                                 </li>
                                 <li>
                                     <a href="https://github.com/modularcode/modular-admin-html"> <i class="fa fa-github-alt"></i> Theme Docs </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                     </div>

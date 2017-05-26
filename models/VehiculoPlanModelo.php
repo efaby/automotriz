@@ -6,13 +6,14 @@ class VehiculoPlanModelo {
 	public function obtenerListadoVehiculoPlan(){
 		$activo = $_GET['id'];
 		$model = new BaseModelo();
-		/*$sql = "select ap.*, p.tarea, f.nombre as frecuencia, pm.nombre as parte from activo_plan as ap
-				inner join plan_mantenimiento as p on p.id = ap.plan_mantenimiento_id
-				inner join frecuencia as f on f.id = ap.frecuencia_id 	
-				left join partes_maquina as pm on pm.id = ap.parte_maquina_id
-				where ap.eliminado = 0 and ap.activo_fisico_id = ".$activo;		
-		return $model->execSql($sql, array(),true);*/
-		return null;
+		$sql = "select vp.*, p.tarea, u.nombre as unidad
+				from vehiculo_plan as vp
+				inner join plan_mantenimiento as p on p.id = vp.plan_mantenimiento_id
+				inner join unidad as u on u.id = vp.unidad_id				
+				where vp.eliminado = 0 and vp.vehiculo_id = ".$activo;		
+
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
 	}	
 	
 	public function obtenerVehiculoNombre(){
@@ -30,8 +31,11 @@ class VehiculoPlanModelo {
 	{
 		$model = new BaseModelo();		
 		if($id > 0){
-			$sql = "select * from vehiculo_plan where eliminado = 0 and id = ?";
-			$result = $model->execSql($sql, array($id));				
+			$sql = "select * from vehiculo_plan where eliminado = 0 and id = ".$id;
+			$result = $model->ejecutarSql($sql);
+			$resultArray = $model->obtenerCampos($result);
+			$result = $resultArray[0];
+						
 		} else {
 			$result = array('id'=>0,'alerta_numero'=>'', 'unidad_numero'=>'','plan_mantenimiento_id'=>0);			
 		}		
@@ -42,37 +46,39 @@ class VehiculoPlanModelo {
 		$model = new BaseModelo();
 		$sql = "select id, tarea from plan_mantenimiento 				
 				where eliminado = 0 and 
-				id not in (select plan_mantenimiento_id from activo_plan where eliminado = 0 and vehiculo_id = ".$id." and plan_mantenimiento_id <> ".$plan.")";
+				id not in (select plan_mantenimiento_id from vehiculo_plan where eliminado = 0 and vehiculo_id = ".$id." and plan_mantenimiento_id <> ".$plan.")";
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 
 	}
 	
-/*	public function getFrecuencias(){
-		$model = new BaseModel();
-		$sql = "select id, nombre from frecuencia";
-		return $model->execSql($sql, array(),true);
+	public function obtenerUnidad($vehiculoId){
+		$model = new BaseModelo();
+		$activo = $_GET['id'];
+		$sql = "SELECT u.id, u.nombre
+				FROM vehiculo v
+				INNER JOIN tipo_vehiculo tv ON tv.id=v.tipo_vehiculo_id
+				INNER JOIN tipo_vehiculo tv1 ON tv1.id=tv.padre
+				INNER JOIN unidad u ON u.id=tv1.padre
+				
+				WHERE v.id=".$vehiculoId;
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
 	}
 	
-	
-	
-	public function getPartes($id){
-		$model = new BaseModel();
-		$sql = "select id, nombre from partes_maquina
-				where activo_id = ?";
-		return $model->execSql($sql, array($id),true);
-	}
-	
-	public function saveActivoPlan($activoPlan)
+	public function guardarVehiculoPlan($activoPlan)
 	{
-		$model = new BaseModel();
-		return $model->saveDatos($activoPlan,'activo_plan');
+		if($activoPlan['id']==0){
+			$activoPlan['numero_operacion'] = 0;
+		}
+		$model = new BaseModelo();
+		return $model->guardarDatos($activoPlan, 'vehiculo_plan');
 	}
 	
-	public function delActivoPlan($activo){
-		$sql = "update activo_plan set eliminado = 1 where id = ?";
-		$model = new BaseModel();
-		$result = $model->execSql($sql, array($activo),false,true);
-	}*/
+	public function eliminarVehiculoPlan($activo){
+		$sql = "update vehiculo_plan set eliminado = 1 where id = ".$activo;
+		$model = new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+	}
 
 }

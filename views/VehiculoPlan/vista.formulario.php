@@ -4,7 +4,7 @@
 		<select class='form-control' name="plan_mantenimiento_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($planes as $dato) { ?>
-			<option value="<?php echo $dato->id;?>"  <?php if($item->plan_mantenimiento_id==$dato->id):echo "selected"; endif;?>><?php echo $dato->tarea;?></option>
+			<option value="<?php echo $dato['id'];?>"  <?php if($item['plan_mantenimiento_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['tarea'];?></option>
 		<?php }?>
 		</select>
 
@@ -15,11 +15,11 @@
 		<div class="form-group  col-sm-12" style="margin-bottom: 0px">
 			<div class="form-group  col-sm-4" style="margin-bottom: 0px">
 			<input type='text'
-			name='frecuencia_numero' class='form-control'
+			name='unidad_numero' class='form-control'
 			value="<?php echo $item['unidad_numero']; ?>">
 			</div>
 		<div class="form-group  col-sm-8">
-		Kilometros - Horas
+		<h5><b><?php echo $unidad[0]['nombre']; ?> </b></h5>
 		</div>
 	</div>
 	</div>
@@ -34,7 +34,7 @@
 			</div>
 			<div class="form-group  col-sm-8">
 			<label class="control-label" id="antes">
-				Kilometros - Horas
+				<h5><b><?php echo $unidad[0]['nombre']; ?> Antes</b></h5>
 			</label>
 		</div>
 	</div>
@@ -42,8 +42,9 @@
 
 	
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $item->id; ?>">
-	<input type='hidden' name='activo_fisico_id' class='form-control' value="<?php echo $activo_id; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
+	<input type='hidden' name='vehiculo_id' class='form-control' value="<?php echo $vehiculo_id; ?>">
+	<input type='hidden' name='unidad_id' class='form-control' value="<?php echo $unidad[0]['id']; ?>">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 
@@ -51,17 +52,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-
-	$("#frecuencia_id").change(function(){
-	     if(this.value==1){
-		     $('#antes').html('Hora(s) Antes');
-	     } else {
-	    	 $('#antes').html('Día(s) Antes');
-	     }
-	    
-	  });
-	
-
 	
     $('#frmItem').formValidation({
     	message: 'This value is not valid',
@@ -71,15 +61,15 @@ $(document).ready(function() {
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {			
-			frecuencia_numero: {
-				message: 'El valor de la frecuencia no es válido',
+			unidad_numero: {
+				message: 'El valor ingresado no es válido',
 				validators: {
 					notEmpty: {
-						message: 'El valor de la frecuencia no puede ser vacío.'
+						message: 'El valor ingresado no puede ser vacío.'
 					},					
 					regexp: {
 						regexp: /^\d*$/,
-						message: 'Ingrese un valor de la frecuencia válido.'
+						message: 'Ingrese un valor válido.'
 					}
 				}
 			},
@@ -92,7 +82,12 @@ $(document).ready(function() {
 					regexp: {
 						regexp: /^\d*$/,
 						message: 'Ingrese un valor de la alerta válido.'
-					}
+					},
+					between: {
+                         min: 0,
+                         max: 'unidad_numero',
+                         message: 'La alerta no puede ser mayor al valor de mantenimiento'
+                     }
 				}
 			},
 			plan_mantenimiento_id: {
@@ -102,27 +97,7 @@ $(document).ready(function() {
 					}
 				}
 			},
-			parte_maquina_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione una parte'
-					}
-				}
-			},
-			frecuencia_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione una Frecuencia'
-					}
-				}
-			},
-			frecuencia_alerta_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione una Frecuencia de Alerta'
-					}
-				}
-			},
+			
 			
 		}
 	});

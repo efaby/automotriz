@@ -15,45 +15,45 @@ class VehiculoPlanControlador {
 	public function editar(){
 		$model = new VehiculoPlanModelo();
 		$arrayId = explode('-', $_GET['id']);
-		$item = $model->obtenerVehiculoPlan($arrayId[1]);
+		$item = $model->obtenerVehiculoPlan($arrayId[1]);		
 		$planes = $model->obtenerPlanes($arrayId[0],$item['plan_mantenimiento_id']);
 		$vehiculo_id = $arrayId[0];
+		$unidad = $model->obtenerUnidad($vehiculo_id);
 		$message = "";		
 		require_once PATH_VISTAS."/VehiculoPlan/vista.formulario.php";
 	}
 	
-/*	public function guardar() {
+	public function guardar() {
 		
 		$activoPlan ['id'] = $_POST ['id'];
 		$activoPlan ['plan_mantenimiento_id'] = $_POST ['plan_mantenimiento_id'];
-		$activoPlan ['activo_fisico_id'] = $_POST ['activo_fisico_id'];
-		$activoPlan ['frecuencia_numero'] = $_POST ['frecuencia_numero'];
-		$activoPlan ['frecuencia_id'] = $_POST ['frecuencia_id'];
+		$activoPlan ['vehiculo_id'] = $_POST ['vehiculo_id'];
+		$activoPlan ['unidad_numero'] = $_POST ['unidad_numero'];
 		$activoPlan ['fecha_registro'] = date('Y-m-d');
 		$activoPlan ['fecha_inicio'] = date('Y-m-d');
 		$activoPlan ['alerta_numero'] = $_POST ['alerta_numero'];
-		$activoPlan ['parte_maquina_id'] = $_POST ['parte_maquina_id'];
+		$activoPlan ['unidad_id'] = $_POST ['unidad_id'];
 		
-		$model = new ActivoPlanModel();
+		$model = new VehiculoPlanModelo();
 		try {
-			$datos = $model->saveActivoPlan( $activoPlan );
+			$datos = $model->guardarVehiculoPlan( $activoPlan );
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/".$_POST ['activo_fisico_id'] );
+		header ( "Location: ../listar/".$_POST ['vehiculo_id'] );
 	}
 	
 	public function eliminar() {
 		$arrayId = explode('-', $_GET['id']);
-		$model = new ActivoPlanModel();
+		$model = new VehiculoPlanModelo();
 		try {
-			$datos = $model->delActivoPlan($arrayId[1]);
+			$datos = $model->eliminarVehiculoPlan($arrayId[1]);
 			$_SESSION ['message'] = "Datos eliminados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
 		header ( "Location: ../listar/".$arrayId[0] );
-	}*/
+	}
 	
 }

@@ -31,9 +31,8 @@
     <thead>
 	    <tr>
 	    	<th>ID</th>
-		    <th>Plan</th>		
-		    <th>Parte</th>	    
-		    <th>Frecuencia Mantenimiento</th>
+		    <th>Plan</th>		    
+		    <th>Mantenimiento</th>
 		    <th>Alerta Mantenimiento</th>
 		    <th>Horas Operando</th>
 		     <th>Desde</th>
@@ -44,22 +43,20 @@
     	<?php
     		if(count($datos) >0){
 	    		foreach ($datos as $item) {
-	    		echo "<tr><td>".$item->id."</td>";
-	    		echo "<td>".$item->tarea."</td>";   
-	    		echo "<td>".$item->parte."</td>";
-	    		echo "<td> Cada ".$item->frecuencia_numero." ".$item->frecuencia."</td>";
-	    		$antes = ($item->frecuencia_id==1)?'Hora(s) Antes':'Día(s) antes';
-	    		echo "<td> Cada ".$item->alerta_numero." ".$antes."</td>";
-	    		echo "<td>".$item->horas_operacion."</td>";
-	    		echo "<td>".$item->fecha_inicio."</td>";
-	    		$id = $activo->id."-".$item->id;
+	    		echo "<tr><td>".$item['id']."</td>";
+	    		echo "<td>".$item['tarea']."</td>";   
+	    		echo "<td> Cada ".$item['unidad_numero']." ".$item['unidad']."</td>";	    		
+	    		echo "<td> ".$item['alerta_numero']." ".$item['unidad']." antes.</td>";
+	    		echo "<td>".$item['numero_operacion']."</td>";
+	    		echo "<td>".$item['fecha_inicio']."</td>";
+	    		$id = $vehiculo[0]['id']."-".$item['id'];
 	    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
 					  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
     		}
     	}?>
     </tbody>
     </table>
-    <a href='../../Activo/listar/' class='btn btn-info' title='Regresar' >Regresar</a>
+    <a href='../../Vehiculo/listarplan/' class='btn btn-info' title='Regresar' >Regresar</a>
     </div>
     </div>
 </div>
