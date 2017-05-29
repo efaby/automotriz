@@ -2,53 +2,56 @@
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 
 <!-- Main row -->
-<div class="row">
-	<div class="col-lg-12">
-    	<h1 class="page-header">Registro Novedad</h1>
-   	</div>
+<div class="title-block">
+    <h1 class="title"> Registro Novedad</h1>
 </div>
+
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
 <div class="alert alert-success fade in alert-dismissable">
 	<button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>
 		<?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
 </div>
 <?php endif;?>
+<div class="card">
+	<div class="card-block">
 <div class="row">	
 <form id="frmItem" method="post" action="../guardar/" >
 	<div class="form-group  col-sm-12">
-		<div class="form-group  col-sm-6">
+		<div class="form-group  col-sm-6 row-padding">
 			<label class="control-label">Vehículo/Maquinaria</label>
 			<select class='form-control' name="vehiculo_id" id="vehiculo_id">
 				<option value="" >Seleccione</option>
 				<?php foreach ($vehiculos as $dato) { ?>
-				<option value="<?php echo $dato['id'];?>"  ><?php echo $dato['nombre'];?></option>
+				<option value="<?php echo $dato['id'];?>"  ><?php echo $dato['nombre'] ." " .$dato['marca'] ." " .$dato['modelo'] ." No. " .$dato['numero'];?></option>
 				<?php }?>
 			</select>
 		</div>
 	</div>
 	<div class="form-group col-sm-12">
-		<div class="form-group  col-sm-6">
+		<div class="form-group  col-sm-6 row-padding" >
 			<label class="control-label">Problema</label>
 			<textarea name='problema' id='problema' class='form-control' ></textarea>	
 		</div>		
 	</div>
 	<div class="form-group col-sm-12">
-		<div class="form-group  col-sm-6">
+		<div class="form-group  col-sm-6 row-padding">
 			<label class="control-label">Causa</label>
 			<textarea name='causa' id='causa' class='form-control' ></textarea>		
 		</div>	
 	</div>	
 	<div class="form-group col-sm-12">
-		<div class="form-group  col-sm-6">
+		<div class="form-group  col-sm-6 row-padding">
 			<label class="control-label">Solución</label>
 			<textarea name='solucion' id='solucion' class='form-control' ></textarea>	
 		</div>		
 	</div>	
-	<div class="form-group">
+	<div class="form-group col-sm-12">
 		<input type='hidden' name='id' class='form-control' value="">
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 </form>
+</div>
+</div>
 </div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
 <script src="<?php echo PATH_JS; ?>/formValidation.js"></script>

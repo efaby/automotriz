@@ -5,7 +5,7 @@ class NovedadControlador {
 	
 	public function ingreso(){
 		$model = new NovedadModelo();
-		$vehiculos = $model->obtenerVehiculos();
+		$vehiculos = $model->obtenerVehiculos(3); //id usuario en sesion
 		$message = "";
 		require_once PATH_VISTAS."/Novedad/vista.ingreso.php";
 	}
@@ -30,4 +30,113 @@ class NovedadControlador {
 		}
 		header ( "Location: ../ingreso/" );
 	}
+
+	public function listar() {
+		$model = new NovedadModelo();	
+		$usuario = 0;
+		/* si el usuario que est en sesion es una tecnico se habilit esto
+		if($_SESSION['SESSION_USER']->tipo > 1){
+			$usuario = $_SESSION['SESSION_USER']->id;
+		}*/
+		$datos = $model->obtenerlistadoNovedad($usuario);
+		$message = "";
+		require_once PATH_VISTAS."/Novedad/view.listado.php";
+	}
+	
+	public function asignar(){
+		$model = new NovedadModelo();		
+		$item = $model->obtenerNovedad();	
+		$tecnicos = $model->obtenerTecnicos();		
+		require_once PATH_VISTAS."/Novedad/view.formAsignar.php";
+	}
+
+	public function ver(){
+		$model = new NovedadModelo();
+		$item = $model->obtenerNovedad();
+		require_once PATH_VISTAS."/Novedad/view.ver.php";
+	}
+
+	/*
+	
+	
+	public function guardarAsignar() {
+	
+		$novedad ['id'] = $_POST ['id'];
+		$novedad ['tecnico_asigna'] = $_POST ['usuario_id'];
+		$novedad ['supervisor_id'] = $_SESSION['SESSION_USER']->id;
+	
+		$model = new NovedadModel();
+		try {
+			$datos = $model->saveNovedad( $novedad );
+			$_SESSION ['message'] = "Datos almacenados correctamente.";
+			//envio email
+			if(SENDEMAIL){
+				$datos = $model->getNovedadById($_POST ['id']);					
+				$email = new Email();
+				$email->sendNotificacionTecnico($datos->nombres .' '.$datos->apellidos, $datos->email, $datos->maquina, "http://" . $_SERVER['HTTP_HOST'] . PATH_BASE);
+			}
+			
+				
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: ../listar/" );
+	}
+	
+	public function reparar(){
+		$model = new NovedadModel();
+		$item = $model->getNovedad();			
+		require_once PATH_VIEWS."/Novedad/view.formReparar.php";
+	}
+	
+	public function guardarReparar() {
+
+		$novedad ['id'] = $_POST ['id'];
+		$novedad ['proceso'] = $_POST ['proceso'];
+		$novedad ['elementos'] = $_POST ['elementos'];
+		$novedad ['tiempo_ejecucion'] = $_POST ['tiempo_ejecucion'];
+		$novedad ['observaciones'] = $_POST ['observacion'];
+		$novedad ['tecnico_repara'] = $_SESSION['SESSION_USER']->id; 
+		$novedad ['fecha_atencion'] = date('Y-m-d');
+		$novedad ['atendido'] = 1;
+		
+		if($_FILES['url']['name']!=''){
+			$novedad ['url'] = $this->uploadFile('nov','novedades');
+		}
+		
+	
+		$model = new NovedadModel();
+		try {
+			$datos = $model->saveNovedad( $novedad );			
+			$_SESSION ['message'] = "Datos almacenados correctamente.";
+			
+			// envio email
+			if(SENDEMAIL){
+				$email = new Email();
+				$supervisor = $model->getSupervisorById();
+				$novedad = $model->getNovedadById($novedad ['id']);
+				$email->sendNotificacionArreglo($supervisor->nombres ." ".$supervisor->apellidos, $supervisor->email, $novedad->maquina ,"http://" . $_SERVER['HTTP_HOST'] . PATH_BASE);
+					
+			}
+			
+			
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: ../listar/" );
+	}
+	
+	private function uploadFile($nombre,$carpeta){
+		$upload = new File();
+		return $upload->uploadFile($nombre,$carpeta);
+	}
+	
+	public function downloadFile(){
+		$nombre = $_GET['id'];
+		$upload = new File();
+		return $upload->download($nombre,'novedades');
+	}
+	
+	
+	*/
 }

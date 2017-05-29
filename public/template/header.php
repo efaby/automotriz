@@ -72,8 +72,12 @@
                                     <a href="../../Vehiculo/listar/"> <i class="fa fa-truck"></i> Vehículos </a>
                                     
                                 </li>
+                                 <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
+                                    <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>
+                                    
+                                </li>
                                 
-                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/VehiculoPlan/listar/')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/Novedad/listar/'))||(strpos($url, '/VehiculoPlan/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
                                         <li> <a href="../../Plan/listar/">
@@ -82,6 +86,9 @@
                                             <li> <a href="../../Vehiculo/listarplan/">
         								Asignar
         							</a> </li>
+                                        <li> <a href="../../Novedad/listar/">
+                                        Man. Correctivos
+                                    </a> </li>
                                     </ul>
                                 </li>
                                 <!--  
