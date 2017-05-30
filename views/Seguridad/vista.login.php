@@ -28,9 +28,10 @@
 
 <body>
 
-<section class="container" style="margin-top: 120px">
+<section class="container loginContainer" >
 		<section class="row">
-			<div class="col-xs-12 col-sm-6 left">
+			<div class="col-xs-12 col-sm-6 left divContainer" >
+			
 			<?php $url = $_SERVER["REQUEST_URI"];?>
 				<form action="<?php echo (strpos($url, '/Seguridad/mostrar/'))?'../validar/':'Seguridad/validar/';?>" role="login" id="frmLogin" method="post">
 					<img src="<?php echo PATH_IMAGES; ?>/logo.png" alt="" class="img-responsive" />
@@ -56,8 +57,9 @@
                                 <i class="fa fa-sign-in "></i>&nbsp;Ingresar</button>
 				</form>
 			</div>
+			
 			<div class="hidden-xs col-sm-6 right">
-				<img src="<?php echo PATH_IMAGES; ?>/image3.png" class="img-responsive" alt="" />
+				<img src="<?php echo PATH_IMAGES; ?>/image1.png" class="img-responsive" alt="" />
 			</div>
 		</section>
 	</section>

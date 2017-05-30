@@ -71,3 +71,23 @@ form[role=login] {
     padding: 8px 0 0 15px;
 	font-size: 16px;
 }
+
+.loginContainer {
+	margin-top: 5%; 
+	width: 65%; 
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .loginContainer {
+		margin-top: 10%; 
+		width: 90%; 
+
+	}
+
+	.divContainer {
+		height: 100% !important;
+    	padding-bottom: 30px !important;
+	}
+
+}
