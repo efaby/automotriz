@@ -8,55 +8,32 @@ class VehiculoControlador {
 	public function listar() {
 		$model = new VehiculoModelo();
 		$datos = $model->obtenerListadoVehiculos();
+		$tipo = $model->obtenerTipo();
 		$message = "";
 		require_once PATH_VISTAS."/Vehiculo/vista.listado.php";
 	}
 	
 	public function editar(){
 		$model = new VehiculoModelo();
-		$vehiculo = $model->obtenerVehiculo();
-		$categorias = $model->obtenerTipoVehiculo(0);
-		$estados = $model->obtenerEstadoVehiculo();
-		$clases = $tipos = $usuarios = array();
-		if($vehiculo['id']>0){
-			$clases = $model->obtenerTipoVehiculo($vehiculo['categoria_id']);
-			$tipos = $model->obtenerTipoVehiculo($vehiculo['clase_id']);
-			$usuarios = $model->obtenerConductores($vehiculo['categoria_id']);
-		}
+		$arrayId = explode('-', $_GET['id']);
+		$vehiculo = $model->obtenerVehiculo($arrayId[1]);
+		$tipo = $arrayId[0];
+		$usuarios = $model->obtenerConductores($tipo);
+		$medida = "Kilometros";
+		if($tipo>3){
+			$medida = "Horas";
+		}		
+		$estados = $model->obtenerEstadoVehiculo();		
 		$message = "";
 		require_once PATH_VISTAS."/Vehiculo/vista.formulario.php";
 	}
 
-	public function loadConductorVehiculo(){
-		$opcion = $_POST ['opcion'];
-		$model = new VehiculoModelo();
-		$items = $model->obtenerConductores($opcion);
-		$html ='<option value="" >Seleccione</option>';
-		foreach ($items as $dato) {
-			$html .='<option value="'.$dato['id'].'" >'.$dato['nombres'].' '.$dato['apellidos'].'</option>';
-		}
-		
-		echo $html;
-	}
-
-	public function loadTipoVehiculo(){
-		$opcion = $_POST ['opcion'];
-		$model = new VehiculoModelo();
-		$items = $model->obtenerTipoVehiculo($opcion);
-		$html ='<option value="" >Seleccione</option>';
-		foreach ($items as $dato) {
-			$html .='<option value="'.$dato['id'].'" >'.$dato['nombre'].'</option>';
-		}
-		
-		echo $html;
-	}
 	
 	public function guardar() {
 		$vehiculo ['id'] = $_POST ['id'];
 		$vehiculo ['tipo_vehiculo_id'] = $_POST ['tipo_vehiculo_id'];
 		$vehiculo ['usuario_id'] = $_POST ['usuario_id'];
 		$vehiculo ['marca'] = $_POST ['marca'];
-		$vehiculo ['modelo'] = $_POST ['modelo'];
 		$vehiculo ['estado_vehiculo_id'] = $_POST ['estado_vehiculo_id'];
 		$vehiculo ['numero'] = $_POST ['numero'];
 		$vehiculo ['placa'] = $_POST ['placa'];
@@ -71,22 +48,24 @@ class VehiculoControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$_POST ['tipo_vehiculo_id'] );
 	}
 	
 	public function eliminar() {
 		$model = new VehiculoModelo();
+		$arrayId = explode('-', $_GET['id']);
 		try {
-			$datos = $model->eliminarVehiculo();
+			$datos = $model->eliminarVehiculo($arrayId[1]);
 			$_SESSION ['message'] = "Datos eliminados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$arrayId[0] );
 	}
 
 	public function listarplan() {
 		$model = new VehiculoModelo();
+
 		$datos = $model->obtenerListadoVehiculos();
 		$message = "";
 		require_once PATH_VISTAS."/Vehiculo/vista.listadoplan.php";

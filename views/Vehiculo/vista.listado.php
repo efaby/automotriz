@@ -4,7 +4,7 @@
 <!-- Main row -->
 
 <div class="title-block">
-    <h1 class="title"> Vehículos</h1>
+    <h1 class="title">Administración <?php echo $tipo['nombre']; ?></h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -17,7 +17,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<button class="btn btn-primary rounded" id="modalOpen">
+			<button class="btn btn-primary rounded" id="modalOpen1" onclick="javascript: loadModal('<?php echo  $tipo['id'].'-0';?>')">
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</button>
 	    </div>
@@ -28,7 +28,6 @@
 			    	<th>Número</th>
 				    <th>Tipo</th>
 				    <th>Marca</th>
-				    <th>Modelo</th>
 				    <th>Placa</th>
 				    <th>Conductor</th>
 				    <th>Estado</th>
@@ -40,12 +39,12 @@
 		    		echo "<tr><td>".$item['numero']."</td>";
 		    		echo "<td>".$item['tipo']."</td>";
 		    		echo "<td>".$item['marca']."</td>";
-		    		echo "<td>".$item['modelo']."</td>";
 		    		echo "<td>".$item['placa']."</td>";
 		    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";
 		    		echo "<td>".$item['estado']." </td>";
-		    		echo "<td align='center'><a href='javascript: loadModal(".$item['id'].")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
-							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    		$id = $tipo['id']."-".$item['id'];
+		    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
+							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
 		    	}?>
 		    </tbody>
 		    </table>
@@ -58,7 +57,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Vehículo</h3>
+				<h3><?php echo $tipo['nombre']; ?></h3>
 			</div>
 
 			<div class="modal-body"></div>

@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `automotriz` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `automotriz`;
--- MySQL dump 10.13  Distrib 5.5.49, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.7.9, for linux-glibc2.5 (x86_64)
 --
--- Host: 127.0.0.1    Database: automotriz
+-- Host: localhost    Database: automotriz
 -- ------------------------------------------------------
--- Server version	5.5.49-0ubuntu0.14.04.1
+-- Server version	5.5.54-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,7 +52,7 @@ CREATE TABLE `novedad` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehiculo_id` int(11) NOT NULL,
   `problema` varchar(1204) NOT NULL,
-  `causa` varchar(1024) NOT NULL,
+  `causa` varchar(1024) DEFAULT NULL,
   `solucion` varchar(1024) DEFAULT NULL,
   `proceso` varchar(1024) DEFAULT NULL,
   `elementos` varchar(1024) DEFAULT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE `plan_mantenimiento` (
   `estado_maquina` tinyint(4) NOT NULL,
   `herramientas` varchar(256) NOT NULL,
   `materiales` varchar(256) NOT NULL,
-  `equipo` varchar(256) NOT NULL,
+  `equipo` varchar(256) DEFAULT NULL,
   `procedimiento` text NOT NULL,
   `observaciones` varchar(2048) NOT NULL,
   `tarea` varchar(1024) NOT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE `tipo_usuario` (
 
 LOCK TABLES `tipo_usuario` WRITE;
 /*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
-INSERT INTO `tipo_usuario` VALUES (1,'Administrador','Usuario Adminstrador'),(2,'Secretario','Secretario general'),(3,'Conductor Livianos','Usuario Conductor Vehiculo Liviano'),(4,'Conductor Pesados','Usuario Conductor Vehiculo Pesados'),(5,'Operador','Usuario Operador de Pesados'),(6,'Técnico','Usuario Técnico');
+INSERT INTO `tipo_usuario` VALUES (1,'Administrador','Usuario Adminstrador'),(2,'Secretario','Secretario general'),(3,'Conductor Auto. Livianos','Usuario Conductor Vehiculo Liviano'),(4,'Conductor Auto.  Pesados','Usuario Conductor Vehiculo Pesados'),(5,'Operador','Usuario Operador de Pesados'),(6,'Técnico','Usuario Técnico');
 /*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ DROP TABLE IF EXISTS `tipo_vehiculo`;
 CREATE TABLE `tipo_vehiculo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(128) NOT NULL,
-  `padre` int(11) NOT NULL DEFAULT '0',
+  `tipo_conductor` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -190,7 +190,7 @@ CREATE TABLE `tipo_vehiculo` (
 
 LOCK TABLES `tipo_vehiculo` WRITE;
 /*!40000 ALTER TABLE `tipo_vehiculo` DISABLE KEYS */;
-INSERT INTO `tipo_vehiculo` VALUES (1,'Automotor Liviano Gasolina',0),(2,'Automotor Liviano Pesados',0),(3,'Automotor Pesados',0),(4,'Rodillo',0),(5,'Retroescabadora',0),(6,'Cargadora Frontal',0),(7,'Motoniveladora',0),(8,'Buldocer',0);
+INSERT INTO `tipo_vehiculo` VALUES (1,'Automotor Liviano Gasolina',3),(2,'Automotor Liviano Diesel',3),(3,'Automotor Pesados',4),(4,'Maquinaria Rodillo',5),(5,'Maquinaria Retroescabadora',5),(6,'Maquinaria Cargadora Frontal',5),(7,'Maquinaria Motoniveladora',5),(8,'Maquinaria Buldocer',5);
 /*!40000 ALTER TABLE `tipo_vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +242,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`),
   KEY `fk_tecnico_tipo_usuario_idx` (`tipo_usuario_id`),
   CONSTRAINT `fk_tecnico_tipo_usuario` FOREIGN KEY (`tipo_usuario_id`) REFERENCES `tipo_usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +251,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1,'Fabian','Villa','0603108770','argentinos y cubas','023689434','0893456794','efaby10@gmail.com','0603108770','e10adc3949ba59abbe56e057f20f883e',0),(2,2,'Carlos','Perez','0603718577','calle 4','','','mail1@mail.com','0603718577','e10adc3949ba59abbe56e057f20f883e',0),(3,3,'jose','gonza','0302424445','calle 12','234576285','0987858010','franciscobmv91@gmail.com','0302424445','81dc9bdb52d04dc20036dbd8313ed055',0),(4,2,'edison','tapia','0304556612','Calee 4','453672578','0983445567','sairi@92gmail.com','0304556612','81dc9bdb52d04dc20036dbd8313ed055',0),(5,2,'francisco','huerta','0302606231','diercion juan montalvo','234567853','0984716918','franciscohuerta1991@hotmail.com','0302606231','81dc9bdb52d04dc20036dbd8313ed055',0),(6,3,'Víctor ',' Peralta','0302674455','carrera ingapirca y 9 de octubre','432563357','0984765523','victore55@gmail.com','0302674455','81dc9bdb52d04dc20036dbd8313ed055',0),(7,3,'Homero ','Sacoto','0306558812','guayaquil y colon','235467892','0985453345','Sacoto67@hotmail.com','0306558812','81dc9bdb52d04dc20036dbd8313ed055',0),(8,3,'Germán ','Arévalo','0308565544','9 de agosto y colon','234567687','0989234543','Arévalo@hotmail.com','0308565544','81dc9bdb52d04dc20036dbd8313ed055',0),(9,3,'Miguel ','Cárdenas','06256788876','24 de mayo y colon','235467458','0987123458','Cárdenas@gmail.com','06256788876','81dc9bdb52d04dc20036dbd8313ed055',0),(10,3,'Luis ','Espinoza','03026876678','carrreno y gaspar','098123568','0983457523','Espinoza@hotmail.com','03026876678','81dc9bdb52d04dc20036dbd8313ed055',0),(11,4,'Ángel ','Crespo','0302675568','colon y gaspar','243678124','0984458877','Crespo@gmail.com','0302675568','81dc9bdb52d04dc20036dbd8313ed055',0),(12,4,'Jimmy ','Sacta','03667856434','Francia y colon','234566853','0981235678','Sacta@gmail.com','03667856434','81dc9bdb52d04dc20036dbd8313ed055',0),(13,2,'pablo','munoz','09856722445','10 de agosto y gaspar','235789235','0981345469','mununz@gmail.com','09856722445','81dc9bdb52d04dc20036dbd8313ed055',0);
+INSERT INTO `usuario` VALUES (1,1,'Carlos','Villa','0603108770','argentinos y cubas','023689434','0893456794','efaby10@gmail.com','0603108770','e10adc3949ba59abbe56e057f20f883e',0),(2,2,'Carlos','Perez','0603718577','calle 4','','','mail1@mail.com','0603718577','e10adc3949ba59abbe56e057f20f883e',0),(3,3,'jose','gonza','0302424445','calle 12','234576285','0987858010','franciscobmv91@gmail.com','0302424445','81dc9bdb52d04dc20036dbd8313ed055',0),(4,2,'Edison','Tapia','0304556612','Calee 4','453672578','0983445567','sairi@92gmail.com','0304556612','81dc9bdb52d04dc20036dbd8313ed055',1),(5,2,'Francisco','Huerta','0302606231','juan montalvo','234567853','0984716918','franciscohuerta1991@hotmail.com','0302606231','81dc9bdb52d04dc20036dbd8313ed055',0),(6,3,'Víctor ',' Peralta','0302674455','carrera ingapirca y 9 de octubre','432563357','0984765523','victore55@gmail.com','0302674455','81dc9bdb52d04dc20036dbd8313ed055',0),(7,3,'Homero ','Sacoto','0306558812','guayaquil y colon','235467892','0985453345','Sacoto67@hotmail.com','0306558812','81dc9bdb52d04dc20036dbd8313ed055',0),(8,3,'Germán ','Arévalo','0308565544','9 de agosto y colon','234567687','0989234543','Arévalo@hotmail.com','0308565544','81dc9bdb52d04dc20036dbd8313ed055',0),(9,3,'Miguel ','Cárdenas','06256788876','24 de mayo y colon','235467458','0987123458','Cárdenas@gmail.com','06256788876','81dc9bdb52d04dc20036dbd8313ed055',0),(10,3,'Luis ','Espinoza','03026876678','carrreno y gaspar','098123568','0983457523','Espinoza@hotmail.com','03026876678','81dc9bdb52d04dc20036dbd8313ed055',0),(11,4,'Ángel ','Crespo','0302675568','colon y gaspar','243678124','0984458877','Crespo@gmail.com','0302675568','81dc9bdb52d04dc20036dbd8313ed055',0),(12,4,'Jimmy ','Sacta','03667856434','Francia y colon','234566853','0981235678','Sacta@gmail.com','03667856434','81dc9bdb52d04dc20036dbd8313ed055',0),(13,2,'Pablo','Muñoz','09856722445','10 de agosto y gaspar','235789235','0981345469','mununz@gmail.com','09856722445','81dc9bdb52d04dc20036dbd8313ed055',0),(14,6,'TEcnico','TEcnico','1111111111','calle 4','','','','1111111111','e10adc3949ba59abbe56e057f20f883e',0),(15,5,'Operador','Operador','2222222222','calle 1','','','','2222222222','e10adc3949ba59abbe56e057f20f883e',0);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +282,7 @@ CREATE TABLE `vehiculo` (
   CONSTRAINT `fk_vehiculo_estado_vehiculo1` FOREIGN KEY (`estado_vehiculo_id`) REFERENCES `estado_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_vehiculo_tipo_vehiculo1` FOREIGN KEY (`tipo_vehiculo_id`) REFERENCES `tipo_vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_vehiculo_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +291,7 @@ CREATE TABLE `vehiculo` (
 
 LOCK TABLES `vehiculo` WRITE;
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` VALUES (1,3,1,1,'USA-1230','1','CHEVROLET',2015,'4JJLX9761','8LBETF3N7F0267815',344,0),(2,3,1,1,'UBW-193','2','CHEVROLET',2012,'6BD1-175945','8LBETFS25H40113947',3456,0),(3,11,1,1,'ubs-234','1','KOMATSU',2010,'26518093','75353',2345,0),(4,11,4,1,'usa-123','2','KOMATSU',1991,'26528413','75572',5000,0),(5,9,7,1,'UMA-505','26','INTERNACIONAL',2010,'362GM2UB-135281','PH48807',350658,0),(6,10,7,1,'UMA-0077','37','STEYR',1995,'2122437265','LZFS19L172DO12935',200356,0);
+INSERT INTO `vehiculo` VALUES (1,3,1,1,'USA-1230','1','CHEVROLET',2015,'4JJLX9761','8LBETF3N7F0267815',344,0),(2,3,1,1,'UBW-193','2','CHEVROLET',2012,'6BD1-175945','8LBETFS25H40113947',3456,0),(3,11,1,1,'ubs-234','1','KOMATSU',2010,'26518093','75353',2345,0),(4,11,4,1,'usa-123','2','KOMATSU',1991,'26528413','75572',5000,0),(5,9,7,1,'UMA-505','26','INTERNACIONAL',2010,'362GM2UB-135281','PH48807',350658,0),(6,10,7,1,'UMA-0077','37','STEYR',1995,'2122437265','LZFS19L172DO12935',200356,0),(7,11,3,2,'sdsd','45','marca 1',2014,'sdsd','sdsd',456,1);
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,4 +343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-30  1:03:18
+-- Dump completed on 2017-05-30 12:37:36

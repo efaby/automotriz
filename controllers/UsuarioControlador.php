@@ -8,14 +8,16 @@ class UsuarioControlador {
 	public function listar() {
 		$model = new UsuarioModelo();
 		$datos = $model->obtenerListadoUsuarios();
+		$tipo = $model->obtenerTipo();
 		$message = "";
 		require_once PATH_VISTAS."/Usuario/vista.listado.php";
 	}
 	
 	public function editar(){
 		$model = new UsuarioModelo();
-		$usuario = $model->obtenerUsuario();
-		$tipos = $model->obtenerTipoUsuario();
+		$arrayId = explode('-', $_GET['id']);
+		$usuario = $model->obtenerUsuario($arrayId[1]);
+		$tipo = $arrayId[0];
 		$message = "";
 		require_once PATH_VISTAS."/Usuario/vista.formulario.php";
 	}
@@ -39,18 +41,19 @@ class UsuarioControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$_POST ['tipo_usuario_id'] );
 	}
 	
 	public function eliminar() {
 		$model = new UsuarioModelo();
+		$arrayId = explode('-', $_GET['id']);
 		try {
-			$datos = $model->eliminarUsuario();
+			$datos = $model->eliminarUsuario($arrayId[1]);
 			$_SESSION ['message'] = "Datos eliminados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$arrayId[0] );
 	}
 	
 }

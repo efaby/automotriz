@@ -1,40 +1,7 @@
 <form id="frmVehiculo" method="post" action="../guardar/">
 
+
 <div class="row">
-
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Categoría</label>
-		<select class='form-control' name="categoria_id" id="categoria_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($categorias as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['categoria_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Clase</label>
-		<select class='form-control' name="clase_id" id="clase_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($clases as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['clase_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
-	
-</div>
-<div class="row">
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Tipo</label>
-		<select class='form-control' name="tipo_vehiculo_id" id="tipo_vehiculo_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($tipos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['tipo_vehiculo_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
-
-	</div>
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Conductor</label>
 		<select class='form-control' name="usuario_id" id="usuario_id">
@@ -43,6 +10,13 @@
 			<option value="<?php echo $dato['id'];?>"  <?php if($vehiculo['usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombres']." ".$dato['apellidos'];?></option>
 		<?php }?>
 		</select>
+
+	</div>
+	<div class="form-group col-sm-6">
+		<label class="control-label">Marca</label>
+		<input type='text'
+			name='marca' class='form-control'
+			value="<?php echo $vehiculo['marca']; ?>">
 
 	</div>
 </div>
@@ -57,23 +31,6 @@
 		<label class="control-label">Placa</label> <input type='text'
 			name='placa' class='form-control'
 			value="<?php echo $vehiculo['placa']; ?>">
-
-	</div>
-</div>
-<div class="row">
-	<div class="form-group col-sm-6">
-		<label class="control-label">Marca</label>
-		<input type='text'
-			name='marca' class='form-control'
-			value="<?php echo $vehiculo['marca']; ?>">
-
-	</div>
-	
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Modelo</label>
-		<input type='text'
-			name='modelo' class='form-control'
-			value="<?php echo $vehiculo['modelo']; ?>">
 
 	</div>
 </div>
@@ -104,7 +61,7 @@
 	</div>
 	
 	<div class="form-group  col-sm-4">
-		<label class="control-label">Kilometraje / Horas</label>
+		<label class="control-label"><?php echo $medida; ?></label>
 		<input type='text'
 			name='medida_uso' class='form-control'
 			value="<?php echo $vehiculo['medida_uso']; ?>">
@@ -124,7 +81,8 @@
 
 
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $vehiculo['id']; ?>">
+	<input type='hidden' name='id' value="<?php echo $vehiculo['id']; ?>">
+	<input type='hidden' name='tipo_vehiculo_id' value="<?php echo $tipo; ?>">
 		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 
@@ -134,29 +92,7 @@
 
 $(document).ready(function() {
 
-	$("#categoria_id").change(function () {
-        $("#categoria_id option:selected").each(function () {
-	        opcion=$(this).val();
-	        $.post("../loadTipoVehiculo/", { opcion: opcion }, function(data){
-	        	$("#clase_id").html(data);
-	        	$("#tipo_vehiculo_id").html('<option value="" >Seleccione</option>');
-	        });  
-
-	        $.post("../loadConductorVehiculo/", { opcion: opcion }, function(data){
-	        	$("#usuario_id").html(data);
-	        });          
-     });
-	});
-
-	$("#clase_id").change(function () {
-        $("#clase_id option:selected").each(function () {
-	        opcion=$(this).val();
-	        $.post("../loadTipoVehiculo/", { opcion: opcion }, function(data){
-	        	$("#tipo_vehiculo_id").html(data);
-	        });            
-     });
-	});
-
+	
 
     $('#frmVehiculo').formValidation({
     	message: 'This value is not valid',
@@ -170,27 +106,6 @@ $(document).ready(function() {
 				validators: {
 					notEmpty: {
 						message: 'Seleccione un Conductor'
-					}
-				}
-			},
-			categoria_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione una Categoría'
-					}
-				}
-			},
-			clase_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione una Clase'
-					}
-				}
-			},
-			tipo_vehiculo_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Tipo'
 					}
 				}
 			},
@@ -237,18 +152,7 @@ $(document).ready(function() {
 					}
 				}
 			},
-			modelo: {
-				message: 'El Modelo no es válido',
-				validators: {
-					notEmpty: {
-						message: 'El Modelo no puede ser vacío.'
-					},					
-					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ -\.]+$/,
-						message: 'Ingrese un Modelo válido.'
-					}
-				}
-			},
+			
 			marca: {
 				message: 'La Marca no es válida',
 				validators: {
@@ -286,14 +190,14 @@ $(document).ready(function() {
 				}
 			},	
 			medida_uso: {
-				message: 'El  Kilometraje / Horas no es válido',
+				message: '<?php echo $medida; ?> no es válido',
 				validators: {
 					notEmpty: {
-						message: 'El Kilometraje / Horas no puede ser vacío.'
+						message: '<?php echo $medida; ?> no puede ser vacío.'
 					},					
 					regexp: {
 						regexp: /^\d*$/,
-						message: 'Ingrese un Kilometraje / Horas válido.'
+						message: 'Ingrese <?php echo $medida; ?> que sean válidos.'
 					}
 				}
 			},

@@ -2,22 +2,14 @@
 
 <div class="row">
 
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Tipo Usuario</label>
-		<select class='form-control' name="tipo_usuario_id">
-			<option value="" >Seleccione</option>
-		<?php foreach ($tipos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>"  <?php if($usuario['tipo_usuario_id']==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
-		<?php }?>
-		</select>
 
-	</div>
 	<div class="form-group col-sm-6">
 		<label class="control-label">Número de Identificación</label> <input type='text'
 			name='identificacion' class='form-control'
 			value="<?php echo $usuario['identificacion']; ?>">
 
 	</div>
+	
 </div>
 <div class="row">
 	<div class="form-group col-sm-6">
@@ -83,7 +75,8 @@
 </div>
 
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $usuario['id']; ?>">
+	<input type='hidden' name='id' value="<?php echo $usuario['id']; ?>">
+	<input type='hidden' name='tipo_usuario_id' value="<?php echo $tipo; ?>">
 		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 

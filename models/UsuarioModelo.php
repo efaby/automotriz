@@ -12,9 +12,6 @@ class UsuarioModelo {
 
 	public function obtenerListadoUsuarios(){
 		$tipo = $_GET['id'];
-		if($tipo == 1){
-			$tipo = " 1 or tipo_usuario_id = 2";
-		}
 		$model = new BaseModelo();		
 		$sql = "select u.id, u.identificacion,  u.nombres, u.apellidos, u.email,u.usuario,  t.nombre as tipo_usuario 
 						from usuario as u 
@@ -24,9 +21,20 @@ class UsuarioModelo {
 		return $model->obtenerCampos($result);
 	}	
 	
-	public function obtenerUsuario()
+	public function obtenerTipo()
 	{
-		$usuario = $_GET['id'];
+		$tipo = $_GET['id'];
+		$model = new BaseModelo();	
+		$sql = "select * from tipo_usuario where id = ".$tipo;
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		$resultArray = $resultArray[0];		
+		
+		return $resultArray;
+	}
+
+	public function obtenerUsuario($usuario)
+	{
 		$model = new BaseModelo();	
 		if($usuario > 0){
 			$sql = "select * from usuario where id = ".$usuario;
@@ -57,8 +65,8 @@ class UsuarioModelo {
 		return $model->guardarDatos($usuario, 'usuario');
 	}
 	
-	public function eliminarUsuario(){
-		$usuario = $_GET['id'];
+	public function eliminarUsuario($usuario){
+		
 		$sql = "update usuario set eliminado = 1 where id = ".$usuario;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);

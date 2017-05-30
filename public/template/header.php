@@ -69,14 +69,18 @@
                                 <li class="<?php echo (strpos($url, '/Usuario/listar/'))?'active':'';?>">
                                     <a href=""> <i class="fa fa-users"></i> Personal <i class="fa arrow"></i> </a>
                                     <ul>
-                                    	<li><a href="../../Usuario/listar/1"> Usuarios </a></li>
-                                    	<li><a href=""> Conductores <i class="fa arrow arrow1" ></i></a>
+                                    	<li><a href=""> Usuarios <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
-                                    			<li><a href="../../Usuario/listar/3" class="level2">Auto. Liviano</a></li> 
-                                    			<li><a href="../../Usuario/listar/4" class="level2">Auto. Pesado</a></li> 
+                                    			<li><a href="../../Usuario/listar/1" class="level2">Administrador</a></li> 
+                                    			<li><a href="../../Usuario/listar/2" class="level2">Secretario</a></li> 
                                     		</ul>  
                                     	</li>    
-                                    	      
+                                    	<li><a href=""> Conductores <i class="fa arrow arrow1" ></i></a>
+                                            <ul>
+                                                <li><a href="../../Usuario/listar/3" class="level2">Auto. Liviano</a></li> 
+                                                <li><a href="../../Usuario/listar/4" class="level2">Auto. Pesado</a></li> 
+                                            </ul>  
+                                        </li>      
                                     	<li><a href="../../Usuario/listar/5"> Operadores </a></li>      
                                     	<li><a href="../../Usuario/listar/6"> Técnicos </a></li>                                    	
                                     </ul>                                    	                                  
@@ -91,7 +95,7 @@
                                     		</ul>  
                                     	</li>    
                                     	<li><a href="../../Vehiculo/listar/3">Auto. Pesados </a></li>      
-                                    	<li><a href=""> Maq. Pesada <i class="fa arrow arrow1" ></i></a>
+                                    	<li><a href=""> Maquinaria Pesada <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
                                     			<li><a href="../../Vehiculo/listar/4" class="level2">Rodillo</a></li> 
                                     			<li><a href="../../Vehiculo/listar/5" class="level2">Retroescabadora</a></li> 

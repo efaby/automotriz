@@ -4,7 +4,7 @@
 <!-- Main row -->
 
 <div class="title-block">
-    <h1 class="title"> Usuarios</h1>
+    <h1 class="title">Administración Usuario <?php echo $tipo['nombre']?></h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -17,7 +17,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<button class="btn btn-primary rounded" id="modalOpen">
+			<button class="btn btn-primary rounded" id="modalOpen1" onclick="javascript: loadModal('<?php echo  $tipo['id'].'-0';?>')">
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</button>
 	    </div>
@@ -42,8 +42,9 @@
 		    		echo "<td>".$item['usuario']."</td>";
 		    		echo "<td>".$item['email']."</td>";
 		    		echo "<td>".$item['tipo_usuario']." </td>";
-		    		echo "<td align='center'><a href='javascript: loadModal(".$item['id'].")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
-							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    		$id = $tipo['id']."-".$item['id'];
+		    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
+							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
 		    	}?>
 		    </tbody>
 		    </table>
@@ -56,7 +57,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Usuario</h3>
+				<h3>Usuario <?php echo $tipo['nombre']?></h3>
 			</div>
 
 			<div class="modal-body"></div>

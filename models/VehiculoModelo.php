@@ -9,33 +9,42 @@ require_once(PATH_MODELOS."/BaseModelo.php");
 class VehiculoModelo {
 	
 	public function obtenerListadoVehiculos(){
-		$model = new BaseModelo();		
+		$model = new BaseModelo();	
+		$tipo = $_GET['id'];	
 		$sql = "select v.*, t.nombre as tipo, u.nombres, u.apellidos, e.nombre as estado 
 				from vehiculo as v 
 				inner join tipo_vehiculo as t on  v.tipo_vehiculo_id = t.id 
 				inner join estado_vehiculo as e on  v.estado_vehiculo_id = e.id 
 				inner join usuario as u on  v.usuario_id = u.id 
-				where v.eliminado = 0";		
+				where v.eliminado = 0 and v.tipo_vehiculo_id = ".$tipo;		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	
-	
-	public function obtenerVehiculo()
+	public function obtenerTipo()
 	{
-		$id = $_GET['id'];
+		$tipo = $_GET['id'];
+		$model = new BaseModelo();	
+		$sql = "select * from tipo_vehiculo where id = ".$tipo;
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		$resultArray = $resultArray[0];		
+		
+		return $resultArray;
+	}
+	
+	public function obtenerVehiculo($id)
+	{
 		$model = new BaseModelo();	
 		if($id > 0){
-			$sql = "select v.*, c.padre as categoria_id, c.id as clase_id 
-					from vehiculo as v
-					inner join tipo_vehiculo as t on t.id = v.tipo_vehiculo_id
-					inner join tipo_vehiculo as c on c.id = t.padre					
+			$sql = "select v.* 
+					from vehiculo as v				
 					where v.id = ".$id;
 			$result = $model->ejecutarSql($sql);
 			$resultArray = $model->obtenerCampos($result);
 			$resultArray = $resultArray[0];
 				
 		} else {
-			$resultArray = Array ( 'id' => '' ,'categoria_id' => 0,'clase_id' => 0,'tipo_vehiculo_id' => 0,'estado_vehiculo_id' => 0,'placa' => '','marca' => '','modelo' => '','numero' => '','anio' => '', 'numero_motor' => '','numero_chasis' => '', 'medida_uso' => '');
+			$resultArray = Array ( 'id' => '','tipo_vehiculo_id' => 0,'usuario_id' => 0,'estado_vehiculo_id' => 0,'placa' => '','marca' => '','numero' => '','anio' => '', 'numero_motor' => '','numero_chasis' => '', 'medida_uso' => '');
 		}
 		
 		return $resultArray;
@@ -50,12 +59,13 @@ class VehiculoModelo {
 		return $model->obtenerCampos($result);
 	}
 	
-	public function obtenerConductores($conductor){
-		$conductor = $conductor + 2;
+	public function obtenerConductores($tipo){
+		
 		$model = new BaseModelo();
 		$sql = "select u.id, u.nombres, u.apellidos
 				from usuario as u
-				where u.eliminado=0 and u.tipo_usuario_id = ".$conductor;
+				inner join tipo_vehiculo as t on u.tipo_usuario_id = t.tipo_conductor
+				where u.eliminado=0 and t.id = ".$tipo;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}
@@ -70,8 +80,8 @@ class VehiculoModelo {
 		return $model->guardarDatos($vehiculo, 'vehiculo');
 	}
 	
-	public function eliminarVehiculo(){
-		$vehiculo = $_GET['id'];
+	public function eliminarVehiculo($vehiculo){
+
 		$sql = "update vehiculo set eliminado = 1 where id = ".$vehiculo;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
