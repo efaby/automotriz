@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Iniciar Sesión</title>
-   
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo PATH_IMAGES; ?>/favicon.ico">
     <link href="<?php echo PATH_CSS; ?>/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS; ?>/stylesLogin.css" />
 
