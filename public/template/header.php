@@ -63,29 +63,72 @@
                         <nav class="menu">
                             <ul class="nav metismenu" id="sidebar-menu">
                                 <li class="<?php echo (strpos($url, '/Seguridad/inicio/'))?'active':'';?>">
+                                 
                                     <a href="../../Seguridad/inicio/"> <i class="fa fa-home"></i> Inicio </a>
                                 </li>
                                 <li class="<?php echo (strpos($url, '/Usuario/listar/'))?'active':'';?>">
-                                    <a href="../../Usuario/listar/"> <i class="fa fa-users"></i> Usuarios </a>                                    
+                                    <a href=""> <i class="fa fa-users"></i> Personal <i class="fa arrow"></i> </a>
+                                    <ul>
+                                    	<li><a href="../../Usuario/listar/1"> Usuarios </a></li>
+                                    	<li><a href=""> Conductores <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Usuario/listar/3" class="level2">Auto. Liviano</a></li> 
+                                    			<li><a href="../../Usuario/listar/4" class="level2">Auto. Pesado</a></li> 
+                                    		</ul>  
+                                    	</li>    
+                                    	      
+                                    	<li><a href="../../Usuario/listar/5"> Operadores </a></li>      
+                                    	<li><a href="../../Usuario/listar/6"> Técnicos </a></li>                                    	
+                                    </ul>                                    	                                  
                                 </li>
                                 <li class="<?php echo (strpos($url, '/Vehiculo/listar/'))?'active':'';?>">
-                                    <a href="../../Vehiculo/listar/"> <i class="fa fa-truck"></i> Vehículos </a>
-                                    
+                                    <a href=""> <i class="fa fa-truck"></i> Automotores <i class="fa arrow"></i> </a>
+                                    <ul>                                    	
+                                    	<li><a href=""> Auto. Livianos <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Vehiculo/listar/1" class="level2">Gasolina</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/2" class="level2">Diesel</a></li> 
+                                    		</ul>  
+                                    	</li>    
+                                    	<li><a href="../../Vehiculo/listar/3">Auto. Pesados </a></li>      
+                                    	<li><a href=""> Maq. Pesada <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Vehiculo/listar/4" class="level2">Rodillo</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/5" class="level2">Retroescabadora</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/6" class="level2">Cargadora</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/7" class="level2">Motoniveladora</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/8" class="level2">Buldoser</a></li> 
+                                    		</ul>  
+                                    	</li>       
+                                    	                                   	
+                                    </ul>                                    	                                  
                                 </li>
+                                
+                                  
                                  <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
                                     <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>
                                     
                                 </li>
-                                
-                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/Novedad/listar/'))||(strpos($url, '/VehiculoPlan/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
-                                    <a href=""> <i class="fa fa-book"></i> Mantenimiento <i class="fa arrow"></i> </a>
+                                <li class="<?php echo ((strpos($url, '/Plan/listar/')))?'active':'';?>">
+                                    <a href=""> <i class="fa fa-book"></i> Planes Mantenimiento <i class="fa arrow"></i> </a>
+                                    <ul>
+                                    	<li><a href=""> Auto. Livianos <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Plan/listar/1" class="level2">Gasolina</a></li> 
+                                    			<li><a href="../../Plan/listar/2" class="level2">Diesel</a></li> 
+                                    		</ul>  
+                                    	</li>    
+                                    	      
+                                    	<li><a href="../../Plan/listar/3"> Auto. Pesados </a></li>      
+                                    	<li><a href="../../Plan/listar/4"> Maq. Pesada </a></li>                                    	
+                                    </ul>                                    	                                  
+                                </li>
+                                <li class="<?php echo ((strpos($url, '/Plan1/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/Novedad/listar/'))||(strpos($url, '/VehiculoPlan/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
+                                    <a href=""> <i class="fa fa-cubes"></i> Mantenimientos <i class="fa arrow"></i> </a>
                                     <ul>
                                         <li> <a href="../../Plan/listar/">
-        								Planes
-        						          </a> </li>
-                                            <li> <a href="../../Vehiculo/listarplan/">
-        								Asignar
-        							</a> </li>
+        								Man. Preventivos
+        						          </a> </li>                                            
                                         <li> <a href="../../Novedad/listar/">
                                         Man. Correctivos
                                     </a> </li>

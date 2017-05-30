@@ -2421,6 +2421,19 @@ pre {
                 transition: all 0.3s ease; }
         .sidebar .nav > li > a i.arrow:before {
           content: "\f105" !important; }
+     i.arrow1 {
+        float: right;
+        font-size: 20px;
+        margin-right: 15px;
+        line-height: initial;
+        -webkit-transition: all 0.3s ease;
+                transition: all 0.3s ease; }
+    
+     li.open > a i.arrow1 {
+      -webkit-transform: rotate(90deg);
+              transform: rotate(90deg); }
+   i.arrow1:before {
+          content: "\f105" !important; }
     .sidebar .nav > li > ul > li a {
       padding-top: 10px;
       padding-bottom: 10px;

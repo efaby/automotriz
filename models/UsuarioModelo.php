@@ -11,8 +11,15 @@ class UsuarioModelo {
 	private $patron = "_-_-";
 
 	public function obtenerListadoUsuarios(){
+		$tipo = $_GET['id'];
+		if($tipo == 1){
+			$tipo = " 1 or tipo_usuario_id = 2";
+		}
 		$model = new BaseModelo();		
-		$sql = "select u.id, u.identificacion,  u.nombres, u.apellidos, u.email,u.usuario,  t.nombre as tipo_usuario from usuario as u inner join tipo_usuario as t on  u.tipo_usuario_id = t.id where eliminado = 0";		
+		$sql = "select u.id, u.identificacion,  u.nombres, u.apellidos, u.email,u.usuario,  t.nombre as tipo_usuario 
+						from usuario as u 
+						inner join tipo_usuario as t on  u.tipo_usuario_id = t.id 
+						where eliminado = 0 and (tipo_usuario_id = ".$tipo.")";		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	
