@@ -16,9 +16,9 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<button class="btn btn-primary rounded" id="modalOpen">
+			<a href='../../Plan/editar/0' class='btn btn-primary rounded' title='Añadir' >
 				<i class="glyphicon glyphicon-plus"></i> Añadir
-			</button>
+			</a>			
 	    </div>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover" id="dataTables-example">    
@@ -35,36 +35,23 @@
     		<tbody>
     		<?php
     			if( $datos != 0){
+    				$contador =1;
     				foreach ($datos as $item) {
     					$estado = ($item['estado_maquina'])?'Encendida':'Apagada';
-		    			echo "<tr><td>".$item['id']."</td>";
+		    			echo "<tr><td>".$contador."</td>";
 		    			echo "<td>".$item['tarea']."</td>";
 		    			echo "<td>".$item['tiempo_ejecucion']."</td>";  		
 		    			echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";   
 		    			echo "<td>".$estado."</td>";
 		    			echo "<td align='center'>
-						<a href='javascript: loadModal(".$item['id'].")'' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
-						<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";		    			
+						<a href='../../Plan/editar/".$item['id']."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>			  		
+						<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    			$contador++;
     				}
     			}?>
     		</tbody>
     	</table>
 		</div>
-	</div>
-</div>
-<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" >
-		<div class="modal-content">
-			<div class="modal-header">
-				<a class="close" data-dismiss="modal">×</a>
-				<h3>Plan de Mantemiento</h3>
-			</div>
-
-			<div class="modal-body"></div>
-
-		</div>
-
 	</div>
 </div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>  
