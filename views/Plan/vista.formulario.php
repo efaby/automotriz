@@ -1,76 +1,98 @@
-<form id="frmItem" method="post" action="../guardar/">
-<div class="row">	
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Tarea</label>
-		<input type='text'
-			name='tarea' class='form-control'
-			value="<?php echo $item['tarea']; ?>">
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Tiempo Ejecución</label>
-		<input type='text'
-			name='tiempo_ejecucion' class='form-control'
-			value="<?php echo $item['tiempo_ejecucion']; ?>">
+<?php $title = "Planes Mantenimiento";?>
+<?php include_once PATH_TEMPLATE.'/header.php';?>
+<div class="title-block">
+    <h1 class="title"> Plan de Mantenimiento</h1>
+</div>
+<div class="card">
+	<div class="card-block">
+		<div class="row">
+		<form id="frmItem" method="post" action="../guardar/">
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Tarea</label>
+				<input type='text'
+					name='tarea' class='form-control'
+					value="<?php echo $item['tarea']; ?>">
+			</div>
+		</div>
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Tiempo Ejecución</label>
+				<input type='text'
+					name='tiempo_ejecucion' class='form-control'
+					value="<?php echo $item['tiempo_ejecucion']; ?>">
+			</div>
+		</div>
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Técnico</label>
+				<select class='form-control' name="tecnico_id" id="tecnico_id">
+					<option value="" >Seleccione</option>
+				<?php
+				foreach ($tecnicos as $dato) { ?>
+					<option value="<?php echo $dato['id'];?>" <?php if($item['tecnico_id']==$dato['id']):echo "selected"; endif;?> ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
+				<?php }?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Equipos</label>
+				<textarea name='equipo' id='equipo' class='form-control' ><?php echo $item['equipo']; ?></textarea>	
+			</div>
+		</div>
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Estado Máquina</label><br>
+				<label> <input type="radio" name="estado_maquina" value="0" <?php echo ((int)$item['estado_maquina'] === 0)?'checked':''; ?>>Apagada</label>
+				 <label> <input type="radio" name="estado_maquina"value="1" <?php echo ((int)$item['estado_maquina'] === 1)?'checked':''; ?>> Encendida</label>
+			</div>
+		</div>			
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Materiales</label>
+				<textarea name="materiales" id="materiales" rows="10" cols="60">
+		        	<?php echo $item['materiales']; ?>
+		        </textarea>					
+			</div>
+		</div>	
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Herramientas</label>
+				<textarea name="herramientas" id="herramientas" rows="10" cols="60">
+		        	<?php echo $item['herramientas']; ?>
+		        </textarea>					
+			</div>
+		</div>	
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Procedimiento</label>
+			 	<textarea name="procedimiento" id="procedimiento" rows="10" cols="60">
+		        	<?php echo $item['procedimiento']; ?>
+		        </textarea>
+			</div>
+		</div>	
+		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-6 row-padding">
+				<label class="control-label">Nota</label>
+				<textarea name="observaciones" id="observaciones" rows="10" cols="60">
+		        	<?php echo $item['observaciones']; ?>
+		        </textarea>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
+			<input type='hidden' name='idLab' class='form-control' value="<?php echo $item['idLab']; ?>">
+			<button type="submit" class="btn btn-success">Guardar</button>	
+		</div>
+		</form>
+		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Materiales</label>
-		<textarea name='materiales' id='materiales' class='form-control' ><?php echo $item['materiales']; ?></textarea>	
-	</div>		
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Equipos</label>
-		<textarea name='equipo' id='equipo' class='form-control' ><?php echo $item['equipo']; ?></textarea>	
-	</div>
-</div>	
-<div class="row">
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Herramientas</label>
-		<textarea name='herramientas' id='herramientas' class='form-control' ><?php echo $item['herramientas']; ?></textarea>	
-	</div>
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Técnico</label>
-		<select class='form-control' name="tecnico_id" id="tecnico_id">
-			<option value="" >Seleccione</option>
-		<?php
-		foreach ($tecnicos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>" <?php if($item['tecnico_id']==$dato['id']):echo "selected"; endif;?> ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
-		<?php }?>
-		</select>
-	</div>
-</div>
-
-
-<div class="row">			
-	<div class="form-group  col-sm-12">	
-		<label class="control-label">Procedimiento</label>
-	 	<textarea name="procedimiento" id="procedimiento" rows="10" cols="60">
-        	<?php echo $item['procedimiento']; ?>
-        </textarea>
-	</div>
-</div>	
-<div class="row">
-	<div class="form-group  col-sm-12">
-		<label class="control-label">Observaciones</label>
-		<textarea name="observaciones" id="observaciones" rows="10" cols="60">
-        	<?php echo $item['observaciones']; ?>
-        </textarea>
-	</div>
-</div>
-<div class="row">
-	<div class="form-group  col-sm-6">
-		<label class="control-label">Estado Máquina</label><br>
-		<label> <input type="radio" name="estado_maquina" value="0" <?php echo ((int)$item['estado_maquina'] === 0)?'checked':''; ?>>Apagada</label>
-		 <label> <input type="radio" name="estado_maquina"value="1" <?php echo ((int)$item['estado_maquina'] === 1)?'checked':''; ?>> Encendida</label>
-	</div>
-</div>
-<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
-	<input type='hidden' name='idLab' class='form-control' value="<?php echo $item['idLab']; ?>">
-	<button type="submit" class="btn btn-success">Guardar</button>	
-</div>
-</form>
-
+<?php include_once PATH_TEMPLATE.'/footer.php';?>  
+<script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
+<script src="<?php echo PATH_JS; ?>/bootstrap.js"></script>  
+<link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
 
 <script src="<?php echo PATH_JS; ?>/ckeditor/ckeditor.js"></script>
 <script src="<?php echo PATH_JS; ?>/ckeditor/adapters/jquery.js"></script>
@@ -151,9 +173,6 @@ $(document).ready(function() {
 			equipo: {
 				message: 'El Equipo no es válido.',
 	 			validators: {	
-					notEmpty: {
-						message: 'El Equipo no puede ser vacío.'
-					},											
 					regexp: {
 						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-\,]+$/,
 						message: 'Ingrese un Equipo válido.'
@@ -171,14 +190,14 @@ $(document).ready(function() {
             observaciones: {
                 validators: {
                     notEmpty: {
-                        message: 'Las Observaciones no pueden ser vacías.'
+                        message: 'La nota no puede ser vacía.'
                     },
                     
                 }
             },
         	
 		}
-	}).find('[name="procedimiento"], [name="observaciones"]')
+	}).find('[name="procedimiento"], [name="observaciones"], [name="herramientas"], [name="materiales"]')
     .each(function() {
         $(this)
             // Attach an editor to field
