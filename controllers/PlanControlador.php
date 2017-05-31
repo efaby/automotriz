@@ -5,6 +5,7 @@ class PlanControlador {
 	public function listar() {
 		$model = new PlanModelo();
 		$datos = $model->obtenerListadoPlan();
+		$tipo = $model->obtenerTipo();		
 		$message = "";
 		require_once PATH_VISTAS."/Plan/vista.listado.php";
 	}

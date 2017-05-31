@@ -4,13 +4,31 @@ require_once(PATH_MODELOS."/BaseModelo.php");
 class PlanModelo {
 
 	public function obtenerListadoPlan(){
-		$model = new BaseModelo();	
+		$tipo = $_GET['id'];
+		$model = new BaseModelo();
 		$sql = "select p.*, u.nombres, u.apellidos from plan_mantenimiento as p	
 				inner join usuario as u on u.id = p.tecnico_id
-				where p.eliminado = 0";		
+				where p.eliminado = 0 and tipo_id=".$tipo;		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);		
 	}
+	
+	public function obtenerTipo()
+	{
+		$tipo = $_GET['id'];
+		$model = new BaseModelo();
+		if($tipo <> 4){
+			$sql = "select * from tipo_vehiculo where plan_mantenimiento = ".$tipo;
+			$result = $model->ejecutarSql($sql);
+			$resultArray = $model->obtenerCampos($result);
+			$resultArray = $resultArray[0];			
+		}	
+		else{
+			$resultArray['plan_mantenimiento'] = 4;
+			$resultArray['nombre'] ="Maquinaria Pesada"; 
+		}
+		return $resultArray;
+	}	
 	
 	public function obtenerPlan()
 	{

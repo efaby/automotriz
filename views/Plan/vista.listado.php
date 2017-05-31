@@ -3,7 +3,7 @@
 
 <!-- Main row -->
 <div class="title-block">
-    <h1 class="title"> Planes Mantenimiento</h1>
+    <h1 class="title"> Planes Mantenimiento <?php echo $tipo['nombre']; ?></h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -16,7 +16,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<a href='../../Plan/editar/0' class='btn btn-primary rounded' title='Añadir' >
+			<a href='../../Plan/editar/'<?php echo$tipo['id']?>.'-0'' class='btn btn-primary rounded' title='Añadir' >
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</a>			
 	    </div>
