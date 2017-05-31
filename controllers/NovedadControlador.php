@@ -14,7 +14,6 @@ class NovedadControlador {
 		$novedad ['problema'] = $_POST ['problema'];
 		$novedad ['causa'] = $_POST ['causa'];
 		$novedad ['vehiculo_id'] = $_POST ['vehiculo_id'];
-		//Poner id de Sesion
 		$novedad ['usuario_registra'] = $_SESSION['SESSION_USER']['id'];		
 		$novedad ['fecha_ingreso'] = date('Y-m-d');
 		
