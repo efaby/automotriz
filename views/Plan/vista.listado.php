@@ -16,7 +16,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<a href='../../Plan/editar/'<?php echo$tipo['id']?>.'-0'' class='btn btn-primary rounded' title='Añadir' >
+			<a href='../../Plan/editar/'<?php echo$tipo['id ']?>.'-0'' class='btn btn-primary rounded' title='Añadir' >
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</a>			
 	    </div>
