@@ -32,7 +32,7 @@ class SeguridadControlador {
 		if($result)
 		{			
 			session_regenerate_id();
-			$result['urls'] = $model->obtenerUrlAccesos($result["tipo_usuario_id"]);
+			//$result['urls'] = $model->obtenerUrlAccesos($result["tipo_usuario_id"]);
 			$_SESSION['SESSION_USER'] = $result;
 			session_write_close();
 			$url = $_POST['url'];
@@ -62,6 +62,7 @@ class SeguridadControlador {
 		$passwd["p2"] = $_POST['password'];
 		$passwd["p3"] = $_POST['password1'];
 		$user = $_SESSION['SESSION_USER']['id'];
+
 		$message = $this->validarContrasenas($passwd,$user);
 		if($message == ''){
 			$model = new SeguridadModelo();

@@ -38,14 +38,12 @@
                             <li class="profile dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     <div class="img" style="background-image: url('<?php echo PATH_IMAGES; ?>/avatar_m.png')"> </div> <span class="name">
-    			      John Doe
+    			      <?php echo $_SESSION['SESSION_USER']['nombres']. ' '. $_SESSION['SESSION_USER']['apellidos']; ?>
     			    </span> </a>
                                 <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <a class="dropdown-item" href="#"> <i class="fa fa-user icon"></i> Profile </a>
-                                    <a class="dropdown-item" href="#"> <i class="fa fa-bell icon"></i> Notifications </a>
-                                    <a class="dropdown-item" href="#"> <i class="fa fa-gear icon"></i> Settings </a>
+                                    <a class="dropdown-item" href="../../Seguridad/cambiarContrasena/"> <i class="fa fa-lock icon"></i> Cambio Contraseña </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="login.html"> <i class="fa fa-power-off icon"></i> Logout </a>
+                                    <a class="dropdown-item" href="../../Seguridad/cerrarSesion/"> <i class="fa fa-power-off icon"></i> Cerrar Sesión </a>
                                 </div>
                             </li>
                         </ul>
@@ -67,6 +65,7 @@
                                  
                                     <a href="../../Seguridad/inicio/"> <i class="fa fa-home"></i> Inicio </a>
                                 </li>
+                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
                                 <li class="<?php echo (strpos($url, '/Usuario/listar/'))?'active':'';?>">
                                     <a href=""> <i class="fa fa-users"></i> Personal <i class="fa arrow"></i> </a>
                                     <ul>
@@ -108,12 +107,16 @@
                                     	                                   	
                                     </ul>                                    	                                  
                                 </li>
-                                
-                                  
+                                <?php endif;?>
+                                  <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']>=3)&&($_SESSION['SESSION_USER']['tipo_usuario_id']<=5)):?>
                                  <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
-                                    <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>
-                                    
+                                    <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>                                    
                                 </li>
+                                <li class="<?php echo (strpos($url, '/Registro/ingreso/'))?'active':'';?>">
+                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horas':'Kilometros';?></a>                                    
+                                </li>
+                                <?php endif;?>
+                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
                                 <li class="<?php echo ((strpos($url, '/Plan/listar/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Planes Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
@@ -139,6 +142,7 @@
                                     </a> </li>
                                     </ul>
                                 </li>
+                                <?php endif;?>
                                 <!--  
                                 <li>
                                     <a href="forms.html"> <i class="fa fa-pencil-square-o"></i> Forms </a>

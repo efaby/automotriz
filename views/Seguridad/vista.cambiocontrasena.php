@@ -1,11 +1,10 @@
 <?php $title = "Cambiar contraseña";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <!-- Main row -->
-<div class="row">
-	<div class="col-lg-12">
-    	<h1 class="page-header">Cambiar Contraseña</h1>
-   	</div>
+<div class="title-block">
+    <h1 class="title">Cambiar Contraseña</h1>
 </div>
+
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
 		<div class="alert alert-success fade in alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert"
@@ -13,12 +12,14 @@
 								  <?php echo $_SESSION['message'];$_SESSION['message'] = ''?>
 								</div>
 		<?php endif;?>
+		<div class="card">
+	<div class="card-block">
 <div class="row">
 			
 	<form method="post" action="../cambiarContraseñaDatos/" id="frmUsuario" name="frmUsuario">
 		
 		
-		<div class="form-group col-sm-12 rows">
+		<div class=" col-sm-12 rows">
 		<div class="form-group col-sm-4">
 			<label class="control-label">Contraseña Actual</label>
 			<input type="password"
@@ -41,13 +42,14 @@
 	</div>
 		
 		<div class="form-group rowBottom" >
-		<button type="submit" class="btn btn-info">Cambiar Contraseña</button>
+		<button type="submit" class="btn btn-success">Cambiar Contraseña</button>
 	</div>
 		
 	</form>
 	</div>
 	
-	
+	</div>
+	</div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>
 
 <script src="<?php echo PATH_JS; ?>/bootstrapValidator.min.js"></script>
