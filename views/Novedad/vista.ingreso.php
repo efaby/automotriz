@@ -22,7 +22,7 @@
 			<select class='form-control' name="vehiculo_id" id="vehiculo_id">
 				<option value="" >Seleccione</option>
 				<?php foreach ($vehiculos as $dato) { ?>
-				<option value="<?php echo $dato['id'];?>"  ><?php echo $dato['nombre'] ." " .$dato['marca'] ." " .$dato['modelo'] ." No. " .$dato['numero'];?></option>
+				<option value="<?php echo $dato['id'];?>"  ><?php echo $dato['nombre'] ." " .$dato['marca'] ." No. " .$dato['numero'];?></option>
 				<?php }?>
 			</select>
 		</div>
@@ -39,12 +39,7 @@
 			<textarea name='causa' id='causa' class='form-control' ></textarea>		
 		</div>	
 	</div>	
-	<div class="form-group col-sm-12">
-		<div class="form-group  col-sm-6 row-padding">
-			<label class="control-label">Solución</label>
-			<textarea name='solucion' id='solucion' class='form-control' ></textarea>	
-		</div>		
-	</div>	
+	
 	<div class="form-group col-sm-12">
 		<input type='hidden' name='id' class='form-control' value="">
 		<button type="submit" class="btn btn-success">Guardar</button>
@@ -91,31 +86,13 @@ $(document).ready(function() {
 			causa: {
 				message: 'La Causa no es válida',
 			    validators: {	
-							notEmpty: {
-								message: 'La Causa no puede ser vacía.'
-							},												
+																		
 									regexp: {
 										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
 										message: 'Ingrese una Causa válida.'
 									}
 								}
 							},
-							solucion: {
-								message: 'La Solución no es válido',
-								validators: {												
-											regexp: {
-												regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
-												message: 'Ingrese una Solución válida.'
-											}
-										}
-									},
-									laboratorio_id: {
-														validators: {
-															notEmpty: {
-																message: 'Seleccione un Laboratorio'
-															}
-														}
-													},
 		}
 	});
 });

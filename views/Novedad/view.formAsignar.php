@@ -18,7 +18,8 @@
 	</div>
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Solucion</label>
-		<div id="texto"> <?php echo $item['solucion']; ?>
+		<textarea name='solucion' id='solucion' class='form-control' ></textarea>	
+		
 		</div>
 	</div>
 	
@@ -27,14 +28,14 @@
 		<select class='form-control' name="usuario_id" id="usuario_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($tecnicos as $dato) { ?>
-			<option value="<?php echo $dato->id;?>" ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
+			<option value="<?php echo $dato['id'];?>" ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
 		<?php }?>
 		</select>
 
 	</div>
 	
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $item->id; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
 		<button type="submit" class="btn btn-success" id="saveAsignar">Guardar</button>
 	</div>
 
@@ -58,6 +59,16 @@ $(document).ready(function() {
 					}
 				}
 			},
+			solucion: {
+				message: 'La Causa no es válida',
+			    validators: {	
+																		
+									regexp: {
+										regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
+										message: 'Ingrese una Solucion válida.'
+									}
+								}
+							},
 			
 		}
 	});

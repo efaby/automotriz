@@ -107,16 +107,6 @@
                                     	                                   	
                                     </ul>                                    	                                  
                                 </li>
-                                <?php endif;?>
-                                  <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']>=3)&&($_SESSION['SESSION_USER']['tipo_usuario_id']<=5)):?>
-                                 <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
-                                    <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>                                    
-                                </li>
-                                <li class="<?php echo (strpos($url, '/Registro/ingreso/'))?'active':'';?>">
-                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horas':'Kilometros';?></a>                                    
-                                </li>
-                                <?php endif;?>
-                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
                                 <li class="<?php echo ((strpos($url, '/Plan/listar/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Planes Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
@@ -131,6 +121,17 @@
                                     	<li><a href="../../Plan/listar/4"> Maq. Pesada </a></li>                                    	
                                     </ul>                                    	                                  
                                 </li>
+                                <?php endif;?>
+                                  <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']>=3)&&($_SESSION['SESSION_USER']['tipo_usuario_id']<=5)):?>
+                                 <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
+                                    <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>                                    
+                                </li>
+                                <li class="<?php echo (strpos($url, '/Registro/ingreso/'))?'active':'';?>">
+                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horas':'Kilometros';?></a>                                    
+                                </li>
+                                <?php endif;?>
+                                
+                                 <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
                                 <li class="<?php echo ((strpos($url, '/Plan1/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/Novedad/listar/'))||(strpos($url, '/VehiculoPlan/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-cubes"></i> Mantenimientos <i class="fa arrow"></i> </a>
                                     <ul>

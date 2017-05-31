@@ -68,7 +68,7 @@
 	</div>		
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6">
+	<div class="form-group  col-sm-6 row-padding">
 		<label class="control-label">Elementos</label>
 		<div id="texto"> <?php echo $item['elementos']; ?>
 		</div>

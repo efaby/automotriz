@@ -1,23 +1,23 @@
 <form id="frmItem" method="post" action="../guardarReparar/" enctype="multipart/form-data">
 
 	<div class="form-group  col-sm-12">
-		<label class="control-label">Activo Físico</label>
-		<div id="texto"> <?php echo $item->maquina; ?>
+		<label class="control-label">Vehículo</label>
+		<div id="texto"> <?php echo $item['marca'] ." ".$item['marca']. " No. ".$item['numero']; ?>
 		</div>
 	</div>
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Problema</label>
-		<div id="texto"> <?php echo $item->problema; ?>
+		<div id="texto"> <?php echo $item['problema']; ?>
 		</div>
 	</div>
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Causa</label>
-		<div id="texto"> <?php echo $item->causa; ?>
+		<div id="texto"> <?php echo $item['causa']; ?>
 		</div>
 	</div>
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Solución</label>
-		<div id="texto"> <?php echo $item->solucion; ?>
+		<div id="texto"> <?php echo $item['solucion']; ?>
 		</div>
 	</div>
 	
@@ -46,12 +46,9 @@
 			value="">
 
 	</div>
-		<div class="form-group col-sm-12">
-		<label class="control-label">Imagen </label>	
-			<input type='file' name='url' id="url" class="file">	
-	</div>
+		
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $item->id; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
 		<button type="submit" class="btn btn-success" id="saveReparar">Guardar</button>
 	</div>
 
@@ -99,14 +96,6 @@ $(document).ready(function() {
 												regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
 												message: 'Ingrese una Observación válida.'
 											}
-										}
-									},
-									url: {
-										validators: {							
-											file: {
-							                    extension: 'png,jpg,gif',
-							                    message: 'Seleccione un archivo válido. (.png,.jpg,.gif)'
-							                }
 										}
 									},
 									tiempo_ejecucion: {
