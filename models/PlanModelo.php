@@ -30,9 +30,8 @@ class PlanModelo {
 		return $resultArray;
 	}	
 	
-	public function obtenerPlan()
+	public function obtenerPlan($plan)
 	{
-		$plan = $_GET['id'];
 		$model = new BaseModelo();		
 		if($plan > 0){
 			$sql = "select p.* from plan_mantenimiento as p where p.eliminado = 0 and p.id = ".$plan;
@@ -40,7 +39,7 @@ class PlanModelo {
 			$resultArray = $model->obtenerCampos($result);
 			$resultArray = $resultArray[0];			
 		} else {
-			$resultArray = array('id'=>0,'tarea'=>'','tiempo_ejecucion'=>'','estado_maquina'=>'', 'herramientas' =>'', 'equipo' =>'',  'materiales' =>'', 'procedimiento' =>'',  'observaciones' =>'', 'tecnico_id' => 0);			
+			$resultArray = array('id'=>0,'tarea'=>'','tiempo_ejecucion'=>'','estado_maquina'=>'', 'herramientas' =>'', 'equipo' =>'',  'materiales' =>'', 'procedimiento' =>'',  'observaciones' =>'', 'tecnico_id' => 0,'unidad_numero'=>'','alerta_numero'=>'');			
 		}
 		return $resultArray;
 	}

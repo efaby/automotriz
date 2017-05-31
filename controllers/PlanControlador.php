@@ -11,14 +11,15 @@ class PlanControlador {
 	}
 	
 	public function editar(){
-		$model = new PlanModelo();		
-		$item = $model->obtenerPlan();	
+		$model = new PlanModelo();	
+		$arrayId = explode('-', $_GET['id']);
+		$item = $model->obtenerPlan($arrayId[1]);
+		$tipo = $arrayId[0];
 		$tecnicos = $model->obtenerTecnicos();	
 		require_once PATH_VISTAS."/Plan/vista.formulario.php";
 	}
 	
 	public function guardar() {
-
 		$plan ['id'] = $_POST ['id'];
 		$plan ['tarea'] = $_POST ['tarea'];
 		$plan ['tiempo_ejecucion'] = $_POST ['tiempo_ejecucion'];
@@ -29,7 +30,9 @@ class PlanControlador {
 		$plan ['procedimiento'] = $this->dataready($_POST ['procedimiento']);
 		$plan ['observaciones'] = $this->dataready($_POST ['observaciones']);
 		$plan ['tecnico_id'] = $_POST ['tecnico_id'];
-		
+		$plan ['unidad_numero'] = $_POST ['unidad_numero'];
+		$plan ['alerta_numero'] = $_POST ['alerta_numero'];
+		$plan ['tipo_id'] = $_POST ['tipo'];
 		
 		$model = new PlanModelo();
 		try {
@@ -38,7 +41,8 @@ class PlanControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$_POST ['tipo'] );
+		
 	}
 	
 	public function eliminar() {
