@@ -19,12 +19,14 @@ class SeguridadModelo {
 	
 	public function validarUsuario($login, $password){
 		$model = new BaseModelo();
-		$sql = "select id, nombres, apellidos, tipo_usuario_id, genero, usuario
+		$sql = "select id, nombres, apellidos, tipo_usuario_id, usuario
 				from usuario
 				where usuario= '".$login."' and password = '".md5($password)."' and eliminado = 0";
 		
+		
 		$result = $model->ejecutarSql($sql);
 		$result = $model->obtenerCampos($result);
+		
 		return (count($result)>0)?$result[0]:0;		
 	}
 	
