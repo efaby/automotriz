@@ -49,6 +49,38 @@
 			</div>
 		</div>			
 		<div class="form-group  col-sm-12">
+			<div class="form-group  col-sm-5 row-padding">
+				<label class="control-label">Aplicar Mantenimiento cada:</label>
+				<input type='text' name='unidad_numero' class='form-control' value="<?php echo $item['unidad_numero']; ?>">
+			</div>
+			<div class="form-group  col-sm-1 row-padding">	
+				<br><br>
+				<?php if ($tipo <4){ ?>
+				<b>Kilometros</b>
+				<input type='hidden' name='unidad_id' class='form-control' value="1">
+				<?php }else{ ?>
+				<b>Horas</b>
+				<input type='hidden' name='unidad_id' class='form-control' value="2">
+				<?php } ?>
+			</div>
+		</div>
+		<div class="form-group  col-sm-12">
+			<div class="form-group col-sm-5 row-padding">
+				<label class="control-label">Alertar cada:</label>
+				<input type='text'	name='alerta_numero' class='form-control' value="<?php echo $item['alerta_numero']; ?>">
+			</div>
+			<div class="form-group col-sm-2 row-padding">
+				<br><br><b>
+					<?php if ($tipo <4){ ?>
+						Kilometros							
+					<?php }else{ ?>
+						Horas
+					<?php } ?>
+					 Antes</b>				
+			</div>
+		</div>
+		
+		<div class="form-group  col-sm-12">
 			<div class="form-group  col-sm-6 row-padding">
 				<label class="control-label">Materiales</label>
 				<textarea name="materiales" id="materiales" rows="10" cols="60">
@@ -82,7 +114,7 @@
 		</div>
 		<div class="form-group col-sm-12">
 			<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
-			<input type='hidden' name='idLab' class='form-control' value="<?php echo $item['idLab']; ?>">
+			<input type='hidden' name='tipo' class='form-control' value="<?php echo $tipo; ?>">
 			<button type="submit" class="btn btn-success">Guardar</button>	
 		</div>
 		</form>
@@ -146,28 +178,33 @@ $(document).ready(function() {
 					}
 				}
 			},
-			herramientas: {
-				message: 'Las Herramientas no son válidas.',
-				validators: {	
+			unidad_numero: {
+				message: 'El valor ingresado no es válido',
+				validators: {
 					notEmpty: {
-						message: 'Las Herramientas no pueden ser vacías.'
-					},											
+						message: 'El valor ingresado no puede ser vacío.'
+					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-\,]+$/,
-						message: 'Ingrese unas Herramientas válidas.'
+						regexp: /^\d*$/,
+						message: 'Ingrese un valor válido.'
 					}
 				}
 			},
-			materiales: {
-				message: 'Los Materiales no son válidos.',
-				validators: {	
+			alerta_numero: {
+				message: 'El valor de la alerta no es válido',
+				validators: {
 					notEmpty: {
-						message: 'Los Materiales no pueden ser vacíos.'
-					},											
+						message: 'El valor de la alerta no puede ser vacío.'
+					},					
 					regexp: {
-						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-\,]+$/,
-						message: 'Ingrese unos Materiales válidos.'
-					}
+						regexp: /^\d*$/,
+						message: 'Ingrese un valor de la alerta válido.'
+					},
+					between: {
+                         min: 0,
+                         max: 'unidad_numero',
+                         message: 'La alerta no puede ser mayor al valor de mantenimiento'
+                     }
 				}
 			},
 			equipo: {
@@ -195,7 +232,22 @@ $(document).ready(function() {
                     
                 }
             },
-        	
+            herramientas: {
+				message: 'Las Herramientas no son válidas.',
+				validators: {	
+					notEmpty: {
+						message: 'Las Herramientas no pueden ser vacías.'
+					}
+				}
+			},
+			materiales: {
+				message: 'Los Materiales no son válidos.',
+				validators: {	
+					notEmpty: {
+						message: 'Los Materiales no pueden ser vacíos.'
+					}
+				}
+			}
 		}
 	}).find('[name="procedimiento"], [name="observaciones"], [name="herramientas"], [name="materiales"]')
     .each(function() {

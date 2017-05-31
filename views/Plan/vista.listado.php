@@ -16,7 +16,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="card-title-block">
-			<a href='../../Plan/editar/'<?php echo$tipo['id ']?>.'-0'' class='btn btn-primary rounded' title='Añadir' >
+			<a href='../../Plan/editar/<?php echo $tipo['plan_mantenimiento'];?>-0' class='btn btn-primary rounded' title='Añadir' >
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</a>			
 	    </div>
@@ -44,7 +44,7 @@
 		    			echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";   
 		    			echo "<td>".$estado."</td>";
 		    			echo "<td align='center'>
-						<a href='../../Plan/editar/".$item['id']."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>			  		
+						<a href='../../Plan/editar/".$tipo['plan_mantenimiento']."-".$item['id']."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>			  		
 						<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(".$item['id'].");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
 		    			$contador++;
     				}
