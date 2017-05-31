@@ -50,8 +50,7 @@ class PlanModelo {
 		return $model->guardarDatos($plan,'plan_mantenimiento');
 	}
 	
-	public function eliminarPlan(){
-		$plan = $_GET['id'];
+	public function eliminarPlan($plan){
 		$sql = "update plan_mantenimiento set eliminado = 1 where id = ".$plan;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);

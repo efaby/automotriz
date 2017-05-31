@@ -47,13 +47,14 @@ class PlanControlador {
 	
 	public function eliminar() {
 		$model = new PlanModelo();
+		$arrayId = explode('-', $_GET['id']);
 		try {
-			$datos = $model->eliminarPlan();
+			$datos = $model->eliminarPlan($arrayId[1]);
 			$_SESSION ['message'] = "Datos eliminados correctamente.";
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$arrayId[0] );
 	}
 	
 	private function dataready($data) {
