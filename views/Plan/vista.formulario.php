@@ -49,7 +49,7 @@
 			</div>
 		</div>			
 		<div class="form-group  col-sm-12">
-			<div class="form-group  col-sm-5 row-padding">
+			<div class="form-group  col-sm-2 row-padding">
 				<label class="control-label">Aplicar Mantenimiento cada:</label>
 				<input type='text' name='unidad_numero' class='form-control' value="<?php echo $item['unidad_numero']; ?>">
 			</div>
@@ -63,9 +63,7 @@
 				<input type='hidden' name='unidad_id' class='form-control' value="2">
 				<?php } ?>
 			</div>
-		</div>
-		<div class="form-group  col-sm-12">
-			<div class="form-group col-sm-5 row-padding">
+			<div class="form-group col-sm-2 row-padding">
 				<label class="control-label">Alertar cada:</label>
 				<input type='text'	name='alerta_numero' class='form-control' value="<?php echo $item['alerta_numero']; ?>">
 			</div>
@@ -79,7 +77,6 @@
 					 Antes</b>				
 			</div>
 		</div>
-		
 		<div class="form-group  col-sm-12">
 			<div class="form-group  col-sm-6 row-padding">
 				<label class="control-label">Materiales</label>
