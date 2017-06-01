@@ -66,11 +66,7 @@ class VehiculoPlanModelo {
 		return $model->obtenerCampos($result);
 	}
 	
-	public function guardarVehiculoPlan($activoPlan)
-	{
-		if($activoPlan['id']==0){
-			$activoPlan['numero_operacion'] = 0;
-		}
+	public function guardarVehiculoPlan($activoPlan){
 		$model = new BaseModelo();
 		return $model->guardarDatos($activoPlan, 'vehiculo_plan');
 	}

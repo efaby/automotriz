@@ -66,6 +66,31 @@ class NovedadModelo {
 		$model = new BaseModelo();
 		return $model->guardarDatos($novedad, 'novedad');
 	}
+
+	/* funcionalidad registro*/
+
+	public function obtenerPlanesbyTipoVehiculo($tipo){
+		$model = new BaseModelo();
+		$sql = "select p.* 
+				from plan_mantenimiento as p	
+				inner join tipo_vehiculo as t on t.plan_mantenimiento = p.tipo_id
+				where p.eliminado = 0 and t.id =".$tipo;		
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);		
+	}
+
+	public function obtenerVehiculoPlanbyPlan($id)
+	{
+		$model = new BaseModelo();		
+		$sql = "select * from vehiculo_plan where eliminado = 0 and plan_mantenimiento_id = ".$id;
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		return (count($resultArray)>0)$resultArray[0]:array('id'=>0);
+	}
+
+	/* fin registro */
+
+
 /*
 	
 	
