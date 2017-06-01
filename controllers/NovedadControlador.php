@@ -5,7 +5,7 @@ class NovedadControlador {
 	
 	public function ingreso(){
 		$model = new NovedadModelo();
-		$vehiculos = $model->obtenerVehiculos(3); //id usuario en sesion
+		$vehiculos = $model->obtenerVehiculos($_SESSION['SESSION_USER']['id']); //id usuario en sesion
 		$message = "";
 		require_once PATH_VISTAS."/Novedad/vista.ingreso.php";
 	}
