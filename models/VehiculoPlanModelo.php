@@ -76,5 +76,4 @@ class VehiculoPlanModelo {
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 	}
-
 }
