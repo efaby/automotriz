@@ -13,11 +13,26 @@ class RegistroModelo {
 		return $model->obtenerCampos($result);
 	}
 	
-	public function guardarRegistro($novedad)
+	public function obtenerValidacion($vehiculo_id){
+		$model = new BaseModelo();
+		$sql = "SELECT medida_uso FROM vehiculo
+				where id = ".$vehiculo_id;
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
+	}
+	
+	public function guardarRegistro($registro)
 	{
 		$model = new BaseModelo();
-		return $model->guardarDatos($novedad, 'novedad');
+		return $model->guardarDatos($registro, 'registro');
 	}
+	
+	public function guardarOrdenPlan($orden)
+	{
+		$model = new BaseModelo();
+		return $model->guardarDatos($orden, 'orden_plan');
+	}
+	
 
 	public function obtenerlistadoNovedad($usuario){
 		$model = new BaseModelo();	

@@ -37,38 +37,37 @@
 	</div>
 	<div class="form-group col-sm-12">
 		<div class="form-group  col-sm-6 row-padding">
+		<label class="control-label" id="kilometros">		
+		</label> <br>
 			<label class="control-label">
 				<?php if ($vehiculos[0]['plan'] < 4){ ?> 
 					Kilometros
-				<?php } else {?>
+					
+				<?php $texto = "Kilometos"; } else {?>
 					Horas	
-				<?php } ?>
+				<?php $texto = "Horas"; } ?>
 			</label> 
-			<input type='text' name='numero_ingreso' class='form-control' value="">					
+			<input type='text' id='numero_ingreso' name='numero_ingreso' class='form-control' value="">					
 		</div>	
 	</div>	
 	
 	<div class="form-group col-sm-12">
 		<input type='hidden' name='tipo' class='form-control' value="<?php echo $vehiculos[0]['plan'];?>">
+		<input type='hidden' name='valor' id="valor" value="0">
+		
 		<button type="submit" class="btn btn-success">Guardar</button>
 	</div>
 </form>
 </div>
 </div>
 </div>
-<?php include_once PATH_TEMPLATE.'/footer.php';?>
-
-      
+<?php include_once PATH_TEMPLATE.'/footer.php';?>      
 <script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
 <script src="<?php echo PATH_JS; ?>/bootstrap.js"></script>
-
 <script src="<?php echo PATH_JS; ?>/jquery-ui.min.js"></script>
-<script src="<?php echo PATH_JS; ?>/calendar.js"></script>
-	
-
+<script src="<?php echo PATH_JS; ?>/calendar.js"></script>	
 <link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo PATH_CSS; ?>/jquery-ui.min.css">
-
 
 
 <script type="text/javascript">
@@ -81,7 +80,17 @@ $(document).ready(function() {
 	        $('#frmItem').formValidation('revalidateField', 'fecha_registro');
 	      }  		
 	});
-	
+
+	$('#vehiculo_id').change(function(){
+		$("#vehiculo_id option:selected").each(function () {
+	         opcion=$(this).val();
+	         $.post("../obtenerVehiculo/", { id: opcion }, function(data){
+	         	$("#kilometros").html("Su kilometraje actual es: " + data);
+	         	$("#valor").val(data);
+	         	
+	         });            
+	     });
+	});
 	
 	$('#frmItem').formValidation({
     	message: 'This value is not valid',
@@ -117,7 +126,13 @@ $(document).ready(function() {
 					regexp: {
 						regexp: /^[0-9]+$/,
 						message: 'Ingrese un número válido.'
-					}	
+					},
+					between: {
+                        min: 'valor',
+                        max: 1000000,
+                        message: 'El valor de <?php echo $texto;?> no puede ser menor que el valor Actual.'
+                    }
+	
 				}
 			}				
 		}
