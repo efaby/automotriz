@@ -26,7 +26,7 @@
 						    <th>Fecha de Emisión</th>
 						     <th>Fecha de Atención</th>
 						     <th>Estado</th>
-						    <th style="text-align: center; width: 20%">Acciones</th>
+						    <th style="text-align: center; width: 5%">Acciones</th>
 					    </tr>
 				    </thead>
 				    <tbody>
@@ -43,9 +43,14 @@
 					    		if ($item['atendido'] == 0) { echo "Por Atender"; }
 					    		else{ echo "Atendido";}
 					    		echo "</td>";
-					    		echo "<td align='center'>
-									<a href='../../OrdenPlan/editar/".$item['id']."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>
-						    	</td>";
+					    		echo "<td align='center'>";
+								if ($item['atendido'] == 0) {
+									echo "<a href='../../OrdenPlan/editar/".$item['id']."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>";
+								}
+								else{
+									echo "<a href='../../OrdenPlan/editar/".$item['id']."' class='btn btn-info btn-sm' title='Mostrar' ><i class='fa fa-info-circle'></i></a>";
+								}
+						    	echo "</td>";
 				    		}
 				    	}
 				    	?>
