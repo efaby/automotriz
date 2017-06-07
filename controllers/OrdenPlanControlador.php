@@ -4,15 +4,15 @@ require_once (PATH_MODELOS . "/OrdenPlanModelo.php");
 class OrdenPlanControlador {
 	public function listar() {
 		$model = new OrdenPlanModelo();
-		$datos = $model->obtenerOrdenes(null);
+		$datos = $model->obtenerOrdenes(null, null);
 		$message = "";
 		require_once PATH_VISTAS."/OrdenPlan/vista.listado.php";
 	}
 	
 	public function editar(){
-		$id = $_GET['id'];
+		$arrayId = explode('-', $_GET['id']);
 		$model = new OrdenPlanModelo();
-		$dato = $model->obtenerOrdenes($id)[0];
+		$dato = $model->obtenerOrdenes($arrayId[0], $arrayId[1])[0];
 		$message = "";		
 		require_once PATH_VISTAS."/OrdenPlan/vista.formulario.php";		
 	}

@@ -56,20 +56,26 @@
 			</div>		
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label class="control-label">Tiempo Ejecución</label>
+					<label class="control-label">Tiempo Ejecución:</label>
+					<?php if ($dato['atendido'] == 0){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
+					<?php } else { echo $dato['tiempo_ejecucion']; }?>						
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label class="control-label">Observación</label>
+					<label class="control-label">Observación:</label>
+					<?php if ($dato['atendido'] == 0){?>
 					<textarea name='observacion' id='observacion' class='form-control' ></textarea>
+					<?php } else { echo htmlspecialchars_decode($dato['observacion']); }?>
 				</div>
 			</div>
+			<?php if ($dato['atendido'] == 0){?>
 			<div class="form-group">
 				<input type='hidden' name='id' class='form-control' value="<?php echo $dato['id']; ?>">
 				<button type="submit" class="btn btn-success rounded">Guardar</button>
-			</div>
+			</div>	
+			<?php }?>		
 		</form>
 	</div>	
 </div>	

@@ -45,10 +45,10 @@
 					    		echo "</td>";
 					    		echo "<td align='center'>";
 								if ($item['atendido'] == 0) {
-									echo "<a href='../../OrdenPlan/editar/".$item['id']."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>";
+									echo "<a href='../../OrdenPlan/editar/".$item['id']."-0' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>";
 								}
 								else{
-									echo "<a href='../../OrdenPlan/editar/".$item['id']."' class='btn btn-info btn-sm' title='Mostrar' ><i class='fa fa-info-circle'></i></a>";
+									echo "<a href='../../OrdenPlan/editar/".$item['id']."-1' class='btn btn-info btn-sm' title='Mostrar' ><i class='fa fa-info-circle'></i></a>";
 								}
 						    	echo "</td>";
 				    		}
