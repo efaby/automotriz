@@ -8,72 +8,91 @@
 	<div class="card-block">
 		<form id="frmOrdenPlan" method="post" action="../guardar/" >
 			<div class="row">	
-				<div class="form-group  col-sm-12" align="center">				
+				<div class="form-group  col-sm-12 border-div " align="center">				
 					<label class="control-label"><h3><?php echo $dato['marca'].' No.'.$dato['numero']?></h3></label><br>
 					<label class="control-label"><?php echo $dato['vehiculo_nombre']?></label>
 				</div>				
 			</div>
 			
 			<div class="row">
-				<div class="form-group  col-sm-4">
-					<label class="control-label">Frecuencia: </label><?php echo $dato['unidad_numero']?>									
+				<div class="form-group  col-sm-4 border-div ">
+					<label class="control-label">Frecuencia: </label>
+					<div>
+						<?php echo $dato['unidad_numero']?>	
+					</div>
+												
 				</div>
-				<div class="form-group  col-sm-4">
-					<label class="control-label">Tiempo Estimado: </label><?php echo $dato['tiempo_estimado']?>
+				<div class="form-group  col-sm-4 border-div ">
+					<label class="control-label">Tiempo Estimado: </label>
+					<div>
+					<?php echo $dato['tiempo_estimado']?>
+					</div>
 				</div>
-				<div class="form-group  col-sm-4">
+				<div class="form-group  col-sm-4 border-div">
 					<label class="control-label">Estado de la Vehículo/Maquinaria: </label>
+					<div>
 					<?php if ($dato['atendido'] == 0){?>	
 						Por Atender
 					<?php } else {?>
 						Atendido
 					<?php }?>
+					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group  col-sm-12">
-					<br><br>
-					<label class="control-label">Plan de Mantenimiento: </label><?php echo $dato['plan']?>
+				<div class="form-group  col-sm-12 border-div">
+					<label class="control-label">Plan de Mantenimiento: </label>
+					<div>
+					<?php echo $dato['plan']?>
+					</div>
 				</div>
 			</div>	
 			<div class="row">
-				<div class="form-group  col-sm-4">				
-					<label class="control-label">Herramientas:</label><br>
-					<?php echo htmlspecialchars_decode($dato['herramientas']);?>					
+				<div class="form-group  col-sm-4 border-div">				
+					<label class="control-label">Herramientas:</label>
+					<div>
+					<?php echo htmlspecialchars_decode($dato['herramientas']);?>	
+					</div>				
 				</div>				
-				<div class="form-group  col-sm-4">				
-					<label class="control-label">Materiales:</label><br>
+				<div class="form-group  col-sm-4 border-div" >				
+					<label class="control-label">Materiales:</label>
+					<div>
 					<?php echo htmlspecialchars_decode($dato['materiales']);?>
+					</div>
 				</div>				
-				<div class="form-group  col-sm-4">				
-					<label class="control-label">Equipo:</label><br>
+				<div class="form-group  col-sm-4 border-div">				
+					<label class="control-label">Equipo:</label>
+					<div>
 					<?php echo htmlspecialchars_decode($dato['equipo']);?>
+					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group  col-sm-12">				
-					<label class="control-label">Observaciones:</label><br>
-					<?php echo htmlspecialchars_decode($dato['observaciones']);?>					
+				<div class="form-group  col-sm-12 border-div">				
+					<label class="control-label">Observaciones:</label>
+					<div>
+					<?php echo htmlspecialchars_decode($dato['observaciones']);?>	
+					</div>				
 				</div>
 			</div>		
-			<div class="row">
-				<div class="form-group  col-sm-6">
+			<div class="row border-div">
+				<div class="form-group  col-sm-6 ">
 					<label class="control-label">Tiempo Ejecución:</label>
 					<?php if ($dato['atendido'] == 0){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
-					<?php } else { echo $dato['tiempo_ejecucion']; }?>						
+					<?php } else { echo "<div>".$dato['tiempo_ejecucion']."</div>"; }?>						
 				</div>
 			</div>
-			<div class="row">
-				<div class="form-group  col-sm-6">
+			<div class="row border-div">
+				<div class="form-group  col-sm-12 ">
 					<label class="control-label">Observación:</label>
 					<?php if ($dato['atendido'] == 0){?>
 					<textarea name='observacion' id='observacion' class='form-control' ></textarea>
-					<?php } else { echo htmlspecialchars_decode($dato['observacion']); }?>
+					<?php } else { echo "<div>".htmlspecialchars_decode($dato['observacion'])."</div>"; }?>
 				</div>
 			</div>
 			<?php if ($dato['atendido'] == 0){?>
-			<div class="form-group">
+			<div class="form-group" style="margin-top: 15px;">
 				<input type='hidden' name='id' class='form-control' value="<?php echo $dato['id']; ?>">
 				<button type="submit" class="btn btn-success rounded">Guardar</button>
 			</div>	
@@ -81,7 +100,10 @@
 		</form>
 	</div>	
 </div>	
-</form>
+<?php include_once PATH_TEMPLATE.'/footer.php';?>   
+<script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
+<script src="<?php echo PATH_JS; ?>/bootstrap.js"></script>
+<link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
 
 <script type="text/javascript">
 $(document).ready(function() {	
@@ -100,7 +122,7 @@ $(document).ready(function() {
 						message: 'El Tiempo de Ejecucion no puede ser vacío.'
 					},
 					regexp: {
-						regexp: /^[0-9]+$/,
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-\:]+$/,
 						message: 'Ingrese un Tiempo de Ejecución válido.'
 					}
 				}
