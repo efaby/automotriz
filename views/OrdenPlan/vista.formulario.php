@@ -9,6 +9,7 @@
 		<form id="frmOrdenPlan" method="post" action="../guardar/" >
 			<div class="row">	
 				<div class="form-group  col-sm-12" align="center">				
+					<label class="control-label"><h3><?php echo $dato['marca'].' No.'.$dato['numero']?></h3></label><br>
 					<label class="control-label"><?php echo $dato['vehiculo_nombre']?></label>
 				</div>				
 			</div>
@@ -17,7 +18,7 @@
 					<label class="control-label">Frecuencia: </label><?php echo $dato['unidad_numero']?>									
 				</div>
 				<div class="form-group  col-sm-4">
-					<label class="control-label">Tiempo de Ejecución: </label><?php echo $dato['tiempo_ejecucion']?>
+					<label class="control-label">Tiempo Estimado: </label><?php echo $dato['tiempo_estimado']?>
 				</div>
 				<div class="form-group  col-sm-4">
 					<label class="control-label">Estado de la Vehículo/Maquinaria: </label>
@@ -56,7 +57,7 @@
 			</div>		
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label class="control-label">Tiempo Ejecución <?php if ($dato['unidad_id'] ==4)  echo " (Horas)"; else echo " (Kilometros)";?>:</label>
+					<label class="control-label">Tiempo Ejecución:</label>
 					<?php if ($dato['atendido'] == 0){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
 					<?php } else { echo $dato['tiempo_ejecucion']; }?>						

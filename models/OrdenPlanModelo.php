@@ -20,7 +20,7 @@ class OrdenPlanModelo {
 		$model = new BaseModelo();
 		$where =null;
 		$sql = "SELECT op.id,v.id as vehiculo_id,tv.nombre as vehiculo_nombre,pm.unidad_numero,
-				pm.tiempo_ejecucion,pm.unidad_id,
+				pm.tiempo_ejecucion as tiempo_estimado,pm.unidad_id,v.marca,v.numero,
 				pm.tarea as plan, pm.unidad_numero as frecuencia,op.fecha_emision, op.fecha_atencion,op.atendido,
 				pm.herramientas,pm.materiales,pm.equipo,pm.observaciones,
 				op.tiempo_ejecucion,op.observacion
