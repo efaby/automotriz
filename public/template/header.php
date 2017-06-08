@@ -131,11 +131,12 @@
                                 </li>
                                 <?php endif;?>
                                 
+                                
                                  <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
-                                <li class="<?php echo ((strpos($url, '/Plan1/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/Novedad/listar/'))||(strpos($url, '/VehiculoPlan/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/OrdenPlan/listar/'))||(strpos($url, '/Vehiculo/listarplan/'))||(strpos($url, '/Novedad/listar/'))||(strpos($url, '/VehiculoPlan/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-cubes"></i> Mantenimientos <i class="fa arrow"></i> </a>
                                     <ul>
-                                        <li> <a href="../../Plan/listar/">
+                                        <li> <a href="../../OrdenPlan/listar/">
         								Man. Preventivos
         						          </a> </li>                                            
                                         <li> <a href="../../Novedad/listar/">

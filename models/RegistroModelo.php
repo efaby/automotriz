@@ -8,7 +8,7 @@ class RegistroModelo {
 		$sql = "SELECT v.*, tv.nombre, tv.plan_mantenimiento as plan 
 				FROM vehiculo as v
 				INNER JOIN tipo_vehiculo as tv ON v.tipo_vehiculo_id = tv.id
-				WHERE v.eliminado=0 and usuario_id = ".$userId;
+				WHERE v.eliminado=0 and v.usuario_id = ".$userId;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}
