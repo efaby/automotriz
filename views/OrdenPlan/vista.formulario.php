@@ -13,6 +13,7 @@
 					<label class="control-label"><?php echo $dato['vehiculo_nombre']?></label>
 				</div>				
 			</div>
+			
 			<div class="row">
 				<div class="form-group  col-sm-4">
 					<label class="control-label">Frecuencia: </label><?php echo $dato['unidad_numero']?>									
