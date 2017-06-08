@@ -30,6 +30,7 @@ class PlanControlador {
 		$plan ['procedimiento'] = $this->dataready($_POST ['procedimiento']);
 		$plan ['observaciones'] = $this->dataready($_POST ['observaciones']);
 		$plan ['tecnico_id'] = $_POST ['tecnico_id'];
+		$plan ['unidad_id'] = $_POST ['tipo'];
 		$plan ['unidad_numero'] = $_POST ['unidad_numero'];
 		$plan ['alerta_numero'] = $_POST ['alerta_numero'];
 		$plan ['tipo_id'] = $_POST ['tipo'];

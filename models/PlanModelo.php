@@ -21,7 +21,7 @@ class PlanModelo {
 			$sql = "select * from tipo_vehiculo where plan_mantenimiento = ".$tipo;
 			$result = $model->ejecutarSql($sql);
 			$resultArray = $model->obtenerCampos($result);
-			$resultArray = $resultArray[0];			
+			$resultArray = isset($resultArray[0])?$resultArray[0]:null;			
 		}	
 		else{
 			$resultArray['plan_mantenimiento'] = 4;

@@ -1,10 +1,10 @@
-<?php $title = "Orden Plan";?>
+<?php $title = "Ejecución Orden Plan";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 
 <!-- Main row -->
 
 <div class="title-block">
-    <h1 class="title">Ordenes</h1>
+    <h1 class="title">Ejecución Ordenes Planes</h1>
 </div>
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
 	<div class="alert alert-success fade in alert-dismissable">
@@ -36,7 +36,9 @@
 					    		echo "<tr><td>".$item['id']."</td>";
 					    		echo "<td>".$item['vehiculo_nombre']."</td>"; 
 					    		echo "<td>".$item['plan']."</td>";
-					    		echo "<td>".$item['numero_operacion']."</td>";
+					    		echo "<td>".$item['frecuencia'];
+					    		if ($item['unidad_id'] ==4)  echo " Horas"; else echo " Kilometros";
+					    		echo "</td>";
 					    		echo "<td>".$item['fecha_emision']."</td>";
 					    		echo "<td>".$item['fecha_atencion']."</td>";
 					    		echo "<td>";

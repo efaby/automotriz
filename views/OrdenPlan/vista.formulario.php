@@ -56,7 +56,7 @@
 			</div>		
 			<div class="row">
 				<div class="form-group  col-sm-6">
-					<label class="control-label">Tiempo Ejecución:</label>
+					<label class="control-label">Tiempo Ejecución <?php if ($dato['unidad_id'] ==4)  echo " (Horas)"; else echo " (Kilometros)";?>:</label>
 					<?php if ($dato['atendido'] == 0){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
 					<?php } else { echo $dato['tiempo_ejecucion']; }?>						
