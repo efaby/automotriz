@@ -58,7 +58,7 @@ class PlanModelo {
 
 	public function obtenerTecnicos(){
 		$model = new BaseModelo();
-		$sql = "select u.id, u.nombres, u.apellidos from usuario as u where u.eliminado = 0 and u.tipo_usuario_id = 2";
+		$sql = "select u.id, u.nombres, u.apellidos from usuario as u where u.eliminado = 0 and u.tipo_usuario_id = 6";
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}
