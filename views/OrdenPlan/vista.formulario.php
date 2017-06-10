@@ -14,7 +14,7 @@
 				</div>				
 			</div>
 			
-			<div class="row">
+			<div class="row match-my-cols">
 				<div class="form-group  col-sm-4 border-div ">
 					<label class="control-label">Frecuencia: </label>
 					<div>
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 			</div>	
-			<div class="row">
+			<div class="row match-my-cols">
 				<div class="form-group  col-sm-4 border-div">				
 					<label class="control-label">Herramientas:</label>
 					<div>
@@ -75,16 +75,19 @@
 					</div>				
 				</div>
 			</div>		
-			<div class="row border-div">
-				<div class="form-group  col-sm-6 ">
+			<div class="row match-my-cols" >
+				<div class="form-group  col-sm-6 border-div">
 					<label class="control-label">Tiempo Ejecución:</label>
 					<?php if ($dato['atendido'] == 0){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
 					<?php } else { echo "<div>".$dato['tiempo_ejecucion']."</div>"; }?>						
 				</div>
+				<div class="form-group  col-sm-6 border-div cellMovil">
+				
+				</div>
 			</div>
-			<div class="row border-div">
-				<div class="form-group  col-sm-12 ">
+			<div class="row ">
+				<div class="form-group  col-sm-12 border-div">
 					<label class="control-label">Observación:</label>
 					<?php if ($dato['atendido'] == 0){?>
 					<textarea name='observacion' id='observacion' class='form-control' ></textarea>
@@ -104,6 +107,7 @@
 <script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
 <script src="<?php echo PATH_JS; ?>/bootstrap.js"></script>
 <link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
+<link href="<?php echo PATH_CSS; ?>/equal-height-columns.css" rel="stylesheet">
 
 <script type="text/javascript">
 $(document).ready(function() {	

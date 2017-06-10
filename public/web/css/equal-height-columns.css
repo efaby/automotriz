@@ -1,0 +1,28 @@
+.row.match-my-cols {
+    overflow: hidden; 
+}
+
+.row.match-my-cols [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.match-my-cols .box {
+  background: none;
+  position: static;
+}
+.match-my-cols [class*="col-"] {
+  background: #fff;
+}
+.match-my-cols .box a {
+  position: relative;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .cellMovil {
+        display: none;
+    }
+}
