@@ -13,9 +13,14 @@ class PlanModelo {
 		return $model->obtenerCampos($result);		
 	}
 	
-	public function obtenerTipo()
+	public function obtenerTipo($tipo_id=null)
 	{
-		$tipo = $_GET['id'];
+		if(isset($tipo_id)){
+			$tipo = $tipo_id;
+		}
+		else{
+			$tipo = $_GET['id'];
+		}		
 		$model = new BaseModelo();
 		if($tipo <> 4){
 			$sql = "select * from tipo_vehiculo where plan_mantenimiento = ".$tipo;

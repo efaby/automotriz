@@ -15,6 +15,7 @@ class PlanControlador {
 		$arrayId = explode('-', $_GET['id']);
 		$item = $model->obtenerPlan($arrayId[1]);
 		$tipo = $arrayId[0];
+		$tipoArray = $model->obtenerTipo($tipo);
 		$tecnicos = $model->obtenerTecnicos();	
 		require_once PATH_VISTAS."/Plan/vista.formulario.php";
 	}

@@ -1,7 +1,7 @@
 <?php $title = "Planes Mantenimiento";?>
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 <div class="title-block">
-    <h1 class="title"> Plan de Mantenimiento</h1>
+    <h1 class="title"> Plan de Mantenimiento <?php echo $tipoArray['nombre']; ?></h1>
 </div>
 <div class="card">
 	<div class="card-block">
