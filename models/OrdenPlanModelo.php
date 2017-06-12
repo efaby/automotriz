@@ -16,24 +16,29 @@ class OrdenPlanModelo {
 		return $model->obtenerCampos($result);
 	}
 	
-	public function obtenerOrdenes($id, $at){
+	public function obtenerOrdenes($id, $at, $usuario){
 		$model = new BaseModelo();
-		$where =null;
+		$where = "";
 		$sql = "SELECT op.id,v.id as vehiculo_id,tv.nombre as vehiculo_nombre,pm.unidad_numero,
 				pm.tiempo_ejecucion as tiempo_estimado,pm.unidad_id,v.marca,v.numero,
 				pm.tarea as plan, pm.unidad_numero as frecuencia,op.fecha_emision, op.fecha_atencion,op.atendido,
 				pm.herramientas,pm.materiales,pm.equipo,pm.observaciones,
-				op.tiempo_ejecucion,op.observacion
+				op.tiempo_ejecucion,op.observacion, u.nombres, u.apellidos
 				FROM vehiculo as v
 				INNER JOIN tipo_vehiculo as tv ON v.tipo_vehiculo_id=tv.id
 				INNER JOIN vehiculo_plan as vp ON vp.vehiculo_id = v.id
 				INNER JOIN plan_mantenimiento as pm ON pm.id=vp.plan_mantenimiento_id
-				INNER JOIN orden_plan as op ON op.vehiculo_plan_id = vp.id";
-		if($id >0 && $at==0){
+				INNER JOIN orden_plan as op ON op.vehiculo_plan_id = vp.id
+				INNER JOIN usuario as u on u.id = pm.tecnico_id
+				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") ";
+		/*if($id >0 && $at==0){
 			$where = " WHERE atendido=0 and op.id=".$id;
 		}elseif($at==1){
 			$where = " WHERE atendido=1 and op.id=".$id;
-		}		
+		}	*/
+		if($id >0){
+			$where = " and op.id=".$id;
+		}
 		$sql .=$where;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);

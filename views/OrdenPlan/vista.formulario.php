@@ -78,28 +78,39 @@
 			<div class="row match-my-cols" >
 				<div class="form-group  col-sm-6 border-div">
 					<label class="control-label">Tiempo Ejecución:</label>
-					<?php if ($dato['atendido'] == 0){?>
+					<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
 					<?php } else { echo "<div>".$dato['tiempo_ejecucion']."</div>"; }?>						
 				</div>
 				<div class="form-group  col-sm-6 border-div cellMovil">
-				
+					<label class="control-label">T&eacute;cnico:</label>
+					
+					<?php echo "<div>".$dato['nombres']." ".$dato['apellidos']."</div> </br>"; ?>		
 				</div>
 			</div>
 			<div class="row ">
 				<div class="form-group  col-sm-12 border-div">
 					<label class="control-label">Observación:</label>
-					<?php if ($dato['atendido'] == 0){?>
+					<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 					<textarea name='observacion' id='observacion' class='form-control' ></textarea>
-					<?php } else { echo "<div>".htmlspecialchars_decode($dato['observacion'])."</div>"; }?>
+					<?php } else { echo "<div>".htmlspecialchars_decode($dato['observacion'])."</div> "; }?>
 				</div>
 			</div>
-			<?php if ($dato['atendido'] == 0){?>
+			<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 			<div class="form-group" style="margin-top: 15px;">
 				<input type='hidden' name='id' class='form-control' value="<?php echo $dato['id']; ?>">
 				<button type="submit" class="btn btn-success rounded">Guardar</button>
+				<a href="../listar/" class="btn btn-info rounded"  >
+			Regresar
+		</a>
 			</div>	
-			<?php }?>		
+			<?php } else { ?>	
+			<div class="form-group" style="margin-top: 15px;">
+				<a href="../listar/" class="btn btn-info rounded"  >
+			Regresar
+		</a>
+			</div>
+			<?php } ?>		
 		</form>
 	</div>	
 </div>	

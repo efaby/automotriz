@@ -31,10 +31,10 @@ class NovedadControlador {
 	public function listar() {
 		$model = new NovedadModelo();	
 		$usuario = 0;
-		/* si el usuario que est en sesion es una tecnico se habilit esto
-		if($_SESSION['SESSION_USER']->tipo > 1){
-			$usuario = $_SESSION['SESSION_USER']->id;
-		}*/
+		/* si el usuario que est en sesion es una tecnico se habilit esto */
+		if($_SESSION['SESSION_USER']['tipo_usuario_id'] > 1){
+			$usuario = $_SESSION['SESSION_USER']['id'];
+		}
 		$datos = $model->obtenerlistadoNovedad($usuario);
 		$message = "";
 		require_once PATH_VISTAS."/Novedad/view.listado.php";

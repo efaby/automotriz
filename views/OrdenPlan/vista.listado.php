@@ -46,7 +46,7 @@
 					    		else{ echo "Atendido";}
 					    		echo "</td>";
 					    		echo "<td align='center'>";
-								if ($item['atendido'] == 0) {
+								if ($item['atendido'] == 0 &&  ($_SESSION['SESSION_USER']['tipo_usuario_id'] == 6)) {
 									echo "<a href='../../OrdenPlan/editar/".$item['id']."-0' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>";
 								}
 								else{
