@@ -42,7 +42,7 @@
 	
 	<div class="form-group col-sm-12">
 		<input type='hidden' name='id' class='form-control' value="">
-		<button type="submit" class="btn btn-success">Guardar</button>
+		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 </form>
 </div>

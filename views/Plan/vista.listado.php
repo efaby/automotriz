@@ -45,8 +45,8 @@
 		    			echo "<td>".$estado."</td>";
 		    			$id = $tipo['plan_mantenimiento']."-".$item['id'];		 
 		    			echo "<td align='center'>
-						<a href='../../Plan/editar/".$id."' class='btn btn-warning btn-sm' title='Editar' ><i class='fa fa-pencil'></i></a>			  		
-						<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+						<a href='../../Plan/editar/".$id."' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>			  		
+						<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn btn-danger btn-sm rounded' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
 		    			$contador++;
     				}
     			}?>

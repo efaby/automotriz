@@ -55,7 +55,7 @@
 		<input type='hidden' name='tipo' class='form-control' value="<?php echo $vehiculos[0]['plan'];?>">
 		<input type='hidden' name='valor' id="valor" value="0">
 		
-		<button type="submit" class="btn btn-success">Guardar</button>
+		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 </form>
 </div>

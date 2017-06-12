@@ -53,7 +53,7 @@
 
 				<input name="url" type="hidden" value="<?php echo (strpos($url, '/Seguridad/mostrar/'))?'../':'Seguridad/'; ?>">
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button class="btn btn-success btn-block" type="submit" id="btnSubmit">
+                                <button class="btn btn-success btn-block rounded" type="submit" id="btnSubmit">
                                 <i class="fa fa-sign-in "></i>&nbsp;Ingresar</button>
 				</form>
 			</div>

@@ -42,7 +42,7 @@
 	</div>
 		
 		<div class="form-group rowBottom" >
-		<button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+		<button type="submit" class="btn btn-success rounded">Cambiar Contraseña</button>
 	</div>
 		
 	</form>

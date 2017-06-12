@@ -49,7 +49,7 @@
 		
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
-		<button type="submit" class="btn btn-success" id="saveReparar">Guardar</button>
+		<button type="submit" class="btn btn-success rounded" id="saveReparar">Guardar</button>
 	</div>
 
 </form>

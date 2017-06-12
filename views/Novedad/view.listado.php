@@ -48,12 +48,12 @@
     		if($_SESSION['SESSION_USER']['tipo_usuario_id'] == 1){
     			echo "<td align='center'>
 					<a href='../ver/".$item['id']."' class='btn btn-info btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>
-					<a href='javascript: loadModalAction(".$item['id'].",\"asignar\")' class='btn btn-warning btn-sm ".$tecnico."' title='Asignar Técnico' ><i class='fa fa-user'></i></a>					
+					<a href='javascript: loadModalAction(".$item['id'].",\"asignar\")' class='btn btn-warning rounded btn-sm ".$tecnico."' title='Asignar Técnico' ><i class='fa fa-user'></i></a>					
 					</td>";
     		} else {
 	    		echo "<td align='center'>				
 					<a href='../ver/".$item['id']."' class='btn btn-info btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>					
-					<a href='javascript: loadModalAction(".$item['id'].",\"reparar\")' class='btn btn-warning btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>
+					<a href='javascript: loadModalAction(".$item['id'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>
 					</td>";
     		}
     	}?>

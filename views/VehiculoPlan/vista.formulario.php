@@ -45,7 +45,7 @@
 	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
 	<input type='hidden' name='vehiculo_id' class='form-control' value="<?php echo $vehiculo_id; ?>">
 	<input type='hidden' name='unidad_id' class='form-control' value="<?php echo $unidad[0]['id']; ?>">
-		<button type="submit" class="btn btn-success">Guardar</button>
+		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 
 </form>
