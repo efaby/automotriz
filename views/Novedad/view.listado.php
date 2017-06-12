@@ -33,9 +33,10 @@
 	    </tr>
     </thead>
     <tbody>
-    	<?php foreach ($datos as $item) {
-    		
-    		echo "<tr><td>".$item['id']."</td>";   		
+    	<?php
+    		$contador=1;
+    		foreach ($datos as $item) {
+    		echo "<tr><td>".$contador."</td>";   		
     		echo "<td>".$item['marca']." No. ".$item['numero']."</td>";
             echo "<td>".$item['nombre_usuario']." ".$item['apellido_usuario']."</td>";    	
     		echo "<td>".substr ( $item['problema'] , 0 ,20 )."</td>";
@@ -56,6 +57,7 @@
 					<a href='javascript: loadModalAction(".$item['id'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>
 					</td>";
     		}
+    		$contador++;
     	}?>
     </tbody>
     </table>

@@ -32,8 +32,9 @@
 				    <tbody>
 				    	<?php
 				    		if(count($datos) >0){
+				    			$contador=1;
 				    			foreach ($datos as $item) {
-					    		echo "<tr><td>".$item['id']."</td>";
+					    		echo "<tr><td>".$contador."</td>";
 					    		echo "<td>".$item['vehiculo_nombre']."</td>"; 
 					    		echo "<td>".$item['plan']."</td>";
 					    		echo "<td>".$item['frecuencia'];
@@ -53,7 +54,8 @@
 									echo "<a href='../../OrdenPlan/editar/".$item['id']."-1' class='btn btn-info btn-sm rounded' title='Mostrar' ><i class='fa fa-info-circle'></i></a>";
 								}
 						    	echo "</td>";
-				    		}
+						    	$contador++;
+				    		}				    		
 				    	}
 				    	?>
 				    </tbody>
