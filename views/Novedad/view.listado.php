@@ -39,7 +39,7 @@
     		echo "<tr><td>".$contador."</td>";   		
     		echo "<td>".$item['marca']." No. ".$item['numero']."</td>";
             echo "<td>".$item['nombre_usuario']." ".$item['apellido_usuario']."</td>";    	
-    		echo "<td>".substr ( $item['problema'] , 0 ,20 )."</td>";
+    		echo "<td>".$item['falla']."</td>";
     		echo "<td>".$item['fecha_ingreso']."</td>";
     		echo "<td>".$item['fecha_atencion']."</td>";
     		$estado = ($item['atendido']==1)?'Cerrado':'Abierto';
@@ -48,13 +48,13 @@
     		$repara = ($item['tecnico_repara'] > 0)?'disabled':'';
     		if($_SESSION['SESSION_USER']['tipo_usuario_id'] == 1){
     			echo "<td align='center'>
-					<a href='../ver/".$item['id']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>
-					<a href='javascript: loadModalAction(".$item['id'].",\"asignar\")' class='btn btn-warning rounded btn-sm ".$tecnico."' title='Asignar Técnico' ><i class='fa fa-user'></i></a>					
+					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>
+					<a href='javascript: loadModalAction(".$item['ids'].",\"asignar\")' class='btn btn-warning rounded btn-sm ".$tecnico."' title='Asignar Técnico' ><i class='fa fa-user'></i></a>					
 					</td>";
     		} else {
 	    		echo "<td align='center'>				
-					<a href='../ver/".$item['id']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>					
-					<a href='javascript: loadModalAction(".$item['id'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>
+					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>					
+					<a href='javascript: loadModalAction(".$item['ids'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>
 					</td>";
     		}
     		$contador++;

@@ -7,7 +7,12 @@
 		</div>
 	</div>
 	<div class="form-group  col-sm-12">
-		<label class="control-label">Problema</label>
+		<label class="control-label">Tipo Falla</label>
+		<div id="texto"> <?php echo $item['falla']; ?>
+		</div>
+	</div>
+	<div class="form-group  col-sm-12">
+		<label class="control-label">Detalle Problema</label>
 		<div id="texto"> <?php echo $item['problema']; ?>
 		</div>
 	</div>

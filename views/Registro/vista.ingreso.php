@@ -3,7 +3,7 @@
 
 <!-- Main row -->
 <div class="title-block">
-    <h1 class="title"> Registro Horometro</h1>
+    <h1 class="title"> Registro <?php if ($vehiculos[0]['plan'] < 4){ ?>  Odometro - Kilometraje <?php } else { ?> Hormotero - Horas<?php }?></h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -43,7 +43,7 @@
 				<?php if ($vehiculos[0]['plan'] < 4){ ?> 
 					Kilometros
 					
-				<?php $texto = "Kilometos"; } else {?>
+				<?php $texto = "Kilometros"; } else {?>
 					Horas	
 				<?php $texto = "Horas"; } ?>
 			</label> 
@@ -85,7 +85,10 @@ $(document).ready(function() {
 		$("#vehiculo_id option:selected").each(function () {
 	         opcion=$(this).val();
 	         $.post("../obtenerVehiculo/", { id: opcion }, function(data){
-	         	$("#kilometros").html("Su kilometraje actual es: " + data);
+	         	$("#kilometros").html("Su <?php echo $texto;?> actual es: " + data);
+	         	if("<?php echo $texto;?>"=="Horas"){
+		         	data = 0;
+	         	}
 	         	$("#valor").val(data);
 	         	
 	         });            

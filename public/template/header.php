@@ -127,7 +127,7 @@
                                     <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>                                    
                                 </li>
                                 <li class="<?php echo (strpos($url, '/Registro/ingreso/'))?'active':'';?>">
-                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horas':'Kilometros';?></a>                                    
+                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horomotero (H)':'Odomentro (Hm)';?></a>                                    
                                 </li>
                                 <?php endif;?>
                                 
