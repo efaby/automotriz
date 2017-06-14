@@ -27,17 +27,6 @@
 			</select>
 		</div>
 	</div>
-	<div class="form-group  col-sm-12">
-		<div class="form-group  col-sm-6 row-padding">
-			<label class="control-label">Tipo Falla</label>
-			<select class='form-control' name="tipo_falla_id" id="tipo_falla_id">
-				<option value="" >Seleccione</option>
-				<?php foreach ($fallas as $dato) { ?>
-				<option value="<?php echo $dato['id'];?>"  ><?php echo $dato['nombre'];?></option>
-				<?php }?>
-			</select>
-		</div>
-	</div>
 	<div class="form-group col-sm-12">
 		<div class="form-group  col-sm-6 row-padding" >
 			<label class="control-label">Detalle Problema</label>
@@ -81,16 +70,11 @@ $(document).ready(function() {
 					}
 				}
 			},			
-			tipo_falla_id: {
-				validators: {
-					notEmpty: {
-						message: 'Seleccione un Tipo Falla'
-					}
-				}
-			},
 			problema: {
-				message: 'El Problema no es válido',
-				validators: {									
+				message: 'El Problema no es válido',				
+				validators: {	notEmpty: {
+					 message: 'El Problemao es requerido y no puede ser vacio'
+				 },								
 							regexp: {
 								regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
 								message: 'Ingrese un problema válido.'

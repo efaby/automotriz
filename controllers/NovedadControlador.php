@@ -18,7 +18,7 @@ class NovedadControlador {
 		$novedad ['vehiculo_id'] = $_POST ['vehiculo_id'];
 		$novedad ['usuario_registra'] = $_SESSION['SESSION_USER']['id'];		
 		$novedad ['fecha_ingreso'] = date('Y-m-d');
-		$novedad ['tipo_falla_id'] = $_POST ['tipo_falla_id'];
+		$novedad ['tipo_falla_id'] = 0;
 		
 		$modelVehiculo = new VehiculoModelo();
 		

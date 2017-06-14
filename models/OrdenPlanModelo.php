@@ -30,7 +30,7 @@ class OrdenPlanModelo {
 				INNER JOIN plan_mantenimiento as pm ON pm.id=vp.plan_mantenimiento_id
 				INNER JOIN orden_plan as op ON op.vehiculo_plan_id = vp.id
 				INNER JOIN usuario as u on u.id = pm.tecnico_id
-				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") ";
+				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") and ((pm.eliminado = 0) or (pm.eliminado = 1 and op.atendido = 1)) ";
 		/*if($id >0 && $at==0){
 			$where = " WHERE atendido=0 and op.id=".$id;
 		}elseif($at==1){
@@ -39,7 +39,7 @@ class OrdenPlanModelo {
 		if($id >0){
 			$where = " and op.id=".$id;
 		}
-		$sql .=$where;
+		$sql .=$where . " order by op.atendido ";
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}

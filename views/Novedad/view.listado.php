@@ -39,7 +39,7 @@
     		echo "<tr><td>".$contador."</td>";   		
     		echo "<td>".$item['marca']." No. ".$item['numero']."</td>";
             echo "<td>".$item['nombre_usuario']." ".$item['apellido_usuario']."</td>";    	
-    		echo "<td>".$item['falla']."</td>";
+            echo "<td>".substr ( $item['problema'] , 0 ,20 )."</td>";
     		echo "<td>".$item['fecha_ingreso']."</td>";
     		echo "<td>".$item['fecha_atencion']."</td>";
     		$estado = ($item['atendido']==1)?'Cerrado':'Abierto';

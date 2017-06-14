@@ -34,7 +34,7 @@ class NovedadModelo {
 				inner join usuario as u2 on u2.id = n.usuario_registra
 				left join usuario as u on u.id = n.tecnico_asigna
 				left join usuario as u1 on u1.id = n.tecnico_repara
-				inner join tipo_falla as tf on tf.id = n.tipo_falla_id
+				left join tipo_falla as tf on tf.id = n.tipo_falla_id
 				where (tecnico_asigna = ".$usuario." or 0 = ".$usuario.") order by n.id desc";	
 
 		$result = $model->ejecutarSql($sql);
