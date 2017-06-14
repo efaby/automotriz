@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="form-group  col-sm-6">
-		<label class="control-label">Conductor</label>
+		<label class="control-label"><?php if($tipo<=3): $title1 = "Conductor"; ?>Conductor<?php else: $title1 = "Operador";?> Operador <?php endif;?></label>
 		<select class='form-control' name="usuario_id" id="usuario_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($usuarios as $dato) { ?>
@@ -105,7 +105,7 @@ $(document).ready(function() {
 			usuario_id: {
 				validators: {
 					notEmpty: {
-						message: 'Seleccione un Conductor'
+						message: 'Seleccione un <?php echo $title1; ?>'
 					}
 				}
 			},
@@ -119,9 +119,11 @@ $(document).ready(function() {
 			placa: {
 				message: 'La Placa no es válida',
 				validators: {
+					<?php if($tipo<=3):?>
 					notEmpty: {
 						message: 'La Placa no puede ser vacía.'
-					},					
+					},	
+					<?php endif;?>				
 					regexp: {
 						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9-]+$/,
 						message: 'Ingrese una Placa válida.'

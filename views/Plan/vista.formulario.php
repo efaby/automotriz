@@ -9,7 +9,7 @@
 		<form id="frmItem" method="post" action="../guardar/">
 		<div class="form-group  col-sm-12">
 			<div class="form-group  col-sm-6 row-padding">
-				<label class="control-label">Tarea</label>
+				<label class="control-label">Actividad</label>
 				<input type='text'
 					name='tarea' class='form-control'
 					value="<?php echo $item['tarea']; ?>">

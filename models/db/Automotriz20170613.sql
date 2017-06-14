@@ -70,7 +70,7 @@ CREATE TABLE `novedad` (
   PRIMARY KEY (`id`),
   KEY `fk_novedad_vehiculo1_idx` (`vehiculo_id`),
   CONSTRAINT `fk_novedad_vehiculo1` FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `novedad` (
 
 LOCK TABLES `novedad` WRITE;
 /*!40000 ALTER TABLE `novedad` DISABLE KEYS */;
-INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','',NULL,NULL,NULL,14,1,NULL,3,NULL,'2017-06-11',NULL,0,0,1),(2,1,'no encuiend luces','focos quemados',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-12',NULL,0,0,3),(3,1,'wdsd','asdssasa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-12',NULL,0,600,2);
+INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','',NULL,NULL,NULL,14,1,NULL,3,NULL,'2017-06-11',NULL,0,0,1),(2,1,'no encuiend luces','focos quemados',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-12',NULL,0,0,3),(3,1,'wdsd','asdssasa',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-12',NULL,0,600,2),(4,1,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-13',NULL,0,600,2);
 /*!40000 ALTER TABLE `novedad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `tipo_usuario` (
 
 LOCK TABLES `tipo_usuario` WRITE;
 /*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
-INSERT INTO `tipo_usuario` VALUES (1,'Administrador','Usuario Adminstrador'),(2,'Secretario','Secretario general'),(3,'Conductor Auto. Livianos','Usuario Conductor Vehiculo Liviano'),(4,'Conductor Auto.  Pesados','Usuario Conductor Vehiculo Pesados'),(5,'Operador','Usuario Operador de Pesados'),(6,'Técnico','Usuario Técnico');
+INSERT INTO `tipo_usuario` VALUES (1,'Administrador','Jefe de Taller'),(2,'Secretario','Secretario general'),(3,'Conductor V. Livianos','Lista de Conductores de V. Livianos'),(4,'Conductor V.  Pesados','Lista de Conductores de V. Pesados'),(5,'Operario M. Pesada','Lista de Operarios de M. Pesados'),(6,'Técnico','Tecnicos de Mantenimiento');
 /*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,6 +243,7 @@ CREATE TABLE `tipo_vehiculo` (
   `nombre` varchar(128) NOT NULL,
   `tipo_conductor` int(11) NOT NULL DEFAULT '0',
   `plan_mantenimiento` int(11) NOT NULL,
+  `descripcion` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -253,7 +254,7 @@ CREATE TABLE `tipo_vehiculo` (
 
 LOCK TABLES `tipo_vehiculo` WRITE;
 /*!40000 ALTER TABLE `tipo_vehiculo` DISABLE KEYS */;
-INSERT INTO `tipo_vehiculo` VALUES (1,'Automotor Liviano Gasolina',3,1),(2,'Automotor Liviano Diesel',3,2),(3,'Automotor Pesados',4,3),(4,'Maquinaria Rodillo',5,4),(5,'Maquinaria Retroescabadora',5,4),(6,'Maquinaria Cargadora Frontal',5,4),(7,'Maquinaria Motoniveladora',5,4),(8,'Maquinaria Buldocer',5,4);
+INSERT INTO `tipo_vehiculo` VALUES (1,'Automotor Liviano Gasolina',3,1,'Automotores Livianos a Gasolina'),(2,'Automotor Liviano Diesel',3,2,'Automotores Livianos a Diesel'),(3,'Automotor Pesados',4,3,'Automotores Pesados'),(4,'Maquinaria Rodillo',5,4,'Maquinaria - Rodillo'),(5,'Maquinaria Retroescabadora',5,4,'Maquinaria - Retroescabadora'),(6,'Maquinaria Cargadora Frontal',5,4,'Maquinaria - Cargadora Frontal'),(7,'Maquinaria Motoniveladora',5,4,'Maquinaria - Motoniveladora'),(8,'Maquinaria Bulldozer',5,4,'Maquinaria - Bulldozer');
 /*!40000 ALTER TABLE `tipo_vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,4 +401,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-12 21:49:55
+-- Dump completed on 2017-06-13 20:45:17

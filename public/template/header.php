@@ -77,8 +77,8 @@
                                     	</li>    
                                     	<li><a href=""> Conductores <i class="fa arrow arrow1" ></i></a>
                                             <ul>
-                                                <li><a href="../../Usuario/listar/3" class="level2">Auto. Liviano</a></li> 
-                                                <li><a href="../../Usuario/listar/4" class="level2">Auto. Pesado</a></li> 
+                                                <li><a href="../../Usuario/listar/3" class="level2">V. Liviano</a></li> 
+                                                <li><a href="../../Usuario/listar/4" class="level2">V. Pesado</a></li> 
                                             </ul>  
                                         </li>      
                                     	<li><a href="../../Usuario/listar/5"> Operadores </a></li>      
@@ -101,16 +101,16 @@
                                     			<li><a href="../../Vehiculo/listar/5" class="level2">Retroescabadora</a></li> 
                                     			<li><a href="../../Vehiculo/listar/6" class="level2">Cargadora</a></li> 
                                     			<li><a href="../../Vehiculo/listar/7" class="level2">Motoniveladora</a></li> 
-                                    			<li><a href="../../Vehiculo/listar/8" class="level2">Buldoser</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/8" class="level2">Bulldozer</a></li> 
                                     		</ul>  
                                     	</li>       
                                     	                                   	
                                     </ul>                                    	                                  
                                 </li>
-                                <li class="<?php echo ((strpos($url, '/Plan/listar/')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Plan/editar/')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Planes Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
-                                    	<li><a href=""> Auto. Livianos <i class="fa arrow arrow1" ></i></a>
+                                    	<li><a href=""> V. Livianos <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
                                     			<li><a href="../../Plan/listar/1" class="level2">Gasolina</a></li> 
                                     			<li><a href="../../Plan/listar/2" class="level2">Diesel</a></li> 
@@ -127,7 +127,7 @@
                                     <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>                                    
                                 </li>
                                 <li class="<?php echo (strpos($url, '/Registro/ingreso/'))?'active':'';?>">
-                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horomotero (H)':'Odomentro (Hm)';?></a>                                    
+                                    <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horomotero (H)':'Odomentro (Km)';?></a>                                    
                                 </li>
                                 <?php endif;?>
                                 

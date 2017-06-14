@@ -4,7 +4,7 @@
 <!-- Main row -->
 
 <div class="title-block">
-    <h1 class="title">Administración Usuario <?php echo $tipo['nombre']?></h1>
+    <h1 class="title">Administración Usuario - <?php echo $tipo['descripcion']?></h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>

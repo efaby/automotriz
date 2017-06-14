@@ -31,6 +31,7 @@ class PlanModelo {
 		else{
 			$resultArray['plan_mantenimiento'] = 4;
 			$resultArray['nombre'] ="Maquinaria Pesada"; 
+			$resultArray['descripcion'] ="Maquinaria Pesada";
 		}
 		return $resultArray;
 	}	
