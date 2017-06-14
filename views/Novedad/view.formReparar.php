@@ -19,13 +19,22 @@
 		<label class="control-label">Causa</label>
 		<div id="texto"> <?php echo $item['causa']; ?>
 		</div>
-	</div>
+	</div>	
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Solución</label>
 		<div id="texto"> <?php echo $item['solucion']; ?>
 		</div>
 	</div>
-	
+	<div class="form-group  col-sm-12">
+		<label class="control-label">Falla T&eacute;cnica</label>
+		<select class='form-control' name="tipo_falla_id" id="tipo_falla_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($fallas as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>" ><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+	</div>
 	<div class="form-group col-sm-12">	
 		<label class="control-label">Proceso</label>
 		<textarea name='proceso' id='proceso' class='form-control' ></textarea>	
@@ -37,12 +46,6 @@
 		<textarea name='elementos' id='elementos' class='form-control' ></textarea>		
 			
 	</div>
-	
-	<div class="form-group col-sm-12">	
-		<label class="control-label">Observación</label>
-		<textarea name='observacion' id='observacion' class='form-control' ></textarea>	
-		
-	</div>
 	<div class="form-group  col-sm-12">
 
 		<label class="control-label">Tiempo ejecución</label>
@@ -51,9 +54,15 @@
 			value="">
 
 	</div>
+	<div class="form-group col-sm-12">	
+		<label class="control-label">Observación</label>
+		<textarea name='observacion' id='observacion' class='form-control' ></textarea>	
+		
+	</div>
+	
 		
 	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $item['ids']; ?>">
 		<button type="submit" class="btn btn-success rounded" id="saveReparar">Guardar</button>
 	</div>
 
@@ -81,7 +90,14 @@ $(document).ready(function() {
 								message: 'Ingrese un proceso válido.'
 							}
 						}
-					},	
+					},
+					tipo_falla_id: {
+						validators: {
+							notEmpty: {
+								message: 'Seleccione una Falla'
+							}
+						}
+					},		
 					elementos: {
 						message: 'Los Elementos no son válidos',
 						validators: {	

@@ -45,11 +45,11 @@ class NovedadModelo {
 	{
 		$novedad = $_GET['id'];
 		$model = new BaseModelo();		
-		$sql = "select n.*, u.nombres  as nombre_tecnico1, tf.nombre as falla, u.apellidos as apellido_tecnico1, u1.nombres  as nombre_tecnico2, u1.apellidos as apellido_tecnico2, v.*, u2.nombres as nombre_usuario, u2.apellidos as apellido_usuario
+		$sql = "select n.*, n.id as ids, u.nombres  as nombre_tecnico1, tf.nombre as falla, u.apellidos as apellido_tecnico1, u1.nombres  as nombre_tecnico2, u1.apellidos as apellido_tecnico2, v.*, u2.nombres as nombre_usuario, u2.apellidos as apellido_usuario
 				from novedad as n
 				inner join vehiculo as v on v.id = n.vehiculo_id
 				inner join usuario as u2 on u2.id = n.usuario_registra	
-				inner join tipo_falla as tf on tf.id = n.tipo_falla_id
+				left join tipo_falla as tf on tf.id = n.tipo_falla_id
 				left join usuario as u on u.id = n.tecnico_asigna
 				left join usuario as u1 on u1.id = n.tecnico_repara
 				

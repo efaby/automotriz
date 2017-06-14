@@ -5,12 +5,7 @@
 		<label class="control-label">Vehículo</label>
 		<div id="texto"> <?php echo $item['marca'] ." ".$item['marca']. " No. ".$item['numero']; ?>
 		</div>
-	</div>
-	<div class="form-group  col-sm-12">
-		<label class="control-label">Tipo Falla</label>
-		<div id="texto"> <?php echo $item['falla']; ?>
-		</div>
-	</div>
+	</div>	
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Detalle Problema</label>
 		<div id="texto"> <?php echo $item['problema']; ?>
@@ -23,7 +18,7 @@
 	</div>
 	<div class="form-group  col-sm-12">
 		<label class="control-label">Solucion</label>
-		<textarea name='solucion' id='solucion' class='form-control' ></textarea>	
+		<textarea name='solucion' id='solucion' class='form-control' ><?php echo $item['solucion'];?></textarea>	
 		
 		</div>
 	</div>
@@ -33,15 +28,18 @@
 		<select class='form-control' name="usuario_id" id="usuario_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($tecnicos as $dato) { ?>
-			<option value="<?php echo $dato['id'];?>" ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
+			<option value="<?php echo $dato['id'];?>" <?php if($item['tecnico_asigna']==$dato['id']):echo "selected"; endif;?> ><?php echo $dato['nombres'].' '.$dato['apellidos'];?></option>
 		<?php }?>
 		</select>
 
 	</div>
 	
-	<div class="form-group">
-	<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
+	<div class="row">
+	<div class="col-sm-12">
+	<input type='hidden' name='id' class='form-control' value="<?php echo $item['ids']; ?>">
 		<button type="submit" class="btn btn-success rounded" id="saveAsignar">Guardar</button>
+	</div>
+	
 	</div>
 
 </form>

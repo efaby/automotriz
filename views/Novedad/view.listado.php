@@ -44,7 +44,7 @@
     		echo "<td>".$item['fecha_atencion']."</td>";
     		$estado = ($item['atendido']==1)?'Cerrado':'Abierto';
     		echo "<td>".$estado."</td>";
-    		$tecnico = ($item['tecnico_asigna'] > 0)?'disabled':'';
+    		$tecnico = ($item['atendido'] == 1)?'disabled':'';
     		$repara = ($item['tecnico_repara'] > 0)?'disabled':'';
     		if($_SESSION['SESSION_USER']['tipo_usuario_id'] == 1){
     			echo "<td align='center'>

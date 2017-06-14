@@ -24,13 +24,7 @@
 	</div>
 	</div>	
 	
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Tipo Falla</label>
-		<div id="texto"> <?php echo $item['falla']; ?>
-		</div>
-	</div>		
-	</div>
+	
 	
 	<div class="form-group col-sm-12">
 	<div class="form-group  col-sm-6 row-padding">
@@ -47,7 +41,13 @@
 		</div>	
 	</div>	
 	</div>
-	
+	<div class="form-group col-sm-12">
+	<div class="form-group  col-sm-6 row-padding">
+		<label class="control-label">Falla T&eacute;cnica</label>
+		<div id="texto"> <?php echo $item['falla']; ?>
+		</div>
+	</div>		
+	</div>
 	<div class="form-group col-sm-12">
 	<div class="form-group  col-sm-6 row-padding">
 		<label class="control-label">Solución</label>

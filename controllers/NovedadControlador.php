@@ -7,7 +7,7 @@ class NovedadControlador {
 	public function ingreso(){
 		$model = new NovedadModelo();
 		$vehiculos = $model->obtenerVehiculos($_SESSION['SESSION_USER']['id']); //id usuario en sesion
-		$fallas = $model->obtenerFallas();
+		
 		$message = "";
 		require_once PATH_VISTAS."/Novedad/vista.ingreso.php";
 	}
@@ -89,7 +89,8 @@ class NovedadControlador {
 	
 	public function reparar(){
 		$model = new NovedadModelo();
-		$item = $model->obtenerNovedad();			
+		$item = $model->obtenerNovedad();	
+		$fallas = $model->obtenerFallas();
 		require_once PATH_VISTAS."/Novedad/view.formReparar.php";
 	}
 	
@@ -103,6 +104,7 @@ class NovedadControlador {
 		$novedad ['tecnico_repara'] = $_SESSION['SESSION_USER']['id']; 
 		$novedad ['fecha_atencion'] = date('Y-m-d');
 		$novedad ['atendido'] = 1;
+		$novedad ['tipo_falla_id'] = $_POST ['tipo_falla_id'];
 	
 		$model = new NovedadModelo();
 		try {
