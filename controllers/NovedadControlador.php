@@ -1,6 +1,13 @@
 <?php
+use Dompdf\Options;
+use Dompdf\Dompdf;
+use Dompdf\FontMetrics;
+
 require_once (PATH_MODELOS . "/NovedadModelo.php");
 require_once (PATH_MODELOS . "/VehiculoModelo.php");
+require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
+require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
+
 
 class NovedadControlador {
 	
@@ -125,5 +132,115 @@ class NovedadControlador {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
 		header ( "Location: ../listar/" );
+	}
+	
+	public function visualizarPdf11(){
+		$novedad = $_GET ['id'];
+		$model = new NovedadModelo();
+		$item = $model->obtenerNovedad($novedad);
+		$html="<html>
+					<head>
+						<style=txt/css>
+							body {
+							margin: 20px 20px 20px 50px;
+							}
+							table{
+							border-collapse: collapse; width: 100%;
+							}
+								
+							td{
+							border:1px solid #ccc; padding:1px;
+							font-size:9pt;
+							}
+					   </style>						
+					</head>
+					<body>
+						<table width= 100%>
+							<tr>
+								<td><b>Vehículo</b></td>
+							</tr>
+							<tr>
+								<td>". $item['marca'] ." ".$item['marca']. " No. ".$item['numero']."								
+							</tr>
+							<tr>
+								<td><b>Detalle Problema</b></td>
+							</tr>
+							<tr>
+								<td>".$item['problema']."</td>
+							</tr>
+							<tr>
+								<td><b>Causa</b></td>
+							</tr>
+							<tr>
+								<td>".$item['causa']."</td>
+							</tr>
+							<tr>
+								<td><b>Falla T&eacute;cnica</b></td>
+							</tr>
+							<tr>
+								<td>".$item['falla']."</td>
+							</tr>
+							<tr>
+								<td><b>Solución</b></td>
+							</tr>
+							<tr>
+								<td>".$item['solucion']."</td>
+							</tr>
+							<tr>
+								<td><b>Técnico Asignado</b></td>
+							</tr>
+							<tr>
+								<td>".$item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']."</td>
+							</tr>
+							<tr>
+								<td><b>Estado</b></td>
+							</tr>
+							<tr>
+								<td>";
+					$html .=($item['atendido']==1)?"Cerrado":"Abierto";
+					$html .="</td></tr>
+							<tr>
+								<td><b>Proceso</b></td>
+							</tr>
+							<tr>
+								<td>".$item['proceso']."</td>
+							</tr>
+							<tr>
+								<td><b>Elementos</b></td>
+							</tr>
+							<tr>
+								<td>".$item['elementos']."</td>
+							</tr>
+							<tr>
+								<td>".$item['proceso']."</td>
+							</tr>
+							<tr>
+								<td><b>Observación</b></td>
+							</tr>
+							<tr>
+								<td>".$item['observaciones']."</td>
+							</tr>
+							<tr>
+								<td><b>Técnico Reparador</b></td>
+							</tr>
+							<tr>
+								<td>".$item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']."</td>
+							</tr>			
+										
+						</table>
+					</body>
+			</html>";
+						
+					$options = new Options();
+					$options->set('isHtml5ParserEnabled', true);
+					$dompdf = new Dompdf($options);
+					
+					$dompdf->load_html($html);
+					$dompdf->render();
+					$canvas = $dompdf->get_canvas();
+					$font = FontMetrics::getFont("helvetica", "bold");
+					$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", $font, 6, array(0,0,0)); //header
+					$canvas->page_text(270, 770, "Copyright © 2017 - SAM - W&L", $font, 6, array(0,0,0)); //footer
+					$dompdf->stream('novedad', array("Attachment"=>false));
 	}
 }

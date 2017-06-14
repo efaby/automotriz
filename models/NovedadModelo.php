@@ -41,9 +41,13 @@ class NovedadModelo {
 		return $model->obtenerCampos($result);
 	}	
 
-	public function obtenerNovedad()
+	public function obtenerNovedad($nov=null)
 	{
-		$novedad = $_GET['id'];
+		if($nov != null){
+			$novedad = $nov;
+		}else{
+			$novedad = $_GET['id'];
+		}
 		$model = new BaseModelo();		
 		$sql = "select n.*, n.id as ids, u.nombres  as nombre_tecnico1, tf.nombre as falla, u.apellidos as apellido_tecnico1, u1.nombres  as nombre_tecnico2, u1.apellidos as apellido_tecnico2, v.*, u2.nombres as nombre_usuario, u2.apellidos as apellido_usuario
 				from novedad as n

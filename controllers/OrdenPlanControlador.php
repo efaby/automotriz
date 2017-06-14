@@ -1,5 +1,11 @@
 <?php
+use Dompdf\Options;
+use Dompdf\Dompdf;
+use Dompdf\FontMetrics;
 require_once (PATH_MODELOS . "/OrdenPlanModelo.php");
+require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
+require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
+
 
 class OrdenPlanControlador {
 	public function listar() {
@@ -41,5 +47,112 @@ class OrdenPlanControlador {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
 		header ( "Location: ../listar/" );					
-	}	
+	}
+	
+	public function visualizarPdf(){
+		$orden = $_GET ['id'];
+		$model = new OrdenPlanModelo();
+		$usuario = 0;
+		$dato = $model->obtenerOrdenes($orden,null,$usuario)[0];
+		
+		$html ="<div class='title-block' align='center'>
+   					<h3 class='title'>Ejecución de Tarea de Mantenimiento</h3>
+				</div>
+				<div class='card'>
+					<div class='card-block'>
+						<div class='row'>	
+							<div class='form-group  col-sm-12 border-div' align='center'>				
+								<label class='control-label'><h3>".$dato['marca']." No.".$dato['numero']."</h3></label><br>
+								<label class='control-label'>". $dato['vehiculo_nombre']."</label>
+							</div>				
+						</div>
+						<div class='row match-my-cols'>
+							<div class='form-group  col-sm-4 border-div'>
+								<label class='control-label'>Frecuencia: </label>
+							<div>".
+							 $dato['unidad_numero']."	
+						</div>				
+					</div>
+					<div class='form-group  col-sm-4 border-div '>
+					<label class='control-label'>Tiempo Estimado: </label>
+					<div>".
+					$dato['tiempo_estimado']."
+					</div>
+				</div>
+				<div class='form-group  col-sm-4 border-div'>
+					<label class='control-label'>Estado de la Vehículo/Maquinaria: </label>
+					<div>";
+					if ($dato['atendido'] == 0){	
+			$html .=" Por Atender";						
+					} else {
+			$html .=" Atendido";
+					}
+			$html .= "</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='form-group  col-sm-12 border-div'>
+					<label class='control-label'>Plan de Mantenimiento: </label>
+					<div>".$dato['plan']."
+					</div>
+				</div>
+			</div>	
+			<div class='row match-my-cols'>
+				<div class='form-group  col-sm-4 border-div'>				
+					<label class='control-label'>Herramientas:</label>
+					<div>".
+					htmlspecialchars_decode($dato['herramientas'])."	
+					</div>				
+				</div>				
+				<div class='form-group  col-sm-4 border-div'>				
+					<label class='control-label'>Materiales:</label>
+					<div>".
+					htmlspecialchars_decode($dato['materiales'])."
+					</div>
+				</div>				
+				<div class='form-group  col-sm-4 border-div'>				
+					<label class='control-label'>Equipo:</label>
+					<div>".
+					htmlspecialchars_decode($dato['equipo'])."
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='form-group  col-sm-12 border-div'>				
+					<label class='control-label'>Observaciones:</label>
+					<div>".
+					htmlspecialchars_decode($dato['observaciones'])."	
+					</div>				
+				</div>
+			</div>		
+			<div class='row match-my-cols'>
+				<div class='form-group  col-sm-6 border-div'>
+					<label class='control-label'>Tiempo Ejecución:</label>
+					<div>".$dato['tiempo_ejecucion']."</div>
+				</div>
+				<div class='form-group  col-sm-6 border-div cellMovil'>
+					<label class='control-label'>T&eacute;cnico:</label>					
+					<div>".$dato['nombres']." ".$dato['apellidos']."</div> </br>		
+				</div>
+			</div>
+			<div class='row'>
+				<div class='form-group  col-sm-12 border-div'>
+					<label class='control-label'>Observación:</label>
+				<div>".htmlspecialchars_decode($dato['observacion'])."</div> 
+			</div>
+			</div>
+			</div>	
+		</div>";
+				
+		$options = new Options();
+		$options->set('isHtml5ParserEnabled', true);
+		$dompdf = new Dompdf($options);
+				
+		$dompdf->load_html($html);
+		$dompdf->render();
+		$canvas = $dompdf->get_canvas();
+		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
+		$canvas->page_text(270, 770, "Copyright © 2017 - SAM - W&L", null, 6, array(0,0,0)); //footer
+		$dompdf->stream('orden'.$dato['id'], array("Attachment"=>false));		
+	}
 }

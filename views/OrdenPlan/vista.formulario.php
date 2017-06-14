@@ -8,6 +8,11 @@
 	<div class="card-block">
 		<form id="frmOrdenPlan" method="post" action="../guardar/" >
 			<div class="row">	
+				<div class="form-group  col-sm-12" align="right">
+					<a href="../visualizarPdf/<?php echo $dato['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+				</div>
+			</div>						
+			<div class="row">	
 				<div class="form-group  col-sm-12 border-div " align="center">				
 					<label class="control-label"><h3><?php echo $dato['marca'].' No.'.$dato['numero']?></h3></label><br>
 					<label class="control-label"><?php echo $dato['vehiculo_nombre']?></label>
