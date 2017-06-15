@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `automotriz` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `automotriz`;
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: automotriz
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.04.1
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -79,7 +79,7 @@ CREATE TABLE `novedad` (
 
 LOCK TABLES `novedad` WRITE;
 /*!40000 ALTER TABLE `novedad` DISABLE KEYS */;
-INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','otra pruebqqq','swdsd','zddad','',16,1,16,3,'3 horas','2017-06-11','2017-06-13',1,0,1),(2,1,'no encuiend luces','focos quemados',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-12',NULL,0,0,3),(3,1,'wdsd','asdssasa','xcxcxc',NULL,NULL,NULL,14,1,NULL,3,NULL,'2017-06-12',NULL,0,600,2),(4,1,'','','otra prueba','sdssd','sdsd','',16,1,16,3,'3 horas','2017-06-13','2017-06-13',1,600,2),(5,1,'otro problem','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-13',NULL,0,750,0);
+INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','otra pruebqqq','swdsd','zddad','',16,1,16,3,'3 horas','2017-06-11','2017-06-13',1,0,1),(2,1,'no encuiend luces','focos quemados',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-12',NULL,0,0,3),(3,1,'wdsd','asdssasa','xcxcxc','asas','zsasa','sesdsd',14,1,14,3,'3 horas','2017-06-12','2017-06-14',1,600,7),(4,1,'','','otra prueba','sdssd','sdsd','',16,1,16,3,'3 horas','2017-06-13','2017-06-13',1,600,2),(5,1,'otro problem','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-13',NULL,0,750,0);
 /*!40000 ALTER TABLE `novedad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,8 +192,10 @@ DROP TABLE IF EXISTS `tipo_falla`;
 CREATE TABLE `tipo_falla` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(512) NOT NULL,
+  `descripcion` varchar(512) NOT NULL,
+  `eliminado` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +204,7 @@ CREATE TABLE `tipo_falla` (
 
 LOCK TABLES `tipo_falla` WRITE;
 /*!40000 ALTER TABLE `tipo_falla` DISABLE KEYS */;
-INSERT INTO `tipo_falla` VALUES (1,'FAlla 1'),(2,'FAlla 2'),(3,'Otro');
+INSERT INTO `tipo_falla` VALUES (1,'El vehículo no se enciende','El vehículo no se enciende',0),(2,'Nivel de refrigerante bajo','Nivel de refrigerante bajo',0),(3,'Nivel de líquido de frenos bajo','Nivel de líquido de frenos bajo',0),(4,'Nivel de líquido hidráulico bajo','Nivel de líquido hidráulico bajo',0),(5,'Batería descargada','Batería descargada',0),(6,'Presión del neumático inadecuado','Presión del neumático inadecuado',0),(7,'Fugas de aceite','Fugas de aceite',0),(8,'Fugas de combustible','Fugas de combustible',0),(9,'Fugas de refrigerante','Fugas de refrigerante',0),(10,'Halógenos quemados','Halógenos quemados',0),(11,'Ralentí inadecuado','Ralentí inadecuado',0),(12,'Temperatura del motor inadecuado','Temperatura del motor inadecuado',0),(13,'Ruidos extraños','Ruidos extraños',0),(14,'Bandas rotos','Bandas rotos',0),(15,'Paquetes de ballestas rotas','Paquetes de ballestas rotas',0),(16,'Amortiguadores deteriorados','Amortiguadores deteriorados',0),(17,'Gala la dirección al conducir','Gala la dirección al conducir',0),(18,'El vehículo enciende pero no tiene fuerza','El vehículo enciende pero no tiene fuerza',0),(19,'El vehículo enciende pero al acelerar se apaga','El vehículo enciende pero al acelerar se apaga',0),(20,'Luces de testigo se prenden en el tablero de instrumentos','Luces de testigo se prenden en el tablero de instrumentos',0),(21,'No entra la marcha','No entra la marcha',0),(22,'El vehículo  no acelera','El vehículo  no acelera',0),(23,'Se queda pegado el pedal del embrague','Se queda pegado el pedal del embrague',0),(24,'Elementos extraños incrustados en los neumáticos','Elementos extraños incrustados en los neumáticos',0),(25,'Terminales sucios o sueltos','Terminales sucios o sueltos',0),(26,'Mal funcionamiento de sistema de encendido','Mal funcionamiento de sistema de encendido',0),(27,'Baja compresión en los cilindros','Baja compresión en los cilindros',0),(28,'Defectos en el motor de arranque','Defectos en el motor de arranque',0),(29,'Succión de aire directa','Succión de aire directa',0),(30,'Detonación en los cilindros al exigir potencia al motor','Detonación en los cilindros al exigir potencia al motor',0),(31,'Bujía de mal estado o carbonizado','Bujía de mal estado o carbonizado',0),(32,'Mala sincronización','Mala sincronización',0),(33,'Junta de culata en mal estado','Junta de culata en mal estado',0),(34,'Carbón en la cámara de explosión','Carbón en la cámara de explosión',0),(35,'Válvulas de motor en mal estado y tolerancia','Válvulas de motor en mal estado y tolerancia',0),(36,'Filtros obstruidos','Filtros obstruidos',0),(37,'Bobina quemada','Bobina quemada',0),(38,'Defectos de modulo electrónico','Defectos de modulo electrónico',0),(39,'Conexiones eléctricas sueltas en el circuito de la bobina','Conexiones eléctricas sueltas en el circuito de la bobina',0),(40,'Interruptor de contacto defectuosos','Interruptor de contacto defectuosos',0),(41,'Anillos sincronizadores en mal estado','Anillos sincronizadores en mal estado',0),(42,'Kit de embrague defectuoso','Kit de embrague defectuoso',0),(43,'Palanca de cambios desconectada de su varillaje','Palanca de cambios desconectada de su varillaje',0),(44,'Engranes o ejes rotos de caja de cambios','Engranes o ejes rotos de caja de cambios',0),(45,'Rodamientos de ruedas dañadas','Rodamientos de ruedas dañadas',0),(46,'Engranajes de satélites en mal estado','Engranajes de satélites en mal estado',0),(47,'Retenes o sellos en mal estado','Retenes o sellos en mal estado',0),(48,'Desgaste general de conjunto de la dirección','Desgaste general de conjunto de la dirección',0),(49,'Roturas desgastadas','Roturas desgastadas',0),(50,'Pastillas o forros de friccione zapatas degastados','Pastillas o forros de friccione zapatas degastados',0),(51,'Fallas de servo freno','Fallas de servo freno',0),(52,'Pistones impulsores agarrotados','Pistones impulsores agarrotados',0),(53,'Disco y tambor de freno en mal estado','Disco y tambor de freno en mal estado',0),(54,'Cables o fusibles quemados','Cables o fusibles quemados',0),(55,'Inyectores obstruidos o desgastados','Inyectores obstruidos o desgastados',0),(56,'Turbo de los motores sobrealimentados','Turbo de los motores sobrealimentados',0),(57,'Otros','Otros',0);
 /*!40000 ALTER TABLE `tipo_falla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-13 22:49:43
+-- Dump completed on 2017-06-14 22:47:34

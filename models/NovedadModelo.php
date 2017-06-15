@@ -21,7 +21,7 @@ class NovedadModelo {
 	
 	public function obtenerFallas(){
 		$model = new BaseModelo();
-		$sql = "SELECT * from tipo_falla ";
+		$sql = "SELECT * from tipo_falla where eliminado=0";
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}

@@ -145,6 +145,11 @@
                                     </ul>
                                 </li>
                                 <?php endif;?>
+                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
+                                <li class="<?php echo (strpos($url, '/TipoFalla/listar/'))?'active':'';?>">
+                                    <a href="../../TipoFalla/listar/"> <i class="fa fa-th-list"></i> Tipos Fallas </a>                                    
+                                </li>
+                                <?php endif;?>
                                 <!--  
                                 <li>
                                     <a href="forms.html"> <i class="fa fa-pencil-square-o"></i> Forms </a>
