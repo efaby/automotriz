@@ -134,113 +134,92 @@ class NovedadControlador {
 		header ( "Location: ../listar/" );
 	}
 	
-	public function visualizarPdf11(){
+	public function visualizarPdf(){
 		$novedad = $_GET ['id'];
 		$model = new NovedadModelo();
 		$item = $model->obtenerNovedad($novedad);
 		$html="<html>
 					<head>
-						<style=txt/css>
+						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
+						<style>
 							body {
-							margin: 20px 20px 20px 50px;
-							}
+								margin: 20px 20px 20px 50px; 
+							}				
 							table{
-							border-collapse: collapse; width: 100%;
+							   border-collapse: collapse; width: 100%;
 							}
-								
+							
 							td{
-							border:1px solid #ccc; padding:1px;
-							font-size:9pt;
+							   border:1px solid #ccc; padding:1px;
+							   font-size:9pt;
 							}
-					   </style>						
+						</style>
 					</head>
 					<body>
+						<center><h3>Mantenimiento Correctivo</h3></center>
 						<table width= 100%>
 							<tr>
-								<td><b>Vehículo</b></td>
+								<td colspan=2 align=center><b>DESCRIPCIÓN</b></td>
 							</tr>
 							<tr>
-								<td>". $item['marca'] ." ".$item['marca']. " No. ".$item['numero']."								
+								<td width='25%'><b>Vehículo</b></td>
+								<td>".$item['marca']. " No. ".$item['numero']."
 							</tr>
 							<tr>
-								<td><b>Detalle Problema</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Detalle Problema</b></td>
 								<td>".$item['problema']."</td>
 							</tr>
 							<tr>
-								<td><b>Causa</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Causa</b></td>
 								<td>".$item['causa']."</td>
 							</tr>
 							<tr>
-								<td><b>Falla T&eacute;cnica</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Falla T&eacute;cnica</b></td>
 								<td>".$item['falla']."</td>
 							</tr>
 							<tr>
-								<td><b>Solución</b></td>
+								<td width='25%'><b>Solución</b></td>
+								<td>".$item['solucion']."</td>		
 							</tr>
 							<tr>
-								<td>".$item['solucion']."</td>
-							</tr>
-							<tr>
-								<td><b>Técnico Asignado</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Técnico Asignado</b></td>
 								<td>".$item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']."</td>
 							</tr>
 							<tr>
-								<td><b>Estado</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Estado</b></td>
 								<td>";
 					$html .=($item['atendido']==1)?"Cerrado":"Abierto";
 					$html .="</td></tr>
 							<tr>
-								<td><b>Proceso</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Proceso</b></td>
 								<td>".$item['proceso']."</td>
 							</tr>
 							<tr>
-								<td><b>Elementos</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Elementos</b></td>
 								<td>".$item['elementos']."</td>
 							</tr>
 							<tr>
-								<td>".$item['proceso']."</td>
-							</tr>
-							<tr>
-								<td><b>Observación</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Observación</b></td>
 								<td>".$item['observaciones']."</td>
 							</tr>
 							<tr>
-								<td><b>Técnico Reparador</b></td>
-							</tr>
-							<tr>
+								<td width='25%'><b>Técnico Reparador</b></td>
 								<td>".$item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']."</td>
-							</tr>			
-										
+							</tr>		
 						</table>
 					</body>
 			</html>";
 						
-					$options = new Options();
-					$options->set('isHtml5ParserEnabled', true);
-					$dompdf = new Dompdf($options);
-					
-					$dompdf->load_html($html);
-					$dompdf->render();
-					$canvas = $dompdf->get_canvas();
-					$font = FontMetrics::getFont("helvetica", "bold");
-					$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", $font, 6, array(0,0,0)); //header
-					$canvas->page_text(270, 770, "Copyright © 2017 - SAM - W&L", $font, 6, array(0,0,0)); //footer
-					$dompdf->stream('novedad', array("Attachment"=>false));
+			$options = new Options();
+			$options->set('isHtml5ParserEnabled', true);
+			$dompdf = new Dompdf($options);
+				
+			$dompdf->load_html($html);
+			$dompdf->render();
+			$canvas = $dompdf->get_canvas();
+			$font = FontMetrics::getFont("helvetica", "bold");
+			$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", $font, 6, array(0,0,0)); //header
+			$canvas->page_text(270, 770, "Copyright © 2017 - SAM - W&L", $font, 6, array(0,0,0)); //footer
+			$dompdf->stream('novedad', array("Attachment"=>false));
 	}
 }
