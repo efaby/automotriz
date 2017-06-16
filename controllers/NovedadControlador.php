@@ -217,9 +217,8 @@ class NovedadControlador {
 			$dompdf->load_html($html);
 			$dompdf->render();
 			$canvas = $dompdf->get_canvas();
-			$font = FontMetrics::getFont("helvetica", "bold");
-			$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", $font, 6, array(0,0,0)); //header
-			$canvas->page_text(270, 770, "Copyright © 2017 - SAM - W&L", $font, 6, array(0,0,0)); //footer
+			$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
+			$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
 			$dompdf->stream('novedad', array("Attachment"=>false));
 	}
 }

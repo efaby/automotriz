@@ -25,7 +25,7 @@
 	    	<thead>
 			    <tr>
 			    	<th>ID</th>
-				    <th>Tarea</th>
+				    <th>Actividades</th>
 				    <th>Tiempo Ejecución</th>
 				    <th>Técnico Asignado</th>		
 				    <th>Estado Máquina</th>		     

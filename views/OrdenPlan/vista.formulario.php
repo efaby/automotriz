@@ -46,7 +46,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group  col-sm-12 border-div">
-					<label class="control-label">Plan de Mantenimiento: </label>
+					<label class="control-label">Actividad: </label>
 					<div>
 					<?php echo $dato['plan']?>
 					</div>

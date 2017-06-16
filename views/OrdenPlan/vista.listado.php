@@ -21,7 +21,7 @@
 					    <tr>
 					    	<th>ID</th>
 						    <th>Vehículo/Maq.</th>		    
-						    <th>Plan de Mantenimiento</th>
+						    <th>Actividades</th>
 						    <th>Frecuencia de Mantenimiento</th>
 						    <th>Fecha de Emisión</th>
 						     <th>Fecha de Atención</th>
