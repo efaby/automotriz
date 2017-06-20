@@ -88,10 +88,20 @@
                                 <li class="<?php echo (strpos($url, '/Vehiculo/listar/'))?'active':'';?>">
                                     <a href=""> <i class="fa fa-truck"></i> Automotores <i class="fa arrow"></i> </a>
                                     <ul>                                    	
-                                    	<li><a href=""> Auto. Livianos <i class="fa arrow arrow1" ></i></a>
+                                    	<li><a href=""> A. Livianos Gasolina<i class="fa arrow arrow1" ></i></a>
                                     		<ul>
-                                    			<li><a href="../../Vehiculo/listar/1" class="level2">Gasolina</a></li> 
-                                    			<li><a href="../../Vehiculo/listar/2" class="level2">Diesel</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/1" class="level2">Camioneta 4x2</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/9" class="level2">Camioneta 4x4</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/11" class="level2">SUV 4x2</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/12" class="level2">SUV 4x4</a></li> 
+                                    		</ul>  
+                                    	</li>
+                                    	<li><a href=""> A. Livianos Diesel<i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Vehiculo/listar/2" class="level2">Camioneta 4x2</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/10" class="level2">Camioneta 4x4</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/13" class="level2">SUV 4x2</a></li> 
+                                    			<li><a href="../../Vehiculo/listar/14" class="level2">SUV 4x4</a></li> 
                                     		</ul>  
                                     	</li>    
                                     	<li><a href="../../Vehiculo/listar/3">Auto. Pesados </a></li>      
@@ -108,17 +118,35 @@
                                     </ul>                                    	                                  
                                 </li>
                                 <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Plan/editar/')))?'active':'';?>">
-                                    <a href=""> <i class="fa fa-book"></i> Planes Mantenimiento <i class="fa arrow"></i> </a>
+                                    <a href=""> <i class="fa fa-book"></i> Plan Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
-                                    	<li><a href=""> V. Livianos <i class="fa arrow arrow1" ></i></a>
+                                    	<li><a href=""> V. Livianos Gasolina <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
-                                    			<li><a href="../../Plan/listar/1" class="level2">Gasolina</a></li> 
-                                    			<li><a href="../../Plan/listar/2" class="level2">Diesel</a></li> 
+                                    			<li><a href="../../Plan/listar/1" class="level2">Camioneta 4x2</a></li> 
+                                    			<li><a href="../../Plan/listar/9" class="level2">Camioneta 4x4</a></li>
+                                    			<li><a href="../../Plan/listar/11" class="level2">SUV 4x2</a></li> 
+                                    			<li><a href="../../Plan/listar/12" class="level2">SUV 4x4</a></li> 
+                                    		</ul>  
+                                    	</li>
+                                    	<li><a href=""> V. Livianos Diesel <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Plan/listar/2" class="level2">Camioneta 4x2</a></li> 
+                                    			<li><a href="../../Plan/listar/10" class="level2">Camioneta 4x4</a></li>
+                                    			<li><a href="../../Plan/listar/13" class="level2">SUV 4x2</a></li> 
+                                    			<li><a href="../../Plan/listar/14" class="level2">SUV 4x4</a></li> 
                                     		</ul>  
                                     	</li>    
                                     	      
                                     	<li><a href="../../Plan/listar/3"> Auto. Pesados </a></li>      
-                                    	<li><a href="../../Plan/listar/4"> Maq. Pesada </a></li>                                    	
+                                    	<li><a href=""> Maquinaria Pesada <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Plan/listar/4" class="level2">Rodillo</a></li> 
+                                    			<li><a href="../../Plan/listar/5" class="level2">Retroescabadora</a></li> 
+                                    			<li><a href="../../Plan/listar/6" class="level2">Cargadora</a></li> 
+                                    			<li><a href="../../Plan/listar/7" class="level2">Motoniveladora</a></li> 
+                                    			<li><a href="../../Plan/listar/8" class="level2">Bulldozer</a></li> 
+                                    		</ul>  
+                                    	</li>                                	
                                     </ul>                                    	                                  
                                 </li>
                                 <?php endif;?>
