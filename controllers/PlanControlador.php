@@ -94,7 +94,7 @@ class PlanControlador {
 						</style>
 					</head>
 					<body>
-						<center><h3>Listado de ".$tipo['descripcion']."</h3></center>
+						<center><h3>Listado de Planes de Mantenimiento<br>".$tipo['descripcion']."</h3></center>
 						<table width= 100%>
 							 <tr>
 						    	<td><b>ID</b></td>
