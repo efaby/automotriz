@@ -53,6 +53,7 @@
 		    		echo "<td>".$item['estado']." </td>";
 		    		$id = $tipo['id']."-".$item['id'];
 		    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>
+							  <a href='../visualizarFicha/".$id."' target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-info-circle'></i></a>
 							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
 		    	}?>
 		    </tbody>

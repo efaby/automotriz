@@ -25,7 +25,7 @@ class VehiculoControlador {
 		$tipo = $arrayId[0];
 		$usuarios = $model->obtenerConductores($tipo);
 		$medida = "Kilometros";
-		if(($tipo>3)&&($tipo<9)){
+		if($tipo>3){
 			$medida = "Horas";
 		}		
 		$estados = $model->obtenerEstadoVehiculo();		
@@ -133,5 +133,100 @@ class VehiculoControlador {
 		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
 		$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
 		$dompdf->stream('vehiculo', array("Attachment"=>false));
+	}
+	
+	public function visualizarFicha(){
+		$model = new VehiculoModelo();
+		$arrayId = explode('-', $_GET['id']);
+		$vehiculo = $model->obtenerVehiculo($arrayId[1]);
+		$tipo_id = $arrayId[0];
+		$usuarios = $model->obtenerConductores($tipo_id);
+		foreach ($usuarios as $dato) {
+			if($vehiculo['usuario_id']==$dato['id']){
+				$nombres = $dato['nombres']. " ".$dato['apellidos'];
+			}
+		}
+		$medida = "Kilometros";
+		if($tipo_id>3 && $tipo_id<9){
+			$medida = "Horas";
+		}
+		$estados = $model->obtenerEstadoVehiculo();
+		foreach ($estados as $estado) {
+			if($vehiculo['estado_vehiculo_id']==$estado['id']){
+				$estado_nombre = $estado['nombre'];
+			}
+		}
+		$tipo = $model->obtenerTipo($tipo_id);
+		$html="<html>
+					<head>
+						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
+						<style>
+						body {
+						margin: 20px 20px 20px 50px;
+						}
+						table{
+						border-collapse: collapse; width: 100%;
+						}
+	
+						td{
+						border:1px solid #ccc; padding:1px;
+						font-size:9pt;
+						}
+						</style>
+					</head>
+					<body>
+						<center><h3>Ficha Técnica de Vehículo</h3></center>
+						<table width= 100%>
+							<tr>
+								<td colspan=4 align=center><b> ".$tipo['nombre']."</b></td>
+							</tr>
+							<tr><td width='25%'><b>";
+		if ($tipo<=3)
+			$html .="Conductor";
+			else
+				$html .="Operador";
+				$html .="</b></td>
+								<td>".$nombres."</td>
+								<td width='25%'><b>Marca</b></td>
+								<td>".$vehiculo['marca']."</td>
+							</tr>
+							<tr>
+								<td width='25%'><b>Modelo</b></td>
+								<td>".$vehiculo['modelo']."</td>
+								<td width='25%'><b>Número</b></td>
+								<td>".$vehiculo['numero']."</td>
+							</tr>
+							<tr>
+								<td width='25%'><b>Placa</b></td>
+								<td>".$vehiculo['placa']."</td>
+								<td width='25%'><b>Número Motor</b></td>
+								<td>".$vehiculo['numero_motor']."</td>
+							</tr>
+							<tr>
+								<td width='25%'><b>Número Chasis</b></td>
+								<td>".$vehiculo['numero_chasis']."</td>
+								<td width='25%'><b>Año Fabricación</b></td>
+								<td>".$vehiculo['anio']."</td>
+							</tr>
+							<tr>
+								<td width='25%'><b>".$medida."</b></td>
+								<td>".$vehiculo['medida_uso']."</td>
+								<td width='25%'><b>Estado</b></td>
+								<td>".$estado_nombre."</td>
+							</tr>
+						</table>
+					</body>
+				</html>";
+	
+				$options = new Options();
+				$options->set('isHtml5ParserEnabled', true);
+				$dompdf = new Dompdf($options);
+	
+				$dompdf->load_html($html);
+				$dompdf->render();
+				$canvas = $dompdf->get_canvas();
+				$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
+				$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
+				$dompdf->stream('vehiculo', array("Attachment"=>false));
 	}
 }
