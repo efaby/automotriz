@@ -5,6 +5,7 @@ use Dompdf\FontMetrics;
 
 require_once (PATH_MODELOS . "/NovedadModelo.php");
 require_once (PATH_MODELOS . "/VehiculoModelo.php");
+require_once (PATH_MODELOS . "/RegistroModelo.php");
 require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
 require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
 
@@ -26,11 +27,8 @@ class NovedadControlador {
 		$novedad ['usuario_registra'] = $_SESSION['SESSION_USER']['id'];		
 		$novedad ['fecha_ingreso'] = date('Y-m-d');
 		$novedad ['tipo_falla_id'] = 0;
+		$novedad ['kilometraje'] = $_POST ['numero_ingreso'];
 		
-		$modelVehiculo = new VehiculoModelo();
-		
-		$vehiculo = $modelVehiculo->obtenerVehiculo($novedad ['vehiculo_id']);
-		$novedad ['kilometraje'] = $vehiculo ['medida_uso'];
 		
 		$model = new NovedadModelo(); 
 		try {
@@ -43,6 +41,19 @@ class NovedadControlador {
 		header ( "Location: ../ingreso/" );
 	}
 
+	public function obtenerVehiculo(){
+		$id = $_POST['id'];
+		$model = new RegistroModelo();
+		$medida_uso = $model->obtenerValidacion($id);
+		$result = array('medida'=>0, 'tipo'=>0);
+		
+		if(count($medida_uso)>0){
+			$result['medida'] = $medida_uso[0]['medida_uso'];
+			$result['tipo'] = $medida_uso[0]['tipo_vehiculo_id'];
+		} 
+		echo json_encode($result);
+	}
+	
 	public function listar() {
 		$model = new NovedadModelo();	
 		$usuario = 0;
@@ -50,7 +61,8 @@ class NovedadControlador {
 		if($_SESSION['SESSION_USER']['tipo_usuario_id'] > 1){
 			$usuario = $_SESSION['SESSION_USER']['id'];
 		}
-		$datos = $model->obtenerlistadoNovedad($usuario);
+		$id = $_GET['id'];
+		$datos = $model->obtenerlistadoNovedad($usuario,$id);
 		$message = "";
 		require_once PATH_VISTAS."/Novedad/view.listado.php";
 	}
@@ -91,7 +103,7 @@ class NovedadControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$_POST ['tipo'] );
 	}
 	
 	public function reparar(){
@@ -131,7 +143,7 @@ class NovedadControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );
+		header ( "Location: ../listar/".$_POST ['tipo'] );
 	}
 	
 	public function visualizarPdf(){

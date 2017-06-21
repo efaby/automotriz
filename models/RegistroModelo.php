@@ -15,7 +15,7 @@ class RegistroModelo {
 	
 	public function obtenerValidacion($vehiculo_id){
 		$model = new BaseModelo();
-		$sql = "SELECT medida_uso FROM vehiculo
+		$sql = "SELECT medida_uso, tipo_vehiculo_id FROM vehiculo
 				where id = ".$vehiculo_id;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);

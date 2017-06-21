@@ -63,6 +63,7 @@
 		
 	<div class="form-group">
 	<input type='hidden' name='id' class='form-control' value="<?php echo $item['ids']; ?>">
+	<input type='hidden' name='tipo' class='form-control' value="<?php echo $item['tipo_vehiculo_id']; ?>">
 		<button type="submit" class="btn btn-success rounded" id="saveReparar">Guardar</button>
 	</div>
 

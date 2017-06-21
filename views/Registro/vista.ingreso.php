@@ -40,9 +40,8 @@
 		<label class="control-label" id="kilometros">		
 		</label> <br>
 			<label class="control-label">
-				<?php if ($vehiculos[0]['plan'] < 4){ ?> 
-					Kilometros
-					
+				<?php if (($vehiculos[0]['plan'] < 4)&&($vehiculos[0]['plan'] > 8)){ ?> 
+					Kilometros					
 				<?php $texto = "Kilometros"; } else {?>
 					Horas	
 				<?php $texto = "Horas"; } ?>

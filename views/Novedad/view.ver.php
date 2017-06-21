@@ -102,7 +102,7 @@
 	</div>
 
 	<div class="form-group col-sm-12">
-	<a href="../listar/" class="btn btn-info rounded"  >
+	<a href="../listar/<?php echo $item['tipo_vehiculo_id'];?>" class="btn btn-info rounded"  >
 			Regresar
 		</a>
 </div>

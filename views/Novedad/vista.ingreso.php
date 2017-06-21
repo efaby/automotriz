@@ -28,6 +28,13 @@
 		</div>
 	</div>
 	<div class="form-group col-sm-12">
+		<div class="form-group  col-sm-6 row-padding">
+			<label class="control-label" id="label"> Medida				
+			</label> 
+			<input type='text' id='numero_ingreso' name='numero_ingreso' class='form-control' value="">					
+		</div>	
+	</div>
+	<div class="form-group col-sm-12">
 		<div class="form-group  col-sm-6 row-padding" >
 			<label class="control-label">Detalle Problema</label>
 			<textarea name='problema' id='problema' class='form-control' ></textarea>	
@@ -42,6 +49,7 @@
 	
 	<div class="form-group col-sm-12">
 		<input type='hidden' name='id' class='form-control' value="">
+		<input type='hidden' name='valor' id="valor" value="0">
 		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 </form>
@@ -55,6 +63,26 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+
+	$('#vehiculo_id').change(function(){
+		$("#vehiculo_id option:selected").each(function () {
+	         opcion=$(this).val();
+	         $.post("../obtenerVehiculo/", { id: opcion }, function(data){
+		         var result = JSON.parse(data);
+		         $("#label").html(""); 
+		         $("#label").html("Kilometros");  	
+		         if(result.tipo>=4 && result.tipo <= 8){
+		        	 $("#label").html("Horas");  	
+		         }
+		         $("#numero_ingreso").val(result.medida);  	
+	         	$("#valor").val(result.medida);
+	         	
+	         });            
+	     });
+	});
+
+	
 	$('#frmItem').formValidation({
     	message: 'This value is not valid',
 		feedbackIcons: {
@@ -69,7 +97,24 @@ $(document).ready(function() {
 						message: 'Seleccione un Vehículo/Maquinaria'
 					}
 				}
-			},			
+			},	
+			numero_ingreso: {
+				validators: {
+					notEmpty: {
+						message: 'El número de ingreso no puede ser vacío.'
+					},
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: 'Ingrese un número válido.'
+					},
+					between: {
+                        min: 'valor',
+                        max: 1000000,
+                        message: 'El valor ingresado no puede ser menor que el valor Actual.'
+                    }
+	
+				}
+			},		
 			problema: {
 				message: 'El Problema no es válido',				
 				validators: {	notEmpty: {
