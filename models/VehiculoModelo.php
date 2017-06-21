@@ -8,9 +8,13 @@ require_once(PATH_MODELOS."/BaseModelo.php");
  */
 class VehiculoModelo {
 	
-	public function obtenerListadoVehiculos(){
+	public function obtenerListadoVehiculos($tipo_id=null){
 		$model = new BaseModelo();	
-		$tipo = $_GET['id'];	
+		if($tipo_id == null){
+			$tipo = $_GET['id'];
+		}else{
+			$tipo = $tipo_id;
+		}			
 		$sql = "select v.*, t.nombre as tipo, u.nombres, u.apellidos, e.nombre as estado 
 				from vehiculo as v 
 				inner join tipo_vehiculo as t on  v.tipo_vehiculo_id = t.id 
@@ -20,9 +24,13 @@ class VehiculoModelo {
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	
-	public function obtenerTipo()
+	public function obtenerTipo($tipo_id=null)
 	{
-		$tipo = $_GET['id'];
+		if($tipo_id == null){
+			$tipo = $_GET['id'];
+		}else{
+			$tipo = $tipo_id;
+		}
 		$model = new BaseModelo();	
 		$sql = "select * from tipo_vehiculo where id = ".$tipo;
 		$result = $model->ejecutarSql($sql);
