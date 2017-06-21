@@ -59,7 +59,7 @@ class RegistroControlador {
 		try {
 			$datos = $model->guardarRegistro($registro);
 			
-			if($tipo < 4){ // kilometros
+			if(($tipo < 4)||($tipo > 8)){ // kilometros
 				$numero = $numero  - $vehiculo['medida_uso'];
 					
 			}

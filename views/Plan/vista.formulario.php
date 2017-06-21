@@ -55,7 +55,7 @@
 			</div>
 			<div class="form-group  col-sm-1 row-padding">	
 				<br><br>
-				<?php if ($tipo <4){ ?>
+				<?php if (($tipo <4)||($tipo >8)){ ?>
 				<b>Kilometros</b>
 				<input type='hidden' name='unidad_id' class='form-control' value="1">
 				<?php }else{ ?>
@@ -69,7 +69,7 @@
 			</div>
 			<div class="form-group col-sm-2 row-padding">
 				<br><br><b>
-					<?php if ($tipo <4){ ?>
+					<?php if (($tipo <4)||($tipo >8)){ ?>
 						Kilometros							
 					<?php }else{ ?>
 						Horas

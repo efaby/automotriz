@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="form-group  col-sm-6">
-		<label class="control-label"><?php if($tipo<=3): $title1 = "Conductor"; ?>Conductor<?php else: $title1 = "Operador";?> Operador <?php endif;?></label>
+		<label class="control-label"><?php if(($tipo<=3)||($tipo>=9)): $title1 = "Conductor"; ?>Conductor<?php else: $title1 = "Operador";?> Operador <?php endif;?></label>
 		<select class='form-control' name="usuario_id" id="usuario_id">
 			<option value="" >Seleccione</option>
 		<?php foreach ($usuarios as $dato) { ?>

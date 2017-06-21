@@ -25,7 +25,7 @@ class VehiculoControlador {
 		$tipo = $arrayId[0];
 		$usuarios = $model->obtenerConductores($tipo);
 		$medida = "Kilometros";
-		if($tipo>3){
+		if(($tipo>3)&&($tipo<9)){
 			$medida = "Horas";
 		}		
 		$estados = $model->obtenerEstadoVehiculo();		

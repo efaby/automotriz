@@ -36,10 +36,10 @@
 				<div class="form-group  col-sm-4 border-div">
 					<label class="control-label">Estado de la Vehículo/Maquinaria: </label>
 					<div>
-					<?php if ($dato['atendido'] == 0){?>	
-						Por Atender
+					<?php if ($dato['estado_maquina'] == 0){?>	
+						Apagado
 					<?php } else {?>
-						Atendido
+						Prendido
 					<?php }?>
 					</div>
 				</div>
@@ -74,18 +74,27 @@
 			</div>
 			<div class="row">
 				<div class="form-group  col-sm-12 border-div">				
-					<label class="control-label">Observaciones:</label>
+					<label class="control-label">Procedimiento:</label>
+					<div>
+					<?php echo htmlspecialchars_decode($dato['procedimiento']);?>	
+					</div>				
+				</div>
+			</div>	
+			<div class="row">
+				<div class="form-group  col-sm-12 border-div">				
+					<label class="control-label">Nota:</label>
 					<div>
 					<?php echo htmlspecialchars_decode($dato['observaciones']);?>	
 					</div>				
 				</div>
-			</div>		
+			</div>
+						
 			<div class="row match-my-cols" >
 				<div class="form-group  col-sm-6 border-div">
 					<label class="control-label">Tiempo Ejecución:</label>
 					<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 					<input type='text' name='tiempo_ejecucion' id='tiempo_ejecucion' class='form-control' value="">
-					<?php } else { echo "<div>".$dato['tiempo_ejecucion']."</div>"; }?>						
+					<?php } else { if($dato['atendido'] == 0){ echo "<div>Por Atender</div> "; } else {  echo "<div>".$dato['tiempo_ejecucion']."</div>"; }}?>						
 				</div>
 				<div class="form-group  col-sm-6 border-div cellMovil">
 					<label class="control-label">T&eacute;cnico:</label>
@@ -104,14 +113,15 @@
 			<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 			<div class="form-group" style="margin-top: 15px;">
 				<input type='hidden' name='id' class='form-control' value="<?php echo $dato['id']; ?>">
+				<input type='hidden' name='tipo' class='form-control' value="<?php echo $dato['tipo_vehiculo_id']; ?>">
 				<button type="submit" class="btn btn-success rounded">Guardar</button>
-				<a href="../listar/" class="btn btn-info rounded"  >
+				<a href="../listar/<?php echo $dato['tipo_vehiculo_id'];?>" class="btn btn-info rounded"  >
 			Regresar
 		</a>
 			</div>	
 			<?php } else { ?>	
 			<div class="form-group" style="margin-top: 15px;">
-				<a href="../listar/" class="btn btn-info rounded"  >
+				<a href="../listar/<?php echo $dato['tipo_vehiculo_id'];?>" class="btn btn-info rounded"  >
 			Regresar
 		</a>
 			</div>

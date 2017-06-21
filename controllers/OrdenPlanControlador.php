@@ -15,7 +15,8 @@ class OrdenPlanControlador {
 		if($_SESSION['SESSION_USER']['tipo_usuario_id'] > 1){
 			$usuario = $_SESSION['SESSION_USER']['id'];
 		}
-		$datos = $model->obtenerOrdenes(null, null,$usuario);
+		$id = $_GET['id'];
+		$datos = $model->obtenerOrdenes(null, null,$usuario, $id);
 		$message = "";
 		require_once PATH_VISTAS."/OrdenPlan/vista.listado.php";
 	}
@@ -24,7 +25,7 @@ class OrdenPlanControlador {
 		$arrayId = explode('-', $_GET['id']);
 		$model = new OrdenPlanModelo();
 		$usuario = 0;
-		$dato = $model->obtenerOrdenes($arrayId[0], $arrayId[1],$usuario)[0];
+		$dato = $model->obtenerOrdenes($arrayId[0], $arrayId[1],$usuario,0)[0];
 		$ban = $arrayId[1];
 		$message = "";		
 		require_once PATH_VISTAS."/OrdenPlan/vista.formulario.php";		
@@ -46,15 +47,16 @@ class OrdenPlanControlador {
 		} catch ( Exception $e ) {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
-		header ( "Location: ../listar/" );					
+		header ( "Location: ../listar/".$_POST ['tipo'] );					
 	}
 	
 	public function visualizarPdf(){
 		$orden = $_GET ['id'];
 		$model = new OrdenPlanModelo();
 		$usuario = 0;
-		$dato = $model->obtenerOrdenes($orden,null,$usuario)[0];
-		$atendido = ($dato['atendido']==0)?'Por Atender':'Atendido';
+		$dato = $model->obtenerOrdenes($orden,null,$usuario,0)[0];
+		$atendido = ($dato['estado_maquina']==0)?'Apagado':'Prendido';
+		$tiempo = ($dato['atendido']==0)?'Por Atender':$dato['tiempo_ejecucion'];
 		$html ="<html>
 					<head>
 						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
@@ -95,10 +97,13 @@ class OrdenPlanControlador {
 								<td style='vertical-align: top'><b>Equipo: </b><br>".htmlspecialchars_decode($dato['equipo'])."</td>
 							</tr>
 							<tr>
-								<td colspan=3 > <b>Observaciones: </b><br><br>".htmlspecialchars_decode($dato['observaciones'])."</td>
+								<td colspan=3 > <b>Procedimiento: </b><br><br>".htmlspecialchars_decode($dato['procedimiento'])."</td>
 							</tr>
 							<tr>
-								<td> <b>Tiempo Ejecución: </b><br><br>".$dato['tiempo_ejecucion']." </td>								
+								<td colspan=3 > <b>Nota: </b><br><br>".htmlspecialchars_decode($dato['observaciones'])."</td>
+							</tr>
+							<tr>
+								<td> <b>Tiempo Ejecución: </b><br><br>".$tiempo." </td>								
 								<td colspan=2 > <b>T&eacute;cnico: </b><br><br>".$dato['nombres']." ".$dato['apellidos']."</td>
 							</tr>
 							<tr>

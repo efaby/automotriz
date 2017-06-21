@@ -3,7 +3,7 @@
 
 <!-- Main row -->
 <div class="title-block">
-    <h1 class="title"> Registro <?php if ($vehiculos[0]['plan'] < 4){ ?>  Odometro - Kilometraje <?php } else { ?> Hormotero - Horas<?php }?></h1>
+    <h1 class="title"> Registro <?php if (($vehiculos[0]['plan'] < 4)||($vehiculos[0]['plan'] > 8)){ ?>  Odometro - Kilometraje <?php } else { ?> Hormotero - Horas<?php }?></h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -40,7 +40,7 @@
 		<label class="control-label" id="kilometros">		
 		</label> <br>
 			<label class="control-label">
-				<?php if (($vehiculos[0]['plan'] < 4)&&($vehiculos[0]['plan'] > 8)){ ?> 
+				<?php if (($vehiculos[0]['plan'] < 4)||($vehiculos[0]['plan'] > 8)){ ?> 
 					Kilometros					
 				<?php $texto = "Kilometros"; } else {?>
 					Horas	
