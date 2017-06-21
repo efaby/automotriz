@@ -20,6 +20,13 @@
 				<i class="glyphicon glyphicon-plus"></i> Añadir
 			</a>			
 	    </div>
+	    <div class="row">	
+			<div class="form-group  col-sm-12" align="right">
+				<?php if (count($datos)>0){?>
+				<a href="../visualizarPdf/<?php echo $tipo['plan_mantenimiento']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+				<?php }?>
+			</div>
+		</div>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-hover" id="dataTables-example">    
 	    	<thead>

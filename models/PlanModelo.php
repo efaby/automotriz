@@ -3,8 +3,12 @@ require_once(PATH_MODELOS."/BaseModelo.php");
 
 class PlanModelo {
 
-	public function obtenerListadoPlan(){
-		$tipo = $_GET['id'];
+	public function obtenerListadoPlan($tipo_id=null){
+		if($tipo_id==null){
+			$tipo = $_GET['id'];
+		}else{
+			$tipo = $tipo_id;
+		}
 		$model = new BaseModelo();
 		$sql = "select p.*, u.nombres, u.apellidos from plan_mantenimiento as p	
 				inner join usuario as u on u.id = p.tecnico_id
