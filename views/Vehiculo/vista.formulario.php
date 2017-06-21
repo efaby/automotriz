@@ -17,24 +17,30 @@
 		<input type='text'
 			name='marca' class='form-control'
 			value="<?php echo $vehiculo['marca']; ?>">
-
 	</div>
 </div>
 <div class="row">
+	<div class="form-group col-sm-6">
+		<label class="control-label">Modelo</label>
+		<input type='text'
+			name='modelo' class='form-control'
+			value="<?php echo $vehiculo['modelo']; ?>">
+
+	</div>
 	<div class="form-group col-sm-6">
 		<label class="control-label">Número</label> <input type='text'
 			name='numero' class='form-control'
 			value="<?php echo $vehiculo['numero']; ?>">
 
 	</div>
+</div>
+<div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Placa</label> <input type='text'
 			name='placa' class='form-control'
 			value="<?php echo $vehiculo['placa']; ?>">
 
 	</div>
-</div>
-<div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Número Motor</label>
 		<input type='text'
@@ -42,7 +48,8 @@
 			value="<?php echo $vehiculo['numero_motor']; ?>">
 
 	</div>
-	
+</div>
+<div class="row">	
 	<div class="form-group  col-sm-6">
 		<label class="control-label">Número Chasis</label>
 		<input type='text'
@@ -50,24 +57,22 @@
 			value="<?php echo $vehiculo['numero_chasis']; ?>">
 
 	</div>
-</div>
-<div class="row">
-	<div class="form-group col-sm-4">
+	<div class="form-group col-sm-6">
 		<label class="control-label">Año Fabricación</label>
 		<input type='text'
 			name='anio' class='form-control'
 			value="<?php echo $vehiculo['anio']; ?>">
-
 	</div>
-	
-	<div class="form-group  col-sm-4">
+</div>
+<div class="row">	
+	<div class="form-group  col-sm-6">
 		<label class="control-label"><?php echo $medida; ?></label>
 		<input type='text'
 			name='medida_uso' class='form-control'
 			value="<?php echo $vehiculo['medida_uso']; ?>">
 
 	</div>
-	<div class="form-group  col-sm-4">
+	<div class="form-group  col-sm-6">
 		<label class="control-label">Estado</label>
 		<select class='form-control' name="estado_vehiculo_id">
 			<option value="" >Seleccione</option>
@@ -153,8 +158,7 @@ $(document).ready(function() {
 						message: 'Ingrese un Número de Chasis válido.'
 					}
 				}
-			},
-			
+			},			
 			marca: {
 				message: 'La Marca no es válida',
 				validators: {
@@ -167,6 +171,15 @@ $(document).ready(function() {
 					}
 				}
 			},
+			modelo: {
+				message: 'El modelo no es válida',
+				validators: {
+					regexp: {
+						regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9_ -\.]+$/,
+						message: 'Ingrese un Modelo válido.'
+					}
+				}
+			},			
 			numero: {
 				message: 'El Número no es válido',
 				validators: {

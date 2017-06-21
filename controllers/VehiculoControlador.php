@@ -39,6 +39,7 @@ class VehiculoControlador {
 		$vehiculo ['tipo_vehiculo_id'] = $_POST ['tipo_vehiculo_id'];
 		$vehiculo ['usuario_id'] = $_POST ['usuario_id'];
 		$vehiculo ['marca'] = $_POST ['marca'];
+		$vehiculo ['modelo'] = $_POST ['modelo'];
 		$vehiculo ['estado_vehiculo_id'] = $_POST ['estado_vehiculo_id'];
 		$vehiculo ['numero'] = $_POST ['numero'];
 		$vehiculo ['placa'] = $_POST ['placa'];
