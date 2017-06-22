@@ -181,10 +181,12 @@ class VehiculoControlador {
 								<td colspan=4 align=center><b> ".$tipo['nombre']."</b></td>
 							</tr>
 							<tr><td width='25%'><b>";
-		if ($tipo<=3)
+		if($tipo_id>3 && $tipo_id<9){
 			$html .="Conductor";
-			else
-				$html .="Operador";
+		}else{
+			$html .="Operador";
+		}	
+				
 				$html .="</b></td>
 								<td>".$nombres."</td>
 								<td width='25%'><b>Marca</b></td>
@@ -217,7 +219,8 @@ class VehiculoControlador {
 						</table>
 					</body>
 				</html>";
-	
+
+				
 				$options = new Options();
 				$options->set('isHtml5ParserEnabled', true);
 				$dompdf = new Dompdf($options);
