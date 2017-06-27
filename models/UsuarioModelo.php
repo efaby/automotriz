@@ -10,8 +10,12 @@ class UsuarioModelo {
 	
 	private $patron = "_-_-";
 
-	public function obtenerListadoUsuarios(){
-		$tipo = $_GET['id'];
+	public function obtenerListadoUsuarios($tipo_id=null){
+		if($tipo_id == null){
+			$tipo = $_GET['id'];
+		}else{
+			$tipo = $tipo_id;
+		}
 		$model = new BaseModelo();		
 		$sql = "select u.id, u.identificacion,  u.nombres, u.apellidos, u.email,u.usuario,  t.nombre as tipo_usuario 
 						from usuario as u 
@@ -21,9 +25,14 @@ class UsuarioModelo {
 		return $model->obtenerCampos($result);
 	}	
 	
-	public function obtenerTipo()
+	public function obtenerTipo($tipo_id=null)
 	{
-		$tipo = $_GET['id'];
+		if($tipo_id == null){
+			$tipo = $_GET['id'];
+		}else{
+			$tipo = $tipo_id;
+		}
+		
 		$model = new BaseModelo();	
 		$sql = "select * from tipo_usuario where id = ".$tipo;
 		$result = $model->ejecutarSql($sql);

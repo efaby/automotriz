@@ -16,6 +16,13 @@
 		<?php endif;?>
 <div class="card">
 	<div class="card-block">
+		<div class="row">	
+			<div class="form-group  col-sm-12" align="right">
+				<?php if (count($datos)>0){?>
+				<a href="../visualizarPdf/<?php echo $tipo['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+				<?php }?>
+			</div>
+		</div>		
 		<div class="card-title-block">
 			<button class="btn btn-primary rounded" id="modalOpen1" onclick="javascript: loadModal('<?php echo  $tipo['id'].'-0';?>')">
 				<i class="glyphicon glyphicon-plus"></i> Añadir
