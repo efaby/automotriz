@@ -73,7 +73,7 @@ class VehiculoModelo {
 		$sql = "select u.id, u.nombres, u.apellidos
 				from usuario as u
 				inner join tipo_vehiculo as t on u.tipo_usuario_id = t.tipo_conductor
-				where u.eliminado=0 and t.id = ".$tipo;
+				where u.eliminado=0 and u.vehiculos < 2 and  t.id = ".$tipo;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}
@@ -89,8 +89,13 @@ class VehiculoModelo {
 	}
 	
 	public function eliminarVehiculo($vehiculo){
-
 		$sql = "update vehiculo set eliminado = 1 where id = ".$vehiculo;
+		$model = new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+	}
+	
+	public function updateUsuario($usuarioId,$item){	
+		$sql = "update usuario set vehiculos = vehiculos ".$item." where id = ".$usuarioId;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 	}

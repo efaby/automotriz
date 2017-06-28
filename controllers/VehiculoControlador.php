@@ -4,7 +4,7 @@ use Dompdf\Dompdf;
 require_once (PATH_MODELOS . "/VehiculoModelo.php");
 require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
 require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
-
+require_once (PATH_MODELOS . "/UsuarioModelo.php");
 /**
  * Controlador de Vehiculos
  */
@@ -24,8 +24,24 @@ class VehiculoControlador {
 		$vehiculo = $model->obtenerVehiculo($arrayId[1]);
 		$tipo = $arrayId[0];
 		$usuarios = $model->obtenerConductores($tipo);
+		if($arrayId[1]>0){
+			$modelUser = new UsuarioModelo();
+			$user = $modelUser->obtenerUsuario($vehiculo['usuario_id']);
+			$users = array();
+			$ban = true;
+			foreach ($usuarios as $item){
+				if($item["id"] == $user["id"]){
+					$ban = false;
+				}
+				$users[] = $item;
+			}
+			if($ban){
+				$users[count($users)] = $user;
+			}
+			$usuarios = $users;
+		}
 		$medida = "Kilometros";
-		if($tipo>3){
+		if($tipo>3 && $tipo < 9){
 			$medida = "Horas";
 		}		
 		$estados = $model->obtenerEstadoVehiculo();		
@@ -48,7 +64,13 @@ class VehiculoControlador {
 		$vehiculo ['numero_chasis'] = $_POST ['numero_chasis'];
 		$vehiculo ['medida_uso'] = $_POST ['medida_uso'];
 		$model = new VehiculoModelo();
+		$conductor = $_POST ['conductor'];
+		if($conductor > 0 && $conductor != $vehiculo ['usuario_id']){
+			$model->updateUsuario($conductor, "- 1");
+		}
+		
 		try {
+			$model->updateUsuario($vehiculo ['usuario_id'], "+ 1");
 			$datos = $model->guardarVehiculo( $vehiculo );
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
 		} catch ( Exception $e ) {

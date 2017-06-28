@@ -88,6 +88,7 @@
 	<div class="form-group">
 	<input type='hidden' name='id' value="<?php echo $vehiculo['id']; ?>">
 	<input type='hidden' name='tipo_vehiculo_id' value="<?php echo $tipo; ?>">
+	<input type='hidden' name='conductor' value="<?php echo $vehiculo['usuario_id']; ?>">
 		<button type="submit" class="btn btn-success rounded">Guardar</button>
 	</div>
 
