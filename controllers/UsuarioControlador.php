@@ -95,18 +95,16 @@ class UsuarioControlador {
 								<td><b>Tipo Usuario</b></td>							    
 							</tr>";
 						foreach ($datos as $item) {
-							echo "<tr><td>".$item['identificacion']."</td>";
-							echo "<td>".$item['nombres']."</td>";
-							echo "<td>".$item['apellidos']."</td>";
-							echo "<td>".$item['usuario']."</td>";
-							echo "<td>".$item['email']."</td>";
-							echo "<td>".$item['tipo_usuario']." </td></tr>";						
+					$html .= "<tr><td>".$item['identificacion']."</td>
+							      <td>".$item['nombres']."</td>
+								  <td>".$item['apellidos']."</td>
+								  <td>".$item['usuario']."</td>
+								  <td>".$item['email']."</td>
+								  <td>".$item['tipo_usuario']." </td></tr>";						
 						}
 		$html .="		</table>
 					</body>
 				</html>";
-		print_r($html);
-		exit();
 		$options = new Options();
 		$options->set('isHtml5ParserEnabled', true);
 		$dompdf = new Dompdf($options);
