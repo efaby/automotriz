@@ -4,6 +4,7 @@ use Dompdf\Dompdf;
 require_once (PATH_MODELOS . "/PlanModelo.php");
 require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
 require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
+require_once (PATH_HELPERS. "/File.php");
 
 
 class PlanControlador {
@@ -40,6 +41,7 @@ class PlanControlador {
 		$plan ['unidad_numero'] = $_POST ['unidad_numero'];
 		$plan ['alerta_numero'] = $_POST ['alerta_numero'];
 		$plan ['tipo_id'] = $_POST ['tipo'];
+		$plan ['url'] = $this->uploadFile('plan','planes');		
 		
 		$model = new PlanModelo();
 		try {
@@ -52,6 +54,16 @@ class PlanControlador {
 		
 	}
 	
+	private function uploadFile($nombre,$carpeta){
+		$upload = new File();
+		return $upload->uploadFile($nombre,$carpeta);
+	}
+	
+	public function downloadFile(){
+		$nombre = $_GET['id'];
+		$upload = new File();
+		return $upload->download($nombre,'practicas');
+	}
 	public function eliminar() {
 		$model = new PlanModelo();
 		$arrayId = explode('-', $_GET['id']);

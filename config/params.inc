@@ -16,7 +16,7 @@
 	define('PATH_IMAGES_USER',  "../../assets/images/users/");
 	define('PATH_FILES_USER',  "../../files/");	
 	
-	define('PATH_FILES', PATH_ROOT."/web/files/");
+	define('PATH_FILES', PATH_ROOT."/public/web/files/");
 	define('PATH_FILES_IMAGE', PATH_ROOT."/web/assets/images/users/");
 	define('PATH_HELPERS', PATH_ROOT."/libs");	
 	define('PUBLIC_URLS', serialize(array('Seguridadmostrar','APIAPIRest','Seguridadvalidar','Seguridaderror404','Seguridaderror403','Seguridaderror500')));

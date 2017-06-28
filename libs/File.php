@@ -55,7 +55,7 @@ class File {
 	}
 	
 	private function uploadFileToServer($prefix,$key,$path){
-		
+
 		$name = $_FILES[$key]['name'];
 		$name_tmp = $_FILES[$key]['tmp_name'];
 		$name = explode('.', $name);

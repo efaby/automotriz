@@ -5,6 +5,7 @@ use Dompdf\FontMetrics;
 require_once (PATH_MODELOS . "/OrdenPlanModelo.php");
 require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
 require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
+require_once (PATH_HELPERS. "/File.php");
 
 
 class OrdenPlanControlador {
@@ -123,5 +124,11 @@ class OrdenPlanControlador {
 		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
 		$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
 		$dompdf->stream('orden'.$dato['id'], array("Attachment"=>false));		
+	}
+	
+	public function downloadFile(){
+		$nombre = $_GET['id'];
+		$upload = new File();
+		return $upload->download($nombre,'practicas');
 	}
 }

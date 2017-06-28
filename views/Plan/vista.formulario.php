@@ -6,7 +6,7 @@
 <div class="card">
 	<div class="card-block">
 		<div class="row">
-		<form id="frmItem" method="post" action="../guardar/">
+		<form id="frmItem" method="post" action="../guardar/" enctype="multipart/form-data">
 		<div class="form-group  col-sm-12">
 			<div class="form-group  col-sm-6 row-padding">
 				<label class="control-label">Actividad</label>
@@ -109,6 +109,18 @@
 		        </textarea>
 			</div>
 		</div>
+		<div class="form-group col-sm-12">
+			<label class="control-label">Respado Digital</label> 
+			
+			<?php if($item['url'] != ''):?>
+				<input type='file' name='url1' id="url1" class="file">		
+				<a href="../downloadFile/<?php echo $item['url'];?>">Descargar</a>
+				<input type="hidden" name="fileName" value="<?php echo $item['url'];?>">
+			<?php else :?>
+				<input type='file' name='url' id="url" class="file">	
+			<?php endif;?>
+		</div>
+		
 		<div class="form-group col-sm-12">
 			<input type='hidden' name='id' class='form-control' value="<?php echo $item['id']; ?>">
 			<input type='hidden' name='tipo' class='form-control' value="<?php echo $tipo; ?>">
@@ -229,6 +241,25 @@ $(document).ready(function() {
                     
                 }
             },
+            url: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Archivo.'
+					},
+					file: {
+	                    extension: 'pdf',
+	                    message: 'Seleccione un archivo válido. (pdf)'
+	                }
+				}
+			},
+			url1: {
+				validators: {							
+					file: {
+	                    extension: 'pdf',
+	                    message: 'Seleccione un archivo válido. (pdf)'
+	                }
+				}
+			},
             herramientas: {
 				message: 'Las Herramientas no son válidas.',
 				validators: {	
