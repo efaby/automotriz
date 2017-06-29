@@ -122,7 +122,7 @@
                                     <ul>
                                     	<li><a href=""> V. Livianos Gasolina <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
-                                    			<li><a href="../../Plan/listar/1" class="level2">Camioneta 4x2</a></li> 
+                                      			<li><a href="../../Plan/listar/1" class="level2">Camioneta 4x2</a></li> 
                                     			<li><a href="../../Plan/listar/9" class="level2">Camioneta 4x4</a></li>
                                     			<li><a href="../../Plan/listar/11" class="level2">SUV 4x2</a></li> 
                                     			<li><a href="../../Plan/listar/12" class="level2">SUV 4x4</a></li> 
@@ -149,6 +149,39 @@
                                     	</li>                                	
                                     </ul>                                    	                                  
                                 </li>
+                                <li class="<?php echo (strpos($url, '/Reporte/listar/'))?'active':'';?>">
+                                    <a href=""> <i class="fa fa-list-alt"></i> Reportes <i class="fa arrow"></i> </a>
+                                    <ul>                                    	
+                                    	<li><a href=""> A. Livianos Gasolina<i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Reporte/listar/1" class="level2">Camioneta 4x2</a></li> 
+                                    			<li><a href="../../Reporte/listar/9" class="level2">Camioneta 4x4</a></li> 
+                                    			<li><a href="../../Reporte/listar/11" class="level2">SUV 4x2</a></li> 
+                                    			<li><a href="../../Reporte/listar/12" class="level2">SUV 4x4</a></li> 
+                                    		</ul>  
+                                    	</li>
+                                    	<li><a href=""> A. Livianos Diesel<i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Reporte/listar/2" class="level2">Camioneta 4x2</a></li> 
+                                    			<li><a href="../../Reporte/listar/10" class="level2">Camioneta 4x4</a></li> 
+                                    			<li><a href="../../Reporte/listar/13" class="level2">SUV 4x2</a></li> 
+                                    			<li><a href="../../Reporte/listar/14" class="level2">SUV 4x4</a></li> 
+                                    		</ul>  
+                                    	</li>    
+                                    	<li><a href="../../Reporte/listar/3">Auto. Pesados </a></li>      
+                                    	<li><a href=""> Maquinaria Pesada <i class="fa arrow arrow1" ></i></a>
+                                    		<ul>
+                                    			<li><a href="../../Reporte/listar/4" class="level2">Rodillo</a></li> 
+                                    			<li><a href="../../Reporte/listar/5" class="level2">Retroescabadora</a></li> 
+                                    			<li><a href="../../Reporte/listar/6" class="level2">Cargadora</a></li> 
+                                    			<li><a href="../../Reporte/listar/7" class="level2">Motoniveladora</a></li> 
+                                    			<li><a href="../../Reporte/listar/8" class="level2">Bulldozer</a></li> 
+                                    		</ul>  
+                                    	</li>       
+                                    	                                   	
+                                    </ul>                                    	                                  
+                                </li>
+                                
                                 <?php endif;?>
                                   <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']>=3)&&($_SESSION['SESSION_USER']['tipo_usuario_id']<=5)):?>
                                  <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
