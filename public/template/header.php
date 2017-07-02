@@ -266,6 +266,11 @@
                                     <a href="../../TipoFalla/listar/"> <i class="fa fa-th-list"></i> Tipos Fallas </a>                                    
                                 </li>
                                 <?php endif;?>
+                                <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+                                <li class="<?php echo (strpos($url, '/Repuesto/listar/'))?'active':'';?>">
+                                    <a href="../../Repuesto/listar/"> <i class="fa fa-edit"></i> Repuestos </a>                                    
+                                </li>
+                                <?php endif;?>
                                 <!--  
                                 <li>
                                     <a href="forms.html"> <i class="fa fa-pencil-square-o"></i> Forms </a>
