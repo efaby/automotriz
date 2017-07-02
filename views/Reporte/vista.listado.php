@@ -53,7 +53,7 @@
 		    		echo "<td>".$item['estado']." </td>";
 		    		$id = $tipo['id']."-".$item['id'];
 		    		echo "<td align='center'><a href='../verReporte/".$item['id']."-1' class='btn btn-info btn-sm rounded' title='H.C.M.A.' ><i class='fa fa-file-text-o'></i></a>
-							  <a href='../verReporte/".$item['id']."-2' target='_blank' class='btn btn-info btn-sm' title='H.C.P.A.' ><i class='fa fa-file-text-o'></i></a>
+							  <a href='../verReporte/".$item['id']."-2' class='btn btn-info btn-sm' title='H.C.P.A.' ><i class='fa fa-file-text-o'></i></a>
 							  <a href='../verReporte/".$item['id']."-3' class='btn rounded btn-danger btn-sm' title='S.H.F.A.'><i class='fa fa-file-text-o'></i></a></td>";
 		    	}?>
 		    </tbody>
