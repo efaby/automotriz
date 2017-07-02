@@ -55,7 +55,13 @@
 		    		echo "<tr><td>".$item['fecha_emision']."</td>";		    		
 		    		echo "<td>".$item['kilometraje']." " .$variables[1]."</td>";
 		    		echo "<td>".$item['actividad']."</td>";
-		    		echo "<td><a href=''>".$item['id']."</a></td>";
+		    		if ($arrayId[1] ==1){
+		    			$url = "";
+		    		}
+		    		else{
+		    			$url = "../../Novedad/ver/".$item['id'];
+		    		}		    		 
+		    		echo "<td><a href=".$url.">".$item['id']."</a></td>";
 		    		echo "<td> Falta poner".$item['id']."</td>";
 		    		echo "<td>".$item['tiempo_ejecucion']." </td>";
 		    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";		    		
