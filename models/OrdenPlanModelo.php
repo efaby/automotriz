@@ -22,8 +22,8 @@ class OrdenPlanModelo {
 		$sql = "SELECT op.id,v.id as vehiculo_id,tv.nombre as vehiculo_nombre,pm.unidad_numero,
 				pm.tiempo_ejecucion as tiempo_estimado,pm.unidad_id,v.marca,v.numero, pm.procedimiento, pm.estado_maquina,
 				pm.tarea as plan, pm.unidad_numero as frecuencia,op.fecha_emision, op.fecha_atencion,op.atendido,
-				pm.herramientas,pm.materiales,pm.equipo,pm.observaciones,pm.url,
-				op.tiempo_ejecucion,op.observacion, u.nombres, u.apellidos, v.tipo_vehiculo_id
+				pm.herramientas,pm.materiales,pm.equipo,pm.observaciones,pm.url,tv.id as tipo_vehiculo,
+				op.tiempo_ejecucion,op.observacion, u.nombres, u.apellidos, v.tipo_vehiculo_id,v.medida_uso
 				FROM vehiculo as v
 				INNER JOIN tipo_vehiculo as tv ON v.tipo_vehiculo_id=tv.id
 				INNER JOIN vehiculo_plan as vp ON vp.vehiculo_id = v.id

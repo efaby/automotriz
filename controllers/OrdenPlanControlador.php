@@ -39,6 +39,7 @@ class OrdenPlanControlador {
 		$orden ['fecha_atencion'] = date('Y-m-d');
 		$orden ['tecnico_atiende'] = $_SESSION['SESSION_USER']['id'];
 		$orden ['atendido'] = 1;
+		$orden ['kilometraje'] = $_POST ['kilometraje'];
 	
 		$model = new OrdenPlanModelo();
 		try {

@@ -56,7 +56,7 @@
 		    		echo "<td>".$item['kilometraje']." " .$variables[1]."</td>";
 		    		echo "<td>".$item['actividad']."</td>";
 		    		if ($arrayId[1] ==1){
-		    			$url = "";
+		    			$url = "../../OrdenPlan/editar/".$item['id']."-1";
 		    		}
 		    		else{
 		    			$url = "../../Novedad/ver/".$item['id'];

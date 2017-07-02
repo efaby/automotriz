@@ -114,6 +114,7 @@
 			<div class="form-group" style="margin-top: 15px;">
 				<input type='hidden' name='id' class='form-control' value="<?php echo $dato['id']; ?>">
 				<input type='hidden' name='tipo' class='form-control' value="<?php echo $dato['tipo_vehiculo_id']; ?>">
+				<input type='hidden' name='kilometraje' class='form-control' value="<?php echo $dato['medida_uso']; ?>">
 				<button type="submit" class="btn btn-success rounded">Guardar</button>
 				<a href="../listar/<?php echo $dato['tipo_vehiculo_id'];?>" class="btn btn-info rounded"  >
 			Regresar
