@@ -270,6 +270,9 @@
                                 <li class="<?php echo (strpos($url, '/Repuesto/listar/'))?'active':'';?>">
                                     <a href="../../Repuesto/listar/"> <i class="fa fa-edit"></i> Repuestos </a>                                    
                                 </li>
+                                <li class="<?php echo (strpos($url, '/Repuesto/listarOrden/'))?'active':'';?>">
+                                    <a href="../../Repuesto/listarOrden/"> <i class="fa fa-edit"></i> Ordenes Repuestos </a>                                    
+                                </li>
                                 <?php endif;?>
                                 <!--  
                                 <li>

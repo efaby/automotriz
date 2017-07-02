@@ -49,4 +49,13 @@ class RepuestoControlador {
 		header ( "Location: ../listar/" );
 	}
 	
+	//////////  Ordenes
+	
+	public function listarOrden() {
+		$model = new RepuestoModelo();
+		$datos = $model->obtenerListadoOrdenes();
+		$message = "";
+		require_once PATH_VISTAS."/Repuesto/vista.listadoOrdenes.php";
+	}
+	
 }
