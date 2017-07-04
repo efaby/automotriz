@@ -4,7 +4,7 @@
 <!-- Main row -->
 
 <div class="title-block">
-    <h1 class="title">Administración Repuestos</h1>
+    <h1 class="title">Administración Ordenes Repuestos</h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -16,28 +16,32 @@
 		<?php endif;?>
 <div class="card">
 	<div class="card-block">
-		<div class="card-title-block">
-			<button class="btn btn-primary rounded" id="modalOpen1" onclick="javascript: loadModal(0)">
-				<i class="glyphicon glyphicon-plus"></i> Añadir
-			</button>
-	    </div>
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 		    <thead>
 			    <tr>
-			    	<th>Codigo</th>
-				    <th>Nombre</th>
-				    <th>Cantidad</th>
-				    <th style="text-align: center;">Acciones</th>
+			    	<th>Vehiculo</th>
+				    <th>T&eacute;cnico</th>
+				    <th>Mantenimiento</th>
+				    <th>Fecha</th>
+				    <th style="text-align: center; width: 15%;">Acciones</th>
 			    </tr>
 		    </thead>
 		    <tbody>
 		    	<?php foreach ($datos as $item) {
-		    		echo "<tr><td>".$item['codigo']."</td>";
-		    		echo "<td>".$item['nombre']."</td>";
-		    		echo "<td>".$item['cantidad']."</td>";		    		
-		    		echo "<td align='center'><a href='javascript: loadModal(\"".$item['id']."\")' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>
-							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$item['id']."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    		echo "<tr><td>No. ".$item['numero']." ".$item['marca']." - ".$item['modelo']."</td>";
+		    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";
+		    		$mantenimiento = ($item['tipo']==1)?"Preventivo":"Correctivo";
+		    		echo "<td>".$mantenimiento."</td>";		 
+		    		echo "<td>".$item['fecha']."</td>";
+		    		if($item['aprobado']==0){
+		    			echo "<td align='center'><a href='../verOrden/".$item['id']."' class='btn btn-warning btn-sm rounded' title='Aprobar' ><i class='fa fa-pencil'></i></a>
+							 ";
+		    		} else {
+		    			echo "<td align='center'><a href='../verOrden/".$item['id']."' class='btn btn-info btn-sm rounded' title='Ver' ><i class='fa fa-info-circle'></i></a>
+							 ";
+		    		}
+		    		
 		    	}?>
 		    </tbody>
 		    </table>

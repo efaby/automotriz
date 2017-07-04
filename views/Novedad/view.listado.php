@@ -53,9 +53,18 @@
 					</td>";
     		} else {
 	    		echo "<td align='center'>				
-					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>					
-					<a href='javascript: loadModalAction(".$item['ids'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>
-					</td>";
+					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>	";				
+    		
+	    		$ordenRepuesto = ($item['repuestoId']>0)?$item['repuestoId']."-0":$item['id']."-1";
+	    		if($item['aprobado']==1){
+	    			echo "<a href='javascript: loadModalAction(".$item['ids'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>";
+	    		} else {
+	    			echo "<a href='../../Repuesto/ingresoCorrectivo/".$ordenRepuesto."' class='btn btn-warning btn-sm rounded' title='Generar Orden Repuesto' ><i class='fa fa-pencil'></i></a>";
+	    		
+	    		}
+	    			
+	    		echo "</td>";
+    		
     		}
     		$contador++;
     	}?>

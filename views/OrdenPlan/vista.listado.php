@@ -48,7 +48,16 @@
 					    		echo "</td>";
 					    		echo "<td align='center'>";
 								if ($item['atendido'] == 0 &&  ($_SESSION['SESSION_USER']['tipo_usuario_id'] == 6)) {
-									echo "<a href='../../OrdenPlan/editar/".$item['id']."-0' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>";
+									
+									$ordenRepuesto = ($item['repuestoId']>0)?$item['repuestoId']."-0":$item['id']."-1";
+									if($item['aprobado']==1){
+										echo "<a href='../../OrdenPlan/editar/".$item['id']."-0' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>";
+									} else {
+										echo "<a href='../../Repuesto/ingresoPreventivo/".$ordenRepuesto."' class='btn btn-warning btn-sm rounded' title='Generar Orden Repuesto' ><i class='fa fa-pencil'></i></a>";
+										
+									}
+									
+									
 									if($item['url']!=''){
 										echo "&nbsp;<a href='../downloadFile/".$item['url']."' class='btn btn-info btn-sm rounded' title='Descargar' ><i class='fa fa-file-pdf-o'></i></a>";
 									}

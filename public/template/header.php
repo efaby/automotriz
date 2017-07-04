@@ -194,7 +194,7 @@
                                 
                                 
                                  <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
-                                <li class="<?php echo ((strpos($url, '/OrdenPlan/listar/'))||(strpos($url, '/OrdenPlan/editar/')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/OrdenPlan/listar/'))||(strpos($url, '/OrdenPlan/editar/'))||(strpos($url, '/Repuesto/ingresoPreventivo/'))||(strpos($url, '/Repuesto/ingresoCorrectivo/')))?'active':'';?>"> 
                                     <a href=""> <i class="fa fa-cubes"></i> Man. Preventivos <i class="fa arrow"></i> </a>
                                     <ul>
                                     	<li><a href=""> V. Livianos Gasolina <i class="fa arrow arrow1" ></i></a>
@@ -214,7 +214,7 @@
                                     		</ul>  
                                     	</li>    
                                     	      
-                                    	<li><a href="../../Plan/listar/3"> Auto. Pesados </a></li>      
+                                    	<li><a href="../../OrdenPlan/listar/3"> Auto. Pesados </a></li>      
                                     	<li><a href=""> Maquinaria Pesada <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
                                     			<li><a href="../../OrdenPlan/listar/4" class="level2">Rodillo</a></li> 
@@ -247,7 +247,7 @@
                                     		</ul>  
                                     	</li>    
                                     	      
-                                    	<li><a href="../../Plan/listar/3"> Auto. Pesados </a></li>      
+                                    	<li><a href="../../Novedad/listar/3"> Auto. Pesados </a></li>      
                                     	<li><a href=""> Maquinaria Pesada <i class="fa arrow arrow1" ></i></a>
                                     		<ul>
                                     			<li><a href="../../Novedad/listar/4" class="level2">Rodillo</a></li> 
