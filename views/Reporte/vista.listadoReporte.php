@@ -40,32 +40,54 @@
 				    </th>
 		  	 	</tr>
 		    	<tr>
+			    	<?php if ($arrayId[1] != 3){
+		    			$cols ="";
+		    			$colsAct = "";
+		    			?>
 			    	<th style="text-align:center">F. de Creación del Mant.</th>
-				    <th style="text-align:center"><?php echo $variables[2];?></th>
-				    <th style="text-align:center">Actividad</th>
+			    	<?php } else{?>
+			    	<th style="text-align:center" colspan="2">N° de Fallas</th>
+			    	<?php $cols ="colspan=2";
+			    		  $colsAct = "colspan=3";?>			    	
+			    	<?php }?>			    	
+				    <th style="text-align:center" <?php echo $cols;?>><?php echo $variables[2];?></th>
+				    <th style="text-align:center" <?php echo $colsAct;?>>Actividad</th>
+				    <?php if ($arrayId[1] != 3){?>
 				    <th style="text-align:center">N° Orden <br>de Trabajo</th>
 				    <th style="text-align:center">N° Orden <br>de Repuestas</th>
 				    <th style="text-align:center">Tiempos <br>de Ejecución</th>
 				    <th style="text-align:center">Responsable</th>
 				    <th style="text-align:center">Observación</th>
+				    <?php }?>									  
 			    </tr>
 		    </thead>
 		    <tbody>
 		    	<?php foreach ($listado as $item) {
-		    		echo "<tr><td>".$item['fecha_emision']."</td>";		    		
-		    		echo "<td>".$item['kilometraje']." " .$variables[1]."</td>";
-		    		echo "<td>".$item['actividad']."</td>";
-		    		if ($arrayId[1] ==1){
-		    			$url = "../../OrdenPlan/editar/".$item['id']."-1";
+		    		if ($arrayId[1] != 3){
+		    			echo "<tr><td>".$item['fecha_emision']."</td>";		    		
+		    			echo "<td>".$item['kilometraje']." " .$variables[1]."</td>";
 		    		}
 		    		else{
-		    			$url = "../../Novedad/ver/".$item['id'];
-		    		}		    		 
-		    		echo "<td><a href=".$url.">Ver</a></td>";
-		    		echo "<td><a href='../../Repuesto/verOrden/".$item['ordenRepuesto']."'>Ver</td>";
-		    		echo "<td>".$item['tiempo_ejecucion']." </td>";
-		    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";		    		
-		    		echo "<td>".$item['observacion']." </td></tr>";
+		    			echo "<tr><td colspan=2>".$item['numero_falla']."</td>";
+		    			echo "<td colspan=2>".$item['promedio']."</td>";
+		    		}
+		    		echo "<td ".$colsAct.">".$item['actividad']."</td>";
+		    		if ($arrayId[1] != 3){
+			    		if ($arrayId[1] ==1){
+			    			$url = "../../OrdenPlan/editar/".$item['id']."-1";
+			    		}
+			    		else{
+			    			$url = "../../Novedad/ver/".$item['id'];
+			    		}		    		 		    		
+			    		echo "<td><a href=".$url.">Ver</a></td>";
+			    		echo "<td><a href='../../Repuesto/verOrden/".$item['ordenRepuesto']."'>Ver</td>";
+			    		echo "<td>".$item['tiempo_ejecucion']." </td>";
+			    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";		    		
+			    		echo "<td>".$item['observacion']." </td></tr>";
+		    		}
+		    		else{
+		    			echo "<td><a href=".$url.">Ver</a></td>";
+		    		}
 		    	}?>
 		    </tbody>
 		    </table>

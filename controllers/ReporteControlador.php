@@ -52,7 +52,8 @@ class ReporteControlador {
 				$listado = $model->obtenerCorrectivos($arrayId[0]);
 				$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);
 			} else {
-				
+				$listado = $model->obtenerFallas($arrayId[0]);
+				$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);			
 			}
 		}
 		if($id == null){

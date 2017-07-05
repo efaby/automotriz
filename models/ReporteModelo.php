@@ -73,6 +73,8 @@ class ReporteModelo {
 		return $model->obtenerCampos($result);
 	}
 	
+	
+	
 	public function obtenerVehiculo($id)
 	{
 		$model = new BaseModelo();
@@ -87,5 +89,42 @@ class ReporteModelo {
 		return $resultArray;
 	}
 	
+	public function obtenerFallas($id){
+		$model = new BaseModelo();
+		$sql = "SELECT tipo_falla_id,tf.nombre as actividad,vehiculo_id,0 as promedio,				
+				count(n.id) as numero_falla
+				FROM novedad as n
+				inner join tipo_falla as tf ON  tf.id=n.tipo_falla_id
+				where vehiculo_id = ".$id."
+				group by tipo_falla_id";
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		$resultado = [];
+		
+		foreach ($resultArray as $res){
+			$sql = "SELECT kilometraje 
+					FROM novedad as n 
+					where vehiculo_id = ".$res['vehiculo_id']."
+					and n.tipo_falla_id=".$res['tipo_falla_id'];
+			$resultKilo = $model->ejecutarSql($sql);
+			$resultKiloArray = $model->obtenerCampos($resultKilo);
+			$contador = 0;
+			$acumulador = 0;
+			if ($res['numero_falla'] > 1){
+				for ($i = 0; $i< $res['numero_falla']; $i++) {				
+					if(isset($resultKiloArray[$i+1])){					
+						$acumulador += ($resultKiloArray[$i+1]['kilometraje'] -$resultKiloArray[$i]['kilometraje']); 
+						$contador++;
+					}
+				}
+				$res['promedio'] = ($acumulador /$contador);
+			}
+			else{
+				$res['promedio'] = $resultKiloArray[0]['kilometraje'];
+			}
+			$resultado[] = $res;
+		}		
+		return $resultado;
+	}
 	
 }
