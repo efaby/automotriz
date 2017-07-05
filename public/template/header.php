@@ -149,7 +149,7 @@
                                     	</li>                                	
                                     </ul>                                    	                                  
                                 </li>
-                                <li class="<?php echo (strpos($url, '/Reporte/listar/'))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Reporte/listar/')) || (strpos($url, '/Reporte/verReporte')))?'active':'';?>">
                                     <a href=""> <i class="fa fa-list-alt"></i> Reportes <i class="fa arrow"></i> </a>
                                     <ul>                                    	
                                     	<li><a href=""> A. Livianos Gasolina<i class="fa arrow arrow1" ></i></a>
@@ -270,7 +270,7 @@
                                 <li class="<?php echo (strpos($url, '/Repuesto/listar/'))?'active':'';?>">
                                     <a href="../../Repuesto/listar/"> <i class="fa fa-edit"></i> Repuestos </a>                                    
                                 </li>
-                                <li class="<?php echo (strpos($url, '/Repuesto/listarOrden/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/Repuesto/listarOrden/')||(strpos($url, '/Repuesto/verOrden/')))?'active':'';?>"> 
                                     <a href="../../Repuesto/listarOrden/"> <i class="fa fa-edit"></i> Ordenes Repuestos </a>                                    
                                 </li>
                                 <?php endif;?>

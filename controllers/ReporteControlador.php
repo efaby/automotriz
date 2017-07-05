@@ -46,11 +46,11 @@ class ReporteControlador {
 		$vehiculo = $model->obtenerVehiculo($arrayId[0]);		
 		if($arrayId[1]==1){
 			$listado = $model->obtenerPreventivos($arrayId[0]);
-			$variables = self::obtenerVariables($listado[0]['plan_mantenimiento']);
+			$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);
 		} else {
 			if($arrayId[1]==2){
 				$listado = $model->obtenerCorrectivos($arrayId[0]);
-				$variables = self::obtenerVariables($listado[0]['plan_mantenimiento']);
+				$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);
 			} else {
 				
 			}
@@ -69,6 +69,8 @@ class ReporteControlador {
 		$array = self::verReporte($_GET['id']);
 		$listado =  $array[0];
 		$variables =  $array[1];
+		$model = new ReporteModelo();
+		$vehiculo = $model->obtenerVehiculo($arrayId[0]);
 		$html="<html>
 					<head>
 						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
@@ -98,15 +100,15 @@ class ReporteControlador {
 				  					<img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/>
 				  				</th>	
 				    			<th rowspan='2'>".$variables[0]."</th>
-				    			<th rowspan='2'>".$listado[0]['pers_nombres']." ".$listado[0]['pers_apellidos']."</th>
+				    			<th rowspan='2'>".$vehiculo['nombres']." ".$vehiculo['apellidos']."</th>
 							</tr>
 							<tr>
 				    			<th colspan='4' style='text-align:center'>REGISTRO DE TRABAJO/REPARACIÓN</th>				   
 							</tr>
 							<tr>
-				    			<th colspan='4' style='text-align:center'>".$listado[0]['nombre_vehiculo']."</th>
+				    			<th colspan='4' style='text-align:center'>".$vehiculo['nombre_vehiculo']."</th>
 				    			<th>Año del Automotor</th>
-				    			<th>".$listado[0]['anio']."
+				    			<th>".$vehiculo['anio']."
 				    			</th>
 		  	 				</tr>
 		    				<tr>

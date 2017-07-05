@@ -27,16 +27,16 @@
 				  		<img src="<?php echo PATH_IMAGES; ?>/gobierno.jpg" width="130px" height="130px"/>
 				  	</th>	
 				    <th rowspan="2"><?php echo $variables[0];?></th>
-				    <th rowspan="2"><?php echo $listado[0]['pers_nombres'];?> <?php echo $listado[0]['pers_apellidos'];?></th>
+				    <th rowspan="2"><?php echo $vehiculo['nombres'];?> <?php echo $vehiculo['apellidos'];?></th>
 				</tr>
 				<tr>
 				    <th colspan="4" style="text-align:center">REGISTRO DE TRABAJO/REPARACIÓN</th>				   
 				</tr>
 				<tr>
-				    <th colspan="4" style="text-align:center"><?php echo $listado[0]['nombre_vehiculo'];?></th>
+				    <th colspan="4" style="text-align:center"><?php echo $vehiculo['nombre_vehiculo'];?></th>
 				    <th>Año del Automotor</th>
 				    <th>
-				    	<?php echo $listado[0]['anio'];?>
+				    	<?php echo $vehiculo['anio'];?>
 				    </th>
 		  	 	</tr>
 		    	<tr>
@@ -61,8 +61,8 @@
 		    		else{
 		    			$url = "../../Novedad/ver/".$item['id'];
 		    		}		    		 
-		    		echo "<td><a href=".$url.">".$item['id']."</a></td>";
-		    		echo "<td> Falta poner".$item['id']."</td>";
+		    		echo "<td><a href=".$url.">Ver</a></td>";
+		    		echo "<td><a href='../../Repuesto/verOrden/".$item['ordenRepuesto']."'>Ver</td>";
 		    		echo "<td>".$item['tiempo_ejecucion']." </td>";
 		    		echo "<td>".$item['nombres']." ".$item['apellidos']."</td>";		    		
 		    		echo "<td>".$item['observacion']." </td></tr>";
@@ -74,6 +74,7 @@
 </div>
 
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
+<script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
 <script src="<?php echo PATH_JS; ?>/bootstrap.js"></script> 
 <link href="<?php echo PATH_CSS; ?>/dataTables.bootstrap.css" rel="stylesheet">
 <script src="<?php echo PATH_JS; ?>/jquery.dataTables.min.js"></script>

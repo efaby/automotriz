@@ -18,6 +18,11 @@
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-hover">
 		    <thead>
+		    <tr>
+		    <th colspan="8"></th>
+		    <th>No. Solicitud: </th>
+		    <th><?php echo $datos['id']?></th>
+		    </tr>
 		    	<tr>  
 				  	<th rowspan="3" colspan="2"  style="text-align:center">
 				  		<img src="<?php echo PATH_IMAGES; ?>/espoch.jpg" width="140px" height="130px"/>
@@ -79,7 +84,7 @@
 		    
 		    </table>
 		    <?php  if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)&&($datos['aprobado']==0)): ?>
-		    <form id="frmUsuario" method="post" action="../aprobarOrden/">
+		    <form id="frmUsuario1" method="post" action="../aprobarOrden/">
 		    <div class="row">
 
 				<input type='hidden' name='id' value="<?php echo $datos['id']; ?>">
@@ -93,6 +98,7 @@
 </div>
 
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
+<script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
 <script src="<?php echo PATH_JS; ?>/bootstrap.js"></script> 
 <link href="<?php echo PATH_CSS; ?>/dataTables.bootstrap.css" rel="stylesheet">
 <script src="<?php echo PATH_JS; ?>/jquery.dataTables.min.js"></script>
