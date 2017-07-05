@@ -19,7 +19,7 @@
 		<div class="row">	
 			<div class="form-group  col-sm-12" align="right">
 				<?php if (count($datos)>0){?>
-				<a href="../visualizarPdf/<?php echo $tipo['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+				<a href="../visualizarPdfGeneral/<?php echo $tipo['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
 				<?php }?>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 		    		$id = $tipo['id']."-".$item['id'];
 		    		echo "<td align='center'><a href='../verReporte/".$item['id']."-1' class='btn btn-info btn-sm rounded' title='H.C.M.A.' ><i class='fa fa-file-text-o'></i></a>
 							  <a href='../verReporte/".$item['id']."-2' class='btn btn-info btn-sm' title='H.C.P.A.' ><i class='fa fa-file-text-o'></i></a>
-							  <a href='../verReporte/".$item['id']."-3' class='btn rounded btn-danger btn-sm' title='S.H.F.A.'><i class='fa fa-file-text-o'></i></a></td>";
+							  <a href='../verReporte/".$item['id']."-3' class='btn rounded btn-info btn-sm' title='S.H.F.A.'><i class='fa fa-file-text-o'></i></a></td>";
 		    	}?>
 		    </tbody>
 		    </table>

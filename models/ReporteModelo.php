@@ -89,23 +89,38 @@ class ReporteModelo {
 		return $resultArray;
 	}
 	
-	public function obtenerFallas($id){
+	public function obtenerFallas($id,$general = false){
 		$model = new BaseModelo();
-		$sql = "SELECT tipo_falla_id,tf.nombre as actividad,vehiculo_id,0 as promedio,				
+		$where = "where vehiculo_id = ".$id;
+		$vehiculo = ", vehiculo_id";
+		$sql1 = "";
+		if($general){
+			$sql1 = " inner join vehiculo as v on v.id =  n.vehiculo_id ";
+			$where = "where tipo_vehiculo_id = ".$id;
+			$vehiculo = "";
+		}
+		
+		$sql = "SELECT tipo_falla_id,tf.nombre as actividad ".$vehiculo.",0 as promedio,				
 				count(n.id) as numero_falla
 				FROM novedad as n
-				inner join tipo_falla as tf ON  tf.id=n.tipo_falla_id
-				where vehiculo_id = ".$id."
-				group by tipo_falla_id";
+				inner join tipo_falla as tf ON  tf.id=n.tipo_falla_id ";		
+		$sql .= $sql1.$where. " group by tipo_falla_id";
+
 		$result = $model->ejecutarSql($sql);
 		$resultArray = $model->obtenerCampos($result);
 		$resultado = [];
 		
 		foreach ($resultArray as $res){
 			$sql = "SELECT kilometraje 
-					FROM novedad as n 
-					where vehiculo_id = ".$res['vehiculo_id']."
-					and n.tipo_falla_id=".$res['tipo_falla_id'];
+					FROM novedad as n ";
+			
+			if($general){
+				$sql .= " inner join vehiculo as v on v.id =  n.vehiculo_id ";
+				$where = "where tipo_vehiculo_id = ".$id;
+			} else {
+				$where = "where vehiculo_id = ".$res['vehiculo_id'];
+			}
+			$sql .= $where . "	and n.tipo_falla_id=".$res['tipo_falla_id'];
 			$resultKilo = $model->ejecutarSql($sql);
 			$resultKiloArray = $model->obtenerCampos($resultKilo);
 			$contador = 0;

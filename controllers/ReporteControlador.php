@@ -175,4 +175,80 @@ class ReporteControlador {
 		$dompdf->stream('reporte', array("Attachment"=>false));
 	}
 	
+	public function visualizarPdfGeneral(){
+
+		$model = new ReporteModelo();
+		$tipo = $model->obtenerTipo();	
+		$listado = $model->obtenerFallas($_GET['id'],true);
+
+		$html="<html>
+					<head>
+						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
+						<style>
+							body {
+							margin: 20px 20px 20px 50px;
+							}
+							table{
+								border-collapse: collapse; width: 100%;
+							}
+							td{
+								border:1px solid #ccc; padding:1px;
+								font-size:9pt;
+							}
+						</style>
+					</head>
+					<body>
+						<center><h3>Reporte de Fallas Comunes</h3>
+							<table width= 100% border=1>
+							<tr>
+								<th rowspan='3' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/>
+				  				</th>
+				    			<th colspan='4' style='text-align:center'>ESPOCH-GADPC</th>
+				    			<th rowspan='3' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/>
+				  				</th>				    			
+							</tr>
+							<tr>
+				    			<th colspan='4' style='text-align:center'>SELECCI&Oacute;N DE FALLAS DEL AUTOMOTOR</th>
+							</tr>
+				    		<tr>
+				    			<th colspan='4' style='text-align:center'>".strtoupper($tipo['nombre'])."</th>
+							</tr>
+							<tr>
+				    		<th style='text-align:center'>N° de Fallas</th>			
+				    	   
+		    			";
+		$kilo = "Kilometro (km)";
+		if($tipo['id']>3&&$tipo['id']<9) {
+			$kilo = "Hor&oacute;metro (H)";
+		}
+		$html .="	<th style='text-align:center'>".$kilo."</th>
+				 <th style='text-align:center' colspan='4'>Actividad</th>
+				</tr>
+				";
+
+		$html .="</tr>";
+		foreach ($listado as $item) {
+			$html .="<tr><td style='text-align:center'>".$item['numero_falla']."</td>
+		    		<td style='text-align:center'>".$item['promedio']."</td>
+					<td style='border-bottom-color: black' colspan='4'>".$item['actividad']."</td></tr>";
+		} 
+		$html .="		</table>
+					</body>
+				</html>";
+
+		$options = new Options();
+		$options->set('isHtml5ParserEnabled', true);
+		$dompdf = new Dompdf($options);
+	
+		$dompdf->load_html($html);
+		$dompdf->set_paper ('a4','landscape');
+		$dompdf->render();
+		$canvas = $dompdf->get_canvas();
+		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
+		$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
+		$dompdf->stream('reporte', array("Attachment"=>false));
+	}
+	
 }
