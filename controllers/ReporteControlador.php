@@ -112,25 +112,44 @@ class ReporteControlador {
 				    			<th>".$vehiculo['anio']."
 				    			</th>
 		  	 				</tr>
-		    				<tr>
-			    				<th style='text-align:center'>F. de Creación del Mant.</th>
-							    <th style='text-align:center'>".$variables[2]."</th>
-							    <th style='text-align:center'>Actividad</th>
-							    <th style='text-align:center'>N° Orden <br>de Trabajo</th>
+		    				<tr>";
+				    		if ($arrayId[1] != 3){
+		    					$cols ="";
+		    					$colsAct = "";
+			    	$html .="	<th style='text-align:center'>F. de Creación del Mant.</th>";
+				    		}
+				    		else{
+				    $html .="  	<th style='text-align:center' colspan='2'>N° de Fallas</th>";
+				    			$cols ="colspan=2";
+				    			$colsAct = "colspan=4";
+				    		}
+					$html .="    <th style='text-align:center' ".$cols.">".$variables[2]."</th>
+							    <th style='text-align:center' ".$colsAct.">Actividad</th>";
+					if ($arrayId[1] != 3){
+					$html .="   <th style='text-align:center'>N° Orden <br>de Trabajo</th>
 							    <th style='text-align:center'>N° Orden <br>de Repuestas</th>
 							    <th style='text-align:center'>Tiempos <br>de Ejecución</th>
 							    <th style='text-align:center'>Responsable</th>
-							    <th style='text-align:center'>Observación</th>
-			    			</tr>";	
+							    <th style='text-align:center'>Observación</th>";
+							}
+			    	$html .="</tr>";	
 					foreach ($listado as $item) {
+						if ($arrayId[1] != 3){
 						$html .="<tr><td style='border-bottom-color: black'>".$item['fecha_emision']."</td>
-									 <td style='border-bottom-color: black'>".$item['kilometraje']." " .$variables[1]."</td>
-									 <td style='border-bottom-color: black'>".$item['actividad']."</td>
-									 <td style='border-bottom-color: black'>".$item['id']."</td>
+									 <td style='border-bottom-color: black'>".$item['kilometraje']." " .$variables[1]."</td>";
+						}else{
+						$html .="<tr><td colspan=2>".$item['numero_falla']."</td>
+		    						 <td colspan=2>".$item['promedio']."</td>";
+						}									 		
+						$html .="	 <td style='border-bottom-color: black' ".$colsAct.">".$item['actividad']."</td>";
+						if ($arrayId[1] != 3){
+						$html .="	 <td style='border-bottom-color: black'>".$item['id']."</td>
 									 <td style='border-bottom-color: black'> Falta poner".$item['id']."</td>
 									 <td style='border-bottom-color: black'>".$item['tiempo_ejecucion']." </td>
 									 <td style='border-bottom-color: black'>".$item['nombres']." ".$item['apellidos']."</td>
-									 <td style='border-bottom-color: black;border-right-color: black'>".$item['observacion']." </td></tr>";
+									 <td style='border-bottom-color: black;border-right-color: black'>".$item['observacion']." </td>";
+						}
+						$html .="</tr>";									 		
 					}
 		$html .="		</table>
 					</body>
