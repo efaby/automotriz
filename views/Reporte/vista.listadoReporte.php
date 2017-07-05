@@ -86,7 +86,11 @@
 			    		echo "<td>".$item['observacion']." </td></tr>";
 		    		}
 		    		else{
-		    			echo "<td><a href=".$url.">Ver</a></td>";
+		    			echo "<td align=center>
+				    			<a href='javascript: loadModal(\"".$item['vehiculo_id']."-".$item['tipo_falla_id']."\")' class='btn btn-info btn-sm rounded' title='Ver' >
+				  					<i class='fa fa-file-text-o'></i>
+				  				</a>
+				  			</td>";
 		    		}
 		    	}?>
 		    </tbody>
@@ -94,6 +98,20 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" 
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 1301px;">
+		<div class="modal-content" style="width:984px">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Historial de Detalle de Fallas de Mantenimiento</h3>
+			</div>
+			<div class="modal-body"></div>
+		</div>
+
+	</div>
+</div>
+
 
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
 <script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
@@ -102,5 +120,7 @@
 <script src="<?php echo PATH_JS; ?>/jquery.dataTables.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/table.js"></script>
+<script src="<?php echo PATH_JS; ?>/listados.js"></script>
+<link href="<?php echo PATH_CSS; ?>/bootstrapValidator.min.css" rel="stylesheet">
 </body>
 </html>

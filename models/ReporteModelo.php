@@ -127,4 +127,18 @@ class ReporteModelo {
 		return $resultado;
 	}
 	
+	public function obtenerDetalleFallas($vehiculo_id, $tipo_falla_id) {
+		$model = new BaseModelo();
+		$sql = "select n.*, n.fecha_ingreso as fecha_emision, n.observaciones as observacion,tf.nombre as actividad, u.nombres, u.apellidos, v.anio,tv.nombre as nombre_vehiculo,
+				tv.plan_mantenimiento, mr.id as ordenRepuesto,tipo_vehiculo_id
+				from novedad as n
+				LEFT JOIN usuario as u on u.id = n.tecnico_repara
+				LEFT JOIN tipo_falla as tf ON  tf.id=n.tipo_falla_id
+				LEFT JOIN vehiculo as v ON v.id = n.vehiculo_id
+				INNER JOIN tipo_vehiculo as tv ON tv.id = v.tipo_vehiculo_id
+				LEFT JOIN mantenimiento_respuestos as mr on mr.mantenimiento_id = n.id
+				where n.vehiculo_id = ".$vehiculo_id ." and tf.id=".$tipo_falla_id;	
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
+	}	
 }

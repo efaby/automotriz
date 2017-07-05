@@ -65,6 +65,16 @@ class ReporteControlador {
 		}
 	}
 	
+	public function editar(){
+		$arrayId = explode('-', $_GET['id']);
+		$model = new ReporteModelo();		
+		$listado = $model->obtenerDetalleFallas($arrayId[0], $arrayId[1]);
+		$variables = self::obtenerVariables($listado[0]['tipo_vehiculo_id']);
+		
+		require_once PATH_VISTAS."/Reporte/vista.listadoFallas.php";
+		
+	}
+	
 	public function visualizarPdf(){
 		$arrayId = explode('-', $_GET['id']);
 		$array = self::verReporte($_GET['id']);
