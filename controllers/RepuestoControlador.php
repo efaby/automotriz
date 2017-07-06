@@ -74,7 +74,7 @@ class RepuestoControlador {
 		$orden = $_GET['id'];
 		$datos = $model->obtenerOrden($orden);
 		$datos = $datos[0];
-		$repuestos = $model->obtenerListadoRepuesto($orden);
+		$repuestos = $model->obtenerOrdenRepuesto($orden);
 		$message = "";
 		require_once PATH_VISTAS."/Repuesto/vista.orden.php";
 	}

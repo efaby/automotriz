@@ -69,10 +69,11 @@ class RepuestoModelo {
 	
 	public function obtenerOrdenRepuesto($orden){
 		$model = new BaseModelo();
-		$sql = "select r.*, or.cantidad
-				from orden_repuesto as or
-				inner join repuestos as r on or.repuesto_id = v.id
-				where or.mantenimineto_repuesto_id = ".$orden;
+		$sql = "select r.*, or1.cantidad as pedido 
+			from orden_repuesto as or1 
+			inner join repuestos as r on or1.repuesto_id = r.id 
+			where or1.mantenimineto_respuesto_id = ".$orden;
+
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}
@@ -180,5 +181,6 @@ class RepuestoModelo {
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 	}
+	
 	
 }

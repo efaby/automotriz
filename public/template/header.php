@@ -61,12 +61,12 @@
                         <?php $url = $_SERVER["REQUEST_URI"];?>
                         <nav class="menu">
                             <ul class="nav metismenu" id="sidebar-menu">
-                                <li class="<?php echo (strpos($url, '/Seguridad/inicio/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/Seguridad/inicio/')!==false)?'active':'';?>">
                                  
                                     <a href="../../Seguridad/inicio/"> <i class="fa fa-home"></i> Inicio </a>
                                 </li>
                                 <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
-                                <li class="<?php echo (strpos($url, '/Usuario/listar/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/Usuario/listar/')!==false)?'active':'';?>">
                                     <a href=""> <i class="fa fa-users"></i> Personal <i class="fa arrow"></i> </a>
                                     <ul>
                                     	<li><a href=""> Usuarios <i class="fa arrow arrow1" ></i></a>
@@ -85,7 +85,7 @@
                                     	<li><a href="../../Usuario/listar/6"> Técnicos </a></li>                                    	
                                     </ul>                                    	                                  
                                 </li>
-                                <li class="<?php echo (strpos($url, '/Vehiculo/listar/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/Vehiculo/listar/')!==false)?'active':'';?>">
                                     <a href=""> <i class="fa fa-truck"></i> Automotores <i class="fa arrow"></i> </a>
                                     <ul>                                    	
                                     	<li><a href=""> A. Livianos Gasolina<i class="fa arrow arrow1" ></i></a>
@@ -117,7 +117,7 @@
                                     	                                   	
                                     </ul>                                    	                                  
                                 </li>
-                                <li class="<?php echo ((strpos($url, '/Plan/listar/'))||(strpos($url, '/Plan/editar/')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Plan/listar/')!==false)||(strpos($url, '/Plan/editar/'))!==false)?'active':'';?>">
                                     <a href=""> <i class="fa fa-book"></i> Plan Mantenimiento <i class="fa arrow"></i> </a>
                                     <ul>
                                     	<li><a href=""> V. Livianos Gasolina <i class="fa arrow arrow1" ></i></a>
@@ -149,7 +149,7 @@
                                     	</li>                                	
                                     </ul>                                    	                                  
                                 </li>
-                                <li class="<?php echo ((strpos($url, '/Reporte/listar/')) || (strpos($url, '/Reporte/verReporte')))?'active':'';?>">
+                                <li class="<?php echo ((strpos($url, '/Reporte/listar/')!==false) || (strpos($url, '/Reporte/verReporte')!==false))?'active':'';?>">
                                     <a href=""> <i class="fa fa-list-alt"></i> Reportes <i class="fa arrow"></i> </a>
                                     <ul>                                    	
                                     	<li><a href=""> A. Livianos Gasolina<i class="fa arrow arrow1" ></i></a>
@@ -184,17 +184,17 @@
                                 
                                 <?php endif;?>
                                   <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']>=3)&&($_SESSION['SESSION_USER']['tipo_usuario_id']<=5)):?>
-                                 <li class="<?php echo (strpos($url, '/Novedad/ingreso/'))?'active':'';?>">
+                                 <li class="<?php echo (strpos($url, '/Novedad/ingreso/')!==false)?'active':'';?>">
                                     <a href="../../Novedad/ingreso/"> <i class="fa fa-edit"></i> Novedad </a>                                    
                                 </li>
-                                <li class="<?php echo (strpos($url, '/Registro/ingreso/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/Registro/ingreso/')!==false)?'active':'';?>">
                                     <a href="../../Registro/ingreso/"> <i class="fa fa-edit"></i> Registro <?php echo ($_SESSION['SESSION_USER']['tipo_usuario_id']==5)?'Horomotero (H)':'Odomentro (Km)';?></a>                                    
                                 </li>
                                 <?php endif;?>
                                 
                                 
                                  <?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
-                                <li class="<?php echo ((strpos($url, '/OrdenPlan/listar/'))||(strpos($url, '/OrdenPlan/editar/'))||(strpos($url, '/Repuesto/ingresoPreventivo/'))||(strpos($url, '/Repuesto/ingresoCorrectivo/')))?'active':'';?>"> 
+                                <li class="<?php echo ((strpos($url, '/OrdenPlan/listar/')!==false)||(strpos($url, '/OrdenPlan/editar/')!==false)||(strpos($url, '/Repuesto/ingresoPreventivo/')!==false)||(strpos($url, '/Repuesto/ingresoCorrectivo/')!==false))?'active':'';?>"> 
                                     <a href=""> <i class="fa fa-cubes"></i> Man. Preventivos <i class="fa arrow"></i> </a>
                                     <ul>
                                     	<li><a href=""> V. Livianos Gasolina <i class="fa arrow arrow1" ></i></a>
@@ -227,7 +227,7 @@
                                     </ul>
                                     
                                   </li>  
-                                  <li class="<?php echo ((strpos($url, '/Novedad/listar/'))||(strpos($url, '/Novedad/ver/')))?'active':'';?>">
+                                  <li class="<?php echo ((strpos($url, '/Novedad/listar/')!==false)||(strpos($url, '/Novedad/ver/')!==false))?'active':'';?>">
                                     <a href=""> <i class="fa fa-calendar"></i> Man. Correctivos <i class="fa arrow"></i> </a>
                                     <ul>
                                     	<li><a href=""> V. Livianos Gasolina <i class="fa arrow arrow1" ></i></a>
@@ -262,71 +262,19 @@
                                 </li>
                                 <?php endif;?>
                                 <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
-                                <li class="<?php echo (strpos($url, '/TipoFalla/listar/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/TipoFalla/listar/')!==false)?'active':'';?>">
                                     <a href="../../TipoFalla/listar/"> <i class="fa fa-th-list"></i> Tipos Fallas </a>                                    
                                 </li>
                                 <?php endif;?>
                                 <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
-                                <li class="<?php echo (strpos($url, '/Repuesto/listar/'))?'active':'';?>">
+                                <li class="<?php echo (strpos($url, '/Repuesto/listar/')!==false)?'active':'';?>">
                                     <a href="../../Repuesto/listar/"> <i class="fa fa-edit"></i> Repuestos </a>                                    
                                 </li>
-                                <li class="<?php echo (strpos($url, '/Repuesto/listarOrden/')||(strpos($url, '/Repuesto/verOrden/')))?'active':'';?>"> 
+                                <li class="<?php echo (strpos($url, '/Repuesto/listarOrden/')!==false||(strpos($url, '/Repuesto/verOrden/')!==false))?'active':'';?>"> 
                                     <a href="../../Repuesto/listarOrden/"> <i class="fa fa-edit"></i> Ordenes Repuestos </a>                                    
                                 </li>
                                 <?php endif;?>
-                                <!--  
-                                <li>
-                                    <a href="forms.html"> <i class="fa fa-pencil-square-o"></i> Forms </a>
-                                </li>
-                                <li>
-                                    <a href=""> <i class="fa fa-desktop"></i> UI Elements <i class="fa arrow"></i> </a>
-                                    <ul>
-                                        <li> <a href="buttons.html">
-    								Buttons
-    							</a> </li>
-                                        <li> <a href="cards.html">
-    								Cards
-    							</a> </li>
-                                        <li> <a href="typography.html">
-    								Typography
-    							</a> </li>
-                                        <li> <a href="icons.html">
-    								Icons
-    							</a> </li>
-                                        <li> <a href="grid.html">
-    								Grid
-    							</a> </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href=""> <i class="fa fa-file-text-o"></i> Pages <i class="fa arrow"></i> </a>
-                                    <ul>
-                                        <li> <a href="login.html">
-    								Login
-    							</a> </li>
-                                        <li> <a href="signup.html">
-    								Sign Up
-    							</a> </li>
-                                        <li> <a href="reset.html">
-    								Reset
-    							</a> </li>
-                                        <li> <a href="error-404.html">
-    								Error 404 App
-    							</a> </li>
-                                        <li> <a href="error-404-alt.html">
-    								Error 404 Global
-    							</a> </li>
-                                        <li> <a href="error-500.html">
-    								Error 500 App
-    							</a> </li>
-                                        <li> <a href="error-500-alt.html">
-    								Error 500 Global
-    							</a> </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="https://github.com/modularcode/modular-admin-html"> <i class="fa fa-github-alt"></i> Theme Docs </a>
-                                </li> -->
+
                             </ul>
                         </nav>
                     </div>

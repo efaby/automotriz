@@ -54,18 +54,38 @@
 				    <th style="width: 10%"><?php echo $datos['anio']; ?></th>
 				    
 		  	 	</tr>
+		  	 	<?php 
+		  	 	$colspan = 8;
+		  	 	$row1 = '';
+		  	 	if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)&&($datos['aprobado']==0)){
+		  	 		$colspan = 7;
+		  	 		$row1 = '<th style="text-align:center">Existente</th>';
+		  	 	}
+		  	 	
+		  	 	?>
 		    	<tr>
 			    	<th style="text-align:center">C&oacute;digo</th>
-				    <th style="text-align:center" colspan="8">Repuesto</th>
+				    <th style="text-align:center" colspan="<?php echo $colspan; ?>">Repuesto</th>
 				    <th style="text-align:center">Cantidad</th>
-				   
+				   <?php echo $row1; ?>
 			    </tr>
 		    </thead>
 		    <tbody>
 		    	<?php foreach ($repuestos as $item) {
 		    		echo "<tr><td>".$item['codigo']."</td>";		    		
-		    		echo "<td colspan='8'>".$item['nombre']."</td>";
-		    		echo "<td style='text-align:center'>".$item['cantidad']."</td></tr>";
+		    		echo "<td colspan='$colspan'>".$item['nombre']."</td>";
+		    		echo "<td style='text-align:center'>".$item['pedido']."</td>";
+		    		if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)&&($datos['aprobado']==0)){
+		    			$style = '';
+		    			$disable = '';
+		    			if($item['pedido']>$item['cantidad']){
+		    				$style = 'color: red;';
+		    				$disable = "disabled";
+		    			}
+		    			echo $row = "<td style='text-align:center; $style'>".$item['cantidad']."</td>";
+		    		}
+					echo "</tr>";
+		    		
 		    		 
 		    	} ?>
 		    	 <?php  if(($_SESSION['SESSION_USER']['tipo_usuario_id']!=2)||($datos['aprobado']==1)): ?>
@@ -88,7 +108,7 @@
 		    <div class="row">
 
 				<input type='hidden' name='id' value="<?php echo $datos['id']; ?>">
-					<button type="submit" class="btn btn-success rounded">Aprobar</button>
+					<button type="submit" class="btn btn-success rounded <?php echo $disable; ?>">Aprobar</button>
 
 			</div>
 		    </form>

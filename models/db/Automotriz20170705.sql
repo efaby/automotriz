@@ -54,10 +54,11 @@ CREATE TABLE `mantenimiento_respuestos` (
   `mantenimiento_id` int(11) NOT NULL,
   `tecnico_id` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `vehiculo_id` int(11) NOT NULL,
   `aprobado` int(11) NOT NULL DEFAULT '0',
+  `vehiculo_id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +67,7 @@ CREATE TABLE `mantenimiento_respuestos` (
 
 LOCK TABLES `mantenimiento_respuestos` WRITE;
 /*!40000 ALTER TABLE `mantenimiento_respuestos` DISABLE KEYS */;
+INSERT INTO `mantenimiento_respuestos` VALUES (6,1,12,16,'2017-07-03',1,8,4),(7,2,6,14,'2017-07-03',0,5,NULL);
 /*!40000 ALTER TABLE `mantenimiento_respuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +100,7 @@ CREATE TABLE `novedad` (
   PRIMARY KEY (`id`),
   KEY `fk_novedad_vehiculo1_idx` (`vehiculo_id`),
   CONSTRAINT `fk_novedad_vehiculo1` FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +109,7 @@ CREATE TABLE `novedad` (
 
 LOCK TABLES `novedad` WRITE;
 /*!40000 ALTER TABLE `novedad` DISABLE KEYS */;
-INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','otra pruebqqq','swdsd','zddad','',16,1,16,3,'3 horas','2017-06-11','2017-06-13',1,0,1),(2,1,'no encuiend luces','focos quemados','wdssd','sodjslkdjlsd osdjlsdmsdnmsd','sdsdsd.sdm','sfssd',16,1,16,3,'2 horas','2017-06-12','2017-06-15',1,0,40),(3,1,'wdsd','asdssasa','xcxcxc','asas','zsasa','sesdsd',14,1,14,3,'3 horas','2017-06-12','2017-06-14',1,600,7),(4,1,'','','otra prueba','sdssd','sdsd','',16,1,16,3,'3 horas','2017-06-13','2017-06-13',1,600,2),(5,1,'otro problem','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-13',NULL,0,750,0),(6,5,'pruebas','preubas','other','xdsdsd','sdsdsd','sdsdsd',14,1,14,9,'10 min','2017-06-21','2017-06-21',1,350678,5);
+INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','otra pruebqqq','swdsd','zddad','',16,1,16,3,'3 horas','2017-06-11','2017-06-13',1,0,1),(2,1,'no encuiend luces','focos quemados','wdssd','sodjslkdjlsd osdjlsdmsdnmsd','sdsdsd.sdm','sfssd',16,1,16,3,'2 horas','2017-06-12','2017-06-15',1,0,40),(3,1,'wdsd','asdssasa','xcxcxc','asas','zsasa','sesdsd',14,1,14,3,'3 horas','2017-06-12','2017-06-14',1,600,7),(4,1,'','','otra prueba','sdssd','sdsd','',16,1,16,3,'3 horas','2017-06-13','2017-06-13',1,600,2),(5,1,'otro problem','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-13',NULL,0,750,0),(6,5,'pruebas','preubas','other','xdsdsd','sdsdsd','sdsdsd',14,1,14,9,'10 min','2017-06-21','2017-06-21',1,350678,5),(7,6,'mi problema','','my solucion',NULL,NULL,NULL,16,1,NULL,15,NULL,'2017-07-03',NULL,0,200356,0);
 /*!40000 ALTER TABLE `novedad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +143,7 @@ CREATE TABLE `orden_plan` (
 
 LOCK TABLES `orden_plan` WRITE;
 /*!40000 ALTER TABLE `orden_plan` DISABLE KEYS */;
-INSERT INTO `orden_plan` VALUES (7,22,'2017-06-07',16,'2017-06-07','39','sl',16,1,0),(8,22,'2017-06-11',16,'2017-06-12','30 minutos','he cmabia de a',16,1,0),(9,23,'2017-06-11',16,'2017-06-11','5 horas','ninguna',2,1,0),(10,21,'2017-06-12',2,NULL,NULL,NULL,NULL,0,0),(11,23,'2017-06-12',2,NULL,NULL,NULL,NULL,0,0),(12,22,'2017-06-13',16,NULL,NULL,NULL,NULL,0,0),(13,24,'2017-06-20',14,'2017-06-20','3 horas','wewewe',14,1,0),(14,25,'2017-06-21',14,'2017-06-21','2 horas','ninguna',14,1,0);
+INSERT INTO `orden_plan` VALUES (7,22,'2017-06-07',16,'2017-06-07','39','sl',16,1,0),(8,22,'2017-06-11',16,'2017-06-12','30 minutos','he cmabia de a',16,1,0),(9,23,'2017-06-11',16,'2017-06-11','5 horas','ninguna',2,1,0),(10,21,'2017-06-12',2,NULL,NULL,NULL,NULL,0,0),(11,23,'2017-06-12',2,NULL,NULL,NULL,NULL,0,0),(12,22,'2017-06-13',16,'2017-07-03','2 horas','wdwewe teminado',16,1,430),(13,24,'2017-06-20',14,'2017-06-20','3 horas','wewewe',14,1,0),(14,25,'2017-06-21',14,'2017-06-21','2 horas','ninguna',14,1,0);
 /*!40000 ALTER TABLE `orden_plan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +160,7 @@ CREATE TABLE `orden_repuesto` (
   `mantenimineto_respuesto_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +169,7 @@ CREATE TABLE `orden_repuesto` (
 
 LOCK TABLES `orden_repuesto` WRITE;
 /*!40000 ALTER TABLE `orden_repuesto` DISABLE KEYS */;
+INSERT INTO `orden_repuesto` VALUES (6,1,6,4),(7,2,7,53);
 /*!40000 ALTER TABLE `orden_repuesto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,7 +444,7 @@ CREATE TABLE `vehiculo` (
 
 LOCK TABLES `vehiculo` WRITE;
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` VALUES (1,10,1,1,'USA-1230','1','ppp','modelo',2015,'4JJLX9761','8LBETF3N7F0267815',750,0),(2,6,1,1,'UBW-193','2','CHEVROLET',NULL,2012,'6BD1-175945','8LBETFS25H40113947',2000,0),(3,11,1,1,'ubs-234','1','KOMATSU',NULL,2010,'26518093','75353',2345,0),(4,9,4,1,'usa-123','2','KOMATSU','',1991,'26528413','75572',5000,0),(5,9,7,1,'UMA-505','26','INTERNACIONAL','',2010,'362GM2UB-135281','PH48807',351203,0),(6,15,7,1,'UMA-0077','37','STEYR','',1995,'2122437265','LZFS19L172DO12935',200356,0),(7,11,3,2,'sdsd','45','marca 1',NULL,2014,'sdsd','sdsd',456,1),(8,6,1,1,'3','2','Ejemplo',NULL,3,'3','3',430,0),(9,3,1,2,'llsd','191','kas','sallsa',22,'ksdk','dslls',2,0),(10,7,10,1,'45','56','mazda','sdsd',2014,'dfdf','werer',800,0);
+INSERT INTO `vehiculo` VALUES (1,10,1,1,'USA-1230','1','ppp','modelo',2015,'4JJLX9761','8LBETF3N7F0267815',750,0),(2,6,1,1,'UBW-193','2','CHEVROLET',NULL,2012,'6BD1-175945','8LBETFS25H40113947',2000,0),(3,11,1,1,'ubs-234','1','KOMATSU',NULL,2010,'26518093','75353',2345,0),(4,9,4,1,'usa-123','2','KOMATSU','',1991,'26528413','75572',5000,0),(5,9,7,1,'UMA-505','26','INTERNACIONAL','modelo4',2010,'362GM2UB-135281','PH48807',351203,0),(6,15,7,1,'UMA-0077','37','STEYR','',1995,'2122437265','LZFS19L172DO12935',200356,0),(7,11,3,2,'sdsd','45','marca 1',NULL,2014,'sdsd','sdsd',456,1),(8,6,1,1,'3','2','Ejemplo','modelo1',3,'3','3',430,0),(9,3,1,2,'llsd','191','kas','sallsa',22,'ksdk','dslls',2,0),(10,7,10,1,'45','56','mazda','sdsd',2014,'dfdf','werer',800,0);
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -487,4 +490,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-01 23:47:46
+-- Dump completed on 2017-07-05 22:13:41
