@@ -21,6 +21,12 @@
 <div class="row">
 	<div class="card">
 		<div class="card-block">
+			<div class="row">	
+				<div class="form-group  col-sm-12" align="right">
+					<a href="../visualizarLista/<?php echo $tipo_vehiculo['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+				</div>
+			</div>
+			
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 				    <thead>
