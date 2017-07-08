@@ -13,9 +13,15 @@
 				</div>
 			</div>						
 			<div class="row">	
-				<div class="form-group  col-sm-12 border-div " align="center">				
+				<div class="form-group  col-sm-4 border-div " align="center">
+				  		<img src="<?php echo PATH_IMAGES; ?>/espoch.jpg" width="140px" height="130px"/>
+				</div>				  	
+				<div class="form-group  col-sm-4 border-div" align="center" style="height: 162px;">				
 					<label class="control-label"><h3><?php echo $dato['marca'].' No.'.$dato['numero']?></h3></label><br>
 					<label class="control-label"><?php echo $dato['vehiculo_nombre']?></label>
+				</div>
+				<div class="form-group  col-sm-4 border-div " align="center">
+				  		<img src="<?php echo PATH_IMAGES; ?>/gobierno.jpg" width="130px" height="130px"/>
 				</div>				
 			</div>
 			

@@ -82,8 +82,10 @@ class OrdenPlanControlador {
 						</div>
 						<table width= 100%>
 							<tr>
-								<td colspan=3 align=center><label class='control-label'><h3>".$dato['marca']." No.".$dato['numero']."</h3></label>
+								<td align=center><img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/></td> 
+								<td align=center><label class='control-label'><h3>".$dato['marca']." No.".$dato['numero']."</h3></label>
 										<label class='control-label'>". $dato['vehiculo_nombre']."</label></td>
+								<td align=center><img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/></td>				
 							</tr>
 							<tr>
 								<td style='vertical-align: top'> <b>Frecuencia: </b><br><br>".$dato['unidad_numero']." </td>								
