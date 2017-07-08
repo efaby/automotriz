@@ -4,7 +4,13 @@
 
 <!-- Main row -->
 <div class="title-block">
-    <h1 class="title">Mantenimiento Correctivo</h1>
+    <h1 class="title">Mantenimiento Correctivo
+     <?php
+    if(count($tipo_vehiculo) >0){
+    	echo $tipo_vehiculo['nombre'];
+    }
+    ?>   
+    </h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>

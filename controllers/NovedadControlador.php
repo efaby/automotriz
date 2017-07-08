@@ -6,6 +6,7 @@ use Dompdf\FontMetrics;
 require_once (PATH_MODELOS . "/NovedadModelo.php");
 require_once (PATH_MODELOS . "/VehiculoModelo.php");
 require_once (PATH_MODELOS . "/RegistroModelo.php");
+require_once (PATH_MODELOS . "/OrdenPlanModelo.php");
 require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
 require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
 
@@ -55,7 +56,8 @@ class NovedadControlador {
 	}
 	
 	public function listar() {
-		$model = new NovedadModelo();	
+		$model = new NovedadModelo();
+		$modelOrdenPlan = new OrdenPlanModelo();
 		$usuario = 0;
 		/* si el usuario que est en sesion es una tecnico se habilit esto */
 		if($_SESSION['SESSION_USER']['tipo_usuario_id'] > 1){
@@ -63,6 +65,8 @@ class NovedadControlador {
 		}
 		$id = $_GET['id'];
 		$datos = $model->obtenerlistadoNovedad($usuario,$id);
+		
+		$tipo_vehiculo = $modelOrdenPlan->obtenerTipoVehiculo($id)[0];
 		$message = "";
 		require_once PATH_VISTAS."/Novedad/view.listado.php";
 	}
@@ -75,8 +79,12 @@ class NovedadControlador {
 	}
 
 	public function ver(){
+		$id = $_GET['id'];
 		$model = new NovedadModelo();
 		$item = $model->obtenerNovedad();
+		
+		$modelOrdenPlan = new OrdenPlanModelo();
+		$tipo_vehiculo = $modelOrdenPlan->obtenerTipoVehiculo($id)[0];		
 		require_once PATH_VISTAS."/Novedad/view.ver.php";
 	}
 	

@@ -45,4 +45,11 @@ class OrdenPlanModelo {
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}
+	
+	public function obtenerTipoVehiculo($id){
+		$model = new BaseModelo();
+		$sql = "SELECT * FROM tipo_vehiculo where id=".$id;		
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
+	}
 }

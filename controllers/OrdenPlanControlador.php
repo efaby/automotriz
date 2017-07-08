@@ -17,6 +17,7 @@ class OrdenPlanControlador {
 			$usuario = $_SESSION['SESSION_USER']['id'];
 		}
 		$id = $_GET['id'];
+		$tipo_vehiculo = $model->obtenerTipoVehiculo($id)[0];
 		$datos = $model->obtenerOrdenes(null, null,$usuario, $id);
 		$message = "";
 		require_once PATH_VISTAS."/OrdenPlan/vista.listado.php";
@@ -27,6 +28,8 @@ class OrdenPlanControlador {
 		$model = new OrdenPlanModelo();
 		$usuario = 0;
 		$dato = $model->obtenerOrdenes($arrayId[0], $arrayId[1],$usuario,0)[0];
+		$tipo_vehiculo = $model->obtenerTipoVehiculo($arrayId[1])[0];
+		
 		$ban = $arrayId[1];
 		$message = "";		
 		require_once PATH_VISTAS."/OrdenPlan/vista.formulario.php";		

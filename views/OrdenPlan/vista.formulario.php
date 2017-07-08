@@ -2,7 +2,13 @@
 <?php include_once PATH_TEMPLATE.'/header.php';?>
 
 <div class="title-block">
-   	<h1 class="title">Ejecución de Tarea de Mantenimiento</h1>
+   	<h1 class="title">Ejecución de Tarea de Mantenimiento
+   	 <?php
+    if(count($tipo_vehiculo) >0){
+    	echo $tipo_vehiculo['nombre'];
+    }
+    ?>   
+   	</h1>
 </div>
 <div class="card">
 	<div class="card-block">
