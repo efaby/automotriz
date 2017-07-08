@@ -55,7 +55,7 @@ class NovedadControlador {
 		echo json_encode($result);
 	}
 	
-	public function listar() {
+	public function listar($cod = null) {
 		$model = new NovedadModelo();
 		$modelOrdenPlan = new OrdenPlanModelo();
 		$usuario = 0;
@@ -63,12 +63,96 @@ class NovedadControlador {
 		if($_SESSION['SESSION_USER']['tipo_usuario_id'] > 1){
 			$usuario = $_SESSION['SESSION_USER']['id'];
 		}
-		$id = $_GET['id'];
+		if ($cod == null){
+			$id = $_GET['id'];
+		}else{
+			$id = $cod;
+		}
 		$datos = $model->obtenerlistadoNovedad($usuario,$id);
 		
 		$tipo_vehiculo = $modelOrdenPlan->obtenerTipoVehiculo($id)[0];
 		$message = "";
-		require_once PATH_VISTAS."/Novedad/view.listado.php";
+		if ($cod == null){
+			require_once PATH_VISTAS."/Novedad/view.listado.php";
+		}
+		else{
+			$array = [];
+			$array[0] = $datos;
+			$array[1] = $tipo_vehiculo;
+			return $array;
+		}
+	}
+	
+	public function visualizarLista(){
+		$id = $_GET['id'];
+		$array = self::listar($id);
+		$tipo_vehiculo = $array[1];
+		$datos = $array[0];
+	
+		$html ="<html>
+					<head>
+						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
+						<style>
+							body {
+								margin: 20px 20px 20px 50px;
+							}
+							table{
+							   border-collapse: collapse; width: 100%;
+							}
+	
+							td{
+							   border:1px solid #ccc; padding:1px;
+							   font-size:9pt;
+							}
+						</style>
+					</head>
+					<body>
+						<div class='title-block' align='center'>
+		   					<h3 class='title'>Mantenimiento Correctivo ";
+		if(count($tipo_vehiculo) >0){
+			$html .= $tipo_vehiculo['nombre'];
+		}
+		$html .="			</h3>
+						</div>
+						<table width= 100%>
+							<tr>
+						    	<td style='text-align:center'><b>ID</b></td>
+							    <td style='text-align:center'><b>Vehículo/Maq.</b></td>
+							    <td style='text-align:center'><b>Conductor</b></td>
+							    <td style='text-align:center'><b>Problema</b></td>
+							    <td style='text-align:center'><b>Ingreso</b></td>
+							    <td style='text-align:center'><b>Atención</b></td>
+								<td style='text-align:center'><b>Estado</b></td>
+							</tr>";
+			if(count($datos) >0){
+				$contador=1;
+				foreach ($datos as $item) {
+				$html .= "<tr><td>".$contador."</td>";
+					$html .= "<td>".$item['marca']." No. ".$item['numero']."</td>";
+					$html .= "<td>".$item['nombre_usuario']." ".$item['apellido_usuario']."</td>";
+					$html .= "<td>".substr ( $item['problema'] , 0 ,20 )."</td>";
+					$html .= "<td>".$item['fecha_ingreso']."</td>";
+					$html .= "<td>".$item['fecha_atencion']."</td>";
+					$estado = ($item['atendido']==1)?'Cerrado':'Abierto';
+					$html .= "<td>".$estado."</td></tr>";
+					$contador++;
+					}
+				}
+		$html .="</table>
+			</body></html>";
+	
+		$options = new Options();
+		$options->set('isHtml5ParserEnabled', true);
+		$dompdf = new Dompdf($options);
+	
+		$dompdf->load_html($html);
+		$dompdf->render();
+		$canvas = $dompdf->get_canvas();
+		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
+		$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
+		$dompdf->stream('orden'.$dato['id'], array("Attachment"=>false));
+	
+	
 	}
 	
 	public function asignar(){
