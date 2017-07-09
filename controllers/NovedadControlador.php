@@ -260,60 +260,69 @@ class NovedadControlador {
 						</style>
 					</head>
 					<body>
-						<center><h3>Mantenimiento Correctivo</h3></center>
 						<table width= 100%>
 							<tr>
-								<td colspan=2 align=center><b>DESCRIPCIÓN</b></td>
+								<td width='25%'>
+									<img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/>
+								</td>
+								<td>
+									<h3>Mantenimiento Correctivo</h3>
+								</td>
+								<td width='25%'>
+									<img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/>		
+								</td>
+							</tr>
+							<tr>
+								<td colspan=3 align=center><b>DESCRIPCIÓN</b></td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Vehículo</b></td>
-								<td>".$item['marca']. " No. ".$item['numero']."
+								<td colspan=2>".$item['marca']. " No. ".$item['numero']."
 							</tr>
 							<tr>
 								<td width='25%'><b>Detalle Problema</b></td>
-								<td>".$item['problema']."</td>
+								<td colspan=2>".$item['problema']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Causa</b></td>
-								<td>".$item['causa']."</td>
+								<td colspan=2>".$item['causa']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Falla T&eacute;cnica</b></td>
-								<td>".$item['falla']."</td>
+								<td colspan=2>".$item['falla']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Solución</b></td>
-								<td>".$item['solucion']."</td>		
+								<td colspan=2>".$item['solucion']."</td>		
 							</tr>
 							<tr>
 								<td width='25%'><b>Técnico Asignado</b></td>
-								<td>".$item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']."</td>
+								<td colspan=2>".$item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Estado</b></td>
-								<td>";
+								<td colspan=2>";
 					$html .=($item['atendido']==1)?"Cerrado":"Abierto";
 					$html .="</td></tr>
 							<tr>
 								<td width='25%'><b>Proceso</b></td>
-								<td>".$item['proceso']."</td>
+								<td colspan=2>".$item['proceso']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Elementos</b></td>
-								<td>".$item['elementos']."</td>
+								<td colspan=2>".$item['elementos']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Observación</b></td>
-								<td>".$item['observaciones']."</td>
+								<td colspan=2>".$item['observaciones']."</td>
 							</tr>
 							<tr>
 								<td width='25%'><b>Técnico Reparador</b></td>
-								<td>".$item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']."</td>
+								<td colspan=2>".$item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']."</td>
 							</tr>		
 						</table>
 					</body>
-			</html>";
-						
+			</html>";	
 			$options = new Options();
 			$options->set('isHtml5ParserEnabled', true);
 			$dompdf = new Dompdf($options);

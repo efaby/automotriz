@@ -25,93 +25,126 @@
 			<a href="../visualizarPdf/<?php echo $item['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
 		</div>
 	</div>
-
 	<div class="form-group  col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Vehículo</label>
-		<div id="texto"> <?php echo $item['marca'] ." ".$item['marca']. " No. ".$item['numero'] ; ?>
+		<div class="form-group  col-sm-2">
+			<img src="<?php echo PATH_IMAGES; ?>/espoch.jpg" width="140px" height="130px"/>
+		</div>
+		<div class="form-group  col-sm-8" style="text-align: center">
+			<h3>Mantenimiento Correctivo
+			<?php
+	  			if(count($tipo_vehiculo) >0){
+	    			echo $tipo_vehiculo['nombre'];
+	    		}
+    		?>
+    		</h3>
+		</div>
+		<div class="form-group  col-sm-2">
+			<img src="<?php echo PATH_IMAGES; ?>/gobierno.jpg" width="130px" height="130px"/>			
 		</div>
 	</div>
+	<div class="form-group  col-sm-12">
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Vehículo</label>		
+		</div>
+		<div class="form-group  col-sm-6 row-padding">
+			<div id="texto"> <?php echo $item['marca'] ." ".$item['marca']. " No. ".$item['numero'] ; ?>
+			</div>
+		</div>
 	</div>	
-	
-	
-	
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Detalle Problema</label>
-		<div id="texto"> <?php echo $item['problema']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Detalle Problema</label>
 		</div>
-	</div>		
-	</div>
-	
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo $item['problema']; ?>
+			</div>
+		</div>		
+	</div>	
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Causa</label>
-		<div id="texto"> <?php echo $item['causa']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Causa</label>				
+		</div>
+		<div class="form-group  col-sm-6 row-padding">
+			<div id="texto"> <?php echo $item['causa']; ?>
+			</div>	
 		</div>	
-	</div>	
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Falla T&eacute;cnica</label>
-		<div id="texto"> <?php echo $item['falla']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Falla T&eacute;cnica</label>
+		</div>
+		<div class="form-group  col-sm-6 row-padding">	
+			<div id="texto"> <?php echo $item['falla']; ?>
 		</div>
 	</div>		
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Solución</label>
-		<div id="texto"> <?php echo $item['solucion']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Solución</label>			
+		</div>		
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo $item['solucion']; ?>
+			</div>
 		</div>
-	</div>		
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Técnico Asignado</label>
-		<div id="texto"> <?php echo $item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Técnico Asignado</label>			
 		</div>
-	</div>		
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo $item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']; ?>
+			</div>
+		</div>		
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Estado</label>
-		<div id="texto"> <?php echo ($item['atendido']==1)?'Cerrado':'Abierto'; ?></div>
-	</div>
-	</div>
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Proceso</label>
-		<div id="texto"> <?php echo $item['proceso']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Estado</label>			
 		</div>
-	</div>		
-	</div>
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Elementos</label>
-		<div id="texto"> <?php echo $item['elementos']; ?>
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo ($item['atendido']==1)?'Cerrado':'Abierto'; ?></div>
 		</div>
-	</div>		
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Observación</label>
-		<div id="texto"> <?php echo $item['observaciones']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Proceso</label>			
 		</div>
-	</div>		
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo $item['proceso']; ?>
+			</div>
+		</div>		
 	</div>
 	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Técnico Reparador</label>
-		<div id="texto"> <?php echo $item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']; ?>
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Elementos</label>			
+		</div>		
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo $item['elementos']; ?>
+			</div>
 		</div>
-	</div>		
 	</div>
-
 	<div class="form-group col-sm-12">
-	<a href="../listar/<?php echo $item['tipo_vehiculo_id'];?>" class="btn btn-info rounded"  >
+		<div class="form-group  col-sm-6 row-padding">
+			<label class="control-label">Observación</label>		
+		</div>		
+		<div class="form-group  col-sm-6 row-padding">
+			<div id="texto"> <?php echo $item['observaciones']; ?>
+			</div>
+		</div>
+	</div>
+	<div class="form-group col-sm-12">
+		<div class="form-group  col-sm-2 row-padding">
+			<label class="control-label">Técnico Reparador</label>			
+		</div>		
+		<div class="form-group  col-sm-4 row-padding">
+			<div id="texto"> <?php echo $item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']; ?>
+			</div>
+		</div>
+	</div>
+	<div class="form-group col-sm-12">
+		<a href="../listar/<?php echo $item['tipo_vehiculo_id'];?>" class="btn btn-info rounded"  >
 			Regresar
 		</a>
-</div>
+	</div>
 </div>
 
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
