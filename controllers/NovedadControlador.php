@@ -88,7 +88,7 @@ class NovedadControlador {
 		$array = self::listar($id);
 		$tipo_vehiculo = $array[1];
 		$datos = $array[0];
-	
+		
 		$html ="<html>
 					<head>
 						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
@@ -165,10 +165,7 @@ class NovedadControlador {
 	public function ver(){
 		$id = $_GET['id'];
 		$model = new NovedadModelo();
-		$item = $model->obtenerNovedad();
-		
-		$modelOrdenPlan = new OrdenPlanModelo();
-		$tipo_vehiculo = $modelOrdenPlan->obtenerTipoVehiculo($id)[0];		
+		$item = $model->obtenerNovedad();	
 		require_once PATH_VISTAS."/Novedad/view.ver.php";
 	}
 	
@@ -242,6 +239,7 @@ class NovedadControlador {
 		$novedad = $_GET ['id'];
 		$model = new NovedadModelo();
 		$item = $model->obtenerNovedad($novedad);
+		
 		$html="<html>
 					<head>
 						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
@@ -266,7 +264,7 @@ class NovedadControlador {
 									<img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/>
 								</td>
 								<td>
-									<h3>Mantenimiento Correctivo</h3>
+									<h3>Mantenimiento Correctivo ".$item['tipo_vehiculo']."</h3>
 								</td>
 								<td width='25%'>
 									<img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/>		

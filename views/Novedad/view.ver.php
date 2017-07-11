@@ -5,9 +5,7 @@
 <div class="title-block">
     <h1 class="title">Mantenimiento Correctivo
     <?php
-	    if(count($tipo_vehiculo) >0){
-	    	echo $tipo_vehiculo['nombre'];
-	    }
+   echo $item['tipo_vehiculo'];
     ?>   
     </h1>
 </div>
@@ -22,7 +20,7 @@
 <div class="card-block">
 	<div class="row">	
 		<div class="form-group  col-sm-12" align="right">
-			<a href="../visualizarPdf/<?php echo $item['id']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+			<a href="../visualizarPdf/<?php echo $item['ids']?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
 		</div>
 	</div>
 	<div class="form-group  col-sm-12">
@@ -32,9 +30,7 @@
 		<div class="form-group  col-sm-8" style="text-align: center">
 			<h3>Mantenimiento Correctivo
 			<?php
-	  			if(count($tipo_vehiculo) >0){
-	    			echo $tipo_vehiculo['nombre'];
-	    		}
+			echo $item['tipo_vehiculo'];
     		?>
     		</h3>
 		</div>

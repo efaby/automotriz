@@ -2402,6 +2402,8 @@ pre {
       padding-left: 20px;
       padding-right: 10px; }
     .sidebar .nav > li.active > a,
+    li.active > .level2,
+    li.active > a,
     .sidebar .nav > li.active > a:hover {
       background-color: #fe821d !important;
       color: #ffffff !important; }

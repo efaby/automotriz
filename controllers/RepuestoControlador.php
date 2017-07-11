@@ -114,7 +114,8 @@ class RepuestoControlador {
 		$iteMan = $model->obtenerMantenimientoRepuesto($arrayId[0],$arrayId[1],$tipo);	
 		$datos = $model->obtenerListadoRepuestoOrden($iteMan['id']);
 		$model = new NovedadModelo();
-		$item = $model->obtenerNovedad();
+		
+		$item = $model->obtenerNovedad($iteMan['mantenimiento_id']);
 		require_once PATH_VISTAS."/Repuesto/vista.ingresoCorrectivo.php";
 	
 	}

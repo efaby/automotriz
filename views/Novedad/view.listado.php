@@ -65,7 +65,7 @@
 	    		echo "<td align='center'>				
 					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>	";				
     		
-	    		$ordenRepuesto = ($item['repuestoId']>0)?$item['repuestoId']."-0":$item['id']."-1";
+	    		$ordenRepuesto = ($item['repuestoId']>0)?$item['repuestoId']."-0":$item['ids']."-1";
 	    		if($item['aprobado']==1){
 	    			echo "<a href='javascript: loadModalAction(".$item['ids'].",\"reparar\")' class='btn btn-warning rounded btn-sm ".$repara."' title='Atender' ><i class='fa fa-edit'></i></a>";
 	    		} else {

@@ -58,7 +58,7 @@ CREATE TABLE `mantenimiento_respuestos` (
   `vehiculo_id` int(11) NOT NULL,
   `usuario_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `mantenimiento_respuestos` (
 
 LOCK TABLES `mantenimiento_respuestos` WRITE;
 /*!40000 ALTER TABLE `mantenimiento_respuestos` DISABLE KEYS */;
-INSERT INTO `mantenimiento_respuestos` VALUES (6,1,12,16,'2017-07-03',1,8,4),(7,2,6,14,'2017-07-03',0,5,NULL);
+INSERT INTO `mantenimiento_respuestos` VALUES (6,1,12,16,'2017-07-03',1,8,4),(7,2,6,14,'2017-07-03',0,5,NULL),(8,2,1,16,'2017-07-10',0,1,NULL),(9,2,5,2,'2017-07-10',1,1,4);
 /*!40000 ALTER TABLE `mantenimiento_respuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `novedad` (
 
 LOCK TABLES `novedad` WRITE;
 /*!40000 ALTER TABLE `novedad` DISABLE KEYS */;
-INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','otra pruebqqq','swdsd','zddad','',16,1,16,3,'3 horas','2017-06-11','2017-06-13',1,0,1),(2,1,'no encuiend luces','focos quemados','wdssd','sodjslkdjlsd osdjlsdmsdnmsd','sdsdsd.sdm','sfssd',16,1,16,3,'2 horas','2017-06-12','2017-06-15',1,0,40),(3,1,'wdsd','asdssasa','xcxcxc','asas','zsasa','sesdsd',14,1,14,3,'3 horas','2017-06-12','2017-06-14',1,600,7),(4,1,'','','otra prueba','sdssd','sdsd','',16,1,16,3,'3 horas','2017-06-13','2017-06-13',1,600,2),(5,1,'otro problem','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'2017-06-13',NULL,0,750,0),(6,5,'pruebas','preubas','other','xdsdsd','sdsdsd','sdsdsd',14,1,14,9,'10 min','2017-06-21','2017-06-21',1,350678,5),(7,6,'mi problema','','my solucion',NULL,NULL,NULL,16,1,NULL,15,NULL,'2017-07-03',NULL,0,200356,0);
+INSERT INTO `novedad` VALUES (1,1,'no enciende','Desconocida','otra pruebqqq','swdsd','zddad','',16,1,16,3,'3 horas','2017-06-11','2017-06-13',1,0,1),(2,1,'no encuiend luces','focos quemados','wdssd','sodjslkdjlsd osdjlsdmsdnmsd','sdsdsd.sdm','sfssd',16,1,16,3,'2 horas','2017-06-12','2017-06-15',1,0,40),(3,1,'wdsd','asdssasa','xcxcxc','asas','zsasa','sesdsd',14,1,14,3,'3 horas','2017-06-12','2017-06-14',1,600,7),(4,1,'','','otra prueba','sdssd','sdsd','',16,1,16,3,'3 horas','2017-06-13','2017-06-13',1,600,2),(5,1,'otro problem','','dssd',NULL,NULL,NULL,2,1,NULL,3,NULL,'2017-06-13',NULL,0,750,0),(6,5,'pruebas','preubas','other','xdsdsd','sdsdsd','sdsdsd',14,1,14,9,'10 min','2017-06-21','2017-06-21',1,350678,5),(7,6,'mi problema','','my solucion',NULL,NULL,NULL,16,1,NULL,15,NULL,'2017-07-03',NULL,0,200356,0);
 /*!40000 ALTER TABLE `novedad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `orden_repuesto` (
   `mantenimineto_respuesto_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `orden_repuesto` (
 
 LOCK TABLES `orden_repuesto` WRITE;
 /*!40000 ALTER TABLE `orden_repuesto` DISABLE KEYS */;
-INSERT INTO `orden_repuesto` VALUES (6,1,6,4),(7,2,7,53);
+INSERT INTO `orden_repuesto` VALUES (6,1,6,4),(7,2,7,53),(8,1,8,3),(9,2,8,5),(10,1,9,4);
 /*!40000 ALTER TABLE `orden_repuesto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +263,7 @@ CREATE TABLE `repuestos` (
 
 LOCK TABLES `repuestos` WRITE;
 /*!40000 ALTER TABLE `repuestos` DISABLE KEYS */;
-INSERT INTO `repuestos` VALUES (1,'Aceite',2,'cd-001',0),(2,'agua',6,'cd-003',0);
+INSERT INTO `repuestos` VALUES (1,'Aceite',20,'cd-001',0),(2,'agua',6,'cd-003',0);
 /*!40000 ALTER TABLE `repuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -490,4 +490,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-05 22:13:41
+-- Dump completed on 2017-07-10 22:21:24
