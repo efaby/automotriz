@@ -76,7 +76,10 @@ class UsuarioControlador {
 							table{
 							border-collapse: collapse; width: 100%;
 							}
-								
+							th{
+							border:1px solid #ccc; padding:1px;
+							font-size:9pt;
+							}	
 							td{
 							border:1px solid #ccc; padding:1px;
 							font-size:9pt;
@@ -84,7 +87,20 @@ class UsuarioControlador {
 						</style>
 					</head>
 					<body>
-						<center><h3>Listado de Usuarios - ".$tipo['descripcion']."</h3></center>
+						<table width= 100%>
+							<tr>
+								<th rowspan='2' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/>
+				  				</th>
+				    			<th colspan='2' style='text-align:center'>ESPOCH-GADPC</th>
+				    			<th rowspan='2' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/gobierno.jpg width='100px' height='100px'/>
+				  				</th>				    			
+							</tr>
+				  			<tr>
+				    			<th colspan='2' style='text-align:center'>Listado de Usuarios - ".$tipo['descripcion']."</th>
+							</tr>				    		
+				  	  </table><br>		
 						<table width= 100%>
 							<tr>
 				    		    <td><b>Identificación</b></td>

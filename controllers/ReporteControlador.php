@@ -90,6 +90,10 @@ class ReporteControlador {
 							table{
 								border-collapse: collapse; width: 100%;
 							}				
+							th{
+								border:1px solid #ccc; padding:1px;
+								font-size:9pt;
+							}
 							td{
 								border:1px solid #ccc; padding:1px;
 								font-size:9pt;
@@ -99,7 +103,7 @@ class ReporteControlador {
 					<body>
 						<center><h3>Historial de Mantenimiento ";
 						$title = ($arrayId[1] ==1)?"Preventivo": "Correctivo";
-		$html .=$title."</h3><table width= 100% border=1>
+		$html .=$title."</h3><table width= 100%>
 							<tr>
 								<th rowspan='3' style='text-align:center'>
 				  					<img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/>				  				
@@ -149,13 +153,13 @@ class ReporteControlador {
 						$html .="<tr><td colspan=2>".$item['numero_falla']."</td>
 		    						 <td colspan=2>".$item['promedio']."</td>";
 						}									 		
-						$html .="	 <td style='border-bottom-color: black' ".$colsAct.">".$item['actividad']."</td>";
+						$html .="	 <td ".$colsAct.">".$item['actividad']."</td>";
 						if ($arrayId[1] != 3){
-						$html .="	 <td style='border-bottom-color: black'>".$item['id']."</td>
-									 <td style='border-bottom-color: black'> Falta poner".$item['id']."</td>
-									 <td style='border-bottom-color: black'>".$item['tiempo_ejecucion']." </td>
-									 <td style='border-bottom-color: black'>".$item['nombres']." ".$item['apellidos']."</td>
-									 <td style='border-bottom-color: black;border-right-color: black'>".$item['observacion']." </td>";
+						$html .="	 <td>".$item['id']."</td>
+									 <td> Falta poner".$item['id']."</td>
+									 <td>".$item['tiempo_ejecucion']." </td>
+									 <td>".$item['nombres']." ".$item['apellidos']."</td>
+									 <td>".$item['observacion']." </td>";
 						}
 						$html .="</tr>";									 		
 					}
@@ -191,6 +195,10 @@ class ReporteControlador {
 							table{
 								border-collapse: collapse; width: 100%;
 							}
+							th{
+								border:1px solid #ccc; padding:1px;
+								font-size:9pt;
+							}
 							td{
 								border:1px solid #ccc; padding:1px;
 								font-size:9pt;
@@ -199,7 +207,7 @@ class ReporteControlador {
 					</head>
 					<body>
 						<center><h3>Reporte de Fallas Comunes</h3>
-							<table width= 100% border=1>
+							<table width= 100%>
 							<tr>
 								<th rowspan='3' style='text-align:center'>
 				  					<img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/>
@@ -232,7 +240,7 @@ class ReporteControlador {
 		foreach ($listado as $item) {
 			$html .="<tr><td style='text-align:center'>".$item['numero_falla']."</td>
 		    		<td style='text-align:center'>".$item['promedio']."</td>
-					<td style='border-bottom-color: black' colspan='4'>".$item['actividad']."</td></tr>";
+					<td colspan='4'>".$item['actividad']."</td></tr>";
 		} 
 		$html .="		</table>
 					</body>
