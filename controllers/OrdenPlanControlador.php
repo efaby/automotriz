@@ -50,7 +50,10 @@ class OrdenPlanControlador {
 							table{
 							   border-collapse: collapse; width: 100%;
 							}
-				
+							th{
+							   border:1px solid #ccc; padding:1px;
+							   font-size:9pt;
+							}
 							td{
 							   border:1px solid #ccc; padding:1px;
 							   font-size:9pt;
@@ -58,13 +61,26 @@ class OrdenPlanControlador {
 						</style>
 					</head>
 					<body>
-						<div class='title-block' align='center'>
-		   					<h3 class='title'>Ejecución Ordenes Planes ";
-						    if(count($tipo_vehiculo) >0){
-							    $html .= $tipo_vehiculo['nombre'];
-						    }
-		$html .="			</h3>						    
-						</div>
+						<table width= 100%>
+							<tr>
+								<th rowspan='2' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/>
+				  				</th>
+				    			<th colspan='2' style='text-align:center'>ESPOCH-GADPC</th>
+				    			<th rowspan='2' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/gobierno.jpg width='100px' height='100px'/>
+				  				</th>				    			
+							</tr>
+				  			<tr>
+				    			<th colspan='2' style='text-align:center'>Ejecución Ordenes Planes<br>";
+				    			if(count($tipo_vehiculo) >0){
+				    				$html .= $tipo_vehiculo['nombre'];
+				    			}
+				    		$html .="</th>
+							</tr>				    		
+				  	  	</table><br>
+						
+				
 						<table width= 100%>
 							<tr>
 						    	<td style='text-align:center'><b>ID</b></td>
@@ -82,7 +98,7 @@ class OrdenPlanControlador {
 							$html .= "<td>".$item['vehiculo_nombre']."</td>";
 							$html .= "<td>".$item['plan']."</td>";
 							$html .= "<td>".$item['frecuencia'];
-							if ($item['unidad_id'] ==4)  echo " Horas"; else echo " Kilometros";
+							if ($item['unidad_id'] ==4)  $html .= " Horas"; else $html .= " Kilometros";
 							$html .= "</td>";
 								$html .= "<td>".$item['fecha_emision']."</td>";
 								$html .= "<td>".$item['fecha_atencion']."</td>";
@@ -95,7 +111,6 @@ class OrdenPlanControlador {
 					}
 		$html .="</table>
 			</body></html>";
-		
 		$options = new Options();
 		$options->set('isHtml5ParserEnabled', true);
 		$dompdf = new Dompdf($options);
