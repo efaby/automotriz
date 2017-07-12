@@ -69,6 +69,9 @@ class VehiculoControlador {
 		$vehiculo ['numero_motor'] = $_POST ['numero_motor'];	
 		$vehiculo ['numero_chasis'] = $_POST ['numero_chasis'];
 		$vehiculo ['medida_uso'] = $_POST ['medida_uso'];
+		$vehiculo ['url'] = $this->uploadFile('vehiculo');
+		
+		
 		$model = new VehiculoModelo();
 		$conductor = $_POST ['conductor'];
 		if($conductor > 0 && $conductor != $vehiculo ['usuario_id']){
@@ -83,6 +86,11 @@ class VehiculoControlador {
 			$_SESSION ['message'] = $e->getMessage ();
 		}
 		header ( "Location: ../listar/".$_POST ['tipo_vehiculo_id'] );
+	}
+	
+	private function uploadFile($nombre,$carpeta){
+		$upload = new File();
+		return $upload->uploadFile($nombre,$carpeta);
 	}
 	
 	public function eliminar() {
@@ -168,12 +176,10 @@ class VehiculoControlador {
 		$arrayId = explode('-', $_GET['id']);
 		$vehiculo = $model->obtenerVehiculo($arrayId[1]);
 		$tipo_id = $arrayId[0];
-		$usuarios = $model->obtenerConductores($tipo_id);
-		foreach ($usuarios as $dato) {
-			if($vehiculo['usuario_id']==$dato['id']){
-				$nombres = $dato['nombres']. " ".$dato['apellidos'];
-			}
-		}
+		$usuarios = $model->obtenerConductor($arrayId[1]);
+		
+		$nombres = $usuarios[0]['nombres']. " ".$usuarios[0]['apellidos'];
+		
 		$medida = "Kilometros";
 		if($tipo_id>3 && $tipo_id<9){
 			$medida = "Horas";
@@ -185,6 +191,11 @@ class VehiculoControlador {
 			}
 		}
 		$tipo = $model->obtenerTipo($tipo_id);
+		$urlImage = "../images/vehiculo.png";
+		if($vehiculo['url']!=''){
+			$urlImage = $vehiculo['url'];
+		}
+		
 		$html="<html>
 					<head>
 						<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'/>
@@ -222,12 +233,14 @@ class VehiculoControlador {
 				  	  </table><br>				  							
 				  	  <table width= 100% border=2>
 							<tr>
-				    			<td width='50%' rowspan=4>foto</td>
+				    			<td width='50%' rowspan=4 style='margin:0 auto; text-align:center;'>
+				    				<img src=".PATH_FILES.$urlImage." height='150px'/>	
+				    			</td>
 				    					<td width='50%'><b>";
 								if($tipo_id>3 && $tipo_id<9){
-									$html .="Conductor";
-								}else{
 									$html .="Operador";
+								}else{
+									$html .="Conductor";
 								}	
 				
 								$html .="</b></td>
@@ -277,7 +290,6 @@ class VehiculoControlador {
 					</body>
 				</html>";
 
-				
 				$options = new Options();
 				$options->set('isHtml5ParserEnabled', true);
 				$dompdf = new Dompdf($options);

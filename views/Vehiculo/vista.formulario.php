@@ -1,4 +1,4 @@
-<form id="frmVehiculo" method="post" action="../guardar/">
+<form id="frmVehiculo" method="post" action="../guardar/" enctype="multipart/form-data">
 
 
 <div class="row">
@@ -88,7 +88,8 @@
 			<label class="control-label">Fotografía del Vehículo</label> 			
 			<?php if($vehiculo['url'] != ''):?>
 				<input type='file' name='url1' id="url1" class="file">		
-				<a href="../downloadFile/<?php echo $vehiculo['url'];?>">Descargar</a>
+				<br>
+				<img src="<?php echo PATH_IMAGES."/../files/".$vehiculo['url'];?>" height="150px">
 				<input type="hidden" name="fileName" value="<?php echo $vehiculo['url'];?>">
 			<?php else :?>
 				<input type='file' name='url' id="url" class="file">	
@@ -227,6 +228,25 @@ $(document).ready(function() {
 						regexp: /^\d*$/,
 						message: 'Ingrese <?php echo $medida; ?> que sean válidos.'
 					}
+				}
+			},
+			url: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione un Archivo.'
+					},
+					file: {
+	                    extension: 'jpg,png',
+	                    message: 'Seleccione un archivo válido. (jpg,png)'
+	                }
+				}
+			},
+			url1: {
+				validators: {							
+					file: {
+	                    extension: 'jpg,png',
+	                    message: 'Seleccione un archivo válido. (jpg,png)'
+	                }
 				}
 			},
 			

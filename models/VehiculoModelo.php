@@ -78,6 +78,17 @@ class VehiculoModelo {
 		return $model->obtenerCampos($result);
 	}
 	
+	public function obtenerConductor($vehiculo){
+	
+		$model = new BaseModelo();
+		$sql = "select u.id, u.nombres, u.apellidos
+				from usuario as u
+				inner join vehiculo as v on v.usuario_id = u.id
+				where v.id = ".$vehiculo;
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
+	}
+	
 	public function obtenerEstadoVehiculo(){
 		$model = new BaseModelo();
 		return $model->obtenerCatalogo("estado_vehiculo");
