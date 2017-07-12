@@ -92,6 +92,20 @@ class RepuestoControlador {
 		header ( "Location: ../listarOrden/" );
 	}
 	
+	public function guardarObservacion() {
+		$orden = $_POST ['id'];
+		$observacion = $_POST ['observacion'];
+		$model = new RepuestoModelo();
+		try {
+			$datos = $model->guardarObservacion($orden,$observacion);
+			$_SESSION ['message'] = "Datos almacenados correctamente.";
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: ../listarOrden/" );
+	}
+	
+	
 	// ingreso
 	
 	public function ingresoPreventivo(){

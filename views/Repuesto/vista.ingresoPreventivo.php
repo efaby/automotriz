@@ -132,6 +132,13 @@
 		    	}?>
 		    </tbody>
 		    </table>
+		    <div class="card-block">
+			<div class="form-group col-sm-12 border-div">
+				<label class="control-label">Observaciones:</label>
+				<div id="texto"> <?php echo $iteMan['observacion']; ?>
+				</div>	
+			</div>	
+			</div>
 		</div>
 
 	</div>

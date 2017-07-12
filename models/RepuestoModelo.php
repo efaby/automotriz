@@ -57,7 +57,7 @@ class RepuestoModelo {
 	
 	public function obtenerOrden($orden){
 		$model = new BaseModelo();
-		$sql = "select mr.id, mr.aprobado, mr.fecha, mr.tipo, v.medida_uso, v.numero, v.placa, v.anio, v.tipo_vehiculo_id, u.nombres, u.apellidos,u1.nombres as nombreEnt, u1.apellidos as apellidoEnt 
+		$sql = "select mr.id, mr.aprobado, mr.fecha, mr.tipo, mr.observacion, v.medida_uso, v.numero, v.placa, v.anio, v.tipo_vehiculo_id, u.nombres, u.apellidos,u1.nombres as nombreEnt, u1.apellidos as apellidoEnt 
 				from mantenimiento_respuestos as mr
 				inner join vehiculo as v on mr.vehiculo_id = v.id
 				inner join usuario as u on u.id = mr.tecnico_id
@@ -80,6 +80,12 @@ class RepuestoModelo {
 	
 	public function aprobarOrden($orden, $usuario){
 		$sql = "update mantenimiento_respuestos set aprobado = 1, usuario_id = ".$usuario." where id = ".$orden;
+		$model = new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+	}
+	
+	public function guardarObservacion($orden, $observacion){
+		$sql = "update mantenimiento_respuestos set observacion = '".$observacion."' where id = ".$orden;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 	}

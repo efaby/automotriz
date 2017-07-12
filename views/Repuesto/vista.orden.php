@@ -109,14 +109,47 @@
 
 				<input type='hidden' name='id' value="<?php echo $datos['id']; ?>">
 					<button type="submit" class="btn btn-success rounded <?php echo $disable; ?>">Aprobar</button>
-
+				<a  class="btn btn-primary rounded" id="modalOpen1" href="javascript: loadModal1('<?php echo $datos['id'];?>')">
+						Observaci&oacute;n
+					</a>
 			</div>
 		    </form>
 		    <?php endif;  ?>
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" >
+		<div class="modal-content">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Observaciones</h3>
+			</div>
 
+			<div class="modal-body">
+				<form id="frmUsuario" method="post" action="../guardarObservacion/">
+
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<label class="control-label">Observaci&oacute;n</label> 
+							<textarea name='observacion' id='observacion' class='form-control' ><?php echo $datos['observacion'];?></textarea>	
+					
+						</div>
+					</div>
+					<div class="row">
+					<div class="form-group col-sm-6">
+					<input type='hidden' name='id' value="<?php echo $datos['id']; ?>">
+						<button type="submit" class="btn btn-success rounded">Guardar</button>
+					</div>
+				</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+</div>
 <?php include_once PATH_TEMPLATE.'/footer.php';?>   
 <script src="<?php echo PATH_JS; ?>/formValidation.js"></script>
 <script src="<?php echo PATH_JS; ?>/bootstrap.js"></script> 
@@ -124,5 +157,39 @@
 <script src="<?php echo PATH_JS; ?>/jquery.dataTables.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo PATH_JS; ?>/table.js"></script>
+<script type="text/javascript">
+
+	function loadModal1(id){		
+		$('#confirm-submit').modal({show:true});
+	}
+
+	$(document).ready(function() {
+
+	    $('#frmItem1').formValidation({
+	    	message: 'This value is not valid',
+			feedbackIcons: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			fields: {			
+				
+				observacion: {
+					message: 'La Observacion no es válida',
+				    validators: {	
+																			
+										regexp: {
+											regexp: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9 \.\,\_\-]+$/,
+											message: 'Ingrese una Observacion válida.'
+										}
+									}
+								},
+				
+			}
+		});
+	});
+
+</script>
+
 </body>
 </html>
