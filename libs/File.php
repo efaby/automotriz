@@ -27,6 +27,23 @@ class File {
 		}
 	}
 	
+	
+	public function downloadPdf($nombre){
+	
+		$path = PATH_FILES.$nombre;
+		$type = '';
+	
+		if (is_file($path)) {		
+			header("Content-Type: application/pdf");
+			header("Content-Disposition: inline; filename=$nombre");
+			readfile($path);
+		} else {
+			die("El archivo no existe.");
+		}
+	}
+	
+	
+	
 	public function uploadFile($prefix){
 		$key = 'url';
 

@@ -57,6 +57,7 @@ CREATE TABLE `mantenimiento_respuestos` (
   `aprobado` int(11) NOT NULL DEFAULT '0',
   `vehiculo_id` int(11) NOT NULL,
   `usuario_id` int(11) DEFAULT NULL,
+  `observacion` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,7 +68,7 @@ CREATE TABLE `mantenimiento_respuestos` (
 
 LOCK TABLES `mantenimiento_respuestos` WRITE;
 /*!40000 ALTER TABLE `mantenimiento_respuestos` DISABLE KEYS */;
-INSERT INTO `mantenimiento_respuestos` VALUES (6,1,12,16,'2017-07-03',1,8,4),(7,2,6,14,'2017-07-03',0,5,NULL),(8,2,1,16,'2017-07-10',0,1,NULL),(9,2,5,2,'2017-07-10',1,1,4);
+INSERT INTO `mantenimiento_respuestos` VALUES (6,1,12,16,'2017-07-03',1,8,4,NULL),(7,2,6,14,'2017-07-03',0,5,NULL,NULL),(8,2,1,16,'2017-07-10',0,1,NULL,NULL),(9,2,5,2,'2017-07-10',1,1,4,NULL);
 /*!40000 ALTER TABLE `mantenimiento_respuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,6 +429,7 @@ CREATE TABLE `vehiculo` (
   `numero_chasis` varchar(64) NOT NULL,
   `medida_uso` double NOT NULL,
   `eliminado` int(11) NOT NULL DEFAULT '0',
+  `url` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_vehiculo_estado_vehiculo1_idx` (`estado_vehiculo_id`),
   KEY `fk_vehiculo_usuario1_idx` (`usuario_id`),
@@ -444,7 +446,7 @@ CREATE TABLE `vehiculo` (
 
 LOCK TABLES `vehiculo` WRITE;
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` VALUES (1,10,1,1,'USA-1230','1','ppp','modelo',2015,'4JJLX9761','8LBETF3N7F0267815',750,0),(2,6,1,1,'UBW-193','2','CHEVROLET',NULL,2012,'6BD1-175945','8LBETFS25H40113947',2000,0),(3,11,1,1,'ubs-234','1','KOMATSU',NULL,2010,'26518093','75353',2345,0),(4,9,4,1,'usa-123','2','KOMATSU','',1991,'26528413','75572',5000,0),(5,9,7,1,'UMA-505','26','INTERNACIONAL','modelo4',2010,'362GM2UB-135281','PH48807',351203,0),(6,15,7,1,'UMA-0077','37','STEYR','',1995,'2122437265','LZFS19L172DO12935',200356,0),(7,11,3,2,'sdsd','45','marca 1',NULL,2014,'sdsd','sdsd',456,1),(8,6,1,1,'3','2','Ejemplo','modelo1',3,'3','3',430,0),(9,3,1,2,'llsd','191','kas','sallsa',22,'ksdk','dslls',2,0),(10,7,10,1,'45','56','mazda','sdsd',2014,'dfdf','werer',800,0);
+INSERT INTO `vehiculo` VALUES (1,10,1,1,'USA-1230','1','ppp','modelo',2015,'4JJLX9761','8LBETF3N7F0267815',750,0,NULL),(2,6,1,1,'UBW-193','2','CHEVROLET',NULL,2012,'6BD1-175945','8LBETFS25H40113947',2000,0,NULL),(3,11,1,1,'ubs-234','1','KOMATSU',NULL,2010,'26518093','75353',2345,0,NULL),(4,9,4,1,'usa-123','2','KOMATSU','',1991,'26528413','75572',5000,0,NULL),(5,9,7,1,'UMA-505','26','INTERNACIONAL','modelo4',2010,'362GM2UB-135281','PH48807',351203,0,NULL),(6,15,7,1,'UMA-0077','37','STEYR','',1995,'2122437265','LZFS19L172DO12935',200356,0,NULL),(7,11,3,2,'sdsd','45','marca 1',NULL,2014,'sdsd','sdsd',456,1,NULL),(8,6,1,1,'3','2','Ejemplo','modelo1',3,'3','3',430,0,NULL),(9,3,1,2,'llsd','191','kas','sallsa',22,'ksdk','dslls',2,0,NULL),(10,7,10,1,'45','56','mazda','sdsd',2014,'dfdf','werer',800,0,NULL);
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -490,4 +492,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-10 22:21:24
+-- Dump completed on 2017-07-11 20:06:17

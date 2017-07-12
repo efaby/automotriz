@@ -71,13 +71,13 @@
 									
 									
 									if($item['url']!=''){
-										echo "&nbsp;<a href='../downloadFile/".$item['url']."' class='btn btn-info btn-sm rounded' title='Descargar' ><i class='fa fa-file-pdf-o'></i></a>";
+										echo "&nbsp;<a href='../downloadFile/".$item['url']."' class='btn btn-info btn-sm rounded' title='Descargar' target='_blank' ><i class='fa fa-file-pdf-o'></i></a>";
 									}
 								}
 								else{
 									echo "<a href='../../OrdenPlan/editar/".$item['id']."-1' class='btn btn-info btn-sm rounded' title='Mostrar' ><i class='fa fa-info-circle'></i></a>";
 									if($item['url']!=''){
-										echo "&nbsp;<a href='../downloadFile/".$item['url']."' class='btn btn-info btn-sm rounded' title='Descargar' ><i class='fa fa-file-pdf-o'></i></a>";
+										echo "&nbsp;<a href='../downloadFile/".$item['url']."' class='btn btn-info btn-sm rounded' title='Descargar' target='_blank'><i class='fa fa-file-pdf-o'></i></a>";
 									}
 									
 								}

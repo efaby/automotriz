@@ -222,6 +222,6 @@ class OrdenPlanControlador {
 	public function downloadFile(){
 		$nombre = $_GET['id'];
 		$upload = new File();
-		return $upload->download($nombre,'practicas');
+		return $upload->downloadPdf($nombre);
 	}
 }
