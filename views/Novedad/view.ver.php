@@ -43,7 +43,7 @@
 			<label class="control-label">Vehículo</label>		
 		</div>
 		<div class="form-group  col-sm-6 row-padding">
-			<div id="texto"> <?php echo $item['marca'] ." ".$item['marca']. " No. ".$item['numero'] ; ?>
+			<div id="texto"> <?php echo $item['marca'] . " No. ".$item['numero'] ; ?>
 			</div>
 		</div>
 	</div>	

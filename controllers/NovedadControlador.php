@@ -258,66 +258,86 @@ class NovedadControlador {
 						</style>
 					</head>
 					<body>
-						<table width= 100%>
+						<table width= 100% border=1>
 							<tr>
-								<td width='25%'>
-									<img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/>
-								</td>
-								<td>
-									<h3>Mantenimiento Correctivo ".$item['tipo_vehiculo']."</h3>
-								</td>
-								<td width='25%'>
-									<img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/>		
-								</td>
+								<th rowspan='3' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/>
+				  				</th>
+				    			<th colspan='2' style='text-align:center'>ESPOCH-GADPC</th>
+				    			<th rowspan='3' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/gobierno.jpg width='100px' height='100px'/>
+				  				</th>				    			
+							</tr>
+				  			<tr>
+				    			<th colspan='2' style='text-align:center'>Orden de Trabajo/Reparación</th>
+							</tr>
+				    		<tr>			
+				    			<th colspan='2' style='text-align:center'>".$item['marca']." No. ".$item['numero']."<br>".$item['tipo_vehiculo']."</th>
+							</tr>
+				  	  	</table><br>					
+						<table width= 100% border=2>
+				    		<tr>
+								<td width='50%'><b>Técnico Asignado:</b></td>
+								<td width='50%'><b>N° de Orden:</b></td>
 							</tr>
 							<tr>
-								<td colspan=3 align=center><b>DESCRIPCIÓN</b></td>
+								<td width='50%' height='50px'>".$item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']."</td>
+								<td width='50%' height='50px'>".$item['ids'] ."</td>		
 							</tr>
 							<tr>
-								<td width='25%'><b>Vehículo</b></td>
-								<td colspan=2>".$item['marca']. " No. ".$item['numero']."
+								<td width='50%'><b>Causa:</b></td>
+								<td width='50%'><b>Detalle Problema:</b></td>
 							</tr>
 							<tr>
-								<td width='25%'><b>Detalle Problema</b></td>
-								<td colspan=2>".$item['problema']."</td>
+								<td width='50%' height='50px'>".$item['causa']."</td>
+								<td width='50%' height='50px'>".$item['problema']."</td>		
+							</tr>			
+							<tr>
+								<td width='50%'><b>Solución:</b></td>		
+								<td width='50%'><b>Falla T&eacute;cnica:</b></td>								
 							</tr>
 							<tr>
-								<td width='25%'><b>Causa</b></td>
-								<td colspan=2>".$item['causa']."</td>
+								<td width='50%' height='50px'>".$item['solucion']."</td>
+								<td width='50%' height='50px'>".$item['falla']."</td>		
+							</tr>			
+							<tr>
+								<td width='50%'><b>Estado:</b></td>
+								<td width='50%'><b>Elementos:</b></td>		
 							</tr>
 							<tr>
-								<td width='25%'><b>Falla T&eacute;cnica</b></td>
-								<td colspan=2>".$item['falla']."</td>
-							</tr>
-							<tr>
-								<td width='25%'><b>Solución</b></td>
-								<td colspan=2>".$item['solucion']."</td>		
-							</tr>
-							<tr>
-								<td width='25%'><b>Técnico Asignado</b></td>
-								<td colspan=2>".$item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']."</td>
-							</tr>
-							<tr>
-								<td width='25%'><b>Estado</b></td>
-								<td colspan=2>";
+								<td width='50%' height='50px'>";
 					$html .=($item['atendido']==1)?"Cerrado":"Abierto";
-					$html .="</td></tr>
-							<tr>
-								<td width='25%'><b>Proceso</b></td>
-								<td colspan=2>".$item['proceso']."</td>
+					$html .="</td>
+								<td width='50%' height='50px'>".$item['elementos']."</td>
 							</tr>
 							<tr>
-								<td width='25%'><b>Elementos</b></td>
-								<td colspan=2>".$item['elementos']."</td>
+								<td colspan=2><b>Proceso:</b></td>
 							</tr>
 							<tr>
-								<td width='25%'><b>Observación</b></td>
-								<td colspan=2>".$item['observaciones']."</td>
-							</tr>
-							<tr>
-								<td width='25%'><b>Técnico Reparador</b></td>
-								<td colspan=2>".$item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']."</td>
+								<td colspan=2 height='70px'>".$item['proceso']."</td>
 							</tr>		
+							<tr>
+								<td colspan=2><b>Observación:</b></td>
+							</tr>
+							<tr>
+								<td colspan=2 height='70px'>".$item['observaciones']."</td>
+							</tr>		
+							<tr>
+								<td width='50%'><b>Técnico Reparador:</b></td>
+								<td width='50%'><b>Técnico Supervisor:</b></td>
+							</tr>
+							<tr>
+								<td width='50%' height='50px'>".$item['nombre_tecnico2'] ." ".$item['apellido_tecnico2']."</td>
+								<td width='50%' height='50px'>".$item['nombre_supervisor'] ." ".$item['apellido_supervisor']."</td>		
+							</tr>
+							<tr>
+								<td width='50%'><b>Firma:</b></td>
+								<td width='50%'><b>Firma:</b></td>
+							</tr>
+							<tr>
+								<td width='50%' height='70px'></td>
+								<td width='50%' height='70px'></td>
+							</tr>										
 						</table>
 					</body>
 			</html>";	
