@@ -251,6 +251,10 @@ class NovedadControlador {
 							   border-collapse: collapse; width: 100%;
 							}
 							
+							th{
+							   border:1px solid #ccc; padding:1px;
+							   font-size:9pt;
+							}
 							td{
 							   border:1px solid #ccc; padding:1px;
 							   font-size:9pt;
@@ -258,7 +262,7 @@ class NovedadControlador {
 						</style>
 					</head>
 					<body>
-						<table width= 100% border=1>
+						<table width= 100%>
 							<tr>
 								<th rowspan='3' style='text-align:center'>
 				  					<img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/>
@@ -275,7 +279,7 @@ class NovedadControlador {
 				    			<th colspan='2' style='text-align:center'>".$item['marca']." No. ".$item['numero']."<br>".$item['tipo_vehiculo']."</th>
 							</tr>
 				  	  	</table><br>					
-						<table width= 100% border=2>
+						<table width= 100%>
 				    		<tr>
 								<td width='50%'><b>Técnico Asignado:</b></td>
 								<td width='50%'><b>N° de Orden:</b></td>

@@ -207,6 +207,10 @@ class VehiculoControlador {
 						border-collapse: collapse; width: 100%;
 						}
 	
+						th{
+						border:1px solid #ccc; padding:1px;
+						font-size:9pt;
+						}
 						td{
 						border:1px solid #ccc; padding:1px;
 						font-size:9pt;
@@ -214,7 +218,7 @@ class VehiculoControlador {
 						</style>
 					</head>
 					<body>
-						<table width= 100% border=1>
+						<table width= 100%>
 							<tr>
 								<th rowspan='3' style='text-align:center'>
 				  					<img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/>
@@ -231,61 +235,39 @@ class VehiculoControlador {
 				    			<th colspan='2' style='text-align:center'>".$vehiculo['marca']."</th>
 							</tr>
 				  	  </table><br>				  							
-				  	  <table width= 100% border=2>
+				  	  <table width= 100%>
 							<tr>
-				    			<td width='50%' rowspan=4 style='margin:0 auto; text-align:center;'>
+				    			<td width='50%' rowspan=2 style='margin:0 auto; text-align:center;'>
 				    				<img src=".PATH_FILES.$urlImage." height='150px'/>	
 				    			</td>
-				    					<td width='50%'><b>";
+				    			<td width='50%'><b>";
 								if($tipo_id>3 && $tipo_id<9){
-									$html .="Operador";
+									$html .="Operador:";
 								}else{
-									$html .="Conductor";
+									$html .="Conductor:";
 								}	
 				
-								$html .="</b></td>
+								$html .="</b><br><br>".$nombres."</td>
 				    		</tr>
-							<tr>
-								<td width='50%' height='70px'>".$nombres."</td>
-							</tr>
 							<tr>			
-								<td width='50%'><b>Marca</b></td>
-							</tr>
-							<tr>			
-								<td width='50%' height='70px'>".$vehiculo['marca']."</td>
+								<td width='50%'><b>Marca:</b><br><br>".$vehiculo['marca']."</td>
 							</tr>
 							<tr>
-								<td width='50%'><b>Número</b></td>
-								<td width='50%'><b>Modelo</b></td>																
+								<td width='50%'><b>Número:</b><br><br>".$vehiculo['numero']."<br><br></td>
+								<td width='50%'><b>Modelo:</b><br><br>".$vehiculo['modelo']."<br><br></td>																
 							</tr>
 							<tr>
-								<td width='50%' height='70px'>".$vehiculo['numero']."</td>										
-								<td width='50%' height='70px'>".$vehiculo['modelo']."</td>								
-							</tr>			
-							<tr>
-								<td width='50%'><b>Placa</b></td>
-								<td width='50%'><b>Número Motor</b></td>								
+								<td width='50%'><b>Placa:</b><br><br>".$vehiculo['placa']."<br><br></td>
+								<td width='50%'><b>Número Motor:</b><br><br>".$vehiculo['numero_motor']."<br><br></td>		
 							</tr>
 							<tr>
-								<td width='50%' height='70px'>".$vehiculo['placa']."</td>
-								<td width='50%' height='70px'>".$vehiculo['numero_motor']."</td>
-							</tr>			
-							<tr>
-								<td width='50%'><b>Número Chasis</b></td>
-								<td width='50%'><b>Año Fabricación</b></td>								
+								<td width='50%'><b>Número Chasis:</b><br><br>".$vehiculo['numero_chasis']."<br><br></td>
+								<td width='50%'><b>Año Fabricación:</b><br><br>".$vehiculo['anio']."<br><br></td>
 							</tr>
 							<tr>
-								<td width='50%' height='70px'>".$vehiculo['numero_chasis']."</td>
-								<td width='50%' height='70px'>".$vehiculo['anio']."</td>
-							</tr>			
-							<tr>
-								<td width='50%'><b>".$medida."</b></td>
-								<td width='50%'><b>Estado</b></td>								
-							</tr>
-							<tr>
-								<td width='50%' height='70px'>".$vehiculo['medida_uso']."</td>
-								<td width='50%' height='70px'>".$estado_nombre."</td>
-							</tr>			
+								<td width='50%'><b>".$medida.":</b><br><br>".$vehiculo['medida_uso']."<br><br></td>
+								<td width='50%'><b>Estado:</b><br><br>".$estado_nombre."<br><br></td>								
+							</tr>										
 						</table>
 					</body>
 				</html>";
