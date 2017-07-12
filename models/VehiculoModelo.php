@@ -52,7 +52,7 @@ class VehiculoModelo {
 			$resultArray = $resultArray[0];
 				
 		} else {
-			$resultArray = Array ( 'id' => '','tipo_vehiculo_id' => 0,'usuario_id' => 0,'estado_vehiculo_id' => 0,'placa' => '','marca' => '','modelo' => '','numero' => '','anio' => '', 'numero_motor' => '','numero_chasis' => '', 'medida_uso' => '');
+			$resultArray = Array ( 'id' => '','tipo_vehiculo_id' => 0,'usuario_id' => 0,'estado_vehiculo_id' => 0,'placa' => '','marca' => '','modelo' => '','numero' => '','anio' => '', 'numero_motor' => '','numero_chasis' => '', 'medida_uso' => '', 'url' => '');
 		}
 		
 		return $resultArray;

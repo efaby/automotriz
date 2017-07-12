@@ -82,6 +82,18 @@
 		</select>
 
 	</div>
+</div>	
+<div class="row">
+	<div class="form-group  col-sm-6">
+			<label class="control-label">Fotografía del Vehículo</label> 			
+			<?php if($vehiculo['url'] != ''):?>
+				<input type='file' name='url1' id="url1" class="file">		
+				<a href="../downloadFile/<?php echo $vehiculo['url'];?>">Descargar</a>
+				<input type="hidden" name="fileName" value="<?php echo $vehiculo['url'];?>">
+			<?php else :?>
+				<input type='file' name='url' id="url" class="file">	
+			<?php endif;?>
+	</div>	
 </div>
 
 

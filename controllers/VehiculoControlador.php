@@ -5,6 +5,8 @@ require_once (PATH_MODELOS . "/VehiculoModelo.php");
 require_once (PATH_HELPERS. "/dompdf/autoload.inc.php");
 require_once (PATH_HELPERS. "/dompdf/src/FontMetrics.php");
 require_once (PATH_MODELOS . "/UsuarioModelo.php");
+require_once (PATH_HELPERS. "/File.php");
+
 /**
  * Controlador de Vehiculos
  */
@@ -49,7 +51,11 @@ class VehiculoControlador {
 		require_once PATH_VISTAS."/Vehiculo/vista.formulario.php";
 	}
 
-	
+	public function downloadFile(){
+		$nombre = $_GET['id'];
+		$upload = new File();
+		return $upload->downloadPdf($nombre);
+	}	
 	public function guardar() {
 		$vehiculo ['id'] = $_POST ['id'];
 		$vehiculo ['tipo_vehiculo_id'] = $_POST ['tipo_vehiculo_id'];
@@ -197,47 +203,76 @@ class VehiculoControlador {
 						</style>
 					</head>
 					<body>
-						<center><h3>Ficha Técnica de Vehículo</h3></center>
-						<table width= 100%>
+						<table width= 100% border=1>
 							<tr>
-								<td colspan=4 align=center><b> ".$tipo['nombre']."</b></td>
+								<th rowspan='3' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/>
+				  				</th>
+				    			<th colspan='2' style='text-align:center'>ESPOCH-GADPC</th>
+				    			<th rowspan='3' style='text-align:center'>
+				  					<img src=".PATH_FILES."../images/gobierno.jpg width='100px' height='100px'/>
+				  				</th>				    			
 							</tr>
-							<tr><td width='25%'><b>";
-		if($tipo_id>3 && $tipo_id<9){
-			$html .="Conductor";
-		}else{
-			$html .="Operador";
-		}	
+				  			<tr>
+				    			<th colspan='2' style='text-align:center'>Ficha Técnica <br> ".$tipo['nombre']."</th>
+							</tr>
+				    		<tr>
+				    			<th colspan='2' style='text-align:center'>".$vehiculo['marca']."</th>
+							</tr>
+				  	  </table><br>				  							
+				  	  <table width= 100% border=2>
+							<tr>
+				    			<td width='50%' rowspan=4>foto</td>
+				    					<td width='50%'><b>";
+								if($tipo_id>3 && $tipo_id<9){
+									$html .="Conductor";
+								}else{
+									$html .="Operador";
+								}	
 				
-				$html .="</b></td>
-								<td>".$nombres."</td>
-								<td width='25%'><b>Marca</b></td>
-								<td>".$vehiculo['marca']."</td>
+								$html .="</b></td>
+				    		</tr>
+							<tr>
+								<td width='50%' height='70px'>".$nombres."</td>
+							</tr>
+							<tr>			
+								<td width='50%'><b>Marca</b></td>
+							</tr>
+							<tr>			
+								<td width='50%' height='70px'>".$vehiculo['marca']."</td>
 							</tr>
 							<tr>
-								<td width='25%'><b>Modelo</b></td>
-								<td>".$vehiculo['modelo']."</td>
-								<td width='25%'><b>Número</b></td>
-								<td>".$vehiculo['numero']."</td>
+								<td width='50%'><b>Número</b></td>
+								<td width='50%'><b>Modelo</b></td>																
 							</tr>
 							<tr>
-								<td width='25%'><b>Placa</b></td>
-								<td>".$vehiculo['placa']."</td>
-								<td width='25%'><b>Número Motor</b></td>
-								<td>".$vehiculo['numero_motor']."</td>
+								<td width='50%' height='70px'>".$vehiculo['numero']."</td>										
+								<td width='50%' height='70px'>".$vehiculo['modelo']."</td>								
+							</tr>			
+							<tr>
+								<td width='50%'><b>Placa</b></td>
+								<td width='50%'><b>Número Motor</b></td>								
 							</tr>
 							<tr>
-								<td width='25%'><b>Número Chasis</b></td>
-								<td>".$vehiculo['numero_chasis']."</td>
-								<td width='25%'><b>Año Fabricación</b></td>
-								<td>".$vehiculo['anio']."</td>
+								<td width='50%' height='70px'>".$vehiculo['placa']."</td>
+								<td width='50%' height='70px'>".$vehiculo['numero_motor']."</td>
+							</tr>			
+							<tr>
+								<td width='50%'><b>Número Chasis</b></td>
+								<td width='50%'><b>Año Fabricación</b></td>								
 							</tr>
 							<tr>
-								<td width='25%'><b>".$medida."</b></td>
-								<td>".$vehiculo['medida_uso']."</td>
-								<td width='25%'><b>Estado</b></td>
-								<td>".$estado_nombre."</td>
+								<td width='50%' height='70px'>".$vehiculo['numero_chasis']."</td>
+								<td width='50%' height='70px'>".$vehiculo['anio']."</td>
+							</tr>			
+							<tr>
+								<td width='50%'><b>".$medida."</b></td>
+								<td width='50%'><b>Estado</b></td>								
 							</tr>
+							<tr>
+								<td width='50%' height='70px'>".$vehiculo['medida_uso']."</td>
+								<td width='50%' height='70px'>".$estado_nombre."</td>
+							</tr>			
 						</table>
 					</body>
 				</html>";
