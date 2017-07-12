@@ -167,42 +167,53 @@ class OrdenPlanControlador {
 						</style>
 					</head>
 					<body>
-						<div class='title-block' align='center'>
-		   					<h3 class='title'>Tarea de Mantenimiento</h3>
-						</div>
 						<table width= 100%>
 							<tr>
-								<td align=center><img src=".PATH_FILES."../images/espoch.jpg width='140px' height='130px'/></td> 
-								<td align=center><label class='control-label'><h3>".$dato['marca']." No.".$dato['numero']."</h3></label>
+								<td align=center><img src=".PATH_FILES."../images/espoch.jpg width='100px' height='100px'/></td> 
+								<td align=center colspan=2>
+										<h3 class='title'>Tarea de Mantenimiento</h3>
+										<label class='control-label'>
+											<h3>".$dato['marca']." No.".$dato['numero']."</h3>
+										</label>
 										<label class='control-label'>". $dato['vehiculo_nombre']."</label></td>
-								<td align=center><img src=".PATH_FILES."../images/gobierno.jpg width='130px' height='130px'/></td>				
+								<td align=center><img src=".PATH_FILES."../images/gobierno.jpg width='100px' height='100px'/></td>				
 							</tr>
+						</table><br>			
+						<table width= 100%>				
 							<tr>
 								<td style='vertical-align: top'> <b>Frecuencia: </b><br><br>".$dato['unidad_numero']." </td>								
-								<td style='vertical-align: top'> <b>Tiempo Estimado: </b><br><br>".$dato['tiempo_estimado']."</td>
+								<td colspan=2 style='vertical-align: top'> <b>Tiempo Estimado: </b><br><br>".$dato['tiempo_estimado']."</td>
 								<td style='vertical-align: top'> <b>Estado de la Vehículo/Maquinaria: </b><br><br>".$atendido."</td>
 							</tr>
 							<tr>
-								<td colspan=3 > <b>Actividad: </b><br><br>".$dato['plan']."
+								<td colspan=4 > <b>Actividad: </b><br><br>".$dato['plan']."
 							</tr>
 							<tr>
 								<td style='vertical-align: top'><b>Herramientas: </b><br>".htmlspecialchars_decode($dato['herramientas'])." </td>								
-								<td style='vertical-align: top'><b>Materiales: </b><br>".htmlspecialchars_decode($dato['materiales'])."</td>
+								<td colspan=2 style='vertical-align: top'><b>Materiales: </b><br>".htmlspecialchars_decode($dato['materiales'])."</td>
 								<td style='vertical-align: top'><b>Equipo: </b><br>".htmlspecialchars_decode($dato['equipo'])."</td>
 							</tr>
 							<tr>
-								<td colspan=3 > <b>Procedimiento: </b><br><br>".htmlspecialchars_decode($dato['procedimiento'])."</td>
+								<td colspan=4><b>Procedimiento: </b><br>".htmlspecialchars_decode($dato['procedimiento'])."</td>
 							</tr>
 							<tr>
-								<td colspan=3 > <b>Nota: </b><br><br>".htmlspecialchars_decode($dato['observaciones'])."</td>
+								<td colspan=4> <b>Nota: </b><br>".htmlspecialchars_decode($dato['observaciones'])."</td>
 							</tr>
 							<tr>
-								<td> <b>Tiempo Ejecución: </b><br><br>".$tiempo." </td>								
-								<td colspan=2 > <b>T&eacute;cnico: </b><br><br>".$dato['nombres']." ".$dato['apellidos']."</td>
+								<td colspan=2> <b>Tiempo Ejecución: </b><br><br>".$tiempo." </td>								
+								<td colspan=2> <b>T&eacute;cnico: </b><br><br>".$dato['nombres']." ".$dato['apellidos']."</td>
 							</tr>
 							<tr>
-								<td colspan=3 > <b>Observación: </b><br><br>".htmlspecialchars_decode($dato['observacion'])."
+								<td colspan=4 > <b>Observación: </b><br><br>".htmlspecialchars_decode($dato['observacion'])."</td>
 							</tr>
+							<tr>
+								<td colspan=2 ><b>Técnico Reparador: </b><br><br>".$dato['nombre_repara']." ".$dato['apellido_repara']."</td>
+								<td colspan=2 ><b>Técnico Supervisor: </b><br><br>".$dato['nombre_supervisor']." ".$dato['apellido_supervisor']."</td>			
+							</tr>
+							<tr>
+								<td colspan=2 ><b>Firma: </b><br><br><br><br></td>
+								<td colspan=2 ><b>Firma: </b><br><br><br><br></td>	
+							</tr>			
 						</table>
 						
 			</body></html>";

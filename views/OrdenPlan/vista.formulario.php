@@ -122,6 +122,20 @@
 					<?php } else { echo "<div>".htmlspecialchars_decode($dato['observacion'])."</div> "; }?>
 				</div>
 			</div>
+			<div class="row ">
+				<div class="form-group  col-sm-6 border-div">
+					<label class="control-label">Técnico Reparador:</label>
+					<div>
+						<?php echo $dato['nombre_repara']." ".$dato['apellido_repara'];?>
+					</div>
+				</div>
+				<div class="form-group  col-sm-6 border-div">
+					<label class="control-label">Técnico Supervisor:</label>
+					<div>
+						<?php echo $dato['nombre_repara']." ".$dato['apellido_repara'];?>
+					</div>
+				</div>
+			</div>
 			<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 			<div class="form-group" style="margin-top: 15px;">
 				<input type='hidden' name='id' class='form-control' value="<?php echo $dato['id']; ?>">
