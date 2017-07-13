@@ -35,7 +35,7 @@
 			<?php $url = $_SERVER["REQUEST_URI"];?>
 				<form action="<?php echo (strpos($url, '/Seguridad/mostrar/'))?'../validar/':'Seguridad/validar/';?>" role="login" id="frmLogin" method="post">
 					<img src="<?php echo PATH_IMAGES; ?>/login.png" alt="" class="img-responsive" />
-				<h3 style="text-align: center; color: rgb(0, 0, 0);">Nombre Sistema</h3>
+				<h3 style="text-align: center; color: rgb(0, 0, 0);">Sistema de Mantenimiento Automotriz</h3>
 				<div class="alert alert-danger fade in alert-dismissable" style="display: none; padding: 6px;" id="mensajeContenedor">
 								  <span id="mensajeLogin"></span>
 								</div>

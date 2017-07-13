@@ -32,7 +32,7 @@ class OrdenPlanModelo {
 				INNER JOIN plan_mantenimiento as pm ON pm.id=vp.plan_mantenimiento_id
 				INNER JOIN orden_plan as op ON op.vehiculo_plan_id = vp.id
 				INNER JOIN usuario as u on u.id = op.tecnico_asignado
-				inner join usuario as u2 on u2.id = op.tecnico_atiende		
+				left join usuario as u2 on u2.id = op.tecnico_atiende		
 				inner join usuario as u3 on u3.id = pm.tecnico_id
 				left join mantenimiento_respuestos as mr on mr.mantenimiento_id = op.id
 				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") and ((pm.eliminado = 0) or (pm.eliminado = 1 and op.atendido = 1)) and (v.tipo_vehiculo_id = ".$tipo." or 0 = ".$tipo.")";

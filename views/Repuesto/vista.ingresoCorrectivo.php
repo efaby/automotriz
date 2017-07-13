@@ -17,52 +17,77 @@
 <div class="card">
 	<div class="card-block">
 	<div class="card-block">
-	<div class="form-group  col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Vehículo</label>
-		<div id="texto"> <?php echo $item['marca'] ." ".$item['marca']. " No. ".$item['numero'] ; ?>
+	
+	<div class="row">
+		<div class="form-group  col-sm-2 border-div">
+			<img src="<?php echo PATH_IMAGES; ?>/espoch.jpg" width="140px" height="130px"/>
+		</div>
+		<div class="form-group  col-sm-8 border-div" style="text-align: center; height: 163px">
+			<h3>ESPOCH-GADPC</h3>
+			<h3>Orden de Trabajo/Reparación</h3>
+			<h3><?php echo $item['marca'] . " No. ".$item['numero'] ; ?></h3>
+		</div>
+		<div class="form-group  col-sm-2 border-div">
+			<img src="<?php echo PATH_IMAGES; ?>/gobierno.jpg" width="130px" height="130px"/>			
 		</div>
 	</div>
+	<br>
+	
+	<div class="row">
+		<div class="form-group  col-sm-6 border-div">
+			<label class="control-label">Técnico Asignado:</label>	
+			<div id="texto"><?php echo $item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']; ?>
+			</div>		
+		</div>
+		<div class="form-group  col-sm-6 border-div">
+			<label class="control-label">N° de Orden:</label>
+			<div id="texto"> <?php echo $item['ids']; ?>
+			</div>
+		</div>				
+	</div>
+	<div class="row">
+		<div class="form-group  col-sm-6 row-padding border-div">
+			<label class="control-label">Causa:</label>	
+			<div id="texto"> <?php echo $item['causa']; ?>
+			</div>			
+		</div>
+		<div class="form-group  col-sm-6 row-padding border-div">
+			<label class="control-label">Detalle Problema:</label>
+			<div id="texto"> <?php echo $item['problema']; ?>
+			</div>
+		</div>
+			</div>
+	<div class="row">
+		<div class="form-group  col-sm-6 row-padding border-div">
+			<label class="control-label">Solución</label>	
+			<div id="texto"> <?php echo $item['solucion']; ?>
+			</div>		
+		</div>		
+		<div class="form-group  col-sm-6 row-padding border-div">
+			<label class="control-label">Falla T&eacute;cnica</label>
+			<div id="texto"> <?php echo $item['falla']; ?>
+			</div>
+		</div>
 	</div>	
-	
-	
-	
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Detalle Problema</label>
-		<div id="texto"> <?php echo $item['problema']; ?>
+	<div class="row">
+		<div class="form-group  col-sm-6 row-padding border-div">
+			<label class="control-label">Estado</label>	
+			<div id="texto"> <?php echo ($item['atendido']==1)?'Cerrado':'Abierto'; ?></div>		
 		</div>
-	</div>		
+		<div class="form-group  col-sm-6 row-padding border-div">
+			<label class="control-label">Elementos</label>	
+			<div id="texto"> <?php echo $item['elementos']; ?>
+			</div>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group  col-sm-12 row-padding border-div">
+			<label class="control-label">Proceso</label>
+			<div id="texto"> <?php echo $item['proceso']; ?>
+			</div>			
+		</div>				
 	</div>
 	
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Causa</label>
-		<div id="texto"> <?php echo $item['causa']; ?>
-		</div>	
-	</div>	
-	</div>
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Falla T&eacute;cnica</label>
-		<div id="texto"> <?php echo $item['falla']; ?>
-		</div>
-	</div>		
-	</div>
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Solución</label>
-		<div id="texto"> <?php echo $item['solucion']; ?>
-		</div>
-	</div>		
-	</div>
-	<div class="form-group col-sm-12">
-	<div class="form-group  col-sm-6 row-padding">
-		<label class="control-label">Técnico Asignado</label>
-		<div id="texto"> <?php echo $item['nombre_tecnico1'] ." ".$item['apellido_tecnico1']; ?>
-		</div>
-	</div>		
-	</div>
 		
 	</div>
 						

@@ -130,7 +130,7 @@ class OrdenPlanControlador {
 		$model = new OrdenPlanModelo();
 		$usuario = 0;
 		$dato = $model->obtenerOrdenes($arrayId[0], $arrayId[1],$usuario,0)[0];
-		$tipo_vehiculo = $model->obtenerTipoVehiculo($arrayId[1])[0];
+		$tipo_vehiculo = $model->obtenerTipoVehiculo($dato['tipo_vehiculo_id'])[0];
 		
 		$ban = $arrayId[1];
 		$message = "";		

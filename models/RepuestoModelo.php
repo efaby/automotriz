@@ -82,6 +82,12 @@ class RepuestoModelo {
 		$sql = "update mantenimiento_respuestos set aprobado = 1, usuario_id = ".$usuario." where id = ".$orden;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
+		$repuestos = $this->obtenerListadoRepuestoOrden($orden);
+		foreach ($repuestos as $item){
+			$sql = "update repuestos set cantidad = cantidad - ".$item['cantidad']." where id = ".$item['repuesto_id'];			
+			$result = $model->ejecutarSql($sql);
+		}	
+		
 	}
 	
 	public function guardarObservacion($orden, $observacion){
@@ -161,7 +167,8 @@ class RepuestoModelo {
 	
 	public function obtenerListadoRepuestoOrden($id){
 		$model = new BaseModelo();
-		$sql = "select or1.id, or1.cantidad, r.codigo, r.nombre from orden_repuesto as or1
+		$sql = "select or1.id, or1.cantidad, r.codigo, r.nombre, or1.repuesto_id  
+				from orden_repuesto as or1
 				inner join repuestos as r on r.id = or1.repuesto_id
 				where mantenimineto_respuesto_id = ".$id;
 		$result = $model->ejecutarSql($sql);
