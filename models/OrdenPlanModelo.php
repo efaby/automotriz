@@ -33,7 +33,7 @@ class OrdenPlanModelo {
 				INNER JOIN orden_plan as op ON op.vehiculo_plan_id = vp.id
 				INNER JOIN usuario as u on u.id = op.tecnico_asignado
 				left join usuario as u2 on u2.id = op.tecnico_atiende		
-				inner join usuario as u3 on u3.id = pm.tecnico_id
+				inner join usuario as u3 on u3.tipo_usuario_id = 1
 				left join mantenimiento_respuestos as mr on mr.mantenimiento_id = op.id
 				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") and ((pm.eliminado = 0) or (pm.eliminado = 1 and op.atendido = 1)) and (v.tipo_vehiculo_id = ".$tipo." or 0 = ".$tipo.")";
 		/*if($id >0 && $at==0){
