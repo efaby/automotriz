@@ -17,7 +17,7 @@ class UsuarioModelo {
 			$tipo = $tipo_id;
 		}
 		$model = new BaseModelo();		
-		$sql = "select u.id, u.identificacion,  u.nombres, u.apellidos, u.email,u.usuario,  t.nombre as tipo_usuario 
+		$sql = "select u.id, u.identificacion,  u.nombres, u.apellidos, u.email,u.usuario,  t.nombre as tipo_usuario, u.tipo_usuario_id 
 						from usuario as u 
 						inner join tipo_usuario as t on  u.tipo_usuario_id = t.id 
 						where eliminado = 0 and (tipo_usuario_id = ".$tipo.")";		

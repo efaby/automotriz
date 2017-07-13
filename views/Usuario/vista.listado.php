@@ -50,8 +50,11 @@
 		    		echo "<td>".$item['email']."</td>";
 		    		echo "<td>".$item['tipo_usuario']." </td>";
 		    		$id = $tipo['id']."-".$item['id'];
-		    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>
-							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    		echo "<td align='center'><a href='javascript: loadModal(\"".$id."\")' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>";
+		    		if($item['tipo_usuario_id'] !=1 ){
+		    			echo " <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$id."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
+		    		}
+							  
 		    	}?>
 		    </tbody>
 		    </table>
