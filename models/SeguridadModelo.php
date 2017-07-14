@@ -56,7 +56,7 @@ class SeguridadModelo {
 	}
 	
 	public function contarClientes(){
-		$sql = "Select count(id) as numero from cliente where eliminado = 0";
+		$sql = "Select count(id) as numero from vehiculo where eliminado = 0";
 		$model =  new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 		$resultArray = $model->obtenerCampos($result);
@@ -65,24 +65,16 @@ class SeguridadModelo {
 	}
 	
 	public function contarReparaciones($estado){
-		$sql = "Select count(h.id) as numero from historial as h ";
-		$sql1 = "";
-		if((isset($_SESSION['SESSION_USER']['tipo_usuario_id']))&&($_SESSION['SESSION_USER']['tipo_usuario_id']==2)){
-			$sql .= " inner join reparacion as r on r.id =  h.reparacion_id ";
-			$sql1 = " and r.tecnico_id = ".$_SESSION['SESSION_USER']['id'];
-		}
-		$sql .= "where h.activo = 1".$sql1;
-		if($estado){
-			$sql .= " and h.estado_id = ".$estado;
-		} else {
-			$sql .= " and (h.estado_id = 2 or h.estado_id = 3 )";			
-		}	
-		
+		$sql = "Select count(id) as atendidos FROM orden_plan where atendido=".$estado;
+		$sql1 ="Select count(id) as atendidos FROM novedad where atendido=".$estado;
 		$model =  new BaseModelo();
 		$result = $model->ejecutarSql($sql);
+		$result1 = $model->ejecutarSql($sql1);
 		$resultArray = $model->obtenerCampos($result);
-		
-		return (count($resultArray)>0)?$resultArray[0]['numero']:0;
+		$resultArray1 = $model->obtenerCampos($result1);
+		$total = (count($resultArray)>0)?$resultArray[0]['atendidos']:0;
+		$total1 = (count($resultArray1)>0)?$resultArray1[0]['atendidos']:0;
+		return ($total+$total1);
 	}
 	
 	/*	
