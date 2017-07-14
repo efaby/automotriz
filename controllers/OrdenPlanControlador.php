@@ -197,8 +197,9 @@ class OrdenPlanControlador {
 						<table width= 100%>				
 							<tr>
 								<td style='vertical-align: top'> <b>Frecuencia: </b><br><br>".$dato['unidad_numero']." </td>								
-								<td colspan=2 style='vertical-align: top'> <b>Tiempo Estimado: </b><br><br>".$dato['tiempo_estimado']."</td>
+								<td style='vertical-align: top'> <b>Tiempo Estimado: </b><br><br>".$dato['tiempo_estimado']."</td>
 								<td style='vertical-align: top'> <b>Estado de la Vehículo/Maquinaria: </b><br><br>".$atendido."</td>
+								<td style='vertical-align: top'> <b>N° de Orden: </b><br><br>".$dato['id']."</td>
 							</tr>
 							<tr>
 								<td colspan=4 > <b>Actividad: </b><br><br>".$dato['plan']."
@@ -216,7 +217,7 @@ class OrdenPlanControlador {
 							</tr>
 							<tr>
 								<td colspan=2> <b>Tiempo Ejecución: </b><br><br>".$tiempo." </td>								
-								<td colspan=2> <b>T&eacute;cnico: </b><br><br>".$dato['nombres']." ".$dato['apellidos']."</td>
+								<td colspan=2> <b>T&eacute;cnico Asignado: </b><br><br>".$dato['nombres']." ".$dato['apellidos']."</td>
 							</tr>
 							<tr>
 								<td colspan=4 > <b>Observación: </b><br><br>".htmlspecialchars_decode($dato['observacion'])."</td>

@@ -32,20 +32,20 @@
 			</div>
 			
 			<div class="row match-my-cols">
-				<div class="form-group  col-sm-4 border-div ">
+				<div class="form-group  col-sm-3 border-div ">
 					<label class="control-label">Frecuencia: </label>
 					<div>
 						<?php echo $dato['unidad_numero']?>	
 					</div>
 												
 				</div>
-				<div class="form-group  col-sm-4 border-div ">
+				<div class="form-group  col-sm-3 border-div ">
 					<label class="control-label">Tiempo Estimado: </label>
 					<div>
 					<?php echo $dato['tiempo_estimado']?>
 					</div>
 				</div>
-				<div class="form-group  col-sm-4 border-div">
+				<div class="form-group  col-sm-3 border-div">
 					<label class="control-label">Estado de la Vehículo/Maquinaria: </label>
 					<div>
 					<?php if ($dato['estado_maquina'] == 0){?>	
@@ -53,6 +53,12 @@
 					<?php } else {?>
 						Prendido
 					<?php }?>
+					</div>
+				</div>
+				<div class="form-group  col-sm-3 border-div ">
+					<label class="control-label">N° de Orden: </label>
+					<div>
+					<?php echo $dato['id']?>
 					</div>
 				</div>
 			</div>
@@ -109,7 +115,7 @@
 					<?php } else { if($dato['atendido'] == 0){ echo "<div>Por Atender</div> "; } else {  echo "<div>".$dato['tiempo_ejecucion']."</div>"; }}?>						
 				</div>
 				<div class="form-group  col-sm-6 border-div cellMovil">
-					<label class="control-label">T&eacute;cnico:</label>
+					<label class="control-label">T&eacute;cnico Asignado:</label>
 					
 					<?php echo "<div>".$dato['nombres']." ".$dato['apellidos']."</div> </br>"; ?>		
 				</div>
@@ -120,6 +126,18 @@
 					<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
 					<textarea name='observacion' id='observacion' class='form-control' ></textarea>
 					<?php } else { echo "<div>".htmlspecialchars_decode($dato['observacion'])."</div> "; }?>
+				</div>
+			</div>
+			<div class="row ">
+				<div class="form-group  col-sm-6 border-div cellMovil">
+					<label class="control-label">T&eacute;cnico Reparador:</label>
+					
+					<?php echo "<div>".$dato['nombre_repara']." ".$dato['apellido_repara']."</div> </br>"; ?>		
+				</div>
+				<div class="form-group  col-sm-6 border-div cellMovil">
+					<label class="control-label">T&eacute;cnico Supervisor:</label>
+					
+					<?php echo "<div>".$dato['nombre_supervisor']." ".$dato['apellido_supervisor']."</div> </br>"; ?>		
 				</div>
 			</div>
 			<?php if (($dato['atendido'] == 0)&&($ban==0)){?>
