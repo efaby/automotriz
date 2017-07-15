@@ -8,23 +8,29 @@
 			<div class="panel-heading">
 				<div class="row">
 					<div class="col-xs-3">
-						<i class="fa fa-users fa-5x"></i>
+						<i class="fa fa-truck fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
 						<div class="huge"><?php echo $clientes;?></div>
-						<div>Clientes!</div>
+						<div>Automotores!</div>
 					</div>
 				</div>
 			</div>
-			
-			<a href="#">
-			
+			<?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==1):?>
+			<a href="../../Vehiculo/listar/1">			
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
+			<?php else: ?>
+			<div class="panel-footer">
+					<span class="pull-left">Ver Detalles</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<?php endif;?>
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-6">
@@ -40,13 +46,21 @@
 					</div>
 				</div>
 			</div>
-			<a href="../../Reparacion/listar/">
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
+			<a href="../../Reparacion/listar/1">
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
+			<?php else: ?>
+			<div class="panel-footer">
+					<span class="pull-left">Ver Detalles</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<?php endif;?>
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-6">
@@ -62,13 +76,21 @@
 					</div>
 				</div>
 			</div>
-			<a href="../../Reparacion/listar/">
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
+			<a href="../../Reparacion/listar/2">
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
+			<?php else: ?>
+			<div class="panel-footer">
+					<span class="pull-left">Ver Detalles</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<?php endif;?>
 		</div>
 	</div>
 	<div class="col-lg-3 col-md-6">
@@ -84,13 +106,21 @@
 					</div>
 				</div>
 			</div>
-			<a href="../../Reparacion/listar/">
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
+			<a href="../../Reparacion/listar/0">
 				<div class="panel-footer">
 					<span class="pull-left">View Details</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 			</a>
+			<?php else: ?>
+			<div class="panel-footer">
+					<span class="pull-left">Ver Detalles</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<?php endif;?>
 		</div>
 	</div>
 </div>

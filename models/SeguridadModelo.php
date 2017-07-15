@@ -64,9 +64,23 @@ class SeguridadModelo {
 		return (count($resultArray)>0)?$resultArray[0]['numero']:0;
 	}
 	
-	public function contarReparaciones($estado){
-		$sql = "Select count(id) as atendidos FROM orden_plan where atendido=".$estado;
-		$sql1 ="Select count(id) as atendidos FROM novedad where atendido=".$estado;
+	public function contarReparaciones($estado,$usuario){
+		$nuevos = "";
+		$nuevos1 = "";
+		if($estado == 2){
+			$nuevos = " and fecha_ingreso = '".date('Y-m-d')."' ";
+			$nuevos1 = " and fecha_emision = '".date('Y-m-d')."' ";
+			$estado = 0;
+		}
+		$user = "";
+		$user1 = "";
+		if($usuario != 1){
+			$user = " and tecnico_asigna = ".$usuario;
+			$user1 = " and tecnico_asignado = ".$usuario;
+		}
+		
+		$sql = "Select count(id) as atendidos FROM orden_plan where atendido=".$estado .$nuevos1.$user1;
+		$sql1 ="Select count(id) as atendidos FROM novedad where atendido=".$estado. $nuevos.$user;
 		$model =  new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 		$result1 = $model->ejecutarSql($sql1);

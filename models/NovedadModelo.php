@@ -58,12 +58,11 @@ class NovedadModelo {
 				from novedad as n
 				inner join vehiculo as v on v.id = n.vehiculo_id
 				inner join usuario as u2 on u2.id = n.usuario_registra
-				inner join usuario as u3 on u3.id = n.supervisor_id	
+				left join usuario as u3 on u3.id = n.supervisor_id	
 				inner join tipo_vehiculo as tp on tp.id = v.tipo_vehiculo_id
 				left join tipo_falla as tf on tf.id = n.tipo_falla_id
 				left join usuario as u on u.id = n.tecnico_asigna
-				left join usuario as u1 on u1.id = n.tecnico_repara
-				
+				left join usuario as u1 on u1.id = n.tecnico_repara				
 				where n.id = ".$novedad;
 
 		$result = $model->ejecutarSql($sql);

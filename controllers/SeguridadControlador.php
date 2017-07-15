@@ -15,9 +15,9 @@ class SeguridadControlador {
 	public function inicio(){
 		$model = new SeguridadModelo();
 		$clientes = $model->contarClientes();		
-		$atendidos = $model->contarReparaciones(1);
-		$nuevos = $model->contarReparaciones(0);
-		$pendientes = $model->contarReparaciones(0);
+		$atendidos = $model->contarReparaciones(1,$_SESSION['SESSION_USER']['id']);
+		$nuevos = $model->contarReparaciones(2,$_SESSION['SESSION_USER']['id']);
+		$pendientes = $model->contarReparaciones(0,$_SESSION['SESSION_USER']['id']);
 		require_once PATH_VISTAS."/Seguridad/vista.home.php";
 	}
 	
