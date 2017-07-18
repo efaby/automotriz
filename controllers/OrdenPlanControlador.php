@@ -251,4 +251,17 @@ class OrdenPlanControlador {
 		$upload = new File();
 		return $upload->downloadPdf($nombre);
 	}
+	
+	public function eliminar() {
+		$model = new OrdenPlanModelo();
+		$arrayId = explode('-', $_GET['id']);
+		try {
+			$datos = $model->eliminarOrden($arrayId[1]);
+			$_SESSION ['message'] = "Datos eliminados correctamente.";
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: ../listar/".$arrayId[0] );
+	}
+	
 }

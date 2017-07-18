@@ -57,10 +57,12 @@
     		$tecnico = ($item['atendido'] == 1)?'disabled':'';
     		$repara = ($item['tecnico_repara'] > 0)?'disabled':'';
     		if($_SESSION['SESSION_USER']['tipo_usuario_id'] == 1){
+    			$ids = $id.'-'.$item['ids'];
     			echo "<td align='center'>
 					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>
 					<a href='javascript: loadModalAction(".$item['ids'].",\"asignar\")' class='btn btn-warning rounded btn-sm ".$tecnico."' title='Asignar Técnico' ><i class='fa fa-user'></i></a>					
-					</td>";
+					<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$ids."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a>	
+				</td>";
     		} else {
 	    		echo "<td align='center'>				
 					<a href='../ver/".$item['ids']."' class='btn btn-info rounded btn-sm' title='Ver Problema' ><i class='fa fa-info-circle '></i></a>	";				

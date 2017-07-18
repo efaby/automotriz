@@ -79,6 +79,11 @@
 									if($item['url']!=''){
 										echo "&nbsp;<a href='../downloadFile/".$item['url']."' class='btn btn-info btn-sm rounded' title='Descargar' target='_blank'><i class='fa fa-file-pdf-o'></i></a>";
 									}
+									if($_SESSION['SESSION_USER']['tipo_usuario_id'] == 1){
+										$ids = $id.'-'.$item['id'];
+										echo "&nbsp;<a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$ids."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a>";
+									}
+									
 									
 								}
 						    	echo "</td>";

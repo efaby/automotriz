@@ -370,4 +370,18 @@ class NovedadControlador {
 			$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
 			$dompdf->stream('novedad', array("Attachment"=>false));
 	}
+	
+	public function eliminar() {
+		$model = new NovedadModelo();
+		$arrayId = explode('-', $_GET['id']);
+		try {
+			$datos = $model->eliminarNovedad($arrayId[1]);
+			$_SESSION ['message'] = "Datos eliminados correctamente.";
+		} catch ( Exception $e ) {
+			$_SESSION ['message'] = $e->getMessage ();
+		}
+		header ( "Location: ../listar/".$arrayId[0] );
+	}
+	
+	
 }

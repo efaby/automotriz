@@ -35,7 +35,7 @@ class OrdenPlanModelo {
 				left join usuario as u2 on u2.id = op.tecnico_atiende		
 				inner join usuario as u3 on u3.tipo_usuario_id = 1
 				left join mantenimiento_respuestos as mr on mr.mantenimiento_id = op.id
-				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") and ((pm.eliminado = 0) or (pm.eliminado = 1 and op.atendido = 1)) and (v.tipo_vehiculo_id = ".$tipo." or 0 = ".$tipo.")";
+				where (pm.tecnico_id = ".$usuario." or 0 = ".$usuario.") and op.eliminado = 0 and ((pm.eliminado = 0) or (pm.eliminado = 1 and op.atendido = 1)) and (v.tipo_vehiculo_id = ".$tipo." or 0 = ".$tipo.")";
 		
 		/*if($id >0 && $at==0){
 			$where = " WHERE atendido=0 and op.id=".$id;
@@ -56,5 +56,12 @@ class OrdenPlanModelo {
 		$sql = "SELECT * FROM tipo_vehiculo where id=".$id;		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
+	}
+	
+	public function eliminarOrden($item){
+	
+		$sql = "update orden_plan set eliminado = 1 where id = ".$item;
+		$model = new BaseModelo();
+		$result = $model->ejecutarSql($sql);
 	}
 }

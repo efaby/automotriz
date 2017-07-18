@@ -37,7 +37,7 @@ class NovedadModelo {
 				left join usuario as u1 on u1.id = n.tecnico_repara
 				left join tipo_falla as tf on tf.id = n.tipo_falla_id
 				left join mantenimiento_respuestos as mr on mr.mantenimiento_id = n.id
-				where (tecnico_asigna = ".$usuario." or 0 = ".$usuario.") and v.tipo_vehiculo_id = ".$id." order by n.id desc";	
+				where (tecnico_asigna = ".$usuario." or 0 = ".$usuario.") and n.eliminado = 0 and v.tipo_vehiculo_id = ".$id." order by n.id desc";	
 
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
@@ -83,6 +83,13 @@ class NovedadModelo {
 		$model = new BaseModelo();
 		return $model->guardarDatos($novedad, 'novedad');
 	}	
+	
+	public function eliminarNovedad($item){
+	
+		$sql = "update novedad set eliminado = 1 where id = ".$item;
+		$model = new BaseModelo();
+		$result = $model->ejecutarSql($sql);
+	}
 
 /*
 	
