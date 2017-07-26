@@ -68,33 +68,41 @@ class RegistroControlador {
 				
 			$planes = $model->obtenerPlanesbyTipoVehiculo($vehiculo['tipo_vehiculo_id']);
 			$modelVehiculoPlan = new VehiculoPlanModelo();
+			
+
 			foreach ($planes as $plan) {
-				$planVehiculo = $model->obtenerVehiculoPlanbyPlan($plan['id']);	
+				$planVehiculo = $model->obtenerVehiculoPlanbyPlanVehiculo($plan['id'], $_POST ['vehiculo_id']);	
+
 				if($planVehiculo['id']>0){
-					$numero = $planVehiculo['numero_operacion'] + $numero;
+					$numeroInt = $planVehiculo['numero_operacion'] + $numero;
 				} else {
 					$planVehiculo['fecha_inicio'] = date('Y-m-d');
 					$planVehiculo['vehiculo_id'] = $_POST ['vehiculo_id'];
-					$planVehiculo['plan_mantenimiento_id'] = $plan['id'];						
+					$planVehiculo['plan_mantenimiento_id'] = $plan['id'];	
+					$numeroInt = $numero;
 				}
 				$planVehiculo['fecha_registro'] = date('Y-m-d');
-				$planVehiculo['numero_operacion'] = $numero;
-	
+				$planVehiculo['numero_operacion'] = $numeroInt;
+
 				$vpid = $modelVehiculoPlan->guardarVehiculoPlan($planVehiculo);	
+
 				if($vpid==0){
 					$vpid = $planVehiculo['id'];
 				}
 				if($planVehiculo['numero_operacion'] >= ($plan['unidad_numero']-$plan['alerta_numero'])){
 					$modelOrdenPlan = new OrdenPlanModelo();
 					$ordenPlan = $modelOrdenPlan->obtenerOrdenPlan($vpid, $plan['tecnico_id']);
+					
 					if(count($ordenPlan) == 0){
 						$ordenPlan['vehiculo_plan_id'] = $vpid;
 						$ordenPlan['fecha_emision'] = date('Y-m-d');
-						$ordenPlan['tecnico_asignado'] = $plan['tecnico_id'];					
+						$ordenPlan['tecnico_asignado'] = $plan['tecnico_id'];
+
 						$modelOrdenPlan->guardarOrdenPlan($ordenPlan);
 					}
 				}	
 			}
+
 			$_SESSION ['message'] = "Datos almacenados correctamente.";
 			//envio email
 			/*

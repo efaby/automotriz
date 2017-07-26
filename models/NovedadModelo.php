@@ -89,6 +89,8 @@ class NovedadModelo {
 		$sql = "update novedad set eliminado = 1 where id = ".$item;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
+		$sql = "update mantenimiento_respuestos set eliminado = 1 where tipo = 2 and mantenimiento_id = ".$item;
+		$result = $model->ejecutarSql($sql);
 	}
 
 /*

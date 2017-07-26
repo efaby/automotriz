@@ -188,7 +188,7 @@ class RepuestoControlador {
 		$orden = $_GET['id'];
 		$datos = $model->obtenerOrden($orden);
 		$datos = $datos[0];
-		$repuestos = $model->obtenerListadoRepuesto($orden);
+		$repuestos = $model->obtenerOrdenRepuesto($orden);
 		$label = ($datos['tipo_vehiculo_id']>3&&$datos['tipo_vehiculo_id']<9)?"Odometro":"Kilometro";
 		$vehiculo = ($datos['tipo_vehiculo_id']==3)?"Vehiculo Pesado": ($datos['tipo_vehiculo_id']>3&&$datos['tipo_vehiculo_id']<9)?"Maquinaria Pesada":"Vehiculo Liviano";
 		$html="<html>

@@ -66,4 +66,13 @@ class RegistroModelo {
 		$resultArray = $model->obtenerCampos($result);
 		return (count($resultArray)>0)?$resultArray[0]:array('id'=>0);
 	}
+	
+	public function obtenerVehiculoPlanbyPlanVehiculo($id,$vehiculo_id)
+	{
+		$model = new BaseModelo();
+		$sql = "select * from vehiculo_plan where eliminado = 0 and plan_mantenimiento_id = ".$id." and vehiculo_id = ".$vehiculo_id;
+		$result = $model->ejecutarSql($sql);
+		$resultArray = $model->obtenerCampos($result);
+		return (count($resultArray)>0)?$resultArray[0]:array('id'=>0);
+	}
 }

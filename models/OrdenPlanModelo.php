@@ -63,5 +63,8 @@ class OrdenPlanModelo {
 		$sql = "update orden_plan set eliminado = 1 where id = ".$item;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
+		$sql = "update mantenimiento_respuestos set eliminado = 1 where tipo = 1 and mantenimiento_id = ".$item;
+		$result = $model->ejecutarSql($sql);
+		
 	}
 }

@@ -48,6 +48,7 @@ class RepuestoModelo {
 				from mantenimiento_respuestos as mr
 				inner join vehiculo as v on mr.vehiculo_id = v.id
 				inner join usuario as u on u.id = mr.tecnico_id
+				where mr.eliminado = 0
 				order by mr.aprobado, fecha desc ";
 
 		$result = $model->ejecutarSql($sql);

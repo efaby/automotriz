@@ -74,6 +74,7 @@ class BaseModelo
 			$sql = 'Update '.$tabla. ' set '.$values.' where id = '.$id;
 		}
 
+
 		return $this->ejecutarSql($sql,true);
 	}
 	

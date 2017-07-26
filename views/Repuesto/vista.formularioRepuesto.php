@@ -56,7 +56,7 @@ $(document).ready(function() {
 						message: 'La cantidad no puede ser vacía.'
 					},
 					regexp: {
-						regexp: /^[0-9]+$/,
+						regexp: /^[0-9]+([.][0-9]+)?$/,
 						message: 'La cantidad dese se número válido.'
 					}	
 				}
