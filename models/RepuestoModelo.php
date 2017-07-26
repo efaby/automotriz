@@ -103,7 +103,7 @@ class RepuestoModelo {
 		if($insert==1){
 			
 			$sql = "select mr.* from mantenimiento_respuestos as mr
-				where mantenimiento_id=".$orden." and tipo = ".$tipo;
+				where mr.eliminado = 0 and mantenimiento_id=".$orden." and tipo = ".$tipo;
 			$result = $model->ejecutarSql($sql);
 			$mo = $model->obtenerCampos($result);
 			
