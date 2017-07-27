@@ -79,8 +79,8 @@ class SeguridadModelo {
 			$user1 = " and tecnico_asignado = ".$usuario;
 		}
 		
-		$sql = "Select count(id) as atendidos FROM orden_plan where atendido=".$estado .$nuevos1.$user1;
-		$sql1 ="Select count(id) as atendidos FROM novedad where atendido=".$estado. $nuevos.$user;
+		$sql = "Select count(id) as atendidos FROM orden_plan where eliminado =  0 and atendido=".$estado .$nuevos1.$user1;
+		$sql1 ="Select count(id) as atendidos FROM novedad where eliminado =  0 and atendido=".$estado. $nuevos.$user;
 		$model =  new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 		$result1 = $model->ejecutarSql($sql1);
