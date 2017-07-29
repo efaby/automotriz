@@ -103,6 +103,21 @@ class VehiculoModelo {
 		$sql = "update vehiculo set eliminado = 1 where id = ".$vehiculo;
 		$model = new BaseModelo();
 		$result = $model->ejecutarSql($sql);
+		
+		$sql = "update novedad set eliminado = 1 where vehiculo_id = ".$vehiculo;
+		$result = $model->ejecutarSql($sql);
+		$sql = "update mantenimiento_respuestos set eliminado = 1 where tipo = 2 and 
+				mantenimiento_id in (select id from novedad where vehiculo_id = ".$vehiculo.")";
+		$result = $model->ejecutarSql($sql);
+		
+		$sql = "update orden_plan set eliminado = 1 where vehiculo_plan_id in (select id from vehiculo_plan where vehiculo_id = ".$vehiculo.")";
+		$result = $model->ejecutarSql($sql);
+		$sql = "update mantenimiento_respuestos set eliminado = 1 
+				where tipo = 1 and mantenimiento_id in (select op.id from orden_plan as op
+                inner join vehiculo_plan as vp on op.vehiculo_plan_id = vp.id 
+                where vp.vehiculo_id = ".$vehiculo.")";
+		$result = $model->ejecutarSql($sql);
+		
 	}
 	
 	public function updateUsuario($usuarioId,$item){	

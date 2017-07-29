@@ -55,8 +55,12 @@ class SeguridadModelo {
 		$result = $model->ejecutarSql($sql);
 	}
 	
-	public function contarClientes(){
-		$sql = "Select count(id) as numero from vehiculo where eliminado = 0";
+	public function contarVehiculos($usuario,$tipo){
+		$vehiculo = "";
+		if(($tipo >2)&&($tipo < 6)){
+			$vehiculo = " and usuario_id = ".$usuario;
+		}
+		$sql = "Select count(id) as numero from vehiculo where eliminado = 0".$vehiculo;
 		$model =  new BaseModelo();
 		$result = $model->ejecutarSql($sql);
 		$resultArray = $model->obtenerCampos($result);
@@ -64,31 +68,57 @@ class SeguridadModelo {
 		return (count($resultArray)>0)?$resultArray[0]['numero']:0;
 	}
 	
-	public function contarReparaciones($estado,$usuario){
+	public function contarReparaciones($estado,$usuario,$tipo){
 		$nuevos = "";
 		$nuevos1 = "";
-		if($estado == 2){
-			$nuevos = " and fecha_ingreso = '".date('Y-m-d')."' ";
-			$nuevos1 = " and fecha_emision = '".date('Y-m-d')."' ";
-			$estado = 0;
-		}
-		$user = "";
-		$user1 = "";
-		if($usuario != 1){
-			$user = " and tecnico_asigna = ".$usuario;
-			$user1 = " and tecnico_asignado = ".$usuario;
+		$model =  new BaseModelo();
+
+		if($tipo == 2){
+			if($estado == 2){
+				$nuevos = " and fecha = '".date('Y-m-d')."' ";				
+				$estado = 0;
+			}
+			$sql = "Select count(id) as atendidos FROM mantenimiento_respuestos where eliminado =  0 and aprobado=".$estado.$nuevos;
+			
+			$result = $model->ejecutarSql($sql);
+			$resultArray = $model->obtenerCampos($result);
+			return (count($resultArray)>0)?$resultArray[0]['atendidos']:0;
+		} else {
+			if($estado == 2){
+				$nuevos = " and fecha_ingreso = '".date('Y-m-d')."' ";
+				$nuevos1 = " and fecha_emision = '".date('Y-m-d')."' ";
+				$estado = 0;
+			}
+			if(($tipo >2)&&($tipo < 6)){
+				$sql1 ="Select count(n.id) as atendidos FROM novedad as n
+						inner join vehiculo as v on v.id = n.vehiculo_id 
+						where n.eliminado =  0 and n.atendido=".$estado. $nuevos." and v.usuario_id = ".$usuario;
+				
+				$sql = "Select count(op.id) as atendidos FROM orden_plan as op
+						inner join vehiculo_plan as vp on vp.id = op.vehiculo_plan_id
+						inner join vehiculo as v on v.id = vp.vehiculo_id 
+						where op.eliminado =  0 and op.atendido=".$estado .$nuevos1." and v.usuario_id = ".$usuario;
+				
+			} else {				
+				$user = "";
+				$user1 = "";
+				if($usuario != 1){
+					$user = " and tecnico_asigna = ".$usuario;
+					$user1 = " and tecnico_asignado = ".$usuario;
+				}
+				$sql = "Select count(id) as atendidos FROM orden_plan where eliminado =  0 and atendido=".$estado .$nuevos1.$user1;
+				$sql1 ="Select count(id) as atendidos FROM novedad where eliminado =  0 and atendido=".$estado. $nuevos.$user;
+			}			
+
+			$result = $model->ejecutarSql($sql);
+			$result1 = $model->ejecutarSql($sql1);
+			$resultArray = $model->obtenerCampos($result);
+			$resultArray1 = $model->obtenerCampos($result1);
+			$total = (count($resultArray)>0)?$resultArray[0]['atendidos']:0;
+			$total1 = (count($resultArray1)>0)?$resultArray1[0]['atendidos']:0;
+			return ($total+$total1);
 		}
 		
-		$sql = "Select count(id) as atendidos FROM orden_plan where eliminado =  0 and atendido=".$estado .$nuevos1.$user1;
-		$sql1 ="Select count(id) as atendidos FROM novedad where eliminado =  0 and atendido=".$estado. $nuevos.$user;
-		$model =  new BaseModelo();
-		$result = $model->ejecutarSql($sql);
-		$result1 = $model->ejecutarSql($sql1);
-		$resultArray = $model->obtenerCampos($result);
-		$resultArray1 = $model->obtenerCampos($result1);
-		$total = (count($resultArray)>0)?$resultArray[0]['atendidos']:0;
-		$total1 = (count($resultArray1)>0)?$resultArray1[0]['atendidos']:0;
-		return ($total+$total1);
 	}
 	
 	/*	

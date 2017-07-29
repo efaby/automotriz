@@ -13,7 +13,7 @@ class ReparacionControlador {
 	public function listar(){
 		$model = new ReparacionModelo();
 		$tipo = $_GET['id'];
-		$datos = $model->obtenerReparaciones($tipo,$_SESSION['SESSION_USER']['id']);		
+		$datos = $model->obtenerReparaciones($tipo,$_SESSION['SESSION_USER']['id'],$_SESSION['SESSION_USER']['tipo_usuario_id']);		
 		$message = "";
 		require_once PATH_VISTAS."/Reparacion/view.listado.php";
 	}

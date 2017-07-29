@@ -259,7 +259,7 @@ class RepuestoControlador {
 					foreach ($repuestos as $item) {
 						$html .= "<tr><td>".$item['codigo']."</td>";
 						$html .= "<td colspan='8'>".$item['nombre']."</td>";
-						$html .= "<td style='text-align:center'>".$item['cantidad']."</td></tr>";
+						$html .= "<td style='text-align:center'>".$item['pedido']."</td></tr>";
 						 
 					}
 		$html .= "		

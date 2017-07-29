@@ -46,8 +46,17 @@
 					</div>
 				</div>
 			</div>
-			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']!=2)):?>
 			<a href="../../Reparacion/listar/1">
+				<div class="panel-footer">
+					<span class="pull-left">Ver Detalles</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<?php else: ?>
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)):?>
+			<a href="../../Repuesto/listarOrden/">
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -60,6 +69,7 @@
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
+			<?php endif;?>
 			<?php endif;?>
 		</div>
 	</div>
@@ -76,8 +86,17 @@
 					</div>
 				</div>
 			</div>
-			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']!=2)):?>
 			<a href="../../Reparacion/listar/2">
+				<div class="panel-footer">
+					<span class="pull-left">Ver Detalles</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<?php else: ?>
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)):?>
+			<a href="../../Repuesto/listarOrden/">
 				<div class="panel-footer">
 					<span class="pull-left">Ver Detalles</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -90,6 +109,7 @@
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
+			<?php endif;?>
 			<?php endif;?>
 		</div>
 	</div>
@@ -106,8 +126,17 @@
 					</div>
 				</div>
 			</div>
-			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==1)||($_SESSION['SESSION_USER']['tipo_usuario_id']==6)):?>
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']!=2)):?>
 			<a href="../../Reparacion/listar/0">
+				<div class="panel-footer">
+					<span class="pull-left">View Details</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<?php else: ?>
+			<?php if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)):?>
+			<a href="../../Repuesto/listarOrden/">
 				<div class="panel-footer">
 					<span class="pull-left">View Details</span> <span
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -120,6 +149,7 @@
 						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
+			<?php endif;?>
 			<?php endif;?>
 		</div>
 	</div>

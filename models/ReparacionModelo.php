@@ -4,7 +4,7 @@ require_once(PATH_MODELOS."/BaseModelo.php");
 
 class ReparacionModelo {
 
-	public function obtenerReparaciones($id,$usuario){
+	public function obtenerReparaciones($id,$usuario,$tipo){
 		$model = new BaseModelo();
 		$nuevos = "";
 		$nuevos1 = "";
@@ -16,17 +16,24 @@ class ReparacionModelo {
 		
 		$user = "";
 		$user1 = "";
-		if($usuario != 1){
-			$user = " and tecnico_asigna = ".$usuario;
-			$user1 = " and tecnico_asignado = ".$usuario;
+		$vehiculo = "";
+		if(($tipo >2)&&($tipo < 6)){
+			$vehiculo = " and v.usuario_id = ".$usuario;
+		} else {
+			if($usuario != 1){
+				$user = " and tecnico_asigna = ".$usuario;
+				$user1 = " and tecnico_asignado = ".$usuario;
+			}
 		}
+		
+		
 		
 		$sql = "select n.id as ids, n.problema as actividad, v.marca,v.numero,
 				u2.nombres , u2.apellidos , 'Correctivo' as tipo, 1 as tipo_id
 				from novedad as n
 				inner join vehiculo as v on v.id = n.vehiculo_id
 				inner join usuario as u2 on u2.id = n.usuario_registra				
-				where atendido = ".$id." ".$nuevos." ".$user."
+				where n.eliminado = 0 and atendido = ".$id." ".$nuevos." ".$user.$vehiculo."
 			union 
 				SELECT op.id as ids, pm.tarea as actividad,	v.marca,v.numero, 
 				 u.nombres, u.apellidos, 'Preventivo' as tipo, 2 as tipo_id
@@ -36,7 +43,7 @@ class ReparacionModelo {
 				INNER JOIN orden_plan as op ON op.vehiculo_plan_id = vp.id
 				INNER JOIN usuario as u on u.id = v.usuario_id
 				
-				where  op.atendido = ".$id." ".$nuevos1 ." ".$user1;
+				where op.eliminado = 0 and op.atendido = ".$id." ".$nuevos1 ." ".$user1.$vehiculo;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	

@@ -36,7 +36,7 @@ class NovedadModelo {
 				left join usuario as u on u.id = n.tecnico_asigna
 				left join usuario as u1 on u1.id = n.tecnico_repara
 				left join tipo_falla as tf on tf.id = n.tipo_falla_id
-				left join mantenimiento_respuestos as mr on mr.mantenimiento_id = n.id
+				left join mantenimiento_respuestos as mr on mr.mantenimiento_id = n.id and tipo = 2
 				where (tecnico_asigna = ".$usuario." or 0 = ".$usuario.") and n.eliminado = 0 and v.tipo_vehiculo_id = ".$id." order by n.id desc";	
 
 		$result = $model->ejecutarSql($sql);

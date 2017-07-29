@@ -73,28 +73,28 @@
 			<div class="row match-my-cols">
 				<div class="form-group  col-sm-4 border-div">				
 					<label class="control-label">Herramientas:</label>
-					<div>
-					<?php echo htmlspecialchars_decode($dato['herramientas']);?>	
-					</div>				
+					
+					<?php echo (strlen($dato['herramientas']) > 0)?htmlspecialchars_decode(strip_tags($dato['herramientas'],"<p>")):"";?>	
+									
 				</div>				
 				<div class="form-group  col-sm-4 border-div" >				
 					<label class="control-label">Materiales:</label>
-					<div>
-					<?php echo htmlspecialchars_decode($dato['materiales']);?>
-					</div>
+					
+					<?php echo htmlspecialchars_decode(strip_tags($dato['materiales'],"<p>"));?>
+					
 				</div>				
 				<div class="form-group  col-sm-4 border-div">				
 					<label class="control-label">Equipo:</label>
-					<div>
-					<?php echo htmlspecialchars_decode($dato['equipo']);?>
-					</div>
+					
+					<?php echo htmlspecialchars_decode(strip_tags($dato['equipo'],"<p>"));?>
+					
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group  col-sm-12 border-div">				
 					<label class="control-label">Procedimiento:</label>
 					<div>
-					<?php echo htmlspecialchars_decode($dato['procedimiento']);?>	
+					<?php echo htmlspecialchars_decode(strip_tags($dato['procedimiento'],"<p>"));?>	
 					</div>				
 				</div>
 			</div>	
@@ -102,7 +102,7 @@
 				<div class="form-group  col-sm-12 border-div">				
 					<label class="control-label">Nota:</label>
 					<div>
-					<?php echo htmlspecialchars_decode($dato['observaciones']);?>	
+					<?php echo htmlspecialchars_decode(strip_tags($dato['observaciones'],"<p>"));?>	
 					</div>				
 				</div>
 			</div>

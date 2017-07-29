@@ -205,15 +205,15 @@ class OrdenPlanControlador {
 								<td colspan=4 > <b>Actividad: </b><br><br>".$dato['plan']."
 							</tr>
 							<tr>
-								<td style='vertical-align: top'><b>Herramientas: </b><br>".htmlspecialchars_decode($dato['herramientas'])." </td>								
-								<td colspan=2 style='vertical-align: top'><b>Materiales: </b><br>".htmlspecialchars_decode($dato['materiales'])."</td>
-								<td style='vertical-align: top'><b>Equipo: </b><br>".htmlspecialchars_decode($dato['equipo'])."</td>
+								<td style='vertical-align: top'><b>Herramientas: </b><br>".htmlspecialchars_decode(strip_tags($dato['herramientas'],'<p>'))." </td>								
+								<td colspan=2 style='vertical-align: top'><b>Materiales: </b><br>".htmlspecialchars_decode(strip_tags($dato['materiales'],'<p>'))."</td>
+								<td style='vertical-align: top'><b>Equipo: </b><br>".htmlspecialchars_decode(strip_tags($dato['equipo'],'<p>'))."</td>
 							</tr>
 							<tr>
-								<td colspan=4><b>Procedimiento: </b><br>".htmlspecialchars_decode($dato['procedimiento'])."</td>
+								<td colspan=4><b>Procedimiento: </b><br>".htmlspecialchars_decode(strip_tags($dato['procedimiento'],'<p>'))."</td>
 							</tr>
 							<tr>
-								<td colspan=4> <b>Nota: </b><br>".htmlspecialchars_decode($dato['observaciones'])."</td>
+								<td colspan=4> <b>Nota: </b><br>".htmlspecialchars_decode(strip_tags($dato['observaciones'],'<p>'))."</td>
 							</tr>
 							<tr>
 								<td colspan=2> <b>Tiempo Ejecución: </b><br><br>".$tiempo." </td>								
