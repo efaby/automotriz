@@ -4,7 +4,7 @@
 <!-- Main row -->
 
 <div class="title-block">
-    <h1 class="title">Administración Repuestos</h1>
+    <h1 class="title">Administración Medida Respuesto</h1>
 </div>
 
 <?php if (isset($_SESSION['message'])&& ($_SESSION['message'] != '')):?>
@@ -25,19 +25,15 @@
 			<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 		    <thead>
 			    <tr>
-			    	<th>Codigo</th>
+			    	<th style="width: 5%">Id</th>
 				    <th>Nombre</th>
-				    <th>Medida</th>
-				    <th>Cantidad</th>
-				    <th style="text-align: center;">Acciones</th>
+				    <th style="text-align: center; width: 10%">Acciones</th>
 			    </tr>
 		    </thead>
 		    <tbody>
-		    	<?php foreach ($datos as $item) {
-		    		echo "<tr><td>".$item['codigo']."</td>";
-		    		echo "<td>".$item['nombre']."</td>";
-		    		echo "<td>".$item['medida']."</td>";
-		    		echo "<td>".$item['cantidad']."</td>";		    		
+		    	<?php foreach ($datos as $item) { 
+		    		echo "<tr><td>".$item['id']."</td>";
+		    		echo "<td>".$item['nombre']."</td>";		    		
 		    		echo "<td align='center'><a href='javascript: loadModal(\"".$item['id']."\")' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>
 							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect(\"".$item['id']."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";
 		    	}?>
@@ -52,7 +48,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<a class="close" data-dismiss="modal">×</a>
-				<h3>Repuesto</h3>
+				<h3>Medida Repuesto</h3>
 			</div>
 
 			<div class="modal-body"></div>

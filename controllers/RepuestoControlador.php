@@ -26,6 +26,7 @@ class RepuestoControlador {
 		$model = new RepuestoModelo();
 		$tipoId = $_GET['id'];
 		$tipo = $model->obtenerRepuesto($tipoId);
+		$medidas = $model->obtenerMedidasRepuestos();
 		$message = "";
 		require_once PATH_VISTAS."/Repuesto/vista.formulario.php";
 	}
@@ -35,6 +36,7 @@ class RepuestoControlador {
 		$repuesto ['nombre'] = $_POST ['nombre'];
 		$repuesto ['codigo'] = $_POST ['codigo'];		
 		$repuesto ['cantidad'] = $_POST ['cantidad'];	
+		$repuesto ['medida_repuesto_id'] = $_POST ['medida_repuesto_id'];
 		$repuesto ['eliminado'] = 0;
 		
 		$model = new RepuestoModelo();
@@ -139,7 +141,15 @@ class RepuestoControlador {
 		$arrayId = explode('-', $_GET['id']);
 		$mant = $arrayId[0];
 		$tipo = $model->obtenerRepuestoOrden($arrayId[1]);
-		$repuestos = $model->obtenerListadoRepuesto();
+		$medidas = $model->obtenerMedidasRepuestos();
+		$medida_id = 0;
+		$repuestos = array();
+		if($tipo['repuesto_id'] > 0){
+			$repuesto = $model->obtenerRepuesto($tipo['repuesto_id']);
+			$repuestos = $model->getRepuestoByMedida($repuesto['medida_repuesto_id']);
+			$medida_id = $repuesto['medida_repuesto_id'];
+		}
+		
 		$message = "";
 		require_once PATH_VISTAS."/Repuesto/vista.formularioRepuesto.php";
 	}
@@ -249,16 +259,17 @@ class RepuestoControlador {
 		  	 	</tr>
 		    	<tr>
 			    	<th style="text-align:center">C&oacute;digo</th>
-				    <th style="text-align:center" colspan="8">Repuesto</th>
-				    <th style="text-align:center">Cantidad</th>
-				   
+				    <th style="text-align:center" colspan="7">Repuesto</th>
+				    <th style="text-align:center">Medida</th>
+				   <th style="text-align:center">Cantidad</th>
 			    </tr>
 		    </thead>
 		    <tbody>';
 				    		
 					foreach ($repuestos as $item) {
 						$html .= "<tr><td>".$item['codigo']."</td>";
-						$html .= "<td colspan='8'>".$item['nombre']."</td>";
+						$html .= "<td colspan='7'>".$item['nombre']."</td>";
+						$html .= "<td>".$item['medida']."</td>";
 						$html .= "<td style='text-align:center'>".$item['pedido']."</td></tr>";
 						 
 					}
@@ -288,6 +299,18 @@ class RepuestoControlador {
 		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
 		$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
 		$dompdf->stream('reporte', array("Attachment"=>false));
+	}
+	
+	public function loadRepuestoByMedida(){
+		$opcion = $_POST ['opcion'];
+		$model = new RepuestoModelo();
+		$maquinas = $model->getRepuestoByMedida($opcion);
+		$html ='<option value="" >Seleccione</option>';
+		foreach ($maquinas as $dato) {
+			$html .='<option value="'.$dato['id'].'" >'.$dato['nombre'].'</option>';
+		}
+		$html .='</select>';
+		echo $html;
 	}
 	
 }

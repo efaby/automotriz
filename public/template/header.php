@@ -301,6 +301,9 @@
                                 </li>
                                 <?php endif;?>
                                 <?php if($_SESSION['SESSION_USER']['tipo_usuario_id']==2):?>
+                                <li class="<?php echo (strpos($url, '/MedidaRepuesto/listar/')!==false)?'active':'';?>">
+                                    <a href="../../MedidaRepuesto/listar/"> <i class="fa fa-edit"></i> Medidas Repuestos </a>                                    
+                                </li>
                                 <li class="<?php echo (strpos($url, '/Repuesto/listar/')!==false)?'active':'';?>">
                                     <a href="../../Repuesto/listar/"> <i class="fa fa-edit"></i> Repuestos </a>                                    
                                 </li>

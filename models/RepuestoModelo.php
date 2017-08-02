@@ -11,11 +11,18 @@ class RepuestoModelo {
 
 	public function obtenerListadoRepuesto(){
 		$model = new BaseModelo();		
-		$sql = "select * from repuestos where eliminado = 0 ";		
+		$sql = "select r.*, mr.nombre as medida from repuestos as r inner join medida_repuesto as mr on r.medida_repuesto_id = mr.id where r.eliminado = 0 ";		
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
 	}	
 
+	public function obtenerMedidasRepuestos(){
+		$model = new BaseModelo();
+		$sql = "select * from medida_repuesto where eliminado = 0 ";
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
+	}
+	
 	public function obtenerRepuesto($tipo){
 		$model = new BaseModelo();	
 		if($tipo > 0){
@@ -25,7 +32,7 @@ class RepuestoModelo {
 			$resultArray = $resultArray[0];
 				
 		} else {
-			$resultArray = Array ( 'id' => '' ,'nombre' => '','codigo' => '','cantidad' => 0);
+			$resultArray = Array ( 'id' => '' ,'nombre' => '','codigo' => '','cantidad' => 0, 'medida_repuesto_id'=>0);
 		}
 		return $resultArray;
 	}
@@ -70,9 +77,10 @@ class RepuestoModelo {
 	
 	public function obtenerOrdenRepuesto($orden){
 		$model = new BaseModelo();
-		$sql = "select r.*, or1.cantidad as pedido 
+		$sql = "select r.*, or1.cantidad as pedido , mr.nombre as medida
 			from orden_repuesto as or1 
 			inner join repuestos as r on or1.repuesto_id = r.id 
+			inner join medida_repuesto as mr on mr.id = r.medida_repuesto_id
 			where or1.mantenimineto_respuesto_id = ".$orden;
 
 		$result = $model->ejecutarSql($sql);
@@ -168,9 +176,10 @@ class RepuestoModelo {
 	
 	public function obtenerListadoRepuestoOrden($id){
 		$model = new BaseModelo();
-		$sql = "select or1.id, or1.cantidad, r.codigo, r.nombre, or1.repuesto_id  
+		$sql = "select or1.id, or1.cantidad, r.codigo, r.nombre, or1.repuesto_id, mr.nombre as medida 
 				from orden_repuesto as or1
 				inner join repuestos as r on r.id = or1.repuesto_id
+				inner join medida_repuesto as mr on mr.id = r.medida_repuesto_id
 				where mantenimineto_respuesto_id = ".$id;
 		$result = $model->ejecutarSql($sql);
 		return $model->obtenerCampos($result);
@@ -196,5 +205,10 @@ class RepuestoModelo {
 		$result = $model->ejecutarSql($sql);
 	}
 	
-	
+	public function getRepuestoByMedida($id){
+		$model = new BaseModelo();
+		$sql = "select r.* from repuestos as r where r.eliminado = 0 and r.medida_repuesto_id = ".$id;
+		$result = $model->ejecutarSql($sql);
+		return $model->obtenerCampos($result);
+	}
 }

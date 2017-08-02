@@ -2,6 +2,19 @@
 
 <div class="row">
 	<div class="form-group col-sm-6">
+		<label class="control-label">Medida Repuesto</label> 
+		
+		<select class='form-control' name="medida_repuesto_id" id="medida_repuesto_id">
+			<option value="" >Seleccione</option>
+		<?php foreach ($medidas as $dato) { ?>
+			<option value="<?php echo $dato['id'];?>"  <?php if($medida_id==$dato['id']):echo "selected"; endif;?>><?php echo $dato['nombre'];?></option>
+		<?php }?>
+		</select>
+
+	</div>
+</div>
+<div class="row">
+	<div class="form-group col-sm-6">
 		<label class="control-label">Repuesto</label> 
 		
 		<select class='form-control' name="repuesto_id" id="repuesto_id">
@@ -32,7 +45,15 @@
 </form>
 
 <script type="text/javascript">
-
+$("#medida_repuesto_id").change(function () {
+    $("#medida_repuesto_id option:selected").each(function () {
+     opcion=$(this).val();
+     $.post("../loadRepuestoByMedida/", { opcion: opcion }, function(data){
+     $("#repuesto_id").html(data);
+     $('#frmUsuario').formValidation('revalidateField', 'repuesto_id');
+     });            
+ });
+});
 $(document).ready(function() {
     $('#frmUsuario').formValidation({
     	message: 'This value is not valid',
@@ -43,6 +64,13 @@ $(document).ready(function() {
 		},
 		fields: {			
 
+			medida_repuesto_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una Medida de Repuesto'
+					}
+				}
+			},
 			repuesto_id: {
 				validators: {
 					notEmpty: {

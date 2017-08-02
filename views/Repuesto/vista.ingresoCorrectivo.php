@@ -106,6 +106,7 @@
 			    <tr>
 			    	<th>Codigo</th>
 				    <th>Nombre</th>
+				    <th>Medida</th>
 				    <th>Cantidad</th>
 				    <th style="text-align: center;">Acciones</th>
 			    </tr>
@@ -114,7 +115,8 @@
 		    	<?php foreach ($datos as $item) {
 		    		echo "<tr><td>".$item['codigo']."</td>";
 		    		echo "<td>".$item['nombre']."</td>";
-		    		echo "<td>".$item['cantidad']."</td>";		
+		    		echo "<td>".$item['medida']."</td>";	
+		    		echo "<td>".$item['cantidad']."</td>";
 		    		$ids = $iteMan['id'] .'-'.$item['id'];
 		    		echo "<td align='center'><a href='javascript: loadModal1(\"".$ids."\")' class='btn btn-warning btn-sm rounded' title='Editar' ><i class='fa fa-pencil'></i></a>
 							  <a href='javascript:if(confirm(\"Está seguro que desea eliminar el elemento seleccionado?\")){redirect1(\"".$ids."\");}' class='btn rounded btn-danger btn-sm' title='Eliminar'><i class='fa fa-trash'></i></a></td>";

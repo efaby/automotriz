@@ -16,6 +16,17 @@
 
 	</div>
 </div>
+<div class="form-group  col-sm-12">
+		<div class="form-group  col-sm-6 row-padding">
+			<label class="control-label">Medida Repuesto</label>
+			<select class='form-control' name="medida_repuesto_id" id="medida_repuesto_id">
+				<option value="" >Seleccione</option>
+				<?php foreach ($medidas as $dato) { ?>
+				<option value="<?php echo $dato['id'];?>"  <?php echo($dato['id']===$tipo['medida_repuesto_id'])?'selected':''; ?> ><?php echo $dato['nombre'] ;?></option>
+				<?php }?>
+			</select>
+		</div>
+	</div>
 <div class="row">
 	<div class="form-group col-sm-6">
 		<label class="control-label">Cantidad</label> <input type='text'
@@ -44,7 +55,13 @@ $(document).ready(function() {
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {			
-
+			medida_repuesto_id: {
+				validators: {
+					notEmpty: {
+						message: 'Seleccione una Medida'
+					}
+				}
+			},	
 			nombre: {
 				message: 'El Nombre no es válido',
 				validators: {

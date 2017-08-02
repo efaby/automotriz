@@ -55,17 +55,18 @@
 				    
 		  	 	</tr>
 		  	 	<?php 
-		  	 	$colspan = 8;
+		  	 	$colspan = 7;
 		  	 	$row1 = '';
 		  	 	if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)&&($datos['aprobado']==0)){
-		  	 		$colspan = 7;
+		  	 		$colspan = 6;
 		  	 		$row1 = '<th style="text-align:center">Existente</th>';
 		  	 	}
 		  	 	
 		  	 	?>
 		    	<tr>
 			    	<th style="text-align:center">C&oacute;digo</th>
-				    <th style="text-align:center" colspan="<?php echo $colspan; ?>">Repuesto</th>
+				    <th style="text-align:center" colspan="<?php echo $colspan ; ?>">Repuesto</th>
+				    <th style="text-align:center">Medida</th>
 				    <th style="text-align:center">Cantidad</th>
 				   <?php echo $row1; ?>
 			    </tr>
@@ -74,6 +75,7 @@
 		    	<?php foreach ($repuestos as $item) {
 		    		echo "<tr><td>".$item['codigo']."</td>";		    		
 		    		echo "<td colspan='$colspan'>".$item['nombre']."</td>";
+		    		echo "<td >".$item['medida']."</td>";
 		    		echo "<td style='text-align:center'>".$item['pedido']."</td>";
 		    		if(($_SESSION['SESSION_USER']['tipo_usuario_id']==2)&&($datos['aprobado']==0)){
 		    			$style = '';
