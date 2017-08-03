@@ -42,8 +42,10 @@ class ReporteControlador {
 		else{
 			$arrayId = explode('-', $id);
 		}
+		
 		$model = new ReporteModelo();
-		$vehiculo = $model->obtenerVehiculo($arrayId[0]);		
+		$vehiculo = $model->obtenerVehiculo($arrayId[0]);	
+		$tipoReporte = $arrayId[1];
 		if($arrayId[1]==1){
 			$listado = $model->obtenerPreventivos($arrayId[0]);
 			$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);
@@ -52,7 +54,9 @@ class ReporteControlador {
 				$listado = $model->obtenerCorrectivos($arrayId[0]);
 				$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);
 			} else {
-				$listado = $model->obtenerFallas($arrayId[0]);
+				$fecha_inicio = $_GET['fecha_inicio'];
+				$fecha_fin = $_GET['fecha_fin'];
+				$listado = $model->obtenerFallas($arrayId[0],false, $fecha_inicio,$fecha_fin);
 				$variables = self::obtenerVariables($vehiculo['tipo_vehiculo_id']);			
 			}
 		}
@@ -183,7 +187,9 @@ class ReporteControlador {
 
 		$model = new ReporteModelo();
 		$tipo = $model->obtenerTipo();	
-		$listado = $model->obtenerFallas($_GET['id'],true);
+		$fecha_inicio = $_GET['fecha_inicio1'];
+		$fecha_fin = $_GET['fecha_fin1'];
+		$listado = $model->obtenerFallas($_GET['id'],true,$fecha_inicio,$fecha_fin );
 
 		$html="<html>
 					<head>
@@ -257,6 +263,16 @@ class ReporteControlador {
 		$canvas->page_text(550, 750, "Pág. {PAGE_NUM}/{PAGE_COUNT}", null, 6, array(0,0,0)); //header
 		$canvas->page_text(270, 770, "Copyright © 2017", null, 6, array(0,0,0)); //footer
 		$dompdf->stream('reporte', array("Attachment"=>false));
+	}
+	
+	public function loadModal(){
+		$action = "verReporte/".$_GET['id'];		
+		require_once PATH_VISTAS."/Reporte/vista.formulario.php";
+	}
+	
+	public function loadModalGeneral(){
+		$action = "visualizarPdfGeneral/".$_GET['id'];
+		require_once PATH_VISTAS."/Reporte/vista.formulario1.php";
 	}
 	
 }

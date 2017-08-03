@@ -11,7 +11,7 @@
 		<div class="row">	
 			<div class="form-group  col-sm-12" align="right">
 				<?php if (count($listado)>0){?>
-				<a href="../visualizarPdf/<?php echo $arrayId[0]."-".$arrayId[1]?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
+				<a href="../visualizarPdf/<?php echo $arrayId[0]."-".$arrayId[1]."?fecha_inicio=".$fecha_inicio."&fecha_fin=".$fecha_fin; ?>" target='_blank' class='btn btn-info btn-sm' title='Descargar' ><i class='fa fa-file-pdf-o'></i>  Descargar</a>
 				<?php }?>
 			</div>
 		</div>		

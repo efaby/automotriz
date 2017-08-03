@@ -89,7 +89,8 @@ class ReporteModelo {
 		return $resultArray;
 	}
 	
-	public function obtenerFallas($id,$general = false){
+	public function obtenerFallas($id,$general = false, $fecha_inicio, $fecha_fin){
+
 		$model = new BaseModelo();
 		$where = "where vehiculo_id = ".$id;
 		$vehiculo = ", vehiculo_id";
@@ -104,7 +105,7 @@ class ReporteModelo {
 				count(n.id) as numero_falla
 				FROM novedad as n
 				inner join tipo_falla as tf ON  tf.id=n.tipo_falla_id ";		
-		$sql .= $sql1.$where. " group by tipo_falla_id";
+		$sql .= $sql1.$where. " and n.fecha_atencion >= '".$fecha_inicio."' and n.fecha_atencion <= '".$fecha_fin."' group by tipo_falla_id";
 
 		$result = $model->ejecutarSql($sql);
 		$resultArray = $model->obtenerCampos($result);
